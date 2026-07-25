@@ -585,7 +585,7 @@ def _recover_gemini_omni_turn(turn_id: str, *, sc: Any) -> bool:
     turn = claim.turn
     task = sc.task_or_404(int(turn["task_id"]))
     actor_id = video_interaction_actor_id(task)
-    thread = repository.internal_thread(task_id=int(task["id"]), actor_id=actor_id, thread_id=turn["thread_id"])
+    repository.internal_thread(task_id=int(task["id"]), actor_id=actor_id, thread_id=turn["thread_id"])
     request_config = turn.get("request_config_json") if isinstance(turn.get("request_config_json"), dict) else {}
     workspace = sc.workspace_for(task)
     output_rel = _text(turn.get("output_path"))

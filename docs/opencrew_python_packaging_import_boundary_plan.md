@@ -4,7 +4,11 @@
 
 OpenClip/Koubo 后端已在 C1 迁入 `backend/opcrew_backend/koubo/`,C3 删除了 `OpenClip/` 空壳和 4 个 OpenClip bridge 文件,`backend/opcrew_backend/app.py` 现在直接从 `opcrew_backend.koubo` 导入 Koubo router builder。
 
-本文下面保留的 `OpenClip/backend/`、`OpenClip.backend.openclip_backend` 和 OpenClip bridge 引用是迁移前的设计依据和问题证据,不是当前要继续维护的运行路径。当前剩余的 Python 边界治理重点是 `ModelConfig/backend/`、`WorkflowAssistant/backend/`、ModelConfig wrapper、ToolLibrary 脚本入口,以及残留的 `sys.path.insert`/wildcard import 约束。
+本文下面保留的 `OpenClip/backend/`、`OpenClip.backend.openclip_backend` 和 OpenClip bridge 引用是迁移前的设计依据和问题证据,不是当前要继续维护的运行路径。当前剩余的 Python 边界治理重点是 `ModelConfig/backend/`、`WorkflowAssistant/backend/`、剩余的 media model wrapper、ToolLibrary 脚本入口,以及残留的 `sys.path.insert`/wildcard import 约束。
+
+## 2026-07-25 批次 A 状态
+
+仓内代码、测试、CI、运行入口和 `routes/__init__.py` 均未引用 `backend/opcrew_backend/routes/asr_config.py`；当前 ASR 路由由 `opcrew_model_config.router` 直接注册。OpenCrew 的交付物是应用而非对外 Python SDK，因此本批次删除该 wildcard 兼容转发层，不再为 `opcrew_backend.routes.asr_config` 保留公共导入承诺。历史章节中与该文件有关的证据以本状态说明为准。
 
 ## 结论
 
@@ -60,7 +64,6 @@ OpenClip/Koubo 后端已在 C1 迁入 `backend/opcrew_backend/koubo/`,C3 删除�
 - `backend/opcrew_backend/routes/oc_storyboard_bridge.py:9`
 - `backend/opcrew_backend/routes/koubo_storyboard_bridge.py:9`
 - `backend/opcrew_backend/routes/workflow_assistant_bridge.py:9`
-- `backend/opcrew_backend/routes/asr_config.py:10`
 - `backend/opcrew_backend/routes/media_model_config.py:10`
 
 这些路径计算依赖固定目录层级，例如 `parents[3]`。目录一旦移动，或者启动 cwd/launcher 改变，导入行为就会变化。
@@ -117,9 +120,8 @@ from openclip_backend.analysis_v1_artifact_billing import ...
 
 ### 4. wildcard bridge 和常量污染
 
-ModelConfig bridge 使用 wildcard re-export：
+剩余的 ModelConfig bridge 使用 wildcard re-export：
 
-- `backend/opcrew_backend/routes/asr_config.py:12`
 - `backend/opcrew_backend/routes/media_model_config.py:12`
 
 Koubo Storyboard 子包也大量使用：
@@ -249,42 +251,13 @@ from openclip_backend import build_openclip_router
 - `backend/opcrew_backend/routes/oc_storyboard_bridge.py`
 - `backend/opcrew_backend/routes/koubo_storyboard_bridge.py`
 - `backend/opcrew_backend/routes/workflow_assistant_bridge.py`
-- `backend/opcrew_backend/routes/asr_config.py`
 - `backend/opcrew_backend/routes/media_model_config.py`
 
 删除后，应用启动失败应被视为启动器 `PYTHONPATH` 配置问题，而不是再通过局部补 path 修复。
 
 ### 阶段 5：消除 wildcard re-export
 
-把：
-
-```python
-from opcrew_model_config.asr_config import *
-```
-
-改为显式 re-export：
-
-```python
-from opcrew_model_config.asr_config import (
-    ASRConfigSavePayload,
-    ASRConnectionTestPayload,
-    build_asr_config_router,
-    connection_result,
-    load_stored_key,
-    model_options,
-    test_asr_connection,
-)
-
-__all__ = [
-    "ASRConfigSavePayload",
-    "ASRConnectionTestPayload",
-    "build_asr_config_router",
-    "connection_result",
-    "load_stored_key",
-    "model_options",
-    "test_asr_connection",
-]
-```
+ASR wildcard wrapper 已在 2026-07-25 批次 A 中删除，不再改造成显式 re-export。剩余的 media model wrapper 应按真实调用面改为显式导出，或在确认没有兼容调用者后同样删除。
 
 Koubo 的 `from .constants import *` 改为按名导入。常量很多时可以先分批处理：
 
@@ -357,7 +330,7 @@ ToolLibrary 脚本可以晚于主应用迁移，但最终应满足以下之一�
 1. 在启动器（`opencrew_local_stack.sh`、launchd 等）单点声明 `PYTHONPATH`，覆盖三个 Python 根；冷启动验证通过。
 2. OpenClip 生产 bridge 相关步骤已由 C1/C3 完成；不要重新引入 `OpenClip/backend` 或 OpenClip bridge。
 3. 删除 `app.py`、ModelConfig wrapper、WorkflowAssistant bridge 中剩余的路径注入,前提是对应启动入口已完成冷启动验证。
-4. 显式化 ModelConfig wrapper 的 re-export，并定义 `__all__`。
+4. 显式化剩余 media model wrapper 的 re-export 并定义 `__all__`，或在独立审核后删除该 wrapper。
 5. 分批清理 Koubo 的 `from .constants import *`。
 6. 给 CI 增加 no-new-`sys.path.insert` 和 no-wildcard-import 检查。
 7. 规划 ToolLibrary 脚本经子进程 `PYTHONPATH` 注入或 `python -m` 化的迁移。

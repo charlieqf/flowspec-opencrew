@@ -5628,7 +5628,6 @@ ORDER BY id DESC
 
     def analysis_v1_one_click_start(task_id: int, payload: OpenClipAnalysisV1OneClickMoviePayload, role: str, request: Request) -> dict[str, Any]:
         task = get_task(task_id)
-        selected_talking_head_video_model: dict[str, Any] = {}
         if analysis_v1_payload_workflow_profile(payload) == WORKFLOW_PERSON_TALKING_HEAD_V1:
             ensure_talking_head_v1_task(task)
             config_row = repo.get_talking_head_config(task_id) or {}
@@ -5648,7 +5647,6 @@ ORDER BY id DESC
             )
             if not selected_video_model:
                 raise HTTPException(status_code=400, detail={"code": "talking_head_video_model_invalid", "message": "人物口播任务没有有效的视频模型选择。"})
-            selected_talking_head_video_model = selected_video_model
             video_plan_settings = dict(payload.video_plan_settings or {})
             video_plan_settings.update({
                 "video_provider": selected_video_model["provider"],
@@ -7044,7 +7042,6 @@ ORDER BY id DESC
 
     @router.post("/api/openclip/tasks/{task_id}/rerun")
     async def rerun_openclip_task(request: Request, task_id: int, payload: OpenClipRunPayload) -> dict[str, Any]:
-        task_row = get_task(task_id)
         return await run_openclip_task(request, task_id, payload)
 
     @router.get("/api/openclip/tasks/{task_id}/attempts")
