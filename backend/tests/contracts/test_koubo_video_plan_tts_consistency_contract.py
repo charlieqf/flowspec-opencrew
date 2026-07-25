@@ -207,12 +207,12 @@ def test_video_plan_audio_preparation_calls_selected_clone_provider() -> None:
             captured.update({"request": request_payload, "prompt": prompt_item, "output": output_rel})
             return {"output": output_rel, "duration_seconds": 1.25}
 
-        with patch.object(tts_workflow_services, "run_scene_tts_candidate", side_effect=fake_run):
-            result = tts_workflow_services.prepare_video_plan_selected_tts_audio(
-                {"id": 266, "session_id": 325},
-                workspace,
-                sc=sc,
-            )
+        sc.run_scene_tts_candidate = fake_run
+        result = tts_workflow_services.prepare_video_plan_selected_tts_audio(
+            {"id": 266, "session_id": 325},
+            workspace,
+            sc=sc,
+        )
 
     assert result["generated_count"] == 1
     assert captured["prompt"]["provider"] == "heygen"

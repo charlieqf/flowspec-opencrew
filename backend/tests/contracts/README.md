@@ -5,8 +5,9 @@ These tests cover P0 workflow infrastructure contracts without real model, VLM, 
 Run from the repository root:
 
 ```bash
+backend/.venv/bin/python -m pip install -r backend/requirements-test.txt
 PYTHONPYCACHEPREFIX=/private/tmp/opencrew-pycache \
-  backend/.venv/bin/python -m unittest discover -s backend/tests/contracts
+  backend/.venv/bin/python -m pytest -q backend/tests/contracts
 ```
 
 ## P0 Stack Smoke

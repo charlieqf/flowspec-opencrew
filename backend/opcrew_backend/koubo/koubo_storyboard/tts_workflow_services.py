@@ -328,7 +328,7 @@ def prepare_video_plan_selected_tts_audio(task: dict[str, Any], workspace: Path,
             "text": text_value,
             "tempo": selection["tempo"],
         }
-        result = run_scene_tts_candidate(task, workspace, request_payload, prompt_item, item["output"], sc=sc)
+        result = sc.run_scene_tts_candidate(task, workspace, request_payload, prompt_item, item["output"], sc=sc)
         generated.append({
             "dialogue_asset_key": item["asset_key"],
             "output": sc.text(result.get("output")),

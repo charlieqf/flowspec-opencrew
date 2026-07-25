@@ -16,6 +16,7 @@ LEGACY_API_HELPER_FILES = {
     Path("frontend/src/modules/koubo/KouboTaskList/kouboTaskListApi.js"),
     Path("frontend/src/modules/koubo/OCRebuildModule.jsx"),
     Path("frontend/src/modules/koubo/OCStoryBoard/storyboardApi.js"),
+    Path("frontend/src/modules/koubo/TalkingHeadV1/talkingHeadV1Api.js"),
 }
 ALLOWED_FILES = {CANONICAL_API_MODULE, *LEGACY_API_HELPER_FILES}
 HELPER_PATTERNS = (

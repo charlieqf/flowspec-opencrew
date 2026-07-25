@@ -291,20 +291,20 @@ def assert_prompt_aspect_matches(prompt: str, aspect: str) -> None:
         })
 
 
-def video_aspect_for_reference_image(path: Path | None) -> tuple[str, dict[str, Any]]:
+def video_aspect_for_reference_image(path: Path | None, *, sc: Any) -> tuple[str, dict[str, Any]]:
     if not path:
         return "", {}
-    width, height = image_dimensions(path)
+    width, height = sc.image_dimensions(path)
     aspect = video_aspect_for_dimensions(width, height)
     return aspect, {"first_frame_width": width, "first_frame_height": height, "first_frame_aspect": aspect}
 
 
-def resolve_reference_frame_video_aspect(reference_paths: list[Path], requested_aspect: Any, prompt: str) -> tuple[str, dict[str, Any]]:
+def resolve_reference_frame_video_aspect(reference_paths: list[Path], requested_aspect: Any, prompt: str, *, sc: Any) -> tuple[str, dict[str, Any]]:
     requested = normalize_video_aspect(requested_aspect)
     if not reference_paths:
         assert_prompt_aspect_matches(prompt, requested)
         return requested, {"aspect_source": "request"}
-    target_aspect, meta = video_aspect_for_reference_image(reference_paths[0])
+    target_aspect, meta = video_aspect_for_reference_image(reference_paths[0], sc=sc)
     if not target_aspect:
         assert_prompt_aspect_matches(prompt, requested)
         return requested, {"aspect_source": "request"}
@@ -1252,9 +1252,9 @@ def video_dimensions(path: Path | None) -> tuple[int, int]:
         return 0, 0
 
 
-def validate_video_output_aspect(path: Path, aspect: str, *, provider: str, model: str) -> dict[str, Any]:
+def validate_video_output_aspect(path: Path, aspect: str, *, provider: str, model: str, sc: Any) -> dict[str, Any]:
     width, height = video_dimensions(path)
-    target_ratio = video_aspect_ratio_value(aspect)
+    target_ratio = sc.video_aspect_ratio_value(aspect)
     target_aspect = normalize_video_aspect(aspect)
     if width <= 0 or height <= 0:
         return {
@@ -2007,7 +2007,7 @@ def run_asset_library_video_provider(
             raise HTTPException(status_code=502, detail=f"Video metadata sanitization failed: {exc}") from exc
     else:
         raise HTTPException(status_code=400, detail=f"Unsupported video provider: {provider}")
-    provider_meta.update(validate_video_output_aspect(output_path, aspect, provider=provider, model=model))
+    provider_meta.update(validate_video_output_aspect(output_path, aspect, provider=provider, model=model, sc=sc))
     elapsed_seconds = round(time.time() - call_started, 3)
     usage_task_id = task.get("id") or task.get("task_id") or task.get("session_id") or ""
     usage_request_id = _text(config.get("_omni_usage_request_id")) if is_gemini_omni else ""
@@ -2167,7 +2167,7 @@ def generate_asset_library_video(task_id: int, payload: dict[str, Any], *, sc: A
         config = {**config, "reference_mode": "input_references", "generate_audio": True}
     if _text(config.get("provider")).lower() == "openrouter" and (reference_audio_paths or reference_video_paths):
         config = {**config, "reference_mode": "input_references", "generate_audio": True}
-    aspect, aspect_meta = resolve_reference_frame_video_aspect(reference_paths, payload.get("aspect"), prompt)
+    aspect, aspect_meta = resolve_reference_frame_video_aspect(reference_paths, payload.get("aspect"), prompt, sc=sc)
     if is_gemini_omni and aspect not in {"16:9", "9:16"}:
         raise HTTPException(status_code=400, detail={
             "code": "video_stateful_invalid_request",

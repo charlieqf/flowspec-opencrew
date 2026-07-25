@@ -6,6 +6,11 @@
 - 结果（修复后）：Ran 550 / **0 failures / 0 errors / 1 skipped** ✅ 绿色基线达成
 - 目的：逐条判定「改测试（契约过期）」还是「修代码（真实回归）」，作为后续重构的绿色基线前置。
 
+> 2026-07-26 更新：当前 CI 与 pre-push 已统一改用
+> `backend/.venv/bin/python -m pytest -q backend/tests/contracts`，以同时收集
+> `unittest.TestCase` 和函数式 pytest 契约；上面的命令与计数保留为 2026-07-01
+> 分诊记录。
+
 ## 修复结果（全绿）
 
 18 条全部处理完毕，改动分两类：**测试/契约/夹具更新**（多数）与 **2 处真实代码/数据补全**。

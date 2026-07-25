@@ -61,7 +61,7 @@ if [[ "$run_backend" == "1" ]]; then
     echo "[opencrew] pre-push WARN: backend/.venv not found — skipping contract tests (CI still enforces)."
   else
     echo "[opencrew] pre-push: running backend contract tests…"
-    if ! PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/opencrew-pycache}" "$PY" -m unittest discover -s backend/tests/contracts; then
+    if ! PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/opencrew-pycache}" "$PY" -m pytest -q backend/tests/contracts; then
       echo "[opencrew] pre-push FAIL: backend contract tests failed."
       fail=1
     fi

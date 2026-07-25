@@ -1,7 +1,7 @@
 """Contract test for scripts/deploy/sync_guard.py (dirty-tree mirror guard).
 
 Runs under the repo's standard contract runner
-(``python -m unittest discover -s backend/tests/contracts``). Exercises the
+(``python -m pytest -q backend/tests/contracts``). Exercises the
 byte-safety guarantees the guard must uphold: non-ASCII (Chinese) names, spaces,
 binary/.docx blobs with NUL bytes, and nested directories -- the exact classes
 of file that a naive line/text split silently dropped during the incident this

@@ -41,6 +41,27 @@ class DanceMimicToolchainContractTest(unittest.TestCase):
         if importlib.util.find_spec("cv2") is None or importlib.util.find_spec("numpy") is None:
             raise unittest.SkipTest("opencv/numpy unavailable")
 
+    def setUp(self) -> None:
+        self.original_fetch_default_video_config = self.tool.fetch_dance_mimic_default_video_config
+        self.tool.fetch_dance_mimic_default_video_config = lambda _args: (
+            {
+                "kind": "video",
+                "provider": "openrouter",
+                "model": "bytedance/seedance-2.0",
+                "model_label": "ByteDance Seedance 2.0",
+                "model_alias": "MaxSR2",
+                "api_key_ref": "video_openrouter_key",
+                "has_api_key": True,
+                "source": "contract-test",
+                "extra": {"reference_mode": "input_references"},
+                "extra_json": {"reference_mode": "input_references"},
+            },
+            [],
+        )
+
+    def tearDown(self) -> None:
+        self.tool.fetch_dance_mimic_default_video_config = self.original_fetch_default_video_config
+
     def make_source_video(self, root: Path, *, duration: float = 2.0) -> Path:
         output = root / "source.mp4"
         command = [

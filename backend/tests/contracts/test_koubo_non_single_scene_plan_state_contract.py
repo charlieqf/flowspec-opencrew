@@ -9,8 +9,7 @@ from pathlib import Path
 from typing import Any
 
 
-WORKSPACE_ROOT = Path(__file__).resolve().parents[4]
-OPENCREW_ROOT = WORKSPACE_ROOT / "OpenCrew"
+OPENCREW_ROOT = Path(__file__).resolve().parents[3]
 VIDEO_PLAN_GENERATOR_PATH = OPENCREW_ROOT / "ToolLibrary" / "Analysis_V1" / "05_01_VideoPlanGenerator.py"
 IMAGE_PLAN_GENERATOR_PATH = OPENCREW_ROOT / "ToolLibrary" / "Analysis_V1" / "05_03_ImagePlanGenerator.py"
 VIDEO_ONLY_PLAN_GENERATOR_PATH = OPENCREW_ROOT / "ToolLibrary" / "Analysis_V1" / "05_05_VideoOnlyPlanGenerator.py"

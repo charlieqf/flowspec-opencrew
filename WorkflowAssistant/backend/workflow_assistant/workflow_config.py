@@ -14,9 +14,9 @@ WORKFLOW_CONFIGS = {
         "source": "openclip-analysis",
         "task_adapter": "openclip",
         "tool_library": {
-            "root": "OpenCrew/ToolLibrary/Analysis",
-            "registry": "OpenCrew/ToolLibrary/Analysis/tool_registry.json",
-            "agent_guide": "OpenCrew/ToolLibrary/Analysis/AGENT_TOOL_GUIDE.md",
+            "root": "ToolLibrary/Analysis",
+            "registry": "ToolLibrary/Analysis/tool_registry.json",
+            "agent_guide": "ToolLibrary/Analysis/AGENT_TOOL_GUIDE.md",
         },
         "assistant": {
             "system_prompt_template": "openclip_assistant_system_prompt",
@@ -32,9 +32,9 @@ WORKFLOW_CONFIGS = {
         "source": "oc-rebuild",
         "task_adapter": "oc_rebuild",
         "tool_library": {
-            "root": "OpenCrew/ToolLibrary/Rebuild_V1",
-            "registry": "OpenCrew/ToolLibrary/Rebuild_V1/tool_registry.json",
-            "agent_guide": "OpenCrew/ToolLibrary/Rebuild_V1/README.md",
+            "root": "ToolLibrary/Rebuild_V1",
+            "registry": "ToolLibrary/Rebuild_V1/tool_registry.json",
+            "agent_guide": "ToolLibrary/Rebuild_V1/README.md",
         },
         "assistant": {
             "system_prompt_template": "oc_rebuild_assistant_system_prompt",
@@ -50,9 +50,9 @@ WORKFLOW_CONFIGS = {
         "source": "oc-rebuild",
         "task_adapter": "oc_rebuild",
         "tool_library": {
-            "root": "OpenCrew/ToolLibrary/Rebuild_V1",
-            "registry": "OpenCrew/ToolLibrary/Rebuild_V1/tool_registry.json",
-            "agent_guide": "OpenCrew/ToolLibrary/Rebuild_V1/README.md",
+            "root": "ToolLibrary/Rebuild_V1",
+            "registry": "ToolLibrary/Rebuild_V1/tool_registry.json",
+            "agent_guide": "ToolLibrary/Rebuild_V1/README.md",
         },
         "assistant": {
             "system_prompt_template": "oc_rebuild_plan_a_phase_batch_system_prompt",
@@ -68,9 +68,9 @@ WORKFLOW_CONFIGS = {
         "source": "oc-rebuild",
         "task_adapter": "oc_rebuild",
         "tool_library": {
-            "root": "OpenCrew/ToolLibrary/Rebuild_V1",
-            "registry": "OpenCrew/ToolLibrary/Rebuild_V1/tool_registry.json",
-            "agent_guide": "OpenCrew/ToolLibrary/Rebuild_V1/README.md",
+            "root": "ToolLibrary/Rebuild_V1",
+            "registry": "ToolLibrary/Rebuild_V1/tool_registry.json",
+            "agent_guide": "ToolLibrary/Rebuild_V1/README.md",
         },
         "assistant": {
             "system_prompt_template": "oc_rebuild_plan_a_shot_first_system_prompt",
@@ -143,4 +143,3 @@ def workflow_tool_library_source(workflow_id: str) -> dict[str, str]:
         "registry": paths["registry"].as_posix(),
         "agent_guide": paths["agent_guide"].as_posix(),
     }
-

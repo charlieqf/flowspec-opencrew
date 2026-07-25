@@ -94,12 +94,14 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: backend/requirements.txt
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-test.txt
 
       - name: Install backend dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          pip install -r backend/requirements.txt
+          pip install -r backend/requirements-test.txt
 
       - name: Run model leakage guard
         env:
@@ -109,11 +111,13 @@ jobs:
 
       - name: Run contract tests
         # Run from repo root: tests resolve REPO_ROOT via parents[3] and add
-        # backend/ to sys.path themselves. Keep pycache out of the tree.
+        # backend/ to sys.path themselves. Pytest collects both unittest
+        # contracts and the small set of function-style contracts.
+        # Keep pycache out of the tree.
         env:
           PYTHONPYCACHEPREFIX: /tmp/opencrew-pycache
         run: |
-          python -m unittest discover -s backend/tests/contracts
+          python -m pytest -q backend/tests/contracts
 
   frontend-build:
     name: Frontend build
