@@ -604,7 +604,6 @@ def materialize_plan_assets(workspace: Path, plan: dict[str, Any], *, sc: Any) -
                     slot_path = sc.current_slot_path(slot, sc=sc)
                     if not slot_path:
                         continue
-                    source_type = sc.asset_source_type(slot_path, slot.get("source_type") if isinstance(slot, dict) else "", sc=sc)
                     allowed_exts = AUDIO_EXTS if slot_name == "audio" else VIDEO_EXTS
                     next_path, next_source_type = materialize_standard_slot_path(workspace, slot_path, asset_key, default_slot, allowed_exts, slot.get("source_type") if isinstance(slot, dict) else "", "materialize_slot_asset", dialogue, scene, sc=sc)
                     slot["path"] = next_path

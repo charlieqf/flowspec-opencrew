@@ -1190,7 +1190,6 @@ class VisualSemanticService:
         segments_path = (workspace / segments_rel).resolve()
         if not segments_path.is_relative_to(workspace.resolve()) or not segments_path.is_file():
             raise ValueError("visual_structure_result_missing")
-        structure_root = workspace / base
         manifest_rel = f"{base}/SessionOutput/visual/visual_structure_manifest.json"
         manifest_path = (workspace / manifest_rel).resolve()
         if not manifest_path.is_relative_to(workspace.resolve()) or not manifest_path.is_file():

@@ -11,7 +11,7 @@ extend-exclude = [
 ]
 
 [tool.ruff.lint]
-select = ["E9", "F401", "F811", "F821"]
+select = ["E9", "F401", "F811", "F821", "F841"]
 
 [tool.ruff.lint.per-file-ignores]
 "backend/opcrew_backend/koubo/koubo_storyboard/*.py" = ["F401", "F821"]
