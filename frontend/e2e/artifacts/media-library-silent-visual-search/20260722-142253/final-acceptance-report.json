@@ -1,0 +1,236 @@
+{
+  "schema_version": "media_library_silent_visual_search_final_acceptance_v1",
+  "generated_at": "2026-07-22T15:15:27+10:00",
+  "amended_at": "2026-07-22T17:10:46+10:00",
+  "status": "passed",
+  "contract": {
+    "document_version": "v0.3.1",
+    "scope": ["R0A", "R1", "R2", "R3", "R4"],
+    "sections_satisfied": ["18.2", "18.3", "19"],
+    "production_deployed": false,
+    "commit_created": true,
+    "push_performed": false
+  },
+  "release_configuration": {
+    "visual_search_v1_default_enabled": true,
+    "clip_search_v1_default_enabled": true,
+    "new_environment_variables_added": false,
+    "explicit_false_remains_available_for_rollback": true,
+    "invalid_values_fail_closed": true,
+    "derived_clip_search_eligibility_remains_explicit_opt_in": true
+  },
+  "worktree": {
+    "head": "0439292caeafd80dd96c443d7a28b79b1593ca9d",
+    "branch": "main",
+    "dirty": true,
+    "pre_acceptance_report_status_porcelain_sha256": "e88a1ffe617087213551f78a49a0c165c29d0a18cc0cc1ea9c37087bbeb7b9bc"
+  },
+  "retained_ids": {
+    "asset_ids": [
+      "mla_1784601908573_70c828790521",
+      "mla_1784615441629_44c90c6be2af"
+    ],
+    "clip_ids": [
+      "mlc_1784605289217_6a71573ce61e",
+      "mlc_1784691813613_c891d3f03f6b",
+      "mlc_1784692000511_2d00524be1d2"
+    ],
+    "media_library_search_ids": [
+      "mls_1784691808783_81a35661681a",
+      "mls_1784692000044_02dd6e88fccc",
+      "mls_1784692020738_453cd3cfdac0",
+      "mls_1784692021137_694191f345f8",
+      "mls_1784694748105_620523cd0db0",
+      "mls_1784694962041_e6fac593e6a5",
+      "mls_1784694984707_22f5a8a450fb",
+      "mls_1784695056504_63f88c40f713",
+      "mls_1784695068507_7a9d20a189eb",
+      "mls_1784695076629_d5575029b14c",
+      "mls_1784695152973_0cc82be1ef5f",
+      "mls_1784695341703_c14b55f613ec",
+      "mls_1784695350661_a77f1340d5c5",
+      "mls_1784695351264_f38e8dda0c98",
+      "mls_1784695423798_18ae06ed0cc2",
+      "mls_1784695434755_a81382396df3",
+      "mls_1784695435359_e2cc46dccbf7",
+      "mls_1784695597604_bd44529a47c9",
+      "mls_1784695605506_dce100408098",
+      "mls_1784695606081_079cc3cb0065",
+      "mls_1784695606847_f35403c91f3e",
+      "mls_1784695607659_17f0ca896d3d"
+    ],
+    "agent_search_ids": [
+      "search_1784692010572_1e3f6e",
+      "search_1784695057299_dcc7e3",
+      "search_1784695342497_6b122c",
+      "search_1784695424577_3d7710",
+      "search_1784695598368_13f530"
+    ],
+    "import_ids": [
+      "mli_1784691823064_ada4b833f051",
+      "mli_1784692009992_db630a174a3a",
+      "mli_1784694992008_7eed5930c5f2",
+      "mli_1784695056704_e5586dec5564",
+      "mli_1784695076302_b9b6135e46a5",
+      "mli_1784695341919_22421e51c3a3",
+      "mli_1784695350936_d406d32628d8",
+      "mli_1784695423999_0930b021b83b",
+      "mli_1784695435031_a313e529ec29",
+      "mli_1784695435463_8cc606ebe4c9",
+      "mli_1784695597805_5a1310d67e27",
+      "mli_1784695605786_0b056e3ec568",
+      "mli_1784695606188_b7a1240c83b1"
+    ],
+    "task_ids": [311, 312],
+    "session_ids": [382, 392, 398, 399],
+    "analysis_run_ids": [
+      "mlar_visual_structure_1784689791965_ff664499acc3",
+      "mlar_visual_semantic_1784690007614_2951e3c0f598"
+    ],
+    "tool_use_session_ids": [
+      "tus_1784689791970_a22a4e1ccc72",
+      "tus_1784690007623_01341347882c"
+    ],
+    "model_session_ids": [
+      "ses_0782fa192ffeGaXIW0uPEMf5DL",
+      "ses_078303727ffeysFnC01uV6VACx"
+    ],
+    "model_request_ids": [
+      "f31a8a93-5943-48cc-9533-cda3e9960fa4",
+      "7088acbe-2ef3-4910-a474-0c32abac93a8"
+    ],
+    "local_usage_ids": [3984, 3985]
+  },
+  "retained_entities": {
+    "tasks": [
+      {"task_id": 311, "session_id": 398, "title": "人穷衣服破"},
+      {"task_id": 312, "session_id": 399, "title": "R2 派生片段全局复用验收 20260722-142253"}
+    ],
+    "source_sessions": [
+      {"session_id": 382, "title": "DSCF0157", "asset_id": "mla_1784601908573_70c828790521"},
+      {"session_id": 392, "title": "DSCF0137", "asset_id": "mla_1784615441629_44c90c6be2af"}
+    ],
+    "clip_final_state": {
+      "mlc_1784605289217_6a71573ce61e": {"source_range_ms": [1752, 5974], "duration_ms": 4240, "search_eligible": false, "removal_verified": true},
+      "mlc_1784691813613_c891d3f03f6b": {"source_range_ms": [0, 13000], "duration_ms": 13000, "search_eligible": false},
+      "mlc_1784692000511_2d00524be1d2": {"source_range_ms": [0, 13000], "duration_ms": 13000, "search_eligible": false}
+    }
+  },
+  "provenance_retention_verification": {
+    "completed_import_count": 13,
+    "target_file_exists_count": 13,
+    "target_file_hash_match_count": 13,
+    "non_stale_session_file_registration_count": 13,
+    "storyboard_manifest_path": "/Users/macmini-4/.opencrew/sessions/398/workspace/SessionOutput/storyboard/koubo_storyboard_assets.json",
+    "storyboard_manifest_asset_count": 13,
+    "storyboard_manifest_provenance_complete": true,
+    "imported_files_survive_clip_search_removal": true
+  },
+  "database_migrations": {
+    "artifact": "migration-0023-0024-evidence.json",
+    "passed": true,
+    "test_result": "12 passed in 0.71s",
+    "covered_upgrade_paths": ["0001 to 0023 to 0024", "0018 to 0023 to 0024", "0022 to 0023 to 0024", "0023 to 0024"],
+    "postgresql_sqlite_schema_equivalent": true,
+    "sqlite_rebuild_data_constraints_indexes_foreign_keys_triggers_equivalent": true,
+    "sqlite_foreign_key_check": "empty",
+    "sqlite_integrity_check": "ok",
+    "failure_rollback_verified": true,
+    "existing_clips_auto_opened": false,
+    "historical_single_frame_promoted": false,
+    "pre_0024_backup_sha256": "dfe3a648410a97762bc1126c2359309bbc519e1852addb134e60e3bd8af8b795"
+  },
+  "real_model_and_media": {
+    "artifact": "r0a-real-analysis-evidence.json",
+    "capability_smoke_artifact": "../20260722-131216/four-image-capability-smoke.json",
+    "asset_id": "mla_1784601908573_70c828790521",
+    "fragment_count": 2,
+    "frame_count": 8,
+    "requests_per_fragment": 1,
+    "images_per_request": 4,
+    "action_null": true,
+    "visual_keywords_verified": ["玻璃碗", "深色液体", "绿色包装"]
+  },
+  "backfill": {
+    "artifact": "../20260722-140200/visual-search-backfill-evidence.json",
+    "passed": true,
+    "candidate_count": 8,
+    "eligible_four_frame_asset_count": 1,
+    "reanalysis_required_single_frame_asset_count": 7,
+    "model_calls_created": 0,
+    "idempotent_second_write": true
+  },
+  "postgresql_performance": {
+    "database_version": "PostgreSQL 16.14 (Homebrew)",
+    "r1": {
+      "artifact": "../20260722-140200/r1-postgres-performance.json",
+      "ready_original_video_count": 500,
+      "active_dialogue_fragment_count": 6565,
+      "active_visual_semantic_fragment_count": 1250,
+      "warmup_count": 20,
+      "query_count": 200,
+      "retrieval_ms": {"p50": 81, "p95": 125, "p99": 129},
+      "total_ms": {"p50": 82, "p95": 126, "p99": 129},
+      "p95_gate_ms": 3000,
+      "passed": true
+    },
+    "r2": {
+      "artifact": "r2-postgres-performance.json",
+      "ready_original_video_count": 500,
+      "search_eligible_clip_count": 2000,
+      "active_dialogue_fragment_count": 6503,
+      "active_visual_semantic_fragment_count": 1250,
+      "warmup_count": 20,
+      "query_count": 200,
+      "retrieval_ms": {"p50": 92, "p95": 132, "p99": 144},
+      "total_ms": {"p50": 92, "p95": 133, "p99": 145},
+      "wall_ms": {"p50": 94.697, "p95": 135.557, "p99": 146.704},
+      "p95_gate_ms": 3000,
+      "passed": true
+    }
+  },
+  "browser_and_manual": {
+    "r1_report": "../20260722-140200/r1-browser-e2e-report.json",
+    "r1_screenshot_count": 11,
+    "r2_report": "r2-browser-e2e-report.json",
+    "r2_screenshot_count": 15,
+    "r1_ok": true,
+    "r2_ok": true,
+    "desktop_and_mobile_verified": true,
+    "manual_path": "/Users/macmini-4/work/code/OpenCrew/docs/SessionDesign-R2/OpenCrew_素材库综合分析_视频剪辑与跨页面语义检索_用户手册.html",
+    "manual_size_bytes": 20539879,
+    "manual_embedded_screenshot_count": 57,
+    "manual_validation_report": "manual-validation/manual-validation-report.json",
+    "manual_webkit_desktop_ok": true,
+    "manual_chromium_mobile_ok": true,
+    "manual_console_error_count": 0,
+    "manual_page_error_count": 0,
+    "manual_overflow_element_count": 0
+  },
+  "tests": {
+    "backend_full": "1137 passed, 7 skipped, 230 subtests passed in 56.36s",
+    "analysis_v1_concurrency_regression": "5 consecutive targeted passes",
+    "migration_contracts": "12 passed in 0.71s",
+    "frontend_contract_scripts": "15 passed",
+    "frontend_lint": "0 errors; 864 pre-existing Solid reactivity warnings",
+    "frontend_production_build": "passed",
+    "browser_r1": "passed",
+    "browser_r2": "passed",
+    "manual_offline_validation": "passed"
+  },
+  "artifact_directories": [
+    "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-131216",
+    "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-140200",
+    "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-142253",
+    "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-142253/manual-validation"
+  ],
+  "locked_exclusions_preserved": {
+    "clip_independent_vlm": false,
+    "continuous_action_understanding": false,
+    "embedding_or_pgvector": false,
+    "tenant_permission_system": false,
+    "new_media_gateway": false,
+    "parent_visual_description_inherited_by_clip": false,
+    "query_plan_v2": false
+  }
+}

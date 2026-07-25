@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1920px;overflow:hidden;
+    background:linear-gradient(160deg,#23271f 0%,#14160f 100%);
+    font-family:"PingFang SC","Hiragino Sans GB",sans-serif;}
+  /* 限时甄选:细金边缎带,右上,极轻呼吸 */
+  .ribbon{position:absolute;top:160px;right:80px;border:1px solid #c9a86a;
+    background:rgba(20,22,15,.55);color:#c9a86a;padding:18px 30px;border-radius:6px;text-align:center;
+    letter-spacing:6px;animation:breathe 2.4s ease-in-out infinite;}
+  @keyframes breathe{0%,100%{opacity:.78}50%{opacity:1}}
+  .ribbon .m{font-size:40px;font-weight:500;}.ribbon .s{font-size:24px;margin-top:6px;letter-spacing:10px;}
+  /* 倒计时:米白细字 + 烫金数字,夜色面板 */
+  .count{position:absolute;left:90px;right:90px;bottom:330px;
+    background:rgba(20,22,15,.62);border:1px solid rgba(201,168,106,.5);border-radius:14px;padding:30px;text-align:center;}
+  .count .t{color:#cfc6b2;font-size:32px;letter-spacing:3px;}
+  .count .clock{margin-top:14px;color:#e8d9b5;font-size:84px;font-weight:600;letter-spacing:8px;
+    font-variant-numeric:tabular-nums;}
+  .count .stock{margin-top:14px;color:#c9a86a;font-size:30px;letter-spacing:1px;}
+</style></head><body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="2" data-width="1080" data-height="1920">
+    <div class="ribbon clip" data-start="0" data-duration="2" data-track-index="1"><div class="m">限时甄选</div><div class="s">SELECTED</div></div>
+    <div class="count clip" data-start="0" data-duration="2" data-track-index="2">
+      <div class="t">距本场结束</div>
+      <div class="clock">00:03:58</div>
+      <div class="stock">本场限量 · 仅余 12 件</div>
+    </div>
+  </div>
+  <script>window.__timelines={main:{pause(){return this},play(){return this},seek(){return this},totalTime(){return this},time(){return 0},duration(){return 2}}};</script>
+</body></html>

@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="FlowSpec 声明式业务流程编排规范综述：背景、目标、概念、取舍、AI 与成本治理、OpenCrew 映射、路线图和四场景 Demo。">
+  <title>FlowSpec · 规范综述与阅读入口</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6f8;
+      --bg-soft: #eef3f5;
+      --panel: #ffffff;
+      --panel-2: #f6f9fa;
+      --line: #d5dfe3;
+      --line-strong: #c4d0d5;
+      --text: #182d36;
+      --muted: #526a74;
+      --faint: #6b7f88;
+      --mint: #087f6d;
+      --blue: #2867b2;
+      --violet: #6f52b5;
+      --gold: #875f08;
+      --rose: #ad3656;
+      --ok: #167957;
+      --radius: 16px;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: linear-gradient(180deg, #fbfcfd 0, var(--bg) 560px, var(--bg) 100%);
+      color: var(--text);
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .shell { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+    .wide-shell { width: min(1440px, calc(100% - 40px)); margin: 0 auto; }
+    .anchor { scroll-margin-top: 94px; }
+
+    .topbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(250,252,253,.95);
+      backdrop-filter: blur(20px);
+    }
+    .topbar {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      white-space: nowrap;
+      font-weight: 850;
+      letter-spacing: -.025em;
+    }
+    .brand-mark {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--mint), var(--blue));
+      box-shadow: 0 9px 28px rgba(80, 220, 180, .24);
+      font-weight: 950;
+    }
+    .brand small { color: var(--muted); font-size: 11px; font-weight: 600; }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      padding: 8px 10px;
+      border-radius: 9px;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .nav a:hover, .nav a.active { color: var(--text); background: #edf3f5; }
+    .nav .nav-demo { margin-left: 5px; color: #fff; background: var(--mint); }
+    .nav .nav-demo:hover { color: #fff; background: var(--mint); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 72px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(24,45,54,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(24,45,54,.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, #000, transparent 88%);
+    }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(400px, .88fr);
+      gap: 68px;
+      align-items: center;
+    }
+    .eyebrow {
+      margin: 0 0 17px;
+      color: var(--mint);
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-size: 11px;
+      font-weight: 850;
+    }
+    h1 {
+      margin: 0;
+      max-width: 830px;
+      font-size: clamp(50px, 6.4vw, 88px);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+    .hero-lead {
+      max-width: 790px;
+      margin: 27px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 1.65vw, 21px);
+      line-height: 1.75;
+    }
+    .hero-lead b { color: var(--text); font-weight: 760; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .hero-tags span {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: #49636d;
+      font-size: 10px;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 31px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      color: var(--text);
+      background: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .button.primary { border-color: transparent; color: #fff; background: var(--mint); }
+    .button.secondary { border-color: rgba(125,180,255,.38); background: rgba(125,180,255,.08); }
+    .button:hover { transform: translateY(-1px); }
+
+    .contract-map {
+      position: relative;
+      min-width: 0;
+      padding: 24px;
+      border: 1px solid rgba(104,224,189,.28);
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(22,47,58,.07);
+    }
+    .map-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .map-head small { display: block; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .13em; }
+    .map-head strong { display: block; margin-top: 5px; font-size: 20px; letter-spacing: -.035em; }
+    .live-dot { width: 10px; height: 10px; margin-top: 4px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 7px rgba(66,211,146,.11); }
+    .identity-box {
+      margin-top: 20px;
+      padding: 13px 14px;
+      border: 1px solid rgba(104,224,189,.24);
+      border-radius: 13px;
+      background: rgba(104,224,189,.075);
+    }
+    .identity-box small, .plane-label { color: var(--mint); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+    .identity-box b { display: block; margin-top: 4px; font-size: 13px; }
+    .run-pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: stretch; margin-top: 9px; }
+    .run-box { padding: 12px; border: 1px solid var(--line); border-radius: 13px; background: #f7f9fa; min-width: 0; }
+    .run-box small { color: var(--faint); font-size: 8px; letter-spacing: .1em; }
+    .run-box b { display: block; margin: 4px 0 7px; font-size: 12px; overflow-wrap: anywhere; }
+    .run-box span { color: var(--gold); font-size: 9px; }
+    .run-box.current { border-color: rgba(125,180,255,.35); background: rgba(125,180,255,.06); }
+    .run-arrow { display: grid; place-items: center; color: var(--blue); font-size: 18px; }
+    .dag-box { margin-top: 9px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #f7f9fa; }
+    .dag-row { display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: center; gap: 6px; margin-top: 10px; }
+    .dag-node { display: grid; place-items: center; min-height: 36px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel-2); color: #405b65; font-size: 9px; text-align: center; }
+    .dag-node.ai { border-color: rgba(181,156,255,.35); color: #60459a; }
+    .dag-node.human { border-color: rgba(243,201,105,.38); color: #805a08; }
+    .dag-edge { height: 1px; background: linear-gradient(90deg, var(--mint), var(--blue)); opacity: .6; }
+    .governance-rail { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-top: 9px; }
+    .governance-rail span { padding: 7px 4px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 8px; text-align: center; }
+    .map-caption { margin: 13px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+
+    .audience-strip {
+      display: grid;
+      grid-template-columns: 150px 1fr 1fr;
+      gap: 10px;
+      padding: 18px 0;
+    }
+    .audience-label { display: flex; align-items: center; color: var(--faint); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .audience-route {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      text-decoration: none;
+    }
+    .audience-route b { display: block; margin-bottom: 3px; font-size: 12px; }
+    .audience-route span { color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .audience-route i { color: var(--mint); font-size: 19px; font-style: normal; }
+
+    .section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+    .section.tint { background: #eef3f5; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(320px, .65fr);
+      justify-content: space-between;
+      gap: 50px;
+      align-items: end;
+      margin-bottom: 35px;
+    }
+    .section-head h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -.05em; }
+    .section-head > p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .section-head code { color: #34525e; font-size: .9em; }
+    .audience-chip {
+      display: inline-flex;
+      margin-left: 7px;
+      padding: 3px 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 8px;
+      vertical-align: middle;
+      letter-spacing: .06em;
+    }
+
+    .value-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .value-card {
+      min-height: 210px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+    }
+    .value-card .index { color: var(--mint); font-size: 10px; font-weight: 900; letter-spacing: .1em; }
+    .value-card h3 { margin: 30px 0 9px; font-size: 19px; letter-spacing: -.025em; }
+    .value-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.72; }
+    .boundary-note {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 22px;
+      margin-top: 14px;
+      padding: 19px 22px;
+      border: 1px solid rgba(243,201,105,.26);
+      border-radius: 18px;
+      background: rgba(243,201,105,.045);
+    }
+    .boundary-note strong { color: var(--gold); font-size: 12px; }
+    .boundary-note p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+    .origin-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; counter-reset: origin; }
+    .origin-step { position: relative; padding: 23px 23px 23px 0; border-top: 1px solid var(--line-strong); counter-increment: origin; }
+    .origin-step:not(:last-child)::after { content: ""; position: absolute; top: -2px; right: 12px; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+    .origin-step small::before { content: "0" counter(origin) " · "; color: var(--mint); }
+    .origin-step small { color: var(--faint); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .origin-step h3 { margin: 18px 0 8px; font-size: 17px; }
+    .origin-step p { margin: 0; padding-right: 15px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+    .model-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .model-card { padding: 24px; border: 1px solid var(--line); border-radius: 23px; background: var(--panel); }
+    .model-card h3 { margin: 0 0 7px; font-size: 18px; }
+    .model-card > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+    .chain { margin-top: 19px; }
+    .chain-root { padding: 13px; border: 1px solid rgba(104,224,189,.34); border-radius: 12px; color: #176b59; background: rgba(104,224,189,.07); font-size: 11px; font-weight: 800; }
+    .chain-runs { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin-top: 9px; }
+    .chain-run { min-height: 93px; padding: 13px; border: 1px solid var(--line); border-radius: 12px; background: #f7f9fa; }
+    .chain-run small { color: var(--faint); font-size: 8px; }
+    .chain-run b { display: block; margin: 7px 0; font-size: 12px; }
+    .chain-run span { color: var(--gold); font-size: 9px; }
+    .chain-arrow { color: var(--blue); }
+    .stack { display: grid; gap: 7px; margin-top: 19px; }
+    .stack-row { display: grid; grid-template-columns: 130px 1fr; gap: 8px; align-items: center; }
+    .stack-row strong { color: var(--faint); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+    .stack-items { display: flex; gap: 6px; flex-wrap: wrap; }
+    .stack-items span { padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: #f7f9fa; color: #405b65; font-size: 9px; }
+    .stack-items span.key { border-color: rgba(125,180,255,.31); color: #245a9a; }
+    .relationship-atlas { margin-bottom: 14px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 1px 3px rgba(22,47,58,.035); }
+    .relationship-atlas-head { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 22px; align-items: start; }
+    .relationship-atlas-head small { color: var(--mint); font-size: 10px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .relationship-atlas-head h3 { margin: 7px 0 6px; font-size: 22px; letter-spacing: -.025em; }
+    .relationship-atlas-head p { max-width: 820px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .relationship-atlas-head a { color: var(--blue); font-size: 11.5px; text-decoration: none; white-space: nowrap; }
+    .relation-legend { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .relation-legend-item { padding: 6px 8px; border: 1px solid var(--line); border-radius: 999px; background: #f7f9fa; color: var(--muted); font-size: 11.5px; }
+    .relation-legend-item b { color: var(--text); }
+    .relation-origins { display: grid; grid-template-columns: minmax(260px,.75fr) minmax(0,1.25fr); gap: 10px; margin-top: 13px; }
+    .relation-origin { min-width: 0; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: #f7f9fa; }
+    .relation-origin > small { color: var(--faint); font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .relation-origin h4 { margin: 7px 0 5px; font-size: 16px; }
+    .relation-origin > p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
+    .relation-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+    .relation-pills span { padding: 5px 7px; border-radius: 7px; background: #fff; color: #36545f; font-size: 11.5px; }
+    .relation-pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: stretch; margin-top: 11px; }
+    .relation-pair-node { min-width: 0; padding: 11px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+    .relation-pair-node b { display: block; font-size: 13px; }
+    .relation-pair-node span { display: block; margin-top: 4px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+    .relation-pair-link { align-self: center; color: var(--blue); font: 800 10.5px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace; text-align: center; }
+    .relation-ingress { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin: 12px 0; padding: 10px 13px; border: 1px solid #cfe0df; border-radius: 11px; background: #eef8f5; color: var(--muted); font-size: 12.5px; text-align: center; }
+    .relation-ingress b { color: var(--mint); font-size: 17px; }
+    .relation-ingress strong { color: var(--text); }
+    .relation-flow { display: grid; grid-template-columns: minmax(0,1fr) 74px minmax(0,1fr) 74px minmax(0,1fr) 74px minmax(0,1fr); gap: 7px; align-items: stretch; }
+    .relation-node { min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    .relation-node small { display: block; color: var(--mint); font-size: 10px; font-weight: 850; text-transform: uppercase; letter-spacing: .08em; }
+    .relation-node b { display: block; margin-top: 7px; font-size: 15px; }
+    .relation-node span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .relation-arrow { align-self: center; color: var(--muted); font-size: 10.5px; line-height: 1.35; text-align: center; }
+    .relation-arrow b { display: block; color: var(--blue); font-size: 11px; }
+    .relation-arrow i { display: block; margin-top: 4px; color: var(--blue); font-style: normal; font-size: 17px; }
+    .relation-evidence-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 10px; }
+    .relation-evidence { min-width: 0; padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; background: #f7f9fa; }
+    .relation-evidence b { display: block; font-size: 12.5px; }
+    .relation-evidence span { display: block; margin-top: 4px; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .relation-caution { margin-top: 10px; padding: 11px 13px; border-left: 3px solid var(--gold); border-radius: 8px; background: #fffaf0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .relation-caution b { color: var(--text); }
+    .plain-language { display: grid; grid-template-columns: repeat(4,1fr); gap: 9px; margin-top: 14px; }
+    .term { padding: 15px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+    .term dt { color: var(--text); font-size: 11px; font-weight: 850; }
+    .term dd { margin: 6px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+
+    .control-layout { display: grid; grid-template-columns: minmax(320px,.72fr) minmax(0,1.28fr); gap: 14px; align-items: stretch; }
+    .branch-panel, .control-panel { padding: 23px; border: 1px solid var(--line); border-radius: 22px; background: var(--panel); }
+    .branch-panel h3, .control-panel h3 { margin: 0; font-size: 18px; }
+    .branch-panel > p, .control-panel > p { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .branch-diagram { display: grid; justify-items: center; margin-top: 20px; }
+    .branch-node { width: min(100%,210px); padding: 10px 12px; border: 1px solid var(--line); border-radius: 11px; background: #f7f9fa; color: #405b65; font-size: 10px; text-align: center; }
+    .branch-node b { display: block; margin-bottom: 3px; color: var(--text); font-size: 11px; }
+    .branch-node.root { border-color: rgba(104,224,189,.34); }
+    .branch-node.join { border-color: rgba(125,180,255,.38); }
+    .branch-arrow { color: var(--mint); padding: 7px 0; font-size: 16px; line-height: 1; }
+    .branch-lanes { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; position: relative; }
+    .branch-lanes::before { content: "↙  fork  ↘"; position: absolute; left: 0; right: 0; top: -17px; color: var(--mint); font-size: 10px; text-align: center; letter-spacing: .08em; }
+    .branch-lane { display: grid; gap: 6px; }
+    .branch-lane .branch-node { width: 100%; }
+    .join-arrow { padding: 8px 0 7px; color: var(--blue); font-size: 10px; letter-spacing: .05em; }
+    .control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px; }
+    .control-card { min-height: 156px; padding: 15px; border: 1px solid var(--line); border-radius: 14px; background: #f7f9fa; }
+    .control-card header { display: flex; align-items: start; justify-content: space-between; gap: 8px; }
+    .control-card small { color: var(--mint); font-size: 8px; font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
+    .control-card .scope { color: var(--blue); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8px; white-space: nowrap; }
+    .control-card h4 { margin: 11px 0 6px; font-size: 13px; }
+    .control-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.62; }
+    .control-status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px; }
+    .control-status span { padding: 4px 6px; border-radius: 999px; background: #edf4fc; color: #245a9a; font-size: 7px; }
+    .control-boundary { display: grid; grid-template-columns: 160px 1fr; gap: 18px; margin-top: 12px; padding: 16px 18px; border: 1px solid rgba(243,201,105,.25); border-radius: 15px; background: rgba(243,201,105,.04); }
+    .control-boundary b { color: var(--gold); font-size: 10px; }
+    .control-boundary p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.65; }
+    .control-boundary a { color: var(--blue); }
+
+    .choice-list { display: grid; gap: 8px; }
+    .choice-row {
+      display: grid;
+      grid-template-columns: 55px minmax(190px,.65fr) minmax(190px,.65fr) 1.15fr;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+    .choice-id { color: var(--mint); font-size: 9px; font-weight: 900; }
+    .choice-position, .choice-reject { font-size: 11px; line-height: 1.55; }
+    .choice-position b, .choice-reject b { display: block; margin-bottom: 3px; color: var(--faint); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
+    .choice-reject { color: #825d67; }
+    .choice-reason { color: var(--muted); font-size: 11px; line-height: 1.65; }
+
+    .ai-layout { display: grid; grid-template-columns: 1fr 190px 1fr; gap: 12px; align-items: stretch; }
+    .ai-plane { padding: 23px; border: 1px solid var(--line); border-radius: 21px; background: var(--panel); }
+    .ai-plane.pre { border-color: rgba(181,156,255,.27); }
+    .ai-plane.post { border-color: rgba(104,224,189,.27); }
+    .ai-plane small { color: var(--faint); text-transform: uppercase; font-size: 8px; letter-spacing: .12em; }
+    .ai-plane h3 { margin: 8px 0 6px; font-size: 20px; }
+    .ai-plane > p { margin: 0 0 17px; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .ai-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .ai-facts span { padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: #f7f9fa; color: #405b65; font-size: 9px; line-height: 1.45; }
+    .ai-facts b { display: block; margin-bottom: 3px; color: var(--text); font-size: .88em; }
+    .budget-gate { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 11px; text-align: center; }
+    .budget-circle { width: 112px; height: 112px; display: grid; place-items: center; border: 1px solid rgba(243,201,105,.37); border-radius: 50%; background: rgba(243,201,105,.06); box-shadow: 0 0 0 10px rgba(243,201,105,.025); }
+    .budget-circle b { display: block; color: var(--gold); font-size: 12px; }
+    .budget-circle small { display: block; margin-top: 4px; color: var(--muted); font-size: 8px; }
+    .budget-gate p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.55; }
+    .authority-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin-top: 12px; }
+    .authority-card { padding: 15px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+    .authority-card b { display: block; color: var(--gold); font-size: 10px; }
+    .authority-card p { margin: 6px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+
+    .status-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .status-card { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+    .status-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .status-head h3 { margin: 0; font-size: 18px; }
+    .status-badge { padding: 4px 7px; border-radius: 999px; font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
+    .implemented .status-badge { color: #126947; background: #eaf7f1; }
+    .proposed .status-badge { color: #245a9a; background: #edf4fc; }
+    .roadmap .status-badge { color: #60459a; background: #f1eef9; }
+    .status-summary { margin: 15px 0 0; color: var(--text); font-size: 11px; line-height: 1.68; }
+    .status-question { margin-top: 14px; color: var(--faint); font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .status-card ul { margin: 7px 0 0; padding: 0; list-style: none; }
+    .status-card li { position: relative; padding: 9px 0 9px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .status-card li b { color: var(--text); }
+    .status-card li::before { content: ""; position: absolute; left: 0; top: 15px; width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+    .implemented li::before { background: var(--ok); }
+    .proposed li::before { background: var(--blue); }
+    .roadmap li::before { background: var(--violet); }
+    .status-limit, .status-action { margin-top: 11px; padding: 11px 12px; border-radius: 11px; color: var(--muted); font-size: 9px; line-height: 1.58; }
+    .status-limit { border: 1px solid #ead9b5; background: #fffaf0; }
+    .status-action { border: 1px solid var(--line); background: #f7f9fa; }
+    .status-limit b, .status-action b { display: block; margin-bottom: 3px; color: var(--text); }
+    .precision-note { margin-top: 12px; padding: 15px 17px; border: 1px dashed var(--line-strong); border-radius: 14px; color: var(--muted); font-size: 10px; line-height: 1.65; }
+    .precision-note b { color: var(--text); }
+    .precision-note span { display: block; margin-top: 4px; }
+
+    .prior-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 9px; }
+    .prior-card { padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .prior-card strong { font-size: 13px; }
+    .prior-card p { margin: 12px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+    .prior-card span { display: block; margin-top: 15px; color: var(--mint); font-size: 8px; text-transform: uppercase; letter-spacing: .09em; }
+
+    .roadmap-chain { display: grid; grid-template-columns: repeat(6,1fr); gap: 8px; }
+    .roadmap-step { position: relative; min-height: 225px; padding: 18px; border: 1px solid var(--line); border-radius: 17px; background: var(--panel); }
+    .roadmap-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 33px; z-index: 2; width: 20px; height: 20px; display: grid; place-items: center; color: var(--mint); background: var(--bg-soft); border-radius: 50%; font-size: 11px; }
+    .roadmap-step small { color: var(--mint); font-size: 9px; font-weight: 900; }
+    .roadmap-step h3 { margin: 20px 0 9px; font-size: 15px; line-height: 1.2; }
+    .roadmap-step p { margin: 0; color: var(--muted); font-size: 9px; line-height: 1.65; }
+    .roadmap-step b { display: block; margin-top: 15px; padding-top: 11px; border-top: 1px solid var(--line); color: #405b65; font-size: 8px; line-height: 1.55; }
+
+    .demo-boundary { margin-bottom: 16px; padding: 14px 17px; border: 1px solid rgba(251,130,153,.26); border-radius: 14px; background: rgba(251,130,153,.045); color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .demo-boundary b { color: var(--rose); }
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .demo-card {
+      --demo: var(--mint);
+      position: relative;
+      min-height: 305px;
+      padding: 23px;
+      border: 1px solid color-mix(in srgb, var(--demo) 33%, var(--line));
+      border-radius: 22px;
+      background: linear-gradient(145deg, color-mix(in srgb, var(--demo) 8%, var(--panel)), var(--panel));
+      overflow: hidden;
+    }
+    .demo-card::after { content: ""; position: absolute; width: 170px; height: 170px; right: -70px; bottom: -90px; border-radius: 50%; background: var(--demo); filter: blur(70px); opacity: .12; }
+    .demo-card.loan { --demo: #087f6d; }
+    .demo-card.bank { --demo: #9a5b05; }
+    .demo-card.dd { --demo: #6f52b5; }
+    .demo-card.video { --demo: #ad3656; }
+    .demo-kicker { color: var(--demo); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; font-weight: 900; }
+    .demo-card h3 { margin: 25px 0 9px; max-width: 490px; font-size: 25px; letter-spacing: -.035em; }
+    .demo-card > p { max-width: 530px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .demo-facts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 18px; }
+    .demo-facts span { padding: 5px 7px; border: 1px solid var(--line); border-radius: 999px; color: #506872; font-size: 8px; }
+    .demo-links { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 21px; }
+    .demo-links a { padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; color: #314e5a; background: #fff; text-decoration: none; font-size: 9px; font-weight: 800; }
+    .demo-links a.primary { color: #fff; border-color: transparent; background: var(--demo); }
+
+    .doc-routes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+    .doc-route { padding: 21px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .doc-route h3 { margin: 0 0 7px; font-size: 17px; }
+    .doc-route p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .route-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .route-links a { padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; color: #36545f; text-decoration: none; font-size: 9px; }
+    .docs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+    .doc-card { display: block; min-height: 137px; padding: 16px; border: 1px solid var(--line); border-radius: 15px; background: var(--panel); text-decoration: none; }
+    .doc-card:hover { border-color: rgba(104,224,189,.36); transform: translateY(-1px); }
+    .doc-card small { color: var(--mint); font-size: 8px; letter-spacing: .1em; }
+    .doc-card strong { display: block; margin: 14px 0 6px; font-size: 13px; }
+    .doc-card span { color: var(--muted); font-size: 9px; line-height: 1.55; }
+    .resource-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .resource-row a { padding: 9px 11px; border: 1px solid var(--line); border-radius: 10px; color: #36545f; background: #fff; text-decoration: none; font-size: 9px; }
+
+    .decision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .decision-card { padding: 23px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); }
+    .decision-card h3 { margin: 0 0 16px; font-size: 19px; }
+    .check-list { margin: 0; padding: 0; list-style: none; }
+    .check-list li { position: relative; padding: 10px 0 10px 25px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--mint); font-weight: 900; }
+    .closing-action { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-top: 13px; padding: 24px; border: 1px solid rgba(104,224,189,.27); border-radius: 20px; background: linear-gradient(135deg, rgba(104,224,189,.08), rgba(125,180,255,.05)); }
+    .closing-action h3 { margin: 0 0 6px; font-size: 20px; }
+    .closing-action p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .footer { display: flex; justify-content: space-between; gap: 25px; padding: 34px 0 50px; color: var(--faint); font-size: 10px; }
+
+    @media (max-width: 1050px) {
+      .hero-grid, .section-head { grid-template-columns: 1fr; }
+      .contract-map { max-width: 720px; }
+      .value-grid, .plain-language { grid-template-columns: 1fr 1fr; }
+      .roadmap-chain { grid-template-columns: repeat(3,1fr); }
+      .roadmap-step:nth-child(3)::after { display: none; }
+      .prior-grid { grid-template-columns: repeat(3,1fr); }
+      .docs-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .shell, .wide-shell { width: min(100% - 22px, 1240px); }
+      .topbar { min-height: 62px; align-items: flex-start; flex-direction: column; gap: 7px; padding: 10px 0; }
+      .brand small { display: none; }
+      .nav { width: 100%; padding-bottom: 1px; }
+      .nav a { padding: 7px 9px; font-size: 11px; }
+      .hero { padding: 57px 0 48px; }
+      .hero-grid { gap: 36px; }
+      h1 { font-size: 46px; overflow-wrap: anywhere; }
+      .hero-lead { font-size: 16px; }
+      .contract-map { padding: 17px; border-radius: 22px; }
+      .run-pair { grid-template-columns: 1fr; }
+      .run-arrow { transform: rotate(90deg); }
+      .dag-row { grid-template-columns: 1fr; }
+      .dag-edge { width: 1px; height: 13px; margin: auto; }
+      .governance-rail { grid-template-columns: 1fr 1fr; }
+      .audience-strip { grid-template-columns: 1fr; }
+      .audience-label { padding-top: 6px; }
+      .section { padding: 65px 0; }
+      .section-head { gap: 16px; margin-bottom: 26px; }
+      .section-head h2 { font-size: 36px; }
+      .section-head > p { font-size: 13px; }
+      .value-grid, .origin-grid, .model-layout, .plain-language, .control-layout, .status-grid, .prior-grid, .demo-grid, .doc-routes, .docs-grid, .decision-grid { grid-template-columns: 1fr; }
+      .value-card { min-height: 0; }
+      .origin-step { padding-right: 0; }
+      .origin-step:not(:last-child)::after { display: none; }
+      .boundary-note { grid-template-columns: 1fr; gap: 7px; }
+      .stack-row { grid-template-columns: 1fr; }
+      .relationship-atlas { padding: 17px; }
+      .relationship-atlas-head, .relation-origins { grid-template-columns: 1fr; }
+      .relationship-atlas-head a { white-space: normal; }
+      .relation-pair { grid-template-columns: 1fr; }
+      .relation-pair-link { padding: 1px 0; }
+      .relation-ingress { grid-template-columns: 1fr; gap: 3px; }
+      .relation-flow { grid-template-columns: 1fr; }
+      .relation-arrow { padding: 1px 0; }
+      .relation-arrow i { transform: rotate(90deg); }
+      .relation-evidence-grid { grid-template-columns: 1fr; }
+      .control-grid { grid-template-columns: 1fr; }
+      .control-card { min-height: 0; }
+      .control-boundary { grid-template-columns: 1fr; gap: 6px; }
+      .choice-row { grid-template-columns: 44px 1fr; align-items: start; }
+      .choice-reject, .choice-reason { grid-column: 2; }
+      .ai-layout { grid-template-columns: 1fr; }
+      .budget-gate { padding: 19px 0; }
+      .authority-strip, .ai-facts { grid-template-columns: 1fr; }
+      .roadmap-chain { grid-template-columns: 1fr; }
+      .roadmap-step { min-height: 0; }
+      .roadmap-step:not(:last-child)::after { content: "↓"; display: grid; right: 22px; top: auto; bottom: -14px; }
+      .closing-action, .footer { align-items: flex-start; flex-direction: column; }
+    }
+
+    /* White-paper reading theme: restrained hierarchy, light surfaces, readable body copy. */
+    body {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .topbar-wrap { background: rgba(250,252,253,.95); box-shadow: 0 2px 10px rgba(22,47,58,.045); }
+    .brand-mark { color: #fff; box-shadow: 0 5px 16px rgba(8,127,109,.16); }
+    .brand small { font-size: 12px; }
+    .nav a { font-size: 12px; }
+    .nav a:hover, .nav a.active { color: var(--text); background: #edf3f5; }
+    .nav .nav-demo, .nav .nav-demo:hover { color: #fff; background: var(--mint); }
+    .hero { padding: 62px 0 52px; }
+    .hero::before {
+      background-image: linear-gradient(rgba(24,45,54,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(24,45,54,.035) 1px, transparent 1px);
+    }
+    .hero-grid { grid-template-columns: minmax(0,1.08fr) minmax(390px,.82fr); gap: 54px; }
+    h1 { max-width: 790px; font-size: clamp(38px,4vw,54px); line-height: 1.09; letter-spacing: -.04em; }
+    .hero-lead { margin-top: 22px; color: var(--muted); font-size: clamp(17px,1.45vw,19px); line-height: 1.75; }
+    .hero-tags { margin-top: 22px; }
+    .hero-tags span { background: #fff; color: #49636d; font-size: 11px; }
+    .actions { margin-top: 26px; }
+    .button { background: #fff; font-size: 12.5px; }
+    .button.primary { color: #fff; }
+    .button.secondary { border-color: #bfd0e4; background: #f3f7fc; }
+    .contract-map { padding: 22px; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgba(22,47,58,.07); }
+    .map-head small { font-size: 10px; }
+    .map-head strong { font-size: 19px; }
+    .identity-box { background: #eef8f5; }
+    .identity-box small, .plane-label { font-size: 9.5px; }
+    .identity-box b { font-size: 13.5px; }
+    .run-box, .dag-box { background: #f7f9fa; }
+    .run-box small { font-size: 9px; }
+    .run-box b { font-size: 12.5px; }
+    .run-box span { font-size: 10px; }
+    .run-box.current { background: #f2f6fc; }
+    .dag-node { color: #405b65; font-size: 10px; }
+    .dag-node.ai { color: #60459a; }
+    .dag-node.human { color: #805a08; }
+    .governance-rail span { background: #fff; font-size: 9.5px; }
+    .map-caption { font-size: 12px; line-height: 1.65; }
+    .audience-strip { padding: 16px 0; }
+    .audience-label { font-size: 10.5px; }
+    .audience-route { background: #fff; }
+    .audience-route b { font-size: 13px; }
+    .audience-route span { font-size: 12px; line-height: 1.55; }
+    .section { padding: 72px 0; }
+    .section.tint { background: #eef3f5; }
+    .section-head { gap: 42px; margin-bottom: 30px; }
+    .section-head h2 { font-size: clamp(29px,3.2vw,41px); line-height: 1.12; letter-spacing: -.038em; }
+    .section-head > p { font-size: 15px; line-height: 1.75; }
+    .section-head code { color: #34525e; }
+    .audience-chip { font-size: 9.5px; }
+    .value-card, .model-card, .branch-panel, .control-panel, .ai-plane, .status-card, .prior-card, .roadmap-step, .demo-card, .doc-card, .decision-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(22,47,58,.035);
+    }
+    .value-card { min-height: 205px; }
+    .value-card .index { font-size: 11px; }
+    .value-card h3 { margin-top: 24px; font-size: 18px; }
+    .value-card p { font-size: 14px; line-height: 1.72; }
+    .boundary-note { border-radius: 14px; background: #fffaf0; }
+    .boundary-note strong { font-size: 13px; }
+    .boundary-note p { color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+    .origin-step small { font-size: 10px; }
+    .origin-step p { font-size: 13.5px; line-height: 1.7; }
+    .model-card > p { font-size: 14px; line-height: 1.7; }
+    .chain-root { color: #176b59; background: #eef8f5; font-size: 12px; }
+    .chain-run, .stack-items span { background: #f7f9fa; }
+    .chain-run small { font-size: 9px; }
+    .chain-run b { font-size: 12.5px; }
+    .chain-run span { font-size: 10px; }
+    .stack-row strong { font-size: 10px; }
+    .stack-items span { color: #405b65; font-size: 10.5px; }
+    .stack-items span.key { color: #245a9a; }
+    .term { background: #fff; }
+    .term dt { font-size: 12.5px; }
+    .term dd { font-size: 12.5px; line-height: 1.65; }
+    .branch-panel > p, .control-panel > p { font-size: 13.5px; line-height: 1.68; }
+    .branch-node { background: #f7f9fa; color: #405b65; font-size: 11.5px; }
+    .branch-node b { font-size: 12px; }
+    .control-card { min-height: 177px; background: #f7f9fa; }
+    .control-card small, .control-card .scope { font-size: 9px; }
+    .control-card h4 { font-size: 14px; }
+    .control-card p { font-size: 13px; line-height: 1.66; }
+    .control-status span { color: #245a9a; background: #edf4fc; font-size: 9px; }
+    .control-boundary { background: #fffaf0; }
+    .control-boundary b { font-size: 11px; }
+    .control-boundary p { color: var(--muted); font-size: 13px; line-height: 1.68; }
+    .control-boundary a { color: var(--blue); }
+    .choice-row { background: #fff; }
+    .choice-id { font-size: 10px; }
+    .choice-position, .choice-reject, .choice-reason { font-size: 13px; line-height: 1.65; }
+    .choice-position b, .choice-reject b { font-size: 9px; }
+    .choice-reject { color: #825d67; }
+    .ai-plane small { font-size: 9.5px; }
+    .ai-plane > p { font-size: 13.5px; line-height: 1.7; }
+    .ai-facts span { background: #f7f9fa; color: #405b65; font-size: 12.5px; line-height: 1.55; }
+    .budget-circle { background: #fffaf0; }
+    .budget-circle b { font-size: 13px; }
+    .budget-circle small { font-size: 9.5px; }
+    .budget-gate p { font-size: 11.5px; line-height: 1.65; }
+    .authority-card { background: #fff; }
+    .authority-card b { font-size: 11px; }
+    .authority-card p { font-size: 12.5px; line-height: 1.65; }
+    .status-badge { font-size: 9.5px; }
+    .implemented .status-badge { color: #126947; background: #eaf7f1; }
+    .proposed .status-badge { color: #245a9a; background: #edf4fc; }
+    .roadmap .status-badge { color: #60459a; background: #f1eef9; }
+    .status-card li { color: var(--muted); font-size: 12.5px; line-height: 1.62; }
+    .status-summary { font-size: 13.5px; }
+    .status-question { font-size: 9.5px; }
+    .status-limit, .status-action { font-size: 12px; line-height: 1.65; }
+    .precision-note { background: #f7f9fa; font-size: 12px; line-height: 1.68; }
+    .prior-card p { font-size: 13px; line-height: 1.65; }
+    .prior-card span { font-size: 9.5px; }
+    .roadmap-step { min-height: 245px; }
+    .roadmap-step small { font-size: 10px; }
+    .roadmap-step h3 { font-size: 15.5px; }
+    .roadmap-step p { font-size: 12px; line-height: 1.65; }
+    .roadmap-step b { color: #405b65; font-size: 10.5px; line-height: 1.6; }
+    .demo-boundary { background: #fff5f7; color: var(--muted); font-size: 13px; line-height: 1.68; }
+    .demo-card { min-height: 292px; }
+    .demo-card::after { display: none; }
+    .demo-card.loan { --demo: #087f6d; }
+    .demo-card.bank { --demo: #9a5b05; }
+    .demo-card.dd { --demo: #6f52b5; }
+    .demo-card.video { --demo: #ad3656; }
+    .demo-kicker { font-size: 10px; }
+    .demo-card h3 { margin-top: 22px; font-size: 24px; }
+    .demo-card > p { font-size: 13.5px; line-height: 1.7; }
+    .demo-facts span { background: #fff; color: #506872; font-size: 10px; }
+    .demo-links a { background: #fff; color: #314e5a; font-size: 10.5px; }
+    .demo-links a.primary { color: #fff; }
+    .doc-route { background: #fff; }
+    .doc-route p { font-size: 13.5px; line-height: 1.68; }
+    .route-links a { color: #36545f; font-size: 10.5px; }
+    .doc-card small { font-size: 9.5px; }
+    .doc-card strong { font-size: 14px; }
+    .doc-card span { font-size: 12px; line-height: 1.62; }
+    .resource-row a { background: #fff; color: #36545f; font-size: 10.5px; }
+    .check-list li { color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .closing-action { border-radius: 16px; background: linear-gradient(135deg,#eef8f5,#f2f6fc); }
+    .closing-action p { font-size: 13.5px; line-height: 1.65; }
+    .storage-overview-grid { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); gap: 15px; }
+    .storage-overview-card { min-width: 0; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 1px 3px rgba(22,47,58,.035); }
+    .storage-overview-card h3 { margin: 0 0 8px; font-size: 18px; }
+    .storage-overview-card > p { margin: 0 0 16px; color: var(--muted); font-size: 13.5px; line-height: 1.7; }
+    .authority-rows { display: grid; gap: 7px; }
+    .authority-row { min-width: 0; display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 12px; padding: 11px; border: 1px solid var(--line); border-radius: 11px; background: #f7f9fa; }
+    .authority-row b { color: var(--mint); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+    .authority-row span { min-width: 0; overflow-wrap: anywhere; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .overview-tree { display: block; width: 100%; max-width: 100%; min-width: 0; margin: 0; padding: 16px; overflow: auto; border: 1px solid var(--line); border-radius: 12px; background: #f6f8f9; color: #29434e; font: 11.5px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace; white-space: pre; }
+    .log-level-strip { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-top: 15px; }
+    .log-level-strip span { padding: 10px; border: 1px solid var(--line); border-top: 3px solid #78909a; border-radius: 10px; background: #fff; color: var(--muted); font-size: 11.5px; line-height: 1.55; }
+    .log-level-strip b { display: block; margin-bottom: 4px; color: var(--text); font: 800 11px ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .log-level-strip .info { border-top-color: #16836f; }
+    .log-level-strip .warning { border-top-color: #b77a0b; }
+    .log-level-strip .error { border-top-color: #bd4a58; }
+    .log-level-strip .critical { border-top-color: #812f48; }
+    .storage-compat-note { display: grid; grid-template-columns: 135px 1fr auto; gap: 16px; align-items: center; margin-top: 15px; padding: 15px 17px; border: 1px solid #d6e2e3; border-radius: 13px; background: #eef8f5; }
+    .storage-compat-note b { color: var(--mint); font-size: 12px; }
+    .storage-compat-note p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .storage-compat-note a { color: var(--blue); font-size: 11px; white-space: nowrap; }
+    .footer { font-size: 11.5px; }
+    @media (max-width: 1050px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr); }
+      .storage-overview-grid { grid-template-columns: 1fr; }
+      .log-level-strip { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 760px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr); }
+      .hero { padding: 40px 0 36px; }
+      .hero-grid { gap: 30px; }
+      h1 { font-size: 34px; line-height: 1.12; letter-spacing: -.035em; }
+      .hero-lead { font-size: 16px; }
+      .contract-map { border-radius: 15px; }
+      .section { padding: 54px 0; }
+      .section-head h2 { font-size: 30px; }
+      .section-head > p { font-size: 14px; }
+      .roadmap-step { min-height: 0; }
+      .authority-row, .storage-compat-note { grid-template-columns: 1fr; }
+      .log-level-strip { grid-template-columns: 1fr; }
+      .overview-tree { font-size: 9.5px; }
+    }
+
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #111; }
+      .topbar-wrap { position: static; background: #fff; }
+      .nav, .actions { display: none; }
+      .hero, .section { padding: 35px 0; }
+      .panel, .value-card, .model-card, .status-card, .demo-card, .doc-card, .decision-card { color: #111; background: #fff; border-color: #bbb; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar-wrap">
+    <header class="wide-shell topbar">
+      <a class="brand" href="#top"><span class="brand-mark">F</span><span>FlowSpec <small>/ 规范综述</small></span></a>
+      <nav class="nav" aria-label="页面章节">
+        <a href="#executive">价值</a>
+        <a href="#model">模型</a>
+        <a href="#run-controls">运行控制</a>
+        <a href="#choices">取舍</a>
+        <a href="#storage-logging">存储/日志</a>
+        <a href="#ai-governance">AI 治理</a>
+        <a href="#status">现状映射</a>
+        <a href="#roadmap">路线图</a>
+        <a href="#documents">文档</a>
+        <a class="nav-demo" href="demos/index.html">四个 Demo ↗</a>
+      </nav>
+    </header>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wide-shell hero-grid">
+        <div>
+          <p class="eyebrow">FlowSpec v0.4 · vendor-neutral · AI/Agent-first</p>
+          <h1>把不确定的 AI 执行，收敛为可治理的业务结果</h1>
+          <p class="hero-lead">FlowSpec 是一套从 OpenCrew 生产实践中抽取、并用成熟编排体系校准的业务流程规范。它让<b>流程、产物、人责、外部副作用、模型权限与逐笔成本</b>使用同一套身份和工程契约。</p>
+          <div class="hero-tags" aria-label="规范属性"><span>领域无关</span><span>单 Run 静态 DAG</span><span>跨 Run 业务修订链</span><span>Artifact 一等公民</span><span>AI Usage / Budget 一等事实</span><span>生产边界可核验</span></div>
+          <div class="actions">
+            <a class="button primary" href="#executive">决策层：先看价值与边界 ↓</a>
+            <a class="button secondary" href="#model">开发团队：进入概念与契约 ↓</a>
+            <a class="button" href="README.md">打开规范索引 ↗</a>
+          </div>
+        </div>
+
+        <aside class="contract-map" aria-label="FlowSpec 核心结构图">
+          <div class="map-head"><div><small>Contract stack</small><strong>一套身份，贯穿定义、执行与审计</strong></div><span class="live-dot"></span></div>
+          <div class="identity-box"><small>稳定业务实例</small><b>session + task · 身份、Workspace 与业务记录</b></div>
+          <div class="run-pair">
+            <div class="run-box"><small>RUN 1 · INPUT REVISION A</small><b>一次有界 DAG</b><span>补件 / 拒绝 / 返修也可正常完成</span></div>
+            <div class="run-arrow">→</div>
+            <div class="run-box current"><small>RUN 2 · SUPERSEDES RUN 1</small><b>修订后的新 DAG</b><span>保留旧事实，不原地重置</span></div>
+          </div>
+          <div class="dag-box"><span class="plane-label">Run 内部 · 静态可校验</span><div class="dag-row"><span class="dag-node">Tool Step</span><span class="dag-edge"></span><span class="dag-node ai">AI / Agent</span><span class="dag-edge"></span><span class="dag-node human">Human Gate</span></div></div>
+          <div class="governance-rail"><span>Context</span><span>Artifact</span><span>Event</span><span>Usage · Budget</span></div>
+          <p class="map-caption">Step 是编排节点，不等于一次调用；一个 Agent 或 fanout Step 可以产生多条 Model Invocation 与 UsageRecord。</p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="shell audience-strip" aria-label="双受众阅读路线">
+      <div class="audience-label">Choose your path</div>
+      <a class="audience-route" href="#executive"><span><b>公司决策层</b>为什么需要、解决什么、风险边界与投资顺序</span><i>↓</i></a>
+      <a class="audience-route" href="#model"><span><b>开发团队</b>概念如何咬合、目标契约、OpenCrew 映射与接入 Gate</span><i>↓</i></a>
+    </div>
+
+    <section class="section tint anchor" id="executive" data-nav="价值">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Executive brief <span class="audience-chip">决策层</span></p><h2>它解决的不是“怎么画图”，而是怎么对结果负责</h2></div><p>AI-heavy 业务的问题不是步骤能不能串起来，而是高成本、不完全可靠的外部执行，能否被收敛成可追责、可恢复、可核算的业务事实。</p></header>
+        <div class="value-grid">
+          <article class="value-card"><span class="index">01 · COMMON LANGUAGE</span><h3>统一团队心智模型</h3><p>产品、合规、AI、平台和业务开发使用同一套 Process、Run、Artifact、Human Task、Usage 与 Outcome 语言，减少每个项目重新发明编排语义。</p></article>
+          <article class="value-card"><span class="index">02 · CONTROL</span><h3>让自动化可授权</h3><p>模型只能在冻结的 Profile、数据边界、工具权限和预算内执行；人工决定绑定输入版本、角色、理由与 revision，AI 输出不会自动成为权威事实。</p></article>
+          <article class="value-card"><span class="index">03 · ACCOUNTABILITY</span><h3>让结果可解释</h3><p>每个业务结果都能回答：基于哪版输入、经过哪些步骤、产物来自哪里、谁批准、外部操作是否发生、模型调用花了多少钱。</p></article>
+          <article class="value-card"><span class="index">04 · REUSE</span><h3>把经验变成平台资产</h3><p>从 OpenCrew 生产防御代码中提炼通用不变量，再用贷款、银行报告、尽调和视频四个领域校验，避免规范只对来源业务成立。</p></article>
+        </div>
+        <aside class="boundary-note"><strong>必须诚实表达的边界</strong><p>当前可执行 Demo 证明的是目标契约自洽、拓扑闭合、确定性重建与 UI 投影一致；它不证明分布式 claim / lease / fencing、真实并发、进程崩溃恢复或 reconcile worker 已完成。FlowSpec 是统一规范与目标契约，不是已经生产化的通用工作流引擎。</p></aside>
+      </div>
+    </section>
+
+    <section class="section anchor" id="background" data-nav="价值">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Where it came from</p><h2>从生产教训出发，不从空白 DSL 出发</h2></div><p>规范先把现有实现中的可靠经验显式化，再去业务化，并用不同体系与不同专业场景反复施压。</p></header>
+        <div class="origin-grid">
+          <article class="origin-step"><small>Production</small><h3>OpenCrew 工具会话</h3><p>强类型 Variables、白名单 patch、Workspace、OutputManifest、心跳恢复、事件与本地 Usage 计量已经在真实业务中工作。</p></article>
+          <article class="origin-step"><small>Calibration</small><h3>成熟体系校准</h3><p>用 Control-M、Airflow、Temporal、Step Functions、Argo 与 BPMN 对照术语、资源、恢复、人工卡点和 artifact 取向。</p></article>
+          <article class="origin-step"><small>Abstraction</small><h3>显式化与去业务化</h3><p>把视频领域的 session、task、attempt、slot 与外部模型调用重新厘清，形成稳定身份和分层契约。</p></article>
+          <article class="origin-step"><small>Validation</small><h3>四个专业场景反证</h3><p>用监管审批、多源报告、海量文档和多模态制作检验并行、汇合、人审、昂贵调用和返工是否仍能统一表达。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tint anchor" id="model" data-nav="模型">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Core model <span class="audience-chip">开发团队必读</span></p><h2>业务生命周期可以循环，每次执行仍保持可验证</h2></div><p>核心选择是：稳定的 <code>session + task</code> 表达业务实例；一次 Run 表达静态 DAG；补件、重审和返工创建新 Run，以修订链形成完整业务循环。</p></header>
+        <article class="relationship-atlas" aria-labelledby="relationship-atlas-title">
+          <header class="relationship-atlas-head"><div><small>Authoritative relationship map · 双受众</small><h3 id="relationship-atlas-title">先分清“谁属于谁”，再讨论怎么运行</h3><p>这张图同时表达定义引用、业务配对、逻辑包含和证据关联。数字是基数，不是步骤编号；包含关系是生命周期与查询边界，不要求数据库表或磁盘目录逐层同构。</p></div><a href="01_ConceptModel.md#02-权威层级基数与包含关系">打开完整概念模型与时序 →</a></header>
+          <div class="relation-legend" aria-label="关系图图例"><span class="relation-legend-item"><b>1 ⇄ 1</b> 语义配对</span><span class="relation-legend-item"><b>1..N / 0..N</b> 包含基数</span><span class="relation-legend-item"><b>→</b> 创建或执行方向</span><span class="relation-legend-item"><b>references</b> 关联而非包含</span></div>
+          <div class="relation-origins">
+            <section class="relation-origin"><small>Definition plane · reusable</small><h4>Process@version</h4><p>声明 Step DAG；引用 Tool Registry、AI Profile 与 Schema。它是可复用定义，不是某次业务运行。</p><div class="relation-pills"><span>Tool Registry</span><span>AI Profile</span><span>Context / Artifact Schema</span></div></section>
+            <section class="relation-origin"><small>Business instance · stable identity</small><h4>session + task 共同表达一个业务实例</h4><div class="relation-pair"><div class="relation-pair-node"><b>session · 1</b><span>稳定身份；拥有 Workspace 与 Event Stream。</span></div><div class="relation-pair-link">1 ⇄ 1<br>semantic pair</div><div class="relation-pair-node"><b>task · 1</b><span>业务字段、输入修订、当前版本与最近 Run 指针。</span></div></div></section>
+          </div>
+          <div class="relation-ingress"><span><strong>Definition snapshot</strong><br>Process / Tool / Profile digest</span><b>＋ ↓</b><span><strong>Business ownership</strong><br>一个业务实例拥有 0..N 个不可变 Run</span></div>
+          <div class="relation-flow" aria-label="Run 到实际调用的逻辑包含链">
+            <div class="relation-node"><small>Business execution</small><b>Run</b><span>一次有界 DAG；新输入或业务返工创建新 Run。</span></div><div class="relation-arrow"><b>1..N</b>contains<i>→</i></div>
+            <div class="relation-node"><small>Logical orchestration</small><b>Step</b><span>Process 中的逻辑节点；即使关闭也保留 skipped 状态。</span></div><div class="relation-arrow"><b>0..N</b>dispatches<i>→</i></div>
+            <div class="relation-node"><small>Technical scheduling</small><b>Step Attempt</b><span>一次技术调度；重调度新增 Attempt，transport retry 不新增。</span></div><div class="relation-arrow"><b>0..N</b>performs<i>→</i></div>
+            <div class="relation-node"><small>Actual operation</small><b>Tool / Model Invocation</b><span>真正副作用、幂等和计费边界；Agent/fanout 可以有多个。</span></div>
+          </div>
+          <div class="relation-evidence-grid" aria-label="与执行身份关联的证据"><div class="relation-evidence"><b>Context · 1 / Run</b><span>本 Run 的强类型共享状态；新 Run 冻结新实例。</span></div><div class="relation-evidence"><b>Artifact · 0..N / Attempt</b><span>引用 producer attempt_id；不是裸路径或可变状态。</span></div><div class="relation-evidence"><b>UsageRecord · per operation</b><span>逐个 billable operation 记录用量与费用观测。</span></div><div class="relation-evidence"><b>Event · cross-cutting</b><span>携带 session/task/run/step/attempt 键形成时间线。</span></div><div class="relation-evidence"><b>Human Task · per gated Step</b><span>关联 Run、Step、输入版本、actor、reason 与 revision。</span></div><div class="relation-evidence"><b>Checkpoint · 0..N / Attempt</b><span>可校验恢复产物；不是新 Step、成功状态或业务 Run。</span></div></div>
+          <aside class="relation-caution"><b>三个最容易混淆的边界：</b>task 与 session 是职责配对，不是两级文件树；OpenCrew 历史名 <code>openclip_attempt</code> 映射 FlowSpec Run，不是 Step Attempt；Step 是逻辑节点，不等于一次模型调用或一次收费。</aside>
+        </article>
+        <div class="model-layout">
+          <article class="model-card"><h3>一个业务实例，多次有界 Run</h3><p>身份保持稳定，输入与执行事实按 Run 冻结。旧记录不被覆盖，新的业务修订明确说明替代谁。</p><div class="chain"><div class="chain-root">session + task · application / matter / report / creative project</div><div class="chain-runs"><div class="chain-run"><small>RUN 1 · revision A</small><b>完成一个明确结果</b><span>supplement_requested</span></div><span class="chain-arrow">→</span><div class="chain-run"><small>RUN 2 · revision B</small><b>基于新输入重审</b><span>approved / issued / delivered</span></div></div></div></article>
+          <article class="model-card"><h3>身份层级不能混成一个 attempt</h3><p>不同层级回答不同问题：业务修订、技术重试、实际调用和计费操作必须拥有各自身份。</p><div class="stack"><div class="stack-row"><strong>Definition</strong><div class="stack-items"><span>Process</span><span>Tool Registry</span><span>AI Profile</span></div></div><div class="stack-row"><strong>Business</strong><div class="stack-items"><span class="key">session + task</span><span class="key">Run</span></div></div><div class="stack-row"><strong>Execution</strong><div class="stack-items"><span>Step</span><span>Step Attempt</span><span>Checkpoint</span></div></div><div class="stack-row"><strong>Operation</strong><div class="stack-items"><span>Tool Call</span><span>Model Invocation</span><span>Agent Execution</span></div></div><div class="stack-row"><strong>Evidence</strong><div class="stack-items"><span>Context</span><span>Artifact</span><span>UsageRecord</span><span>Event</span></div></div></div></article>
+        </div>
+        <dl class="plain-language">
+          <div class="term"><dt>DAG · 有向无环流程图</dt><dd>一次 Run 只向前执行，所以依赖可静态检查。业务退回不在图里倒着跳，而是创建下一次 Run。</dd></div>
+          <div class="term"><dt>Artifact · canonical 可消费产物</dt><dd>Runtime 在 finalize 自动生成版本 ID/内容 hash，并关联 producer Attempt 的单份输入摘要；只有确需 join/re-bind 时才声明业务 binding。临时文件不适用。</dd></div>
+          <div class="term"><dt>Outcome · 业务完成结果</dt><dd>批准、拒绝、补件、返修和正式交付都可以是完整结果，不用把所有正常分支挤成一个“成功”。</dd></div>
+          <div class="term"><dt>Reconcilable · 先对账再补做</dt><dd>放款、分发或模型生成响应丢失时，先按稳定 operation key 查询是否已发生，禁止盲目重发。</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section anchor" id="run-controls" data-nav="运行控制">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Graph + user intent <span class="audience-chip">双受众</span></p><h2>流程可以分叉汇合，临时运行也必须沿依赖图裁剪</h2></div><p>FlowSpec 从一开始就不是线性步骤表：一个 Step 可以有多个下游，多个上游也可以 AND / OR 汇合。用户选“到这里”或“从这里重跑”时，Runtime 计算的是图闭包，不是按页面上第几行切片。</p></header>
+        <div class="control-layout">
+          <article class="branch-panel">
+            <h3>一对多 fork · 多对一 join</h3>
+            <p>编号只帮助阅读；箭头和 Artifact/变量生产关系才约束执行。下图的两路核验可以并行，风险决定必须等两路都具备有效输入。</p>
+            <div class="branch-diagram" aria-label="流程分叉与汇合示意">
+              <div class="branch-node root"><b>01 · 冻结业务输入</b>root step</div>
+              <div class="branch-arrow">↓</div>
+              <div class="branch-lanes"><div class="branch-lane"><div class="branch-node"><b>02A · 外部证据</b>parallel branch</div></div><div class="branch-lane"><div class="branch-node"><b>02B · 内部核验</b>parallel branch</div></div></div>
+              <div class="join-arrow">↘ &nbsp; AND-join：两路均满足 &nbsp; ↙</div>
+              <div class="branch-node join"><b>03 · 受控决定</b>multi-upstream step</div>
+            </div>
+          </article>
+          <article class="control-panel">
+            <h3>四种操作，四种不同契约</h3>
+            <p>每次都先编译范围、检查依赖与权限，再决定复用、重算、等待或隔离发布。</p>
+            <div class="control-grid">
+              <article class="control-card"><header><small>01 · canonical</small><span class="scope">full</span></header><h4>运行整个流程</h4><p>从激活根节点走到恰好一个业务 outcome；关闭分支记为 skipped，并非机械调用所有 Step。</p><div class="control-status"><span>OpenCrew 领域已支持</span><span>通用 Runtime proposed</span></div></article>
+              <article class="control-card"><header><small>02 · boundary</small><span class="scope">through_step</span></header><h4>运行到某步骤</h4><p>执行目标的全部必要前置和目标本身；canonical Run 到边界后 waiting，不能冒充业务 completed。</p><div class="control-status"><span>Analysis_V1 range 已有</span><span>等待语义待统一</span></div></article>
+              <article class="control-card"><header><small>03 · recompute</small><span class="scope">from_step</span></header><h4>从某步骤开始重跑</h4><p>新 Run 重算该节点与受影响后继；独立上游只有经输入、hash、Schema、binding 与定义校验后才复用。</p><div class="control-status"><span>领域线性后缀已有</span><span>DAG closure proposed</span></div></article>
+              <article class="control-card"><header><small>04 · isolated</small><span class="scope">only_step</span></header><h4>重新单独运行某步骤</h4><p>默认是 diagnostic，不改正式 Manifest/outcome。若要采用新结果，必须走 from_step 并使受影响下游失效。</p><div class="control-status"><span>diagnostic 计费标记已有</span><span>发布隔离待补</span></div></article>
+            </div>
+          </article>
+        </div>
+        <aside class="control-boundary"><b>当前只能按线性位置选范围；目标是沿真实依赖安全裁剪</b><p>OpenCrew <code>Analysis_V1</code> 已有 full/range/from/only/rerun 的领域入口与依赖缺失检查；但它按硬编码线性步骤表编译，边界前步骤目前按位置标 reused，<code>plan_hash_match</code> 只供观察。FlowSpec 要求按 DAG 闭包裁剪、按 hash/schema/binding 门控复用，并把 diagnostic 与 canonical 发布隔离。详见 <a href="06_Runtime_Observability.md#e6-运行控制词汇-proposed">06 · E6</a>、<a href="07_ImplementationBinding.md#39-snapshot-command-envelopeproposed">07 · 3.9</a> 与 <a href="09_ProductionLessons.md#l46-复用边界与哈希对账-已更正">09 · L4.6</a>。</p></aside>
+      </div>
+    </section>
+
+    <section class="section anchor" id="choices" data-nav="取舍">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Design positions</p><h2>一套能指导实现的规范，必须在真实分歧上选边</h2></div><p>FlowSpec 不追求把所有引擎特性并成最大集合；它为 AI/Agent 密集型、artifact 密集型和高成本副作用场景选择一组可执行的最小内核。</p></header>
+        <div class="choice-list">
+          <div class="choice-row"><span class="choice-id">P1</span><div class="choice-position"><b>选择</b>每个 Run 是声明式 DAG</div><div class="choice-reject"><b>不选择</b>运行时执行任意回边 / 通用循环 DSL</div><div class="choice-reason">保留静态校验与恢复推导；真实业务循环通过跨 Run 修订链表达。</div></div>
+          <div class="choice-row"><span class="choice-id">P2</span><div class="choice-position"><b>选择</b>物化状态 + append-only 审计事件</div><div class="choice-reject"><b>不选择</b>强制事件溯源与确定性重放</div><div class="choice-reason">恢复需要高效快照，审计需要不可变时间线；transactional outbox 仍明确标为 proposed。</div></div>
+          <div class="choice-row"><span class="choice-id">P3</span><div class="choice-position"><b>选择</b>按副作用类别定义恢复</div><div class="choice-reject"><b>不选择</b>一个 retry_count 解决所有失败</div><div class="choice-reason"><code>pure / idempotent / reconcilable / non_idempotent</code> 分别决定重算、去重、对账或 fail-fast。</div></div>
+          <div class="choice-row"><span class="choice-id">P4</span><div class="choice-position"><b>选择</b>canonical Artifact 是一等事实</div><div class="choice-reject"><b>不选择</b>裸路径即结果，或所有文件都背元数据</div><div class="choice-reason">Runtime 自动算版本 ID、内容 hash 与 producer 输入摘要；binding 按需声明。Working、日志、Prompt、staging、投影排除，保住收益而不制造普遍负担。</div></div>
+          <div class="choice-row"><span class="choice-id">P6</span><div class="choice-position"><b>选择</b>Human Task 是持久 work item</div><div class="choice-reject"><b>不选择</b>用布尔按钮或 blocked 冒充审批</div><div class="choice-reason">先 dispatch 再 waiting；决定绑定 actor、role、reason、input hash 和 expected revision。</div></div>
+          <div class="choice-row"><span class="choice-id">AI</span><div class="choice-position"><b>选择</b>Agent 循环留在有界 Tool 内</div><div class="choice-reject"><b>不选择</b>把每次思考画成 Process 回边</div><div class="choice-reason">编排器看到 Step 的最终 Artifact；每轮 Model Invocation 仍单独计量、计费并以 Agent Execution 归组。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tint anchor" id="storage-logging" data-nav="存储/日志">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Logs + physical workspace <span class="audience-chip">双受众</span></p><h2>每个事实有明确权威，每个文件有可解析位置</h2></div><p>FlowSpec 不把“日志”当成一个万能文本桶，也不为 session、task、Run、Step 各复制一棵文件树。业务审计、费用、诊断、Prompt、Artifact 与服务日志分平面治理。</p></header>
+        <div class="storage-overview-grid">
+          <article class="storage-overview-card"><h3>数据库、文件与平台日志各司其职</h3><p>UI 可以把它们组合成一条时间线，但实现和审计必须知道哪一份才是权威。</p><div class="authority-rows"><div class="authority-row"><b>Database</b><span>Run/Step 状态快照、<code>session_events</code> 审计事件、Usage/Cost ledger；不存高容量 stdout/stderr。</span></div><div class="authority-row"><b>Workspace</b><span>冻结输入、Manifest、Artifact、Prompt 与按 Step Attempt 隔离的诊断文件；大文件可换成带版本 URI。</span></div><div class="authority-row"><b>Platform sink</b><span>API、worker、scheduler、数据库进程日志位于 session Workspace 外，由部署配置轮转与告警。</span></div><div class="authority-row"><b>Projection</b><span>UI tail、<code>events.ndjson</code> 证据包和 <code>SessionOutput</code> 都可重建，不成为第二权威源。</span></div></div></article>
+          <article class="storage-overview-card"><h3>兼容 OpenCrew 的物理目录</h3><p>task 是数据库记录并引用配对 session Workspace，不另建 task 文件根；Step 输入按 Run InputManifest 与上游 OutputManifest 定位，默认不复制大文件。</p><pre class="overview-tree">&lt;workspace&gt;/                              # sessions.workspace_dir
+├─ inbox/                                 # session 原始输入（推荐）
+├─ SessionContext | SessionOutput | SessionReport
+└─ tool_use_sessions/&lt;run_id&gt;/
+   ├─ 0_SessionContext/
+   │  ├─ Variables.json
+   │  └─ InputManifest.json               # Run 冻结输入
+   ├─ S{index}_{tool}/
+   │  ├─ State.json
+   │  ├─ Working/Attempts/A{no}_{id}/
+   │  ├─ Report/Attempts/A{no}_{id}/       # NDJSON/stdout/stderr
+   │  ├─ Prompt/Attempts/A{no}_{id}/
+   │  └─ Output/
+   │     ├─ .staging/A{no}_{id}/           # finalize 前
+   │     ├─ OutputManifest.json
+   │     └─ &lt;published artifacts...&gt;
+   ├─ SessionReport/
+   └─ SessionOutput/                       # 可重建投影
+└─ SessionScratch/                         # 不放唯一副本</pre></article>
+        </div>
+        <div class="log-level-strip" aria-label="诊断日志级别"><span><b>debug</b>细粒度判断；生产默认关闭或采样</span><span class="info"><b>info</b>Attempt、adapter 与发布摘要</span><span class="warning"><b>warning</b>可恢复降级、截断、接近阈值</span><span class="error"><b>error</b>当前操作失败；另写 Error/Event</span><span class="critical"><b>critical</b>完整性、权限或平台级故障</span></div>
+        <aside class="storage-compat-note"><b>增量演进，不迁移现网</b><p>保留 OpenCrew 的 <code>tool_use_sessions / 0_SessionContext / S{index}_{tool} / Working|Output|Report|Prompt</code> 主骨架；Attempt 与 staging 只是目标子目录约定。<code>stdout/stderr</code> 是 channel，不自动等于 info/error；durable Event 不受日志阈值过滤。</p><a href="05_Workspace.md#b1-目录布局opencrew-兼容基线">05 Workspace</a><a href="06_Runtime_Observability.md#f5-日志平面事件诊断计量不能混在一起">06 Logs</a></aside>
+      </div>
+    </section>
+
+    <section class="section anchor" id="ai-governance" data-nav="AI 治理">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">AI 与费用如何被管住</p><h2>一次 AI 调用：先检查权限，再执行，最后逐笔记账</h2></div><p>例如生成一段视频：系统必须先确认可用哪个模型、数据能否外发、Agent 能做什么以及预算是否足够；调用结束后，再记录实际模型、用量、费用和对账线索。</p></header>
+        <div class="ai-layout">
+          <article class="ai-plane pre"><small>第 1 步 · 调用前规则</small><h3>这次调用允许发生吗？</h3><p><code>AI Execution Profile</code> 是随 Run 固定的规则卡。业务代码不能临时绕过它。</p><div class="ai-facts"><span><b>模型限制</b>只允许批准的供应商、模型版本和运行区域</span><span><b>数据限制</b>哪些数据可外发、可保留或可用于训练</span><span><b>Agent 权限</b>允许读取哪些文件、调用哪些工具和网络</span><span><b>额度限制</b>最多轮数、token、媒体时长和费用</span><span><b>输出要求</b>必须满足结构、引用、内容安全和业务校验</span><span><b>失败处理</b>是否允许备用模型；禁止无提示地换模型</span></div></article>
+          <div class="budget-gate"><div class="budget-circle"><div><b>第 2 步<br>费用闸门</b><small>预留 → 执行 → 结算</small></div></div><p>预计花 10 元，先占用 10 元额度；实际花 8 元，就记 8 元并释放剩余 2 元。额度不足时不发起调用。</p></div>
+          <article class="ai-plane post"><small>第 3 步 · 调用后事实</small><h3>实际调用了什么、花了多少？</h3><p>每次真正发给模型供应商的调用都产生一条 <code>UsageRecord</code>；Agent 多轮执行也要逐次记录。</p><div class="ai-facts"><span><b>调用身份</b>属于哪个 Run、Step、Attempt 和业务操作</span><span><b>实际模型</b>最终使用的供应商、模型版本和请求编号</span><span><b>实际用量</b>输入/输出 token，或图片、音频、视频单位</span><span><b>费用可信度</b>未知、估算、暂定或账单最终值</span><span><b>对账线索</b>价格版本、供应商请求和稳定操作键</span><span><b>后续纠错</b>原记录不覆盖；用新的更正记录保留前后链条</span></div></article>
+        </div>
+        <div class="authority-strip"><article class="authority-card"><b>模型先产出候选内容</b><p>结构、引用、媒体和业务规则检查通过后，才能成为正式业务产物。</p></article><article class="authority-card"><b>Agent 只能在授权范围内行动</b><p>只能读取获准输入、使用白名单工具和网络，不能直接修改权威状态或发布结果。</p></article><article class="authority-card"><b>人工决定同样需要留痕</b><p>必须记录谁、以什么角色、基于哪版输入、为什么批准或退回。</p></article></div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="status" data-nav="现状映射">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">从今天到生产级平台</p><h2>三列表示同一能力的三个建设阶段</h2></div><p>从左到右分别回答：今天可直接复用什么；采用 FlowSpec 后必须统一什么；多机器、大并发和昂贵外部调用上线前还要补什么。</p></header>
+        <div class="status-grid">
+          <article class="status-card implemented"><div class="status-head"><h3>1 · 今天已有的基础</h3><span class="status-badge">可直接复用</span></div><p class="status-summary">OpenCrew 已能运行工具会话、保存工作目录和事件，支持部分暂停、恢复和范围重跑，也能记录部分模型用量与估算费用。</p><div class="status-question">现在可以依赖</div><ul><li><b>文件交接：</b>每次会话有 Workspace，步骤通过 Manifest 和 Output 交接。</li><li><b>运行追踪：</b>已有持久事件、部分 Attempt 日志和依赖缺失检查。</li><li><b>用量基础：</b><code>local_usage_log</code> 可记单位、估算费用、币种和价格版本。</li></ul><div class="status-limit"><b>还不能据此声称</b>所有业务都已使用统一 Process/Run/Artifact 契约，也不能声称所有模型调用都有实际账单费用。</div><div class="status-action"><b>团队怎么做</b>保留并复用现有数据库和目录骨架，不大规模迁移 OpenCrew。</div></article>
+          <article class="status-card proposed"><div class="status-head"><h3>2 · FlowSpec 统一的工作方式</h3><span class="status-badge">团队统一目标</span></div><p class="status-summary">让不同业务用同一组身份、状态和工程契约描述流程，从而能共用运行时、审计、UI 和成本治理。</p><div class="status-question">采用后必须能回答</div><ul><li>这次 Run 使用了哪版流程、工具、模型规则和输入？</li><li>每个步骤依赖什么、产生什么，返工为何创建新 Run？</li><li>谁批准了什么；每次模型调用用了多少、花了多少？</li><li>某条分支为何关闭，某个正式产物由哪次 Attempt 产生？</li></ul><div class="status-limit"><b>当前边界</b>四个 Demo 已证明这些契约可以闭合和重建，但 OpenCrew 通用运行器尚未完整实现它们。</div><div class="status-action"><b>团队怎么做</b>后续新能力按这套字段、状态、目录和 API 对齐，避免各业务继续发明自己的协议。</div></article>
+          <article class="status-card roadmap"><div class="status-head"><h3>3 · 规模化上线前的可靠性能力</h3><span class="status-badge">上线前补齐</span></div><p class="status-summary">当多个 worker 同时运行、外部调用昂贵且可能超时时，还需要自动协调、对账和崩溃恢复。</p><div class="status-question">生产环境还要保证</div><ul><li><b>不重复执行：</b>同一任务只能被一个有效 worker 领取，旧 worker 不能继续写结果。</li><li><b>结果不明先对账：</b>放款或视频生成超时后，先查询是否已经成功，再决定是否补做。</li><li><b>崩溃可恢复：</b>从安全检查点继续，不必整条昂贵流程重来。</li><li><b>并发受控：</b>公平分配模型额度、速率和共享资源。</li></ul><div class="status-limit"><b>未完成前的运行边界</b>只能采用单 worker、受限流量或人工对账，不能把 Demo 跑通理解成分布式问题已经解决。</div><div class="status-action"><b>团队怎么做</b>按场景风险把这些能力设为上线 Gate；高成本或不可重复副作用的场景必须提前建设。</div></article>
+        </div>
+        <div class="precision-note"><b>开发精度说明：数据库有字段，不代表系统已经稳定写入该事实。</b><span>例如 <code>actual_cost_micros</code> 虽然存在，但本地默认路径通常不写；数据库保存的是 <code>pricebook_version</code>，价格表本身仍在代码配置中；客户价和内部结算价目前由报表按倍率计算，并没有逐笔结算状态。</span></div>
+      </div>
+    </section>
+
+    <section class="section tint anchor" id="prior-art" data-nav="取舍">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">Calibrated, not copied</p><h2>借成熟体系的强项，但不绑定任何一家引擎</h2></div><p>vendor-neutral 不等于最低公分母。FlowSpec 保留明确设计立场，并允许不同运行时用数据库、对象存储、队列或现有引擎实现同一契约。</p></header>
+        <div class="prior-grid"><article class="prior-card"><strong>Control-M</strong><p>依赖、资源、Waiting Info、On-Do、SLA 与企业级运营成熟度。</p><span>Ops semantics</span></article><article class="prior-card"><strong>Argo</strong><p>Artifact 一等公民、工作流模板，以及 mutex / semaphore 的清晰分工。</p><span>Artifacts</span></article><article class="prior-card"><strong>Temporal / SFN</strong><p>Activity/Task 边界、稳定幂等、持久等待、超时与副作用恢复。</p><span>Durability</span></article><article class="prior-card"><strong>BPMN / Camunda</strong><p>User Task、人责移交与业务人员可审阅的流程语义。</p><span>Human work</span></article><article class="prior-card"><strong>Airflow</strong><p>DAG、任务实例与调度元数据；3.3 的 HITL / <code>awaiting_input</code> 也已是一等人工等待能力。</p><span>DAG + HITL</span></article></div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="roadmap" data-nav="路线图">
+      <div class="wide-shell">
+        <header class="section-head"><div><p class="eyebrow">Build order <span class="audience-chip">依赖顺序，不是价值排名</span></p><h2>先建立稳定事实，再叠加规模与运营能力</h2></div><p>Artifact、Human Task、Usage 与 fanout 都需要先挂在稳定的 Run / Step / Attempt 身份上。不能因 AI 成本紧迫，就先造一套脱离执行事实的旁路账本。</p></header>
+        <div class="roadmap-chain">
+          <article class="roadmap-step"><small>P0-A</small><h3>定义编译 + Run 基座</h3><p>Process/Registry 校验与 digest；Run/Step/Attempt；原子 claim；分支闭包与 outcome。</p><b>退出条件：每次执行都有冻结定义与闭合状态。</b></article>
+          <article class="roadmap-step"><small>P0-B</small><h3>Typed Context + Artifact + Storage</h3><p>Schema、白名单 patch、显式 path base、Attempt 私有写、诊断 locator；仅 canonical Artifact 自动生成 hash/provenance/validity，binding 按需，finalize 原子发布。</p><b>退出条件：能证明正式产物属于谁、物理在哪、由何产生；Tool 与临时文件无需重复造元数据。</b></article>
+          <article class="roadmap-step"><small>P0-C</small><h3>Human Task / Callback</h3><p>持久 work item、waiting、actor/role/reason、input hash、expected revision 与幂等回调。</p><b>退出条件：责任移交与并发决定可审计。</b></article>
+          <article class="roadmap-step"><small>P1-A</small><h3>AI Profile + Usage + Budget</h3><p>Profile enforcement、统一 Invocation、typed measurement/cost、reserve/settle/release。</p><b>退出条件：所有模型路径可授权、可逐笔核算。</b></article>
+          <article class="roadmap-step"><small>P1-B</small><h3>Typed fanout / fan-in</h3><p>stable item key、逐项状态/产物/用量、并发与失败阈值、确定性 reduce。</p><b>退出条件：大规模集合执行可定位、可局部恢复。</b></article>
+          <article class="roadmap-step"><small>P2</small><h3>对账、资源与运营面</h3><p>reconcile worker、operation receipt、lease/fencing、snapshot cursor、SLA overlay。</p><b>退出条件：歧义结果、崩溃和规模化资源竞争可收敛。</b></article>
+        </div>
+        <aside class="boundary-note"><strong>上线 Gate 不按编号机械后置</strong><p>P2 是通用平台化顺序，不是安全能力的延期许可。首批场景若已使用多 worker、长时昂贵任务或不可盲重发的外部副作用，相应 lease/fencing、reconcile 与 checkpoint/心跳恢复必须前移为该场景的上线条件；否则只能维持单 worker、受限流量或人工对账的明确边界。</p></aside>
+      </div>
+    </section>
+
+    <section class="section tint anchor" id="demos" data-nav="Demo">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">四场景验证</p><h2>四个业务场景，共用同一套契约</h2></div></header>
+        <div class="demo-boundary"><b>能力边界：</b>这些场景展示目标工作方式；它们不表示 OpenCrew 现网已经具备大规模并发、故障自动恢复或真实模型效果保证。</div>
+        <div class="demo-grid">
+          <article class="demo-card loan"><span class="demo-kicker">Scenario 01 · regulated decisioning</span><h3>消费贷审批 · 从证据到放款</h3><p>并行核验、政策与模型权威分离、临界案件人审、拒绝/退回修改/放款三种 outcome，以及不可盲重发的放款操作。</p><div class="demo-facts"><span>12 个步骤</span><span>2 次运行</span><span>3 种业务结果</span><span>最新 AI 费用 US$0.009</span></div><div class="demo-links"><a class="primary" href="demos/loan-approval/index.html">打开 Demo ↗</a><a href="demos/loan-approval/process.json">Process JSON</a><a href="examples/loan-approval.md">概念场景</a></div></article>
+          <article class="demo-card bank"><span class="demo-kicker">Scenario 02 · controlled reporting</span><h3>银行风险报告 · 冻结数据到签署分发</h3><p>同一 data cut 的多源汇合、DQ waiver、指标/叙述/签署分权，以及可对账的分发或报告修订回执。</p><div class="demo-facts"><span>15 个步骤</span><span>三路数据汇合</span><span>3 种业务结果</span><span>最新 AI 费用 US$0.021</span></div><div class="demo-links"><a class="primary" href="demos/bank-risk-report/index.html">打开 Demo ↗</a><a href="demos/bank-risk-report/process.json">Process JSON</a><a href="examples/bank-data-report.md">概念场景</a></div></article>
+          <article class="demo-card dd"><span class="demo-kicker">Scenario 03 · evidence at scale</span><h3>交易尽调 · 万份材料到可追溯结论</h3><p>补件形成新 Run；文档按稳定 key fanout；法律与财务并行复核；finding 保持 matter、scope 与 evidence binding。</p><div class="demo-facts"><span>10 个步骤</span><span>4 个并行文档项</span><span>6 次 AI 调用</span><span>最新 AI 费用 US$0.111</span></div><div class="demo-links"><a class="primary" href="demos/due-diligence/index.html">打开 Demo ↗</a><a href="demos/due-diligence/process.json">Process JSON</a><a href="examples/due-diligence.md">概念场景</a></div></article>
+          <article class="demo-card video"><span class="demo-kicker">Scenario 04 · multimodal production</span><h3>OpenCrew AI 视频 · 创意到受控发布</h3><p>有界 Agent 内循环、音频/图像/视频逐项成本、按 asset key 汇合、多模态 QA、返修 outcome 与品牌发布批准。</p><div class="demo-facts"><span>16 个步骤</span><span>15 个并行素材项</span><span>17 次 AI 调用</span><span>最新 AI 费用 US$1.637</span></div><div class="demo-links"><a class="primary" href="demos/opencrew-video/index.html">打开 Demo ↗</a><a href="demos/opencrew-video/process.json">Process JSON</a><a href="examples/opencrew-video-creation.md">概念场景</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="documents" data-nav="文档">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">文档导航</p><h2>正式规范与机器契约</h2></div></header>
+        <div class="doc-routes">
+          <article class="doc-route"><h3>决策层推荐路线</h3><p>先理解目标与取舍，再看生产来源、跨体系校准、四场景验证和建设优先级。</p><div class="route-links"><a href="00_Overview.md">00 总览</a><a href="08_PriorArt_CrossReference.md">08 成熟体系</a><a href="09_ProductionLessons.md">09 生产教训</a><a href="11_FourScenarioValidation.md">11 四场景</a><a href="12_ExecutableDemos.md">12 Demo 验收</a></div></article>
+          <article class="doc-route"><h3>开发团队推荐路线</h3><p>先掌握身份与关系，再按 Process、Tool、Context、Artifact、Runtime、Binding 和 AI Profile 落地。</p><div class="route-links"><a href="01_ConceptModel.md">01 概念</a><a href="02_ProcessDefinition.md">02 Process</a><a href="03_ToolContract.md">03 Tool</a><a href="07_ImplementationBinding.md">07 Binding</a><a href="10_AI_ModelAndAgent_Profile.md">10 AI</a><a href="schema/README.md">Schema</a></div></article>
+        </div>
+        <div class="docs-grid">
+          <a class="doc-card" href="00_Overview.md"><small>00 · DESIGN</small><strong>目标、范围与设计取向</strong><span>适用边界、P1–P10 立场及成熟体系总对照。</span></a>
+          <a class="doc-card" href="01_ConceptModel.md"><small>01 · CONCEPT</small><strong>概念模型</strong><span>Process → session+task → Run → Step/Attempt → Invocation/Artifact。</span></a>
+          <a class="doc-card" href="02_ProcessDefinition.md"><small>02 · DEFINITION</small><strong>流程定义</strong><span>Executable Process、typed dependency、guard、branch closure 与 outcome。</span></a>
+          <a class="doc-card" href="03_ToolContract.md"><small>03 · TOOL</small><strong>工具契约</strong><span>Registry、Adapter、I/O、side effect、幂等与 finalize。</span></a>
+          <a class="doc-card" href="04_VariablesAndState.md"><small>04 · STATE</small><strong>变量与状态</strong><span>强类型 Context、白名单写、作用域、Step/Run 状态与 wait reason。</span></a>
+          <a class="doc-card" href="05_Workspace.md"><small>05 · ARTIFACT</small><strong>Workspace 与产物</strong><span>session/task/Run/Step 物理归属、输入输出位置、Manifest、路径 base 与生命周期。</span></a>
+          <a class="doc-card" href="06_Runtime_Observability.md"><small>06 · RUNTIME</small><strong>运行时与可观测性</strong><span>调度、恢复、Event/诊断/计量分层、日志级别、文件落点与 SLA。</span></a>
+          <a class="doc-card" href="07_ImplementationBinding.md"><small>07 · BINDING</small><strong>可实现绑定</strong><span>OpenCrew 兼容目录、日志/Storage Schema、API、枚举和代码映射。</span></a>
+          <a class="doc-card" href="08_PriorArt_CrossReference.md"><small>08 · PRIOR ART</small><strong>成熟体系对照</strong><span>Control-M、Airflow、Temporal、SFN、Argo、BPMN 的借鉴与分歧。</span></a>
+          <a class="doc-card" href="09_ProductionLessons.md"><small>09 · BATTLE TESTED</small><strong>从生产中长出的教训</strong><span>身份哈希、幂等、fail-closed、孤儿恢复、级联失效与信任边界。</span></a>
+          <a class="doc-card" href="10_AI_ModelAndAgent_Profile.md"><small>10 · AI GOVERNANCE</small><strong>Model / Agent Profile</strong><span>模型选择、权限、审计、重试、流式、Usage、Cost 与 Budget。</span></a>
+          <a class="doc-card" href="11_FourScenarioValidation.md"><small>11 · VALIDATION</small><strong>四场景综合验证</strong><span>能力矩阵、Core/Profile/Domain 边界及 P0–P2 建设顺序。</span></a>
+          <a class="doc-card" href="12_ExecutableDemos.md"><small>12 · EVIDENCE</small><strong>可执行 Demo 与验收</strong><span>目录契约、双 Run 结果、Mock 边界、重建和浏览器验证。</span></a>
+        </div>
+        <div class="resource-row"><a href="README.md">规范总索引 README</a><a href="schema/README.md">JSON Schema 说明</a><a href="schema/proposed/Process.schema.json">Process Schema</a><a href="schema/proposed/ToolRegistry.schema.json">Tool Registry Schema</a><a href="schema/proposed/RunRecord.schema.json">RunRecord Schema</a><a href="schema/proposed/DiagnosticLogRecord.schema.json">Diagnostic Log Schema</a><a href="schema/proposed/StorageIndex.schema.json">Storage Index Schema</a><a href="schema/proposed/AIExecutionProfile.schema.json">AI Profile Schema</a><a href="schema/proposed/AIUsageRecord.schema.json">AI Usage Schema</a><a href="schema/proposed/BudgetLedger.schema.json">Budget Ledger Schema</a><a href="demos/README.md">Demo 开发入口</a></div>
+      </div>
+    </section>
+
+    <section class="section tint anchor" id="decision" data-nav="文档">
+      <div class="shell">
+        <header class="section-head"><div><p class="eyebrow">What to align on</p><h2>团队统一规范之前，需要明确同意什么</h2></div><p>FlowSpec 的价值来自核心纪律一致，而不是字段越多越完整。下面两组问题分别对应管理决策和工程接入。</p></header>
+        <div class="decision-grid"><article class="decision-card"><h3>决策层需要确认</h3><ul class="check-list"><li>接受“业务实例稳定、业务返工创建新 Run”的审计模型。</li><li>把 Artifact、人责、AI 权限和逐笔成本视为产品能力，而不是日志附件。</li><li>接受审计事件、费用事实、诊断文件和服务日志分层治理，避免“一份日志包打天下”。</li><li>重大上线决策以实际验收证据为准，不能用 Demo 跑通代替生产可靠性证明。</li></ul></article><article class="decision-card"><h3>开发团队需要遵守</h3><ul class="check-list"><li>新流程以 executable Process、Registry、Schema 和冻结 digest 为契约入口。</li><li>task 不复制 session 文件树；Step 输入走 Manifest/locator，正式输出只从 canonical OutputManifest 发布。</li><li>诊断日志带 Run/Step Attempt 身份、级别/channel、可见性与保留策略；不得从文本日志反推状态或费用。</li><li>每个 Model Invocation 单独记录 Usage/Cost；Agent 内循环不能绕过 Profile 与预算。</li></ul></article></div>
+        <div class="closing-action"><div><h3>先看一条真实业务链，再回到正式契约</h3><p>四个 Demo 都提供决策层解释、场景术语、交互流程、双 Run 记录和开发者下钻。</p></div><div class="actions" style="margin-top:0"><a class="button primary" href="demos/index.html">进入四场景 Demo ↗</a><a class="button" href="11_FourScenarioValidation.md">查看建设优先级 ↗</a></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell footer"><strong>FlowSpec v0.4 · 规范综述</strong><span>来源于 OpenCrew 生产实践 · 经成熟体系与四专业场景校准 · 2026-07-24</span></footer>
+
+  <script>
+    (() => {
+      const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+      const sections = [...document.querySelectorAll('[data-nav]')];
+      if (!('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const label = visible.target.dataset.nav;
+        navLinks.forEach((link) => link.classList.toggle('active', link.textContent.trim() === label));
+      }, { rootMargin: '-25% 0px -65% 0px', threshold: [0, .1, .4] });
+      sections.forEach((section) => observer.observe(section));
+    })();
+  </script>
+</body>
+</html>

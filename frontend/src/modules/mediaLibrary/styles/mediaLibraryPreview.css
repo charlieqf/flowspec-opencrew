@@ -1,0 +1,26 @@
+.media-library-drawer-backdrop { background: rgba(19, 29, 45, 0.16); inset: 0; position: fixed; z-index: 50; }
+.media-library-preview-drawer { background: #fff; bottom: var(--debug-console-height, 0px); box-shadow: -12px 0 36px rgba(19, 29, 45, 0.18); overflow-y: auto; position: fixed; right: 0; top: 0; width: min(460px, 92vw); z-index: 51; }
+.media-library-preview-drawer header { align-items: flex-start; border-bottom: 1px solid #e5eaf1; display: flex; justify-content: space-between; padding: 18px 20px 15px; }
+.media-library-preview-drawer header span { color: #7a879a; font-size: 11px; }
+
+.media-library-preview-stage,
+.media-library-detail-stage { align-items: center; background: #101722; display: flex; justify-content: center; overflow: hidden; }
+.media-library-preview-stage { min-height: 270px; padding: 18px; }
+.media-library-preview-stage video,
+.media-library-detail-stage video { display: block; height: 100%; max-height: 70vh; object-fit: contain; width: 100%; }
+.media-library-preview-stage.is-portrait video { aspect-ratio: 9 / 16; max-height: 420px; width: auto; }
+.media-library-preview-placeholder { align-items: center; color: #aab7c9; display: flex; flex-direction: column; gap: 10px; justify-content: center; min-height: 220px; }
+.media-library-preview-placeholder svg { height: 38px; width: 38px; }
+
+.media-library-drawer-body { padding: 18px 20px 32px; }
+.media-library-drawer-actions { display: flex; margin-bottom: 18px; }
+.media-library-drawer-actions a.primary { background: #305ee9; border-radius: 7px; color: #fff; font-size: 13px; padding: 9px 13px; text-decoration: none; }
+.media-library-detail-list { display: grid; gap: 0; margin: 0; }
+.media-library-detail-list > div { align-items: start; border-top: 1px solid #edf1f6; display: grid; gap: 12px; grid-template-columns: 100px minmax(0, 1fr); padding: 10px 0; }
+.media-library-detail-list > div:first-child { border-top: 0; }
+.media-library-detail-list dt { color: #7b8799; font-size: 12px; }
+.media-library-detail-list dd { color: #35445c; font-size: 12px; margin: 0; min-width: 0; overflow-wrap: anywhere; text-align: right; }
+.media-library-detail-list.compact > div { grid-template-columns: 86px minmax(0, 1fr); }
+.media-library-drawer-section { border-top: 1px solid #e8edf4; margin-top: 15px; padding-top: 15px; }
+.media-library-drawer-section h4 { color: #35445c; font-size: 13px; margin: 0 0 8px; }
+.media-library-drawer-section p { color: #5d6b81; line-height: 1.65; margin: 0; }

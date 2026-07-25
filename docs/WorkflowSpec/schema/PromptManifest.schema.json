@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "tool_id": {
+      "title": "Tool Id",
+      "type": "string"
+    },
+    "prompts": {
+      "items": {
+        "type": "object"
+      },
+      "title": "Prompts",
+      "type": "array"
+    },
+    "references": {
+      "items": {
+        "type": "object"
+      },
+      "title": "References",
+      "type": "array"
+    },
+    "model_calls": {
+      "items": {
+        "type": "object"
+      },
+      "title": "Model Calls",
+      "type": "array"
+    }
+  },
+  "required": [
+    "tool_use_session_id",
+    "step_id",
+    "tool_id"
+  ],
+  "title": "PromptManifest",
+  "type": "object"
+}

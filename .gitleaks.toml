@@ -1,0 +1,35 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Documented Basic Auth placeholders and environment-variable examples"
+condition = "AND"
+rules = ["curl-auth-user"]
+paths = [
+  '''(^|/)README\.md$''',
+  '''(^|/)ACTUAL_STARTUP_AND_VERIFICATION\.md$''',
+  '''(^|/)CORRECT_STARTUP_PLAYBOOK\.md$''',
+  '''(^|/)docs/opencrew_macmini_nipio_deployment_plan\.md$''',
+  '''(^|/)docs/two_node_prod_test_deployment_plan_2026-06-15\.md$''',
+]
+regexTarget = "match"
+regexes = [
+  '''-u\s+"[^"]*(?:<[^>]+>|\$(?:\{)?[A-Z_][A-Z0-9_]*(?:\})?)[^"]*"''',
+]
+
+[[allowlists]]
+description = "Non-secret contract-test identifiers and synthetic credentials"
+condition = "AND"
+rules = ["generic-api-key"]
+paths = [
+  '''(^|/)StoryBoardRegression/script/backend-contracts/test_koubo_storyboard_manual_asset_status_contract\.py$''',
+  '''(^|/)backend/tests/contracts/test_bytedance_tts_contract\.py$''',
+  '''(^|/)backend/tests/contracts/test_koubo_storyboard_manual_asset_status_contract\.py$''',
+  '''(^|/)backend/tests/contracts/test_media_library_migration_0023_contract\.py$''',
+]
+regexTarget = "match"
+regexes = [
+  '''(?:idempotency_key|base_key)\s*=''',
+  '''api_key"\s*:\s*"123e4567-e89b-12d3-a456-426614174000"''',
+  '''api_key"\s*:\s*"app-[0-9]+:token-[0-9]+"''',
+]

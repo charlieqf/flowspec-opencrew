@@ -1,0 +1,57 @@
+{
+  "suite": "video",
+  "number": 4,
+  "title": "Case 4：时长阈值，max=4s 拆成 3 段",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 4,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "shot_count": 1,
+    "scene_count": 1,
+    "dialogue_count": 5,
+    "segment_count": 3,
+    "blocked_segment_count": 0,
+    "skipped_scene_count": 0,
+    "blocked_scene_count": 0,
+    "need_audio_count": 5,
+    "need_image_prompt_count": 1,
+    "need_image_count": 1,
+    "need_video_prompt_count": 3,
+    "need_video_count": 3,
+    "segment_audio_count": 3,
+    "need_lipsync_count": 3,
+    "need_audio_video_sync_count": 0,
+    "need_sync_count": 3
+  },
+  "expected_count": 3,
+  "actual": {
+    "actualCount": 3,
+    "dpr": 1,
+    "rect": {
+      "height": 378.25,
+      "left": 650,
+      "top": 264.375,
+      "width": 620
+    },
+    "segmentRows": [
+      "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "S2\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S3\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 1\nScene 1\nSegment 3",
+    "text": "生成计划\nShot 1\nScene 1\nSegment 3\n0/3\n0/3\n0/3\n0/3\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS3\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_case_04.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 252, 1282, 654]}"
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "media_library_visual_search_backfill_acceptance_v1",
+  "executed_at": "2026-07-22T15:04:00+10:00",
+  "database": "PostgreSQL 16.14",
+  "model_calls_created": 0,
+  "dry_run": {
+    "candidate_count": 8,
+    "publishable_count": 0,
+    "already_published_count": 1,
+    "reanalysis_required_count": 7,
+    "failed_count": 0
+  },
+  "first_write": {
+    "candidate_count": 8,
+    "published_count": 0,
+    "already_published_count": 1,
+    "reanalysis_required_count": 7,
+    "failed_count": 0
+  },
+  "second_write": {
+    "candidate_count": 8,
+    "published_count": 0,
+    "already_published_count": 1,
+    "reanalysis_required_count": 7,
+    "failed_count": 0,
+    "idempotent": true
+  },
+  "eligible": {
+    "asset_id": "mla_1784601908573_70c828790521",
+    "analysis_run_id": "mlar_visual_semantic_1784690007614_2951e3c0f598",
+    "sampling_strategy": "scene_uniform_4_v1",
+    "fragment_count": 2,
+    "status": "already_published"
+  },
+  "reanalysis_required": [
+    "mla_1784500575045_607e5f061102",
+    "mla_1784591754592_d1c20d9832d6",
+    "mla_1784610395385_2640074e8825",
+    "mla_1784612343104_915b16899613",
+    "mla_1784613451673_9661174fa2da",
+    "mla_1784614638548_3edefc190eaf",
+    "mla_1784604415914_0e96d4f546a0"
+  ],
+  "historical_single_frame_promoted": false,
+  "passed": true
+}

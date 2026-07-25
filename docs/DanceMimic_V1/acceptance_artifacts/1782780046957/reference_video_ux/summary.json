@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "run_id": "1782780046957",
+  "frontend_url": "http://127.0.0.1:18080",
+  "screenshot_dir": "/Users/macmini-4/work/code/OpenCrew/docs/DanceMimic_V1/acceptance_artifacts/1782780046957/reference_video_ux",
+  "selected_library_fixture": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_frontal_studio.mp4",
+  "upload_status": 200
+}

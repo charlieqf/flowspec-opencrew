@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "test": "gemini_omni_paid_upload_edit_live_browser",
+  "target": "macmini-4 local only",
+  "task_id": "305",
+  "budget": {
+    "max_usd": 0.3,
+    "max_calls": 1,
+    "max_total_seconds": 3
+  },
+  "source_reference": {
+    "title": "Agent generated video",
+    "label": "Agent generated video"
+  },
+  "screenshots": [
+    "assets/47-omni-browser-paid-upload-edit-confirm.png",
+    "assets/48-omni-browser-paid-upload-edit-completed.png",
+    "assets/49-omni-browser-paid-upload-edit-after-cleanup.png"
+  ],
+  "turn": {
+    "updated_at": 1784767610317,
+    "provider_state_status": "available",
+    "output_asset_id": "SessionOutput/storyboard/assets/videos/1784767551188_agent_generated_direct_video_generation_dead8c17.mp4",
+    "client_action_id": "07d88a60-948b-4c53-9e83-08ea57f86769",
+    "output_path": "SessionOutput/storyboard/assets/videos/1784767551188_agent_generated_direct_video_generation_dead8c17.mp4",
+    "provider_expiry_source": "unknown",
+    "status": "completed",
+    "provider_state_expires_at": null,
+    "parent_turn_id": null,
+    "created_at": 1784767551188,
+    "delete_status": "not_requested",
+    "operation": "edit",
+    "video_thread_id": "5c857329-313c-4dba-b6ee-4799166dafe4",
+    "video_turn_id": "a0a08c27-7c28-4a7e-8521-d6df277696bc",
+    "can_continue": true
+  },
+  "cloud_cleanup": {
+    "ok": true,
+    "video_thread_id": "5c857329-313c-4dba-b6ee-4799166dafe4",
+    "status": "deleted",
+    "deleted_count": 1,
+    "failed_count": 0,
+    "turns": [
+      {
+        "updated_at": 1784767613604,
+        "provider_state_status": "deleted",
+        "output_asset_id": "SessionOutput/storyboard/assets/videos/1784767551188_agent_generated_direct_video_generation_dead8c17.mp4",
+        "client_action_id": "07d88a60-948b-4c53-9e83-08ea57f86769",
+        "output_path": "SessionOutput/storyboard/assets/videos/1784767551188_agent_generated_direct_video_generation_dead8c17.mp4",
+        "provider_expiry_source": "unknown",
+        "status": "completed",
+        "provider_state_expires_at": null,
+        "parent_turn_id": null,
+        "created_at": 1784767551188,
+        "delete_status": "deleted",
+        "operation": "edit",
+        "video_thread_id": "5c857329-313c-4dba-b6ee-4799166dafe4",
+        "video_turn_id": "a0a08c27-7c28-4a7e-8521-d6df277696bc",
+        "can_continue": false
+      }
+    ]
+  },
+  "ok": true
+}

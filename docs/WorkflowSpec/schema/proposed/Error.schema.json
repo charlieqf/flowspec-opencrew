@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/Error.schema.json",
+  "title": "FlowSpec Structured Error (PROPOSED)",
+  "description": "A safe, structured error emitted by a Tool/Adapter phase. retryable is a classification hint, not a scheduler command.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "error_code",
+    "category",
+    "phase",
+    "retryable",
+    "resume_supported",
+    "user_action_required",
+    "safe_message",
+    "suggested_action",
+    "debug_ref"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "error_code": { "type": "string", "minLength": 1 },
+    "category": {
+      "enum": [
+        "transport",
+        "timeout",
+        "rate_limit",
+        "dependency",
+        "input",
+        "schema",
+        "execution",
+        "external_service",
+        "resource",
+        "permission",
+        "cancelled",
+        "internal"
+      ]
+    },
+    "phase": { "enum": ["prepare", "run", "finalize", "control"] },
+    "retryable": { "type": "boolean" },
+    "resume_supported": { "type": "boolean" },
+    "user_action_required": { "type": "boolean" },
+    "safe_message": { "type": "string", "minLength": 1 },
+    "suggested_action": { "type": ["string", "null"] },
+    "debug_ref": { "type": ["string", "null"] }
+  }
+}

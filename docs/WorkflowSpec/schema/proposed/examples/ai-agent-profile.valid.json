@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "storyboard_planning_agent",
+  "version": "2.0.0",
+  "kind": "agent",
+  "model": {
+    "provider": "openrouter",
+    "model_id": "approved-reasoning-model",
+    "model_revision": "2026-07-01",
+    "deployment_id": "regulated-au",
+    "region": "au-southeast",
+    "runtime": "approved-agent-runtime-v2",
+    "modality": "multimodal",
+    "selection_source": "run_snapshot",
+    "fallback_policy": "explicit_list",
+    "fallback_models": [
+      { "provider": "openrouter", "model_id": "approved-fallback-model" }
+    ]
+  },
+  "budget": {
+    "max_wall_seconds": 900,
+    "max_input_tokens": 120000,
+    "max_output_tokens": 12000,
+    "max_cost": "8.0",
+    "currency": "USD",
+    "max_turns": 12,
+    "max_tool_calls": 8
+  },
+  "data_policy": {
+    "sensitivity": "sensitive",
+    "external_transfer": "consent_required",
+    "consent_ref": "consent://run/run_123/cloud-model-use",
+    "redaction_required": true,
+    "residency": ["AU"],
+    "provider_retention": "zero_retention_required",
+    "provider_training": "denied",
+    "purpose": "approved storyboard planning",
+    "deletion_policy_ref": "policy://ai-retention/v2"
+  },
+  "output": {
+    "schema_ref": "schema://storyboard-plan/v2",
+    "validation": "strict",
+    "max_repair_attempts": 1,
+    "safety_policy_ref": "policy://brand-safety/v2",
+    "moderation_required": true,
+    "grounding_required": true,
+    "evidence_required": true
+  },
+  "streaming": {
+    "enabled": true,
+    "partial_output_authoritative": false
+  },
+  "agent": {
+    "engine": "opencode",
+    "session_scope": "step_attempt",
+    "tool_policy": {
+      "mode": "allowlist",
+      "allowed_tools": [
+        {
+          "tool_id": "read_step_input",
+          "version_constraint": "2.x",
+          "approval": "none",
+          "max_calls": 4
+        },
+        {
+          "tool_id": "search_approved_assets",
+          "version_constraint": "1.4.x",
+          "approval": "per_execution",
+          "max_calls": 4,
+          "argument_policy_ref": "policy://approved-assets/v1"
+        }
+      ]
+    },
+    "workspace_access": "read_only",
+    "network_access": {
+      "mode": "allowlist",
+      "allowed_hosts": ["assets.internal.example"]
+    }
+  }
+}

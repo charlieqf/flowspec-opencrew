@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/Process.schema.json",
+  "title": "FlowSpec Process Registry (PROPOSED — target binding, not yet implemented)",
+  "description": "Hand-authored target schema for the [proposed] Process Registry (00/02/03/06/07). NOT auto-generated from Pydantic; the real normalizer output is a Tool-Library structure (see 02·B1). Encodes one Run's DAG execution plan, minimal when guards, bounded transient retry, minimal run-level failure propagation, three resource primitives, and AND/OR dependencies. A session/task business lifecycle may span multiple Runs. Cross-step graph semantics are checked by lint_process.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["process_id", "version", "steps"],
+  "properties": {
+    "schema_version": { "const": "0.4" },
+    "contract_level": {
+      "description": "illustrative documents show topology; executable definitions additionally freeze registries, context/artifact contracts, branch closure, completion outcomes, and a run budget.",
+      "enum": ["illustrative", "executable"],
+      "default": "illustrative"
+    },
+    "process_id": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "title": { "type": "string" },
+    "description": { "type": "string" },
+    "tool_registry_ref": { "type": "string", "minLength": 1 },
+    "context_schema_ref": { "type": "string", "minLength": 1 },
+    "branch_closure": {
+      "description": "When every referenced upstream is terminal and a dependency can no longer match, close the downstream branch as skipped instead of waiting forever.",
+      "enum": ["skip_unreachable"]
+    },
+    "artifact_contracts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/artifactContract" }
+    },
+    "completion": { "$ref": "#/$defs/completion" },
+    "run_budget": { "$ref": "#/$defs/runBudget" },
+    "failure_propagation": {
+      "description": "Run-level behavior after a terminal step failure; independent branches are derived from the DAG.",
+      "enum": ["stop_run", "continue_independent"],
+      "default": "stop_run"
+    },
+    "stages": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+    "resource_pools": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/resourcePool" }
+    },
+    "defaults": { "$ref": "#/$defs/policyDefaults" },
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } },
+    "sla": { "type": "array", "items": { "$ref": "#/$defs/sla" } }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": ["contract_level"],
+        "properties": { "contract_level": { "const": "executable" } }
+      },
+      "then": {
+        "required": [
+          "schema_version", "tool_registry_ref", "context_schema_ref",
+          "branch_closure", "artifact_contracts", "completion", "run_budget"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "artifactContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_type", "classification"],
+      "properties": {
+        "media_type": { "type": "string", "minLength": 1 },
+        "schema_ref": { "type": "string", "minLength": 1 },
+        "classification": { "enum": ["public", "internal", "sensitive", "restricted"] },
+        "binding_keys": {
+          "description": "Stable business binding is opt-in. Omit or use [] when the canonical Artifact is not joined or reused by business identity; fanout reduce may require it.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "retention_class": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" }
+      }
+    },
+    "completionOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "terminal_steps", "required_artifacts"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "when": { "$ref": "#/$defs/when" },
+        "terminal_steps": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "required_artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "outcomes"],
+      "properties": {
+        "mode": { "const": "exactly_one_outcome" },
+        "outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/completionOutcome" }
+        }
+      }
+    },
+    "runBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_cost", "currency", "reservation_policy"],
+      "properties": {
+        "max_cost": { "type": "string", "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$" },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "reservation_policy": { "enum": ["required", "best_effort"] }
+      }
+    },
+    "policyDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retry": { "$ref": "#/$defs/retry" },
+        "on_error": { "type": "array", "items": { "$ref": "#/$defs/onErrorRule" } },
+        "resources": { "type": "array", "items": { "$ref": "#/$defs/resource" } }
+      }
+    },
+    "resourcePool": {
+      "description": "P8: pool config keyed by kind — semaphore needs limit, rate_limit needs per_minute.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["type", "limit"],
+          "properties": { "type": { "const": "semaphore" }, "limit": { "type": "integer", "minimum": 1 } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "per_minute"],
+          "properties": { "type": { "const": "rate_limit" }, "per_minute": { "type": "integer", "minimum": 1 } } }
+      ]
+    },
+    "dependency": {
+      "description": "One depends_on entry: EITHER a plain dependency OR an any_of OR-join.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["step_id", "statuses"],
+          "properties": {
+            "step_id": { "type": "string", "minLength": 1 },
+            "statuses": { "type": "array", "minItems": 1, "uniqueItems": true,
+              "items": { "enum": ["completed", "failed", "blocked", "stale_running", "skipped"] } } } },
+        { "type": "object", "additionalProperties": false, "required": ["any_of"],
+          "properties": { "any_of": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "$ref": "#/$defs/dependency" } } } }
+      ]
+    },
+    "resource": {
+      "description": "P8: three distinct primitives — mutex needs name+mode; semaphore/rate_limit need pool+amount.",
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["kind", "name", "mode"],
+          "properties": { "kind": { "const": "mutex" }, "name": { "type": "string", "minLength": 1 },
+            "mode": { "enum": ["exclusive", "shared"] } } },
+        { "type": "object", "additionalProperties": false, "required": ["kind", "pool", "amount"],
+          "properties": { "kind": { "enum": ["semaphore", "rate_limit"] }, "pool": { "type": "string", "minLength": 1 },
+            "amount": { "type": "integer", "minimum": 1 } } }
+      ]
+    },
+    "retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy"],
+      "properties": {
+        "policy": { "enum": ["fail_fast", "on_transient"] },
+        "max_attempts": { "type": "integer", "minimum": 1 },
+        "backoff_seconds": { "type": "number", "minimum": 0 },
+        "backoff_rate": { "type": "number", "minimum": 1 },
+        "max_backoff_seconds": { "type": "number", "minimum": 0 },
+        "jitter": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": { "required": ["policy"], "properties": { "policy": { "const": "on_transient" } } },
+          "then": { "required": ["max_attempts"] }
+        }
+      ]
+    },
+    "autoRetry": {
+      "description": "A retry object that actually auto-retries (v0.4: transient failures only).",
+      "type": "object", "required": ["policy"],
+      "properties": { "policy": { "const": "on_transient" } }
+    },
+    "onErrorRule": {
+      "type": "object", "additionalProperties": false, "required": ["when", "do"],
+      "properties": {
+        "when": { "type": "string" },
+        "do": { "enum": ["notify", "set_failed", "block", "add_condition", "run_cleanup"] },
+        "target": { "type": ["string", "null"] },
+        "detail": { "type": "string" }
+      }
+    },
+    "slaAction": {
+      "description": "on_breach action — trigger is implicit, so only `do` is required.",
+      "type": "object", "additionalProperties": false, "required": ["do"],
+      "properties": {
+        "do": { "type": "string" }, "target": { "type": ["string", "null"] },
+        "detail": { "type": "string" }, "when": { "type": "string" }
+      }
+    },
+    "humanGate": {
+      "type": "object", "additionalProperties": false, "required": ["type"],
+      "properties": {
+        "type": { "enum": ["confirm"] }, "form": { "type": "string" },
+        "roles": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "scope": { "type": "string" },
+        "sla_seconds": { "type": "integer", "minimum": 0 },
+        "allowed_decisions": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["approved", "rejected", "revision_requested", "cancelled", "expired"] }
+        },
+        "bind_to_input_hash": { "type": "boolean", "default": true },
+        "require_reason": { "type": "boolean", "default": true },
+        "separation_of_duties": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "exclude_step_actors": { "type": "array", "items": { "type": "string" } },
+            "minimum_distinct_approvers": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "fanout": {
+      "type": "object", "additionalProperties": false, "required": ["over", "as"],
+      "properties": {
+        "over": { "type": "string" }, "as": { "type": "string" },
+        "item_key": { "type": "string", "minLength": 1 },
+        "concurrency_pool": { "type": "string" },
+        "max_concurrency": { "type": "integer", "minimum": 1 },
+        "failure_policy": {
+          "oneOf": [
+            { "const": "fail_fast" },
+            {
+              "type": "object", "additionalProperties": false,
+              "required": ["mode"],
+              "properties": {
+                "mode": { "const": "tolerate" },
+                "max_failed_items": { "type": "integer", "minimum": 0 },
+                "max_failed_percent": { "type": "number", "minimum": 0, "maximum": 100 }
+              },
+              "anyOf": [
+                { "required": ["max_failed_items"] },
+                { "required": ["max_failed_percent"] }
+              ]
+            }
+          ]
+        },
+        "reduce": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "order_by": { "type": "string", "minLength": 1 },
+            "require_binding_key": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "guardValue": {
+      "type": ["string", "number", "boolean", "null"]
+    },
+    "when": {
+      "description": "Minimal, data-only step activation guard. Exactly one operator is allowed; false means skipped.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variable"],
+      "properties": {
+        "variable": { "type": "string", "minLength": 1 },
+        "equals": { "$ref": "#/$defs/guardValue" },
+        "not_equals": { "$ref": "#/$defs/guardValue" },
+        "in": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/guardValue" } },
+        "exists": { "type": "boolean" }
+      },
+      "oneOf": [
+        { "required": ["equals"] },
+        { "required": ["not_equals"] },
+        { "required": ["in"] },
+        { "required": ["exists"] }
+      ]
+    },
+    "conditionExpression": {
+      "description": "One flat AND/OR group over named external or cross-process signals. v0.4 intentionally has no free-form or nested expression DSL.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "of"],
+      "properties": {
+        "op": { "enum": ["AND", "OR"] },
+        "of": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "tool", "side_effect_class"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "tool": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "type": { "enum": ["script", "command", "service", "model", "agent", "confirm", "suspend", "subprocess", "noop"] },
+        "ai_profile_ref": {
+          "description": "Reference to a resolved AIExecutionProfile. Required by convention for model/agent steps; registry resolution is outside this standalone schema.",
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": { "type": "string" },
+        "reads": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "consumes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "produces": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "writes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "depends_on": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/dependency" } },
+        "when": { "$ref": "#/$defs/when" },
+        "conditions_in": { "$ref": "#/$defs/conditionExpression" },
+        "conditions_out": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "resources": { "type": "array", "items": { "$ref": "#/$defs/resource" } },
+        "side_effect_class": { "enum": ["pure", "idempotent", "reconcilable", "non_idempotent"] },
+        "retry": { "$ref": "#/$defs/retry" },
+        "on_error": { "type": "array", "items": { "$ref": "#/$defs/onErrorRule" } },
+        "human_gate": { "oneOf": [ { "$ref": "#/$defs/humanGate" }, { "type": "null" } ] },
+        "fanout": { "$ref": "#/$defs/fanout" },
+        "cost_level": { "enum": ["very_low", "low", "medium", "high", "very_high", "external_skill"] },
+        "uses_llm": { "type": "boolean" },
+        "uses_gpu": { "type": "boolean" },
+        "external_quota": { "type": ["string", "null"] },
+        "required_by_default": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "description": "P3/P7: reconcilable/non_idempotent steps may NOT declare transient auto-retry. Defaults are checked after inheritance by lint_process.py.",
+          "if": {
+            "required": ["side_effect_class"],
+            "properties": { "side_effect_class": { "enum": ["non_idempotent", "reconcilable"] } }
+          },
+          "then": {
+            "not": { "required": ["retry"], "properties": { "retry": { "$ref": "#/$defs/autoRetry" } } }
+          }
+        },
+        {
+          "description": "Model and Agent steps must resolve an explicit AI policy profile.",
+          "if": {
+            "required": ["type"],
+            "properties": { "type": { "enum": ["model", "agent"] } }
+          },
+          "then": { "required": ["ai_profile_ref"] }
+        },
+        {
+          "description": "A confirm step creates a durable human work item when dispatched; human_gate configures that work item and is not a pre-dispatch predicate.",
+          "if": {
+            "required": ["type"],
+            "properties": { "type": { "const": "confirm" } }
+          },
+          "then": { "required": ["human_gate"] }
+        }
+      ]
+    },
+    "sla": {
+      "type": "object", "additionalProperties": false, "required": ["service"],
+      "properties": {
+        "service": { "type": "string" },
+        "complete_in_seconds": { "type": "integer", "minimum": 1 },
+        "complete_by": { "type": "string" },
+        "priority": { "type": "integer", "minimum": 1 },
+        "critical_path_override": { "type": "array", "items": { "type": "string" } },
+        "on_breach": { "type": "array", "items": { "$ref": "#/$defs/slaAction" } }
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "media_library_silent_visual_r0a_real_analysis_evidence_v1",
+  "recorded_at": "2026-07-22T15:15:27+10:00",
+  "passed": true,
+  "source": {
+    "filename": "DSCF0157.MOV",
+    "asset_id": "mla_1784601908573_70c828790521",
+    "session_id": 382,
+    "source_version": "c147e8745599bfa2446cfdc772a3142b579bce5af53ea5bedacba08e40a3de1c",
+    "duration_ms": 26000,
+    "audio_track_present": false
+  },
+  "analysis": {
+    "visual_structure": {
+      "analysis_run_id": "mlar_visual_structure_1784689791965_ff664499acc3",
+      "tool_use_session_id": "tus_1784689791970_a22a4e1ccc72",
+      "schema_version": "media_library_visual_structure_v2",
+      "result_hash": "beeacfb0578b6c8d4f71c4e349c5942c80f56bcada901c378de604416f2fb7c3",
+      "status": "ready",
+      "is_current": true
+    },
+    "visual_semantic": {
+      "analysis_run_id": "mlar_visual_semantic_1784690007614_2951e3c0f598",
+      "tool_use_session_id": "tus_1784690007623_01341347882c",
+      "model_session_id": "ses_0782fa192ffeGaXIW0uPEMf5DL",
+      "schema_version": "media_library_visual_semantic_v2",
+      "prompt_version": "visual_semantic_prompt_v3",
+      "model_config_id": "visual_semantic_default_v1",
+      "result_hash": "e60104fbaeccd209a2bcf54773a60dedac0637090b5227ba6b0e0d0a268f280d",
+      "status": "ready",
+      "is_current": true
+    }
+  },
+  "sampling_strategy": "scene_uniform_4_v1",
+  "sampling_positions": [0.125, 0.375, 0.625, 0.875],
+  "fragments": [
+    {
+      "fragment_id": "scene_0001",
+      "start_ms": 0,
+      "end_ms": 13000,
+      "frames": [
+        {"keyframe_id": "scene_0001-sample-01", "keyframe_time_ms": 1625, "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-01.jpg", "image_sha256": "809964b1a93bccad5ba78b2c3075abf84557aab0ff01580fc8fd773a0bc33503", "size_bytes": 188373},
+        {"keyframe_id": "scene_0001-sample-02", "keyframe_time_ms": 4875, "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-02.jpg", "image_sha256": "a5612d23f002898be4803ea26cecdc46114f7bd7501f81cdb663df9c8f9b38a4", "size_bytes": 197069},
+        {"keyframe_id": "scene_0001-sample-03", "keyframe_time_ms": 8125, "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-03.jpg", "image_sha256": "0c9e665435f32df45feb402bd95a3817d21776331f0a0f29b957a28611f42308", "size_bytes": 190826},
+        {"keyframe_id": "scene_0001-sample-04", "keyframe_time_ms": 11375, "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-04.jpg", "image_sha256": "9e035df09e9bd94461427412e2e5480fa22ed984a7a2e48d734f8c691d05fc49", "size_bytes": 189066}
+      ],
+      "visual_summary": "透明纹理碗放在绿色包装盒上，后几帧可见深红色液体和一根竖直吸管。",
+      "action": null,
+      "claim_evidence_keyframe_count": 4
+    },
+    {
+      "fragment_id": "scene_0002",
+      "start_ms": 13000,
+      "end_ms": 26000,
+      "frames": [
+        {"keyframe_id": "scene_0002-sample-01", "keyframe_time_ms": 14625, "image_path": "SessionOutput/visual/scene_frames/scene_0002-sample-01.jpg", "image_sha256": "90db694025235ab4024f4114c334fef03769b063ba705048b3bbdb3f52e8f02f", "size_bytes": 184903},
+        {"keyframe_id": "scene_0002-sample-02", "keyframe_time_ms": 17875, "image_path": "SessionOutput/visual/scene_frames/scene_0002-sample-02.jpg", "image_sha256": "059bed8890eacd151f0493c1a4516e8348d78730469ef99cded95d5894256c41", "size_bytes": 178929},
+        {"keyframe_id": "scene_0002-sample-03", "keyframe_time_ms": 21125, "image_path": "SessionOutput/visual/scene_frames/scene_0002-sample-03.jpg", "image_sha256": "a190e746e09a8aff5ba56d1f85e9833746fd2279704980724615ef02a4b74944", "size_bytes": 177915},
+        {"keyframe_id": "scene_0002-sample-04", "keyframe_time_ms": 24375, "image_path": "SessionOutput/visual/scene_frames/scene_0002-sample-04.jpg", "image_sha256": "17721a9774ef185c18211b7ef4c32bf9303dea3dc2f600cbd9f8be0e172d9829", "size_bytes": 174193}
+      ],
+      "visual_summary": "透明纹理碗内有深红色液体，放在绿色包装盒上方，浅蓝背景中可见竖直浅色细线或液滴痕迹。",
+      "action": null,
+      "claim_evidence_keyframe_count": 4
+    }
+  ],
+  "model_requests": [
+    {
+      "fragment_id": "scene_0001",
+      "request_id": "f31a8a93-5943-48cc-9533-cda3e9960fa4",
+      "local_usage_id": 3984,
+      "provider": "openai",
+      "model_id": "gpt-5.5",
+      "provider_mode": "cloud",
+      "status": "ok",
+      "model_call_count": 1,
+      "image_count": 4,
+      "repair": false
+    },
+    {
+      "fragment_id": "scene_0002",
+      "request_id": "7088acbe-2ef3-4910-a474-0c32abac93a8",
+      "local_usage_id": 3985,
+      "provider": "openai",
+      "model_id": "gpt-5.5",
+      "provider_mode": "cloud",
+      "status": "ok",
+      "model_call_count": 1,
+      "image_count": 4,
+      "repair": false
+    }
+  ],
+  "registration_verification": {
+    "frame_file_count": 8,
+    "frame_hash_count_verified": 8,
+    "session_files_registration_count": 8,
+    "downloadable_count": 8,
+    "stale_count": 0,
+    "registered_sizes_match_files": true
+  },
+  "capability_smoke": {
+    "artifact": "../20260722-131216/four-image-capability-smoke.json",
+    "status": "passed",
+    "model_session_id": "ses_078303727ffeysFnC01uV6VACx",
+    "single_request_image_count": 4
+  },
+  "guards": {
+    "one_multimodal_request_per_fragment": true,
+    "silent_single_frame_fallback": false,
+    "action_is_null_for_every_fragment": true,
+    "raw_image_bytes_retained_in_evidence": false,
+    "cloud_visual_data_transfer_authorized": true
+  }
+}

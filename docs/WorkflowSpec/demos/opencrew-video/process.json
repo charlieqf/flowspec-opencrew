@@ -1,0 +1,142 @@
+{
+  "schema_version": "0.4",
+  "contract_level": "executable",
+  "process_id": "opencrew_ai_video_creation",
+  "version": "1.1.0",
+  "title": "OpenCrew AI 视频创作",
+  "description": "Create and approve a storyboard, fan out audio/image/video by stable asset key, bind media, compose, QA, and deliver or request a scoped revision.",
+  "tool_registry_ref": "tool_registry.json",
+  "context_schema_ref": "schemas/context.schema.json",
+  "branch_closure": "skip_unreachable",
+  "failure_propagation": "continue_independent",
+  "run_budget": { "max_cost": "50.00", "currency": "USD", "reservation_policy": "required" },
+  "resource_pools": {
+    "tts_provider": { "type": "rate_limit", "per_minute": 30 },
+    "image_provider": { "type": "semaphore", "limit": 4 },
+    "video_provider": { "type": "semaphore", "limit": 2 }
+  },
+  "defaults": { "retry": { "policy": "fail_fast" }, "on_error": [], "resources": [] },
+  "stages": ["brief", "plan", "generate", "compose", "approve", "deliver"],
+  "artifact_contracts": {
+    "CreativeBrief.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/brief", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "StoryboardPlan.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/storyboard", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "StoryboardApproval.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/approval", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "StoryboardRevisionRequest.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/revision", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "ConsistencyReferences.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/references", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "Audio_{asset_key}.wav": { "media_type": "audio/wav", "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock", "classification": "internal", "binding_keys": ["project_id", "creative_revision", "asset_key"], "retention_class": "creative-project" },
+    "VisualPrompt_{asset_key}.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/visualPrompt", "classification": "internal", "binding_keys": ["project_id", "creative_revision", "asset_key"], "retention_class": "creative-project" },
+    "Image_{asset_key}.png": { "media_type": "image/png", "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock", "classification": "internal", "binding_keys": ["project_id", "creative_revision", "asset_key"], "retention_class": "creative-project" },
+    "RawVideo_{asset_key}.mp4": { "media_type": "video/mp4", "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock", "classification": "internal", "binding_keys": ["project_id", "creative_revision", "asset_key"], "retention_class": "creative-project" },
+    "FinalSegment_{asset_key}.mp4": { "media_type": "video/mp4", "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock", "classification": "internal", "binding_keys": ["project_id", "creative_revision", "asset_key"], "retention_class": "creative-project" },
+    "MasterVideo.mp4": { "media_type": "video/mp4", "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "DeliveryManifest.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/deliveryManifest", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "QAReport.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/qa", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "QARevisionRequest.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/revision", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "PublishApproval.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/approval", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "PublishRevisionRequest.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/revision", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" },
+    "DeliveryReceipt.json": { "media_type": "application/json", "schema_ref": "schemas/artifacts.schema.json#/$defs/deliveryReceipt", "classification": "internal", "binding_keys": ["project_id", "creative_revision"], "retention_class": "creative-project" }
+  },
+  "steps": [
+    {
+      "id": "S1_creative_brief", "tool": "build_creative_brief", "type": "agent", "description": "Bounded creative Agent turns a business request into a structured candidate brief.", "stage": "brief",
+      "reads": ["project_id", "creative_revision", "brand", "product", "audience", "channel", "duration_seconds"], "consumes": [], "produces": ["CreativeBrief.json"], "writes": ["brief_hash"], "depends_on": [],
+      "side_effect_class": "pure", "ai_profile_ref": "profiles/creative-agent.json"
+    },
+    {
+      "id": "S2_storyboard_plan", "tool": "plan_storyboard", "type": "model", "description": "Generate a typed dialogue plan; streaming text is never the authoritative plan.", "stage": "plan",
+      "reads": ["project_id", "creative_revision", "duration_seconds"], "consumes": ["CreativeBrief.json"], "produces": ["StoryboardPlan.json"], "writes": ["dialogue_count"],
+      "depends_on": [{ "step_id": "S1_creative_brief", "statuses": ["completed"] }], "side_effect_class": "pure", "ai_profile_ref": "profiles/planning-model.json"
+    },
+    {
+      "id": "S3_storyboard_confirm", "tool": "review_storyboard", "type": "confirm", "description": "Dispatch a review work item bound to the plan/input snapshot.", "stage": "plan",
+      "reads": ["project_id", "creative_revision", "dialogue_count"], "consumes": ["StoryboardPlan.json"], "produces": ["StoryboardApproval.json"], "writes": ["storyboard_decision"],
+      "depends_on": [{ "step_id": "S2_storyboard_plan", "statuses": ["completed"] }], "side_effect_class": "idempotent",
+      "human_gate": { "type": "confirm", "form": "storyboard_review", "roles": ["creator", "editor"], "sla_seconds": 86400, "allowed_decisions": ["approved", "revision_requested"], "bind_to_input_hash": true, "require_reason": true, "separation_of_duties": { "exclude_step_actors": ["S1_creative_brief"], "minimum_distinct_approvers": 1 } }
+    },
+    {
+      "id": "S3b_storyboard_revision", "tool": "request_storyboard_revision", "type": "service", "description": "Close a rejected storyboard as an explicit revision outcome.", "stage": "plan",
+      "reads": ["project_id", "creative_revision", "storyboard_decision"], "consumes": ["StoryboardApproval.json", "StoryboardPlan.json"], "produces": ["StoryboardRevisionRequest.json"], "writes": [],
+      "depends_on": [{ "step_id": "S3_storyboard_confirm", "statuses": ["completed"] }], "when": { "variable": "storyboard_decision", "equals": "revision_requested" }, "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S4_consistency_references", "tool": "generate_consistency_references", "type": "model", "description": "Create one controlled visual reference pack before per-dialogue generation.", "stage": "generate",
+      "reads": ["project_id", "creative_revision", "storyboard_decision"], "consumes": ["CreativeBrief.json", "StoryboardPlan.json", "StoryboardApproval.json"], "produces": ["ConsistencyReferences.json"], "writes": [],
+      "depends_on": [{ "step_id": "S3_storyboard_confirm", "statuses": ["completed"] }], "when": { "variable": "storyboard_decision", "equals": "approved" }, "side_effect_class": "reconcilable", "ai_profile_ref": "profiles/image-model.json"
+    },
+    {
+      "id": "S5_audio_fanout", "tool": "generate_dialogue_audio", "type": "model", "description": "Meter one TTS invocation per stable dialogue asset_key.", "stage": "generate",
+      "reads": ["project_id", "creative_revision", "storyboard_decision"], "consumes": ["StoryboardPlan.json", "StoryboardApproval.json"], "produces": ["Audio_{asset_key}.wav"], "writes": [],
+      "depends_on": [{ "step_id": "S3_storyboard_confirm", "statuses": ["completed"] }], "when": { "variable": "storyboard_decision", "equals": "approved" },
+      "fanout": { "over": "StoryboardPlan.json#/dialogues", "as": "dialogue", "item_key": "asset_key", "concurrency_pool": "tts_provider", "max_concurrency": 8, "failure_policy": "fail_fast", "reduce": { "order_by": "asset_key", "require_binding_key": true } },
+      "resources": [{ "kind": "rate_limit", "pool": "tts_provider", "amount": 1 }], "side_effect_class": "reconcilable", "ai_profile_ref": "profiles/tts-model.json"
+    },
+    {
+      "id": "S6_visual_prompt_fanout", "tool": "create_visual_prompt", "type": "model", "description": "Generate a typed prompt per dialogue while the audio branch proceeds independently.", "stage": "generate",
+      "reads": ["project_id", "creative_revision", "storyboard_decision"], "consumes": ["CreativeBrief.json", "StoryboardPlan.json", "ConsistencyReferences.json"], "produces": ["VisualPrompt_{asset_key}.json"], "writes": [],
+      "depends_on": [{ "step_id": "S4_consistency_references", "statuses": ["completed"] }],
+      "fanout": { "over": "StoryboardPlan.json#/dialogues", "as": "dialogue", "item_key": "asset_key", "max_concurrency": 8, "failure_policy": "fail_fast", "reduce": { "order_by": "asset_key", "require_binding_key": true } },
+      "side_effect_class": "pure", "ai_profile_ref": "profiles/planning-model.json"
+    },
+    {
+      "id": "S7_image_fanout", "tool": "generate_dialogue_image", "type": "model", "description": "Generate images by asset_key with a bounded provider semaphore.", "stage": "generate",
+      "reads": ["project_id", "creative_revision"], "consumes": ["StoryboardPlan.json", "VisualPrompt_*.json", "ConsistencyReferences.json"], "produces": ["Image_{asset_key}.png"], "writes": [],
+      "depends_on": [{ "step_id": "S6_visual_prompt_fanout", "statuses": ["completed"] }],
+      "fanout": { "over": "StoryboardPlan.json#/dialogues", "as": "dialogue", "item_key": "asset_key", "concurrency_pool": "image_provider", "max_concurrency": 4, "failure_policy": "fail_fast", "reduce": { "order_by": "asset_key", "require_binding_key": true } },
+      "resources": [{ "kind": "semaphore", "pool": "image_provider", "amount": 1 }], "side_effect_class": "reconcilable", "ai_profile_ref": "profiles/image-model.json"
+    },
+    {
+      "id": "S8_video_fanout", "tool": "generate_dialogue_video", "type": "model", "description": "Generate raw clips by asset_key and retain provider operation identity.", "stage": "generate",
+      "reads": ["project_id", "creative_revision"], "consumes": ["StoryboardPlan.json", "Image_*.png", "VisualPrompt_*.json"], "produces": ["RawVideo_{asset_key}.mp4"], "writes": [],
+      "depends_on": [{ "step_id": "S7_image_fanout", "statuses": ["completed"] }],
+      "fanout": { "over": "StoryboardPlan.json#/dialogues", "as": "dialogue", "item_key": "asset_key", "concurrency_pool": "video_provider", "max_concurrency": 2, "failure_policy": "fail_fast", "reduce": { "order_by": "asset_key", "require_binding_key": true } },
+      "resources": [{ "kind": "semaphore", "pool": "video_provider", "amount": 1 }], "side_effect_class": "reconcilable", "ai_profile_ref": "profiles/video-model.json"
+    },
+    {
+      "id": "S9_bind_segments", "tool": "bind_final_segment", "type": "script", "description": "Typed fan-in joins audio and raw video by asset_key, never by array position.", "stage": "compose",
+      "reads": ["project_id", "creative_revision"], "consumes": ["StoryboardPlan.json", "Audio_*.wav", "RawVideo_*.mp4"], "produces": ["FinalSegment_{asset_key}.mp4"], "writes": [],
+      "depends_on": [{ "step_id": "S5_audio_fanout", "statuses": ["completed"] }, { "step_id": "S8_video_fanout", "statuses": ["completed"] }],
+      "fanout": { "over": "StoryboardPlan.json#/dialogues", "as": "dialogue", "item_key": "asset_key", "max_concurrency": 4, "failure_policy": "fail_fast", "reduce": { "order_by": "asset_key", "require_binding_key": true } },
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S10_master_compose", "tool": "compose_master_video", "type": "script", "description": "Compose only fully bound segments and emit an explicit delivery manifest.", "stage": "compose",
+      "reads": ["project_id", "creative_revision", "dialogue_count"], "consumes": ["StoryboardPlan.json", "FinalSegment_*.mp4"], "produces": ["MasterVideo.mp4", "DeliveryManifest.json"], "writes": [],
+      "depends_on": [{ "step_id": "S9_bind_segments", "statuses": ["completed"] }], "resources": [{ "kind": "mutex", "name": "master:{project_id}", "mode": "exclusive" }], "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S11_multimodal_qa", "tool": "run_multimodal_qa", "type": "model", "description": "Validate media and content; a model score remains a candidate gate fact, not publication authority.", "stage": "approve",
+      "reads": ["project_id", "creative_revision", "qa_pass_fixture"], "consumes": ["MasterVideo.mp4", "DeliveryManifest.json", "CreativeBrief.json"], "produces": ["QAReport.json"], "writes": ["qa_passed"],
+      "depends_on": [{ "step_id": "S10_master_compose", "statuses": ["completed"] }], "side_effect_class": "pure", "ai_profile_ref": "profiles/qa-model.json"
+    },
+    {
+      "id": "S12_qa_revision", "tool": "request_qa_revision", "type": "service", "description": "Close QA failure with scoped asset keys and a new-Run instruction.", "stage": "approve",
+      "reads": ["project_id", "creative_revision", "qa_passed"], "consumes": ["QAReport.json", "DeliveryManifest.json"], "produces": ["QARevisionRequest.json"], "writes": [],
+      "depends_on": [{ "step_id": "S11_multimodal_qa", "statuses": ["completed"] }], "when": { "variable": "qa_passed", "equals": false }, "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S13_publish_confirm", "tool": "review_publish", "type": "confirm", "description": "Create the final accountable publish work item only after QA passes.", "stage": "approve",
+      "reads": ["project_id", "creative_revision", "qa_passed"], "consumes": ["MasterVideo.mp4", "QAReport.json", "DeliveryManifest.json"], "produces": ["PublishApproval.json"], "writes": ["publish_decision"],
+      "depends_on": [{ "step_id": "S11_multimodal_qa", "statuses": ["completed"] }], "when": { "variable": "qa_passed", "equals": true }, "side_effect_class": "idempotent",
+      "human_gate": { "type": "confirm", "form": "final_publish_review", "roles": ["creator", "brand_reviewer"], "sla_seconds": 43200, "allowed_decisions": ["approved", "revision_requested"], "bind_to_input_hash": true, "require_reason": true, "separation_of_duties": { "exclude_step_actors": ["S1_creative_brief"], "minimum_distinct_approvers": 1 } }
+    },
+    {
+      "id": "S14_deliver", "tool": "deliver_channel_asset", "type": "service", "description": "Publish with a stable channel operation key and reconciliation path.", "stage": "deliver",
+      "reads": ["project_id", "creative_revision", "channel", "publish_decision"], "consumes": ["MasterVideo.mp4", "DeliveryManifest.json", "PublishApproval.json"], "produces": ["DeliveryReceipt.json"], "writes": ["delivered_at"],
+      "depends_on": [{ "step_id": "S13_publish_confirm", "statuses": ["completed"] }], "when": { "variable": "publish_decision", "equals": "approved" }, "side_effect_class": "reconcilable"
+    },
+    {
+      "id": "S15_publish_revision", "tool": "request_publish_revision", "type": "service", "description": "Close a brand-review revision request without treating it as an execution failure.", "stage": "deliver",
+      "reads": ["project_id", "creative_revision", "publish_decision"], "consumes": ["PublishApproval.json", "QAReport.json"], "produces": ["PublishRevisionRequest.json"], "writes": [],
+      "depends_on": [{ "step_id": "S13_publish_confirm", "statuses": ["completed"] }], "when": { "variable": "publish_decision", "equals": "revision_requested" }, "side_effect_class": "idempotent"
+    }
+  ],
+  "completion": {
+    "mode": "exactly_one_outcome",
+    "outcomes": [
+      { "id": "storyboard_revision_requested", "title": "Storyboard revision requested", "when": { "variable": "storyboard_decision", "equals": "revision_requested" }, "terminal_steps": ["S3b_storyboard_revision"], "required_artifacts": ["StoryboardRevisionRequest.json"] },
+      { "id": "qa_revision_required", "title": "QA found a scoped revision", "when": { "variable": "qa_passed", "equals": false }, "terminal_steps": ["S12_qa_revision"], "required_artifacts": ["QARevisionRequest.json"] },
+      { "id": "publish_revision_requested", "title": "Brand review requested revision", "when": { "variable": "publish_decision", "equals": "revision_requested" }, "terminal_steps": ["S15_publish_revision"], "required_artifacts": ["PublishRevisionRequest.json"] },
+      { "id": "delivered", "title": "Approved master delivered", "when": { "variable": "publish_decision", "equals": "approved" }, "terminal_steps": ["S14_deliver"], "required_artifacts": ["DeliveryReceipt.json"] }
+    ]
+  }
+}

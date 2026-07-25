@@ -1,0 +1,15 @@
+{
+  "mock": true,
+  "logical_name": "DDReport.pdf",
+  "payload": {
+    "document_type": "buyer_due_diligence_report",
+    "matter_id": "MAT-ATLAS-01",
+    "target_name": "Atlas Components Pty Ltd",
+    "scope_revision": "scope-r2",
+    "included_refs": [
+      "EvidenceIndex.json",
+      "RiskFindings.json",
+      "ProfessionalReview.json"
+    ]
+  }
+}

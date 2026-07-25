@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: opencrew-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: opencrew
+      POSTGRES_PASSWORD: opencrew
+      POSTGRES_DB: opencrew
+    ports:
+      - "5433:5432"
+    volumes:
+      - opencrew-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opencrew -d opencrew"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  opencrew-postgres:

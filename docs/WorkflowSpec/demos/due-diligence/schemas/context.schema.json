@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "additionalProperties": false,
+  "required": ["matter_id", "target_name", "scope_revision", "required_categories", "document_manifest_fixture", "review_decision"],
+  "properties": {
+    "matter_id": { "type": "string" }, "target_name": { "type": "string" }, "scope_revision": { "type": "string" },
+    "required_categories": { "type": "array", "items": { "type": "string" } },
+    "document_manifest_fixture": { "type": "array", "items": { "type": "object", "required": ["document_id", "name", "category", "page_count"] } },
+    "review_decision": { "type": ["string", "null"] }, "document_count": { "type": "integer" }, "missing_materials": { "type": "array" },
+    "inventory_complete": { "type": "boolean" }, "extracted_count": { "type": "integer" }, "finding_count": { "type": "integer" }, "report_ref": { "type": "string" }
+  }
+}

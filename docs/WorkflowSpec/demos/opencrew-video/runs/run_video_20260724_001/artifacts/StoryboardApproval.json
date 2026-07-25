@@ -1,0 +1,12 @@
+{
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "editor_12",
+    "roles": [
+      "editor"
+    ]
+  },
+  "reason": "Dialogue timing and brand claim scope approved for generation.",
+  "expected_revision": 0
+}

@@ -1,0 +1,12 @@
+{
+  "entity_id": "BANK01",
+  "period": "2026-06",
+  "issues": [
+    {
+      "code": "PAYMENT_POPULATION_BREAK",
+      "severity": "high",
+      "rate": 0.12
+    }
+  ],
+  "status": "open"
+}

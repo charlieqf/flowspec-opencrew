@@ -1,0 +1,69 @@
+{
+  "schema_version": "hyperframe_templates_0.1",
+  "business": "live_commerce",
+  "canvas": { "width": 1080, "height": 1920 },
+  "note": "4 套直播带货标题/字幕动效模板。背景为占位渐变,生产时底层替换为真实视频,模板作为叠加层。文案字段为参数化目标,当前 index.html 内为示例值。全部离线可渲染(纯 CSS 或本地 vendored GSAP,不依赖 CDN)。",
+  "templates": [
+    {
+      "id": "price_card",
+      "name": "爆款价签",
+      "use_case": "主推商品价格冲击",
+      "animation": "css_pop",
+      "needs_gsap": false,
+      "preview": { "mp4": "previews/price_card.mp4", "gif": "previews/price_card.gif" },
+      "params": {
+        "product_name": "【爆款】玻尿酸保湿面膜 25片",
+        "badge_text": "限时价",
+        "original_price": "¥199",
+        "sale_price": "59",
+        "save_text": "直降 140 元 · 拍2件再减20"
+      }
+    },
+    {
+      "id": "flash_sale",
+      "name": "限时秒杀",
+      "use_case": "制造紧迫感逼单",
+      "animation": "css_pulse",
+      "needs_gsap": false,
+      "preview": { "mp4": "previews/flash_sale.mp4", "gif": "previews/flash_sale.gif" },
+      "params": {
+        "badge_main": "限时",
+        "badge_sub": "秒杀",
+        "countdown_label": "距结束仅剩",
+        "countdown": "00:03:58",
+        "stock_text": "⚠ 库存仅剩 12 件,手慢无!"
+      }
+    },
+    {
+      "id": "selling_points",
+      "name": "卖点字幕",
+      "use_case": "念卖点建立信任",
+      "animation": "css_stagger_in",
+      "needs_gsap": false,
+      "preview": { "mp4": "previews/selling_points.mp4", "gif": "previews/selling_points.gif" },
+      "params": {
+        "title": "为什么必买这一款?",
+        "points": [
+          { "text": "假一赔十", "highlight": "正品保障" },
+          { "text": "今日下单", "highlight": "买一送一" },
+          { "text": "顺丰包邮 · 7天无理由", "highlight": "" }
+        ]
+      }
+    },
+    {
+      "id": "order_cta",
+      "name": "下单引导",
+      "use_case": "引导小黄车成交",
+      "animation": "gsap_slide_bounce",
+      "needs_gsap": true,
+      "gsap_local": "order_cta/gsap.min.js",
+      "preview": { "mp4": "previews/order_cta.mp4", "gif": "previews/order_cta.gif" },
+      "params": {
+        "room_name": "423 严选直播间",
+        "room_status": "● 直播中 1.2万人在看",
+        "cta_text": "点击下方小黄车下单 ↓",
+        "show_cart": true
+      }
+    }
+  ]
+}

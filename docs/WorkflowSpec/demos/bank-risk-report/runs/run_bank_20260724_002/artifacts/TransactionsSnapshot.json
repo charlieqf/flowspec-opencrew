@@ -1,0 +1,7 @@
+{
+  "entity_id": "BANK01",
+  "period": "2026-06",
+  "data_cut_id": "cut-20260724-b",
+  "row_count": 128420,
+  "snapshot_hash": "mock:transactions:cut-20260724-b:128420"
+}

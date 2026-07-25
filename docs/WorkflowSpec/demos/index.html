@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FlowSpec · 四场景可执行 Demo</title><style>
+:root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color-scheme:light;--bg:#f3f6f8;--line:#d5dfe3;--text:#182d36;--muted:#526a74}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#fbfcfd,#f3f6f8 520px);color:var(--text)}
+main{width:min(1180px,calc(100% - 40px));margin:auto;padding:52px 0}
+.back{display:inline-flex;margin-bottom:30px;color:var(--muted);text-decoration:none;font-size:12px}
+.back:hover{color:var(--text)}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#087f6d;font-weight:800}
+h1{max-width:1040px;margin:14px 0 20px;font-size:clamp(38px,4vw,54px);line-height:1.08;letter-spacing:-.04em}
+header p{max-width:900px;color:var(--muted);font-size:16px;line-height:1.75}
+.boundary{max-width:1040px;margin-top:20px;padding:15px 17px;border:1px solid #d7e1e4;border-radius:13px;background:#fff;color:var(--muted);font-size:14px;line-height:1.7}
+.boundary strong{color:var(--text)}
+.boundary .limit{color:#875a05}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:38px}
+.card{--accent:#2d8f80;position:relative;min-height:275px;border:1px solid var(--line);border-radius:17px;padding:25px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 5%,#fff),#fff);color:var(--text);text-decoration:none;overflow:hidden;transition:.25s;box-shadow:0 2px 8px rgba(22,47,58,.045)}
+.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 65%,transparent);box-shadow:0 8px 22px rgba(22,47,58,.09)}
+.number{font-size:11px;color:var(--accent);font-weight:900;letter-spacing:.13em}
+.card h2{font-size:27px;line-height:1.16;letter-spacing:-.03em;margin:34px 0 11px;max-width:490px}
+.card p{font-size:14px;line-height:1.7;color:var(--muted);max-width:510px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:20px}
+.chips span{font-size:10.5px;border:1px solid var(--line);padding:5px 8px;border-radius:999px;background:#fff;color:#506872}
+.arrow{position:absolute;right:24px;top:22px;width:38px;height:38px;border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:18px}
+.glow{display:none}
+.foot{border-top:1px solid var(--line);margin-top:50px;padding-top:24px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:20px}
+@media(max-width:780px){main{width:min(100% - 24px,1180px);padding-top:34px}
+.back{margin-bottom:28px}
+.grid{grid-template-columns:1fr}
+.card{min-height:0}
+.card h2{font-size:25px}
+h1{font-size:34px}
+.foot{display:block}
+.foot span{display:block;margin-top:8px}
+}
+</style></head><body><main><header><a class="back" href="../index.html">← 返回 FlowSpec 规范综述</a><p class="eyebrow">FlowSpec v0.4 · executable validation set</p><h1>四种业务，同一套可解释的编排契约</h1><p>每个场景按同一阅读顺序展示业务结果、中文步骤与依赖箭头、两次 Run 修订、人工责任、产物血缘、日志物理落点和逐笔成本；决策层可以理解控制边界，开发团队可以继续下钻机器契约。</p><aside class="boundary"><strong>它证明：</strong>契约自洽、拓扑闭合、确定性重建和 UI 投影一致。 <strong class="limit">它不证明：</strong>分布式 claim / lease / fencing、真实并发、进程崩溃恢复、通用范围执行或 reconcile worker 已完成；这些仍是 proposed 能力。</aside></header><section class="grid"><a class="card" href="loan-approval/index.html" style="--accent:#087f6d"><span class="number">SCENARIO 01</span><span class="arrow">↗</span><h2>消费贷审批 · 从证据到放款</h2><p>展示并行核验、可解释决策、人审 work item、拒绝/退回修改/放款三种 outcome，以及跨 Run 修订链。</p><div class="chips"><span>12 个步骤</span><span>2 次 Run</span><span>3 种业务结果</span></div><span class="glow"></span></a><a class="card" href="bank-risk-report/index.html" style="--accent:#9a5b05"><span class="number">SCENARIO 02</span><span class="arrow">↗</span><h2>银行风险报告 · 冻结数据到签署分发</h2><p>展示多源汇合、DQ waiver、指标与叙述分离、签署审批、可对账分发，以及数据重述 Run。</p><div class="chips"><span>15 个步骤</span><span>2 次 Run</span><span>3 种业务结果</span></div><span class="glow"></span></a><a class="card" href="due-diligence/index.html" style="--accent:#6f52b5"><span class="number">SCENARIO 03</span><span class="arrow">↗</span><h2>交易尽调 · 万份材料到可追溯结论</h2><p>展示补件修订、稳定 item key fanout、逐项用量、法律/财务并行复核、证据引用和专业人员定稿。</p><div class="chips"><span>10 个步骤</span><span>2 次 Run</span><span>3 种业务结果</span></div><span class="glow"></span></a><a class="card" href="opencrew-video/index.html" style="--accent:#ad3656"><span class="number">SCENARIO 04</span><span class="arrow">↗</span><h2>OpenCrew AI 视频 · 创意到受控发布</h2><p>展示 Agent 内循环、分镜确认、音频/画面并行 fanout、按 asset key 汇合、多模态成本、QA 返工与发布批准。</p><div class="chips"><span>16 个步骤</span><span>2 次 Run</span><span>4 种业务结果</span></div><span class="glow"></span></a></section><footer class="foot"><strong>OpenCrew / docs / WorkflowSpec / demos</strong><span>Process → Tool → Run → Artifact → Event → Usage · 2026-07-24</span></footer></main></body></html>

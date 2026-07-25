@@ -1,0 +1,6 @@
+{
+  "application_id": "APP-00123",
+  "verified_income": 97000.0,
+  "source": "mock-payroll-api",
+  "match": true
+}

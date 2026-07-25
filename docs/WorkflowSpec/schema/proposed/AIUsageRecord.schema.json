@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/AIUsageRecord.schema.json",
+  "title": "FlowSpec AI Usage Record (PROPOSED)",
+  "description": "One immutable usage/cost observation for one billable model invocation. Step, Run, session and tenant costs are derived aggregates, not replacements for this record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "usage_record_id", "operation_id", "operation_idempotency_key", "observation_idempotency_key",
+    "model_invocation_id", "run_id", "step_id", "step_attempt_id", "step_attempt_no",
+    "profile_snapshot", "provider", "model_id", "modality", "invocation_status",
+    "usage", "cost", "started_at", "finished_at", "recorded_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.2" },
+    "usage_record_id": { "type": "string", "minLength": 1 },
+    "operation_id": { "type": "string", "minLength": 1 },
+    "operation_idempotency_key": {
+      "description": "Stable across transport retries and superseding observations for the same billable operation.",
+      "type": "string", "minLength": 1
+    },
+    "observation_idempotency_key": {
+      "description": "Unique for this immutable observation/correction so a superseding record can coexist with the original.",
+      "type": "string", "minLength": 1
+    },
+    "model_invocation_id": { "type": "string", "minLength": 1 },
+    "agent_execution_id": { "type": ["string", "null"] },
+    "run_id": { "type": "string", "minLength": 1 },
+    "step_id": { "type": "string", "minLength": 1 },
+    "step_attempt_id": {
+      "description": "Stable join key for the exact Step Attempt or fanout-item Attempt that issued this invocation; attempt_no alone is only a display ordinal.",
+      "type": "string", "minLength": 1
+    },
+    "step_attempt_no": { "type": "integer", "minimum": 1 },
+    "profile_snapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profile_id", "version", "digest"],
+      "properties": {
+        "profile_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "provider": { "type": "string", "minLength": 1 },
+    "model_id": { "type": "string", "minLength": 1 },
+    "model_revision": { "type": ["string", "null"] },
+    "deployment_id": { "type": ["string", "null"] },
+    "region": { "type": ["string", "null"] },
+    "modality": { "enum": ["text", "vision", "audio", "video", "multimodal"] },
+    "invocation_status": { "enum": ["completed", "failed", "ambiguous", "cancelled"] },
+    "provider_request_id": { "type": ["string", "null"] },
+    "usage": { "$ref": "#/$defs/usage" },
+    "cost": { "$ref": "#/$defs/moneyObservation" },
+    "charge": {
+      "description": "Optional customer/internal charge. It is distinct from provider cost and must never overwrite it.",
+      "$ref": "#/$defs/moneyObservation"
+    },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": ["string", "null"], "format": "date-time" },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "supersedes_usage_record_id": { "type": ["string", "null"] }
+  },
+  "$defs": {
+    "nonNegativeInteger": { "type": "integer", "minimum": 0 },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["measurement_status"],
+      "properties": {
+        "measurement_status": { "enum": ["provider_reported", "locally_measured", "estimated", "unavailable"] },
+        "input_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "output_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "cached_input_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "cache_write_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "reasoning_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "total_tokens": { "$ref": "#/$defs/nonNegativeInteger" },
+        "provider_units": {
+          "description": "Provider/modality-specific non-negative units such as image_count, audio_seconds or video_seconds.",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "number", "minimum": 0 }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "measurement_status": { "const": "unavailable" } }, "required": ["measurement_status"] },
+          "then": {
+            "not": {
+              "anyOf": [
+                { "required": ["input_tokens"] }, { "required": ["output_tokens"] },
+                { "required": ["cached_input_tokens"] }, { "required": ["cache_write_tokens"] },
+                { "required": ["reasoning_tokens"] }, { "required": ["total_tokens"] },
+                { "required": ["provider_units"] }
+              ]
+            }
+          },
+          "else": {
+            "anyOf": [
+              { "required": ["input_tokens"] }, { "required": ["output_tokens"] },
+              { "required": ["cached_input_tokens"] }, { "required": ["cache_write_tokens"] },
+              { "required": ["reasoning_tokens"] }, { "required": ["total_tokens"] },
+              { "required": ["provider_units"] }
+            ]
+          }
+        }
+      ]
+    },
+    "moneyObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["unknown", "estimated", "provisional", "final"] },
+        "amount": {
+          "description": "Non-negative decimal string; never a binary floating-point amount.",
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+        },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "source": { "enum": ["provider_reported", "price_snapshot_calculated", "tariff_snapshot_calculated", "invoice_reconciled"] },
+        "price_snapshot_ref": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "enum": ["estimated", "provisional", "final"] } }, "required": ["status"] },
+          "then": { "required": ["amount", "currency", "source"] },
+          "else": {
+            "not": { "anyOf": [ { "required": ["amount"] }, { "required": ["currency"] }, { "required": ["source"] } ] }
+          }
+        },
+        {
+          "if": { "properties": { "source": { "enum": ["price_snapshot_calculated", "tariff_snapshot_calculated"] } }, "required": ["source"] },
+          "then": { "required": ["price_snapshot_ref"] }
+        },
+        {
+          "if": { "properties": { "status": { "const": "final" } }, "required": ["status"] },
+          "then": { "properties": { "source": { "enum": ["provider_reported", "invoice_reconciled"] } } }
+        },
+        {
+          "if": { "properties": { "source": { "enum": ["price_snapshot_calculated", "tariff_snapshot_calculated"] } }, "required": ["source"] },
+          "then": { "properties": { "status": { "enum": ["estimated", "provisional"] } } }
+        }
+      ]
+    }
+  }
+}

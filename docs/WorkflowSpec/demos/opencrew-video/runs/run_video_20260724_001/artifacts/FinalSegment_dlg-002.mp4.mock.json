@@ -1,0 +1,16 @@
+{
+  "mock": true,
+  "logical_name": "FinalSegment_dlg-002.mp4",
+  "payload": {
+    "asset_key": "dlg-002",
+    "kind": "final_segment",
+    "duration_seconds": 8.0,
+    "provider_operation_key": "local-bind:run_video_20260724_001:dlg-002",
+    "bound_refs": [
+      "Audio_dlg-002.wav",
+      "RawVideo_dlg-002.mp4"
+    ],
+    "source_video_duration": 8.0,
+    "mock": true
+  }
+}

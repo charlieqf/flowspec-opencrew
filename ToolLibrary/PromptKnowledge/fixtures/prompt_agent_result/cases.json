@@ -1,0 +1,42 @@
+[
+  {
+    "name": "valid_complete",
+    "input": "Notes before the card.\n<PROMPT_AGENT_RESULT>{\"mode\":\"optimize\",\"summary\":\"Tightened structure.\",\"issues\":[{\"severity\":\"medium\",\"span\":\"make it good\",\"problem\":\"Too vague.\",\"why_it_matters\":\"The model has no visual target.\",\"suggestion\":\"Name subject, action, camera, and constraints.\"}],\"revised_prompt\":\"A stable product shot with clear subject and lighting.\",\"negative_prompt\":\"blur, artifacts\",\"changes\":[\"Added subject and camera constraints.\"],\"model_notes\":[\"Keep reference roles explicit.\"],\"used_sources\":[{\"doc_id\":\"seed_prompt_structure_001\",\"title\":\"Prompt structure checklist\",\"trust_level\":\"local_experience\",\"reason\":\"Used the core field checklist.\"}]}</PROMPT_AGENT_RESULT>",
+    "expected_parse": {
+      "mode": "optimize",
+      "summary": "Tightened structure.",
+      "used_source_doc_ids": ["seed_prompt_structure_001"]
+    }
+  },
+  {
+    "name": "streaming_partial",
+    "input": "Partial stream <PROMPT_AGENT_RESULT>{\"mode\":\"optimize\",\"summary\":\"not closed\"",
+    "expected_parse": null
+  },
+  {
+    "name": "invalid_json",
+    "input": "<PROMPT_AGENT_RESULT>{\"mode\":\"optimize\",</PROMPT_AGENT_RESULT>",
+    "expected_parse": null
+  },
+  {
+    "name": "duplicate_tags_take_last_valid",
+    "input": "<PROMPT_AGENT_RESULT>{\"mode\":\"critique\",\"summary\":\"first\",\"issues\":[],\"revised_prompt\":\"\",\"negative_prompt\":\"\",\"changes\":[],\"model_notes\":[],\"used_sources\":[]}</PROMPT_AGENT_RESULT>\n<PROMPT_AGENT_RESULT>{\"mode\":\"optimize\",\"summary\":\"second\",\"issues\":[],\"revised_prompt\":\"final prompt\",\"negative_prompt\":\"\",\"changes\":[],\"model_notes\":[],\"used_sources\":[]}</PROMPT_AGENT_RESULT>",
+    "expected_parse": {
+      "mode": "optimize",
+      "summary": "second",
+      "revised_prompt": "final prompt"
+    }
+  },
+  {
+    "name": "outside_doc_id_backend_drops",
+    "input": "<PROMPT_AGENT_RESULT>{\"mode\":\"optimize\",\"summary\":\"has outside source\",\"issues\":[],\"revised_prompt\":\"prompt\",\"negative_prompt\":\"\",\"changes\":[],\"model_notes\":[],\"used_sources\":[{\"doc_id\":\"external_unknown_001\",\"title\":\"Unknown\",\"trust_level\":\"community_article\",\"reason\":\"Not in retrieval.\"}]}</PROMPT_AGENT_RESULT>",
+    "expected_parse": {
+      "mode": "optimize",
+      "summary": "has outside source",
+      "used_source_doc_ids": ["external_unknown_001"]
+    },
+    "expected_backend_after_validation": {
+      "used_source_doc_ids": []
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "decision": "rejected",
+  "reason": "Unexplained source-system break exceeds the waiver threshold.",
+  "actor": {
+    "type": "user",
+    "id": "finance_controller_4",
+    "roles": [
+      "finance_controller"
+    ]
+  }
+}

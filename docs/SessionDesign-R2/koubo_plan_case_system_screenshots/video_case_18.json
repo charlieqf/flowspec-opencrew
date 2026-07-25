@@ -1,0 +1,58 @@
+{
+  "suite": "video",
+  "number": 18,
+  "title": "Case 18：只生成 Shot2，继承 Shot1 已存在尾帧",
+  "target_type": "shot",
+  "shot_id": "shot_002",
+  "scene_id": "scene_001",
+  "max_seconds": 4,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "shot_count": 1,
+    "scene_count": 2,
+    "dialogue_count": 6,
+    "segment_count": 4,
+    "blocked_segment_count": 0,
+    "skipped_scene_count": 0,
+    "blocked_scene_count": 0,
+    "need_audio_count": 6,
+    "need_image_prompt_count": 0,
+    "need_image_count": 0,
+    "need_video_prompt_count": 4,
+    "need_video_count": 4,
+    "segment_audio_count": 4,
+    "need_lipsync_count": 4,
+    "need_audio_video_sync_count": 0,
+    "need_sync_count": 4
+  },
+  "expected_count": 4,
+  "actual": {
+    "actualCount": 4,
+    "dpr": 1,
+    "rect": {
+      "height": 494.25,
+      "left": 650,
+      "top": 206.375,
+      "width": 620
+    },
+    "segmentRows": [
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 1\nScene 2\nSegment 4",
+    "text": "生成计划\nShot 1\nScene 2\nSegment 4\n0/4\n0/4\n0/4\n0/4\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_case_18.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 194, 1282, 712]}"
+}

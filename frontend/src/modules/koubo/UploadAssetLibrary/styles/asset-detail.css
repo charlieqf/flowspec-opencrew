@@ -1,0 +1,6 @@
+.ual-asset-detail {
+  border-top: 1px solid var(--ual-border);
+  display: grid;
+  gap: 8px;
+  padding: 12px 16px;
+}

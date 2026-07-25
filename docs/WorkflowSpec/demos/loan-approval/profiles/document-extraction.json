@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "loan_document_extraction",
+  "version": "1.0.0",
+  "description": "Mock-only profile demonstrating the policy snapshot required by an executable model Step.",
+  "kind": "model",
+  "model": {
+    "provider": "mock-provider",
+    "model_id": "mock-document-extractor",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "runtime": "flowspec-mock",
+    "modality": "text",
+    "selection_source": "explicit",
+    "fallback_policy": "deny"
+  },
+  "budget": {
+    "max_wall_seconds": 30,
+    "max_input_tokens": 8000,
+    "max_output_tokens": 1000,
+    "max_cost": "0.05",
+    "currency": "USD"
+  },
+  "data_policy": {
+    "sensitivity": "restricted",
+    "external_transfer": "denied",
+    "redaction_required": true,
+    "residency": ["local"],
+    "provider_retention": "denied",
+    "provider_training": "denied",
+    "purpose": "loan application evidence extraction",
+    "deletion_policy_ref": "policy://credit-retention/v1"
+  },
+  "output": {
+    "schema_ref": "schemas/artifacts.schema.json#/$defs/applicationEvidence",
+    "validation": "strict",
+    "max_repair_attempts": 1,
+    "safety_policy_ref": "policy://credit-ai-safety/v1",
+    "moderation_required": false,
+    "grounding_required": true,
+    "evidence_required": true
+  },
+  "streaming": { "enabled": false, "partial_output_authoritative": false }
+}

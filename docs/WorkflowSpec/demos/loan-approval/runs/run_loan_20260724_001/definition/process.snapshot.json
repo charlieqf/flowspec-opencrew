@@ -1,0 +1,620 @@
+{
+  "schema_version": "0.4",
+  "contract_level": "executable",
+  "process_id": "loan_approval",
+  "version": "1.2.0",
+  "title": "个人消费贷审批",
+  "description": "A bounded Run DAG for evidence collection, policy decision, optional human review, offer acceptance, and disbursement or rejection.",
+  "tool_registry_ref": "tool_registry.json",
+  "context_schema_ref": "schemas/context.schema.json",
+  "branch_closure": "skip_unreachable",
+  "failure_propagation": "stop_run",
+  "run_budget": {
+    "max_cost": "2.00",
+    "currency": "USD",
+    "reservation_policy": "required"
+  },
+  "resource_pools": {
+    "credit_bureau": {
+      "type": "rate_limit",
+      "per_minute": 60
+    }
+  },
+  "defaults": {
+    "retry": {
+      "policy": "fail_fast"
+    },
+    "on_error": [],
+    "resources": []
+  },
+  "stages": [
+    "intake",
+    "verification",
+    "decision",
+    "fulfilment"
+  ],
+  "artifact_contracts": {
+    "ValidatedApplication.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/validatedApplication",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "ApplicationEvidence.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/applicationEvidence",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "CreditReport.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/creditReport",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "FraudSignals.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/fraudSignals",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "IncomeVerification.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/incomeVerification",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "RiskAssessment.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/riskAssessment",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "ApprovalPlan.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approvalPlan",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "HumanReviewDecision.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/humanReview",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "FinalDecision.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/finalDecision",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "AcceptedOffer.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/acceptedOffer",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "DisbursementReceipt.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/disbursement",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "RejectionNotice.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/rejection",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    },
+    "ApplicationRevisionRequest.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/applicationRevisionRequest",
+      "classification": "restricted",
+      "binding_keys": [
+        "application_id"
+      ],
+      "retention_class": "credit-7y"
+    }
+  },
+  "steps": [
+    {
+      "id": "S1_validate_application",
+      "tool": "validate_application",
+      "type": "script",
+      "description": "Validate required fields without altering source facts.",
+      "stage": "intake",
+      "reads": [
+        "application_id",
+        "applicant_name",
+        "loan_amount",
+        "stated_income"
+      ],
+      "consumes": [],
+      "produces": [
+        "ValidatedApplication.json"
+      ],
+      "writes": [
+        "application_valid"
+      ],
+      "depends_on": [],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S2_extract_evidence",
+      "tool": "extract_application_evidence",
+      "type": "model",
+      "description": "Mock an LLM extraction while retaining evidence spans and typed usage.",
+      "stage": "intake",
+      "reads": [
+        "application_id",
+        "document_revision"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "ApplicationEvidence.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S1_validate_application",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure",
+      "ai_profile_ref": "profiles/document-extraction.json"
+    },
+    {
+      "id": "S3a_credit_bureau",
+      "tool": "pull_credit_report",
+      "type": "service",
+      "description": "Use a stable enquiry key; an ambiguous response would reconcile rather than blindly retry.",
+      "stage": "verification",
+      "reads": [
+        "application_id",
+        "credit_score_fixture"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "CreditReport.json"
+      ],
+      "writes": [
+        "credit_score"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S1_validate_application",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "kind": "rate_limit",
+          "pool": "credit_bureau",
+          "amount": 1
+        }
+      ],
+      "side_effect_class": "reconcilable"
+    },
+    {
+      "id": "S3b_fraud_screen",
+      "tool": "screen_fraud",
+      "type": "script",
+      "description": "Deterministic fraud policy output, separate from the AI extraction.",
+      "stage": "verification",
+      "reads": [
+        "application_id",
+        "fraud_score_fixture"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "FraudSignals.json"
+      ],
+      "writes": [
+        "fraud_flag"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S1_validate_application",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S3c_income_verify",
+      "tool": "verify_income",
+      "type": "service",
+      "description": "Verify stated income against the supplied mock evidence.",
+      "stage": "verification",
+      "reads": [
+        "application_id",
+        "verified_income_fixture"
+      ],
+      "consumes": [
+        "ApplicationEvidence.json"
+      ],
+      "produces": [
+        "IncomeVerification.json"
+      ],
+      "writes": [
+        "verified_income"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S2_extract_evidence",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S4_risk_decision",
+      "tool": "calculate_risk_decision",
+      "type": "script",
+      "description": "Join the parallel evidence chain into an explainable proposed decision.",
+      "stage": "decision",
+      "reads": [
+        "credit_score",
+        "fraud_flag",
+        "verified_income",
+        "loan_amount"
+      ],
+      "consumes": [
+        "CreditReport.json",
+        "FraudSignals.json",
+        "IncomeVerification.json"
+      ],
+      "produces": [
+        "RiskAssessment.json",
+        "ApprovalPlan.json"
+      ],
+      "writes": [
+        "risk_score",
+        "proposed_decision",
+        "review_required"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S3a_credit_bureau",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S3b_fraud_screen",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S3c_income_verify",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S5_human_review",
+      "tool": "review_credit_decision",
+      "type": "confirm",
+      "description": "Dispatch a durable work item only for the manual-review band.",
+      "stage": "decision",
+      "reads": [
+        "application_id",
+        "proposed_decision"
+      ],
+      "consumes": [
+        "ApprovalPlan.json",
+        "RiskAssessment.json"
+      ],
+      "produces": [
+        "HumanReviewDecision.json"
+      ],
+      "writes": [
+        "review_decision"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S4_risk_decision",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "review_required",
+        "equals": true
+      },
+      "side_effect_class": "idempotent",
+      "human_gate": {
+        "type": "confirm",
+        "form": "credit_manual_review",
+        "roles": [
+          "risk_officer"
+        ],
+        "sla_seconds": 86400,
+        "allowed_decisions": [
+          "approved",
+          "rejected",
+          "revision_requested"
+        ],
+        "bind_to_input_hash": true,
+        "require_reason": true,
+        "separation_of_duties": {
+          "exclude_step_actors": [
+            "S4_risk_decision"
+          ],
+          "minimum_distinct_approvers": 1
+        }
+      }
+    },
+    {
+      "id": "S6_finalize_decision",
+      "tool": "finalize_credit_decision",
+      "type": "script",
+      "description": "Reduce the proposed and optional review decisions into the sole authoritative decision field.",
+      "stage": "decision",
+      "reads": [
+        "proposed_decision",
+        "review_required",
+        "review_decision"
+      ],
+      "consumes": [
+        "ApprovalPlan.json"
+      ],
+      "produces": [
+        "FinalDecision.json"
+      ],
+      "writes": [
+        "decision"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S5_human_review",
+          "statuses": [
+            "completed",
+            "skipped"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S7_offer_acceptance",
+      "tool": "capture_offer_acceptance",
+      "type": "suspend",
+      "description": "Pause on a signed customer callback and bind acceptance to this decision revision.",
+      "stage": "fulfilment",
+      "reads": [
+        "application_id",
+        "decision",
+        "loan_amount"
+      ],
+      "consumes": [
+        "FinalDecision.json"
+      ],
+      "produces": [
+        "AcceptedOffer.json"
+      ],
+      "writes": [
+        "offer_accepted_at"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S6_finalize_decision",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "decision",
+        "equals": "approved"
+      },
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S8_disburse",
+      "tool": "disburse_funds",
+      "type": "service",
+      "description": "A reconcilable ledger side effect with a business operation key.",
+      "stage": "fulfilment",
+      "reads": [
+        "application_id",
+        "loan_amount",
+        "offer_accepted_at"
+      ],
+      "consumes": [
+        "AcceptedOffer.json"
+      ],
+      "produces": [
+        "DisbursementReceipt.json"
+      ],
+      "writes": [
+        "disbursed_at"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S7_offer_acceptance",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "decision",
+        "equals": "approved"
+      },
+      "resources": [
+        {
+          "kind": "mutex",
+          "name": "ledger:{application_id}",
+          "mode": "exclusive"
+        }
+      ],
+      "side_effect_class": "reconcilable"
+    },
+    {
+      "id": "S9_rejection_notice",
+      "tool": "issue_rejection_notice",
+      "type": "service",
+      "description": "Close the rejected outcome with an adverse-action reason artifact.",
+      "stage": "fulfilment",
+      "reads": [
+        "application_id",
+        "decision"
+      ],
+      "consumes": [
+        "FinalDecision.json"
+      ],
+      "produces": [
+        "RejectionNotice.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S6_finalize_decision",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "decision",
+        "equals": "rejected"
+      },
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S10_request_application_revision",
+      "tool": "request_application_revision",
+      "type": "service",
+      "description": "Close a manual request for corrected application evidence as an explicit business outcome.",
+      "stage": "fulfilment",
+      "reads": [
+        "application_id",
+        "decision"
+      ],
+      "consumes": [
+        "FinalDecision.json",
+        "HumanReviewDecision.json"
+      ],
+      "produces": [
+        "ApplicationRevisionRequest.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S6_finalize_decision",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "decision",
+        "equals": "revision_requested"
+      },
+      "side_effect_class": "idempotent"
+    }
+  ],
+  "completion": {
+    "mode": "exactly_one_outcome",
+    "outcomes": [
+      {
+        "id": "approved_and_disbursed",
+        "title": "Approved, accepted, and disbursed",
+        "when": {
+          "variable": "decision",
+          "equals": "approved"
+        },
+        "terminal_steps": [
+          "S8_disburse"
+        ],
+        "required_artifacts": [
+          "DisbursementReceipt.json"
+        ]
+      },
+      {
+        "id": "rejected_with_notice",
+        "title": "Rejected with a traceable notice",
+        "when": {
+          "variable": "decision",
+          "equals": "rejected"
+        },
+        "terminal_steps": [
+          "S9_rejection_notice"
+        ],
+        "required_artifacts": [
+          "RejectionNotice.json"
+        ]
+      },
+      {
+        "id": "application_revision_requested",
+        "title": "Application evidence revision requested",
+        "when": {
+          "variable": "decision",
+          "equals": "revision_requested"
+        },
+        "terminal_steps": [
+          "S10_request_application_revision"
+        ],
+        "required_artifacts": [
+          "ApplicationRevisionRequest.json"
+        ]
+      }
+    ]
+  }
+}

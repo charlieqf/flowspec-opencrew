@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "probe": "gemini_omni_live_probe",
+  "executed_at": "2026-07-22T23:47:52.460415+00:00",
+  "mode": "chain",
+  "model": "gemini-omni-flash-preview",
+  "evidence_scope": "paid_interactions_live_probe",
+  "request": {
+    "method": "POST",
+    "url": "https://generativelanguage.googleapis.com/v1beta/interactions",
+    "scenario": "two_turn_three_second_state_chain_no_customer_media",
+    "response_format": {
+      "type": "video",
+      "delivery": "inline",
+      "aspect_ratio": "16:9",
+      "duration": "3s"
+    },
+    "generation_config": {
+      "video_config": {
+        "task": "text_to_video"
+      }
+    },
+    "store": true,
+    "background": false,
+    "paid_generation": true,
+    "budget": {
+      "max_usd": 1.2,
+      "max_calls": 2,
+      "max_total_seconds": 6,
+      "estimated_usd": 1.2,
+      "calls_used": 2,
+      "requested_seconds": 6
+    }
+  },
+  "media_artifacts": [
+    {
+      "file": "turn-1-blue-circle-1.mp4",
+      "bytes": 765076,
+      "sha256": "6028782a6e202161fcef5a1e13a9cc2c2873c06a3d75d51de724fde365e130c6"
+    },
+    {
+      "file": "turn-2-green-circle-1.mp4",
+      "bytes": 775145,
+      "sha256": "5d0ddd9af8ba575c97889695692bb5f65efe081be530693b4405394ec09764ba"
+    }
+  ],
+  "response_projection": {
+    "http_status": 200,
+    "status": "completed",
+    "model": "gemini-omni-flash-preview",
+    "interaction_id_present": true,
+    "video_part_count": 1,
+    "has_uri_video": false,
+    "inline_video_bytes": [
+      765076
+    ],
+    "inline_video_sha256": [
+      "6028782a6e202161fcef5a1e13a9cc2c2873c06a3d75d51de724fde365e130c6"
+    ],
+    "error_status": null,
+    "error_message": null
+  },
+  "continuation": {
+    "request_projection": {
+      "scenario": "change_blue_circle_to_green_from_first_turn",
+      "previous_interaction_id_present": true,
+      "generation_config_present": false,
+      "store": true,
+      "background": false
+    },
+    "response_projection": {
+      "http_status": 200,
+      "status": "completed",
+      "model": "gemini-omni-flash-preview",
+      "interaction_id_present": true,
+      "video_part_count": 1,
+      "has_uri_video": false,
+      "inline_video_bytes": [
+        775145
+      ],
+      "inline_video_sha256": [
+        "5d0ddd9af8ba575c97889695692bb5f65efe081be530693b4405394ec09764ba"
+      ],
+      "error_status": null,
+      "error_message": null
+    },
+    "ok": true
+  },
+  "ok": true,
+  "cleanup": [
+    {
+      "http_status": 200,
+      "deleted": true,
+      "error_status": null,
+      "error_message": null
+    },
+    {
+      "http_status": 200,
+      "deleted": true,
+      "error_status": null,
+      "error_message": null
+    }
+  ],
+  "interactions_endpoint_proven": true
+}

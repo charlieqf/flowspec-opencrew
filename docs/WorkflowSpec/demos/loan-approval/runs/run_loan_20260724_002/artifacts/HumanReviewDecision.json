@@ -1,0 +1,13 @@
+{
+  "application_id": "APP-00123",
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "risk_officer_17",
+    "roles": [
+      "risk_officer"
+    ]
+  },
+  "reason": "Corrected bureau file and verified serviceability support approval.",
+  "expected_revision": 0
+}

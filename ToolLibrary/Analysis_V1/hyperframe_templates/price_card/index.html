@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1920px;overflow:hidden;
+    background:linear-gradient(160deg,#23271f 0%,#14160f 100%);
+    font-family:"PingFang SC","Hiragino Sans GB",sans-serif;}
+  /* 商品名:细体、宽字距 */
+  .pname{position:absolute;top:150px;left:80px;right:80px;text-align:center;
+    color:#f3ead8;font-size:46px;font-weight:300;letter-spacing:4px;}
+  .pname .line{display:inline-block;width:46px;height:1px;background:#c9a86a;vertical-align:middle;margin:0 22px;}
+  /* 价格卡:米白磨砂 + 细金边,弹入克制 */
+  .pricecard{position:absolute;left:90px;right:90px;bottom:250px;
+    background:rgba(245,239,226,.94);border:1px solid #c9a86a;border-radius:18px;padding:38px 44px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    transform:translateY(30px);opacity:0;animation:rise .7s cubic-bezier(.22,.9,.3,1) forwards;}
+  @keyframes rise{to{transform:translateY(0);opacity:1;}}
+  .tag{position:absolute;top:-22px;left:40px;background:#1f3d2f;color:#c9a86a;font-size:26px;letter-spacing:4px;
+    padding:8px 22px;border-radius:4px;border:1px solid #c9a86a;}
+  .row{display:flex;align-items:baseline;gap:22px;}
+  .orig{color:#9a8f7a;font-size:38px;text-decoration:line-through;}
+  .now{color:#1f3d2f;font-weight:600;}
+  .now .sym{font-size:46px;}.now .num{font-size:116px;line-height:1;font-weight:700;}
+  .save{margin-top:12px;color:#5a6b50;font-size:30px;letter-spacing:1px;}
+</style></head><body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="2" data-width="1080" data-height="1920">
+    <div class="pname clip" data-start="0" data-duration="2" data-track-index="1"><span class="line"></span>玻尿酸保湿面膜<span class="line"></span></div>
+    <div class="pricecard clip" data-start="0" data-duration="2" data-track-index="2">
+      <div class="tag">甄选价</div>
+      <div class="row"><span class="orig">¥199</span>
+        <span class="now"><span class="sym">¥</span><span class="num">59</span></span></div>
+      <div class="save">直降 140 元 · 拍 2 件再减 20</div>
+    </div>
+  </div>
+  <script>window.__timelines={main:{pause(){return this},play(){return this},seek(){return this},totalTime(){return this},time(){return 0},duration(){return 2}}};</script>
+</body></html>

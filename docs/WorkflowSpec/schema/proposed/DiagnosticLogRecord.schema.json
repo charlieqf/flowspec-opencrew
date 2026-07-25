@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/DiagnosticLogRecord.schema.json",
+  "title": "FlowSpec Diagnostic Log Record (PROPOSED)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "timestamp", "sequence", "level", "channel", "message",
+    "session_id", "task_id", "run_id", "step_id", "step_attempt_id",
+    "step_attempt_no", "tool_id", "correlation_id", "visibility",
+    "sensitivity", "fields"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "level": { "enum": ["debug", "info", "warning", "error", "critical"] },
+    "channel": { "enum": ["runtime", "adapter", "tool", "stdout", "stderr", "model_adapter"] },
+    "message": { "type": "string", "minLength": 1, "maxLength": 8000 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "step_id": { "type": ["string", "null"] },
+    "step_attempt_id": { "type": ["string", "null"] },
+    "step_attempt_no": { "type": ["integer", "null"], "minimum": 1 },
+    "tool_id": { "type": ["string", "null"] },
+    "correlation_id": { "type": "string", "minLength": 1 },
+    "visibility": { "enum": ["public", "internal", "restricted"] },
+    "sensitivity": { "enum": ["normal", "sensitive", "secret"] },
+    "fields": { "type": "object" }
+  }
+}

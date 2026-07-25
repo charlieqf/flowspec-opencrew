@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "sourceSnapshot": { "type": "object", "required": ["entity_id", "period", "data_cut_id", "row_count", "snapshot_hash"] },
+    "glControl": { "type": "object", "required": ["entity_id", "period", "data_cut_id", "control_total"] },
+    "dqReport": { "type": "object", "required": ["passed", "discrepancy_rate", "issues", "rule_version"] },
+    "reconciliation": { "type": "object", "required": ["transaction_count", "payment_count", "gl_total", "status"] },
+    "waiver": { "type": "object", "required": ["decision", "reason", "actor"] },
+    "qualityDecision": { "type": "object", "required": ["accepted", "basis", "waiver_applied"] },
+    "cleanDataset": { "type": "object", "required": ["entity_id", "period", "data_cut_id", "quality_basis"] },
+    "riskMetrics": { "type": "object", "required": ["metric_version", "metrics", "definition_refs"] },
+    "narrative": { "type": "object", "required": ["sections", "citations", "mock_model_output"] },
+    "mockDocument": { "type": "object", "required": ["document_type", "version", "included_refs"] },
+    "approval": { "type": "object", "required": ["decision", "actor", "reason", "report_hash"] },
+    "distribution": { "type": "object", "required": ["recipient_set", "operation_key", "status", "distributed_at"] },
+    "remediation": { "type": "object", "required": ["entity_id", "period", "issues", "status"] },
+    "reportRevision": { "type": "object", "required": ["entity_id", "period", "data_cut_id", "decision", "requested_changes", "status"], "properties": { "decision": { "enum": ["rejected", "revision_requested"] }, "requested_changes": { "type": "array", "minItems": 1 }, "status": { "const": "open" } } }
+  }
+}

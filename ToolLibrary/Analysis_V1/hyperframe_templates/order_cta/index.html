@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<script src="./gsap.min.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1920px;overflow:hidden;
+    background:linear-gradient(160deg,#23271f 0%,#14160f 100%);
+    font-family:"PingFang SC","Hiragino Sans GB",sans-serif;}
+  /* 直播间信息条:夜色 + 烫金竖条 */
+  .room{position:absolute;left:0;top:160px;display:flex;align-items:center;}
+  .room .bar{width:6px;height:88px;background:#c9a86a;}
+  .room .box{background:rgba(20,22,15,.62);padding:18px 32px;}
+  .room .name{color:#f3ead8;font-size:40px;font-weight:400;letter-spacing:2px;}
+  .room .tag{color:#c9a86a;font-size:26px;letter-spacing:2px;margin-top:6px;}
+  /* CTA:墨绿底 + 细金边 + 米白字,克制 */
+  .cta{position:absolute;left:90px;right:90px;bottom:360px;
+    background:rgba(31,61,47,.92);border:1px solid #c9a86a;border-radius:14px;padding:34px;text-align:center;
+    color:#f3ead8;font-size:48px;font-weight:400;letter-spacing:3px;box-shadow:0 16px 40px rgba(0,0,0,.4);}
+  .cta .au{color:#e8d9b5;border-bottom:2px solid #c9a86a;padding-bottom:3px;}
+  /* 引导箭头 */
+  .arrow{position:absolute;left:0;right:0;bottom:280px;text-align:center;color:#c9a86a;font-size:60px;}
+  .cart{position:absolute;left:90px;bottom:110px;width:104px;height:104px;border-radius:18px;
+    background:rgba(20,22,15,.7);border:1px solid #c9a86a;display:flex;align-items:center;justify-content:center;font-size:52px;}
+</style></head><body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="2.4" data-width="1080" data-height="1920">
+    <div class="room clip" data-start="0" data-duration="2.4" data-track-index="1">
+      <div class="bar"></div><div class="box"><div class="name">严选直播间</div><div class="tag">直播中 · 1.2 万人在看</div></div></div>
+    <div class="cta clip" data-start="0" data-duration="2.4" data-track-index="2">点击下方 <span class="au">购物袋</span> 下单</div>
+    <div class="arrow clip" data-start="0" data-duration="2.4" data-track-index="3">↓</div>
+    <div class="cart clip" data-start="0" data-duration="2.4" data-track-index="4">🛍</div>
+  </div>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({paused:true});
+    tl.from(".room",{x:-600,opacity:0,duration:.8,ease:"power3.out"},0);
+    tl.from(".cta",{y:40,opacity:0,duration:.6,ease:"power2.out"},.45);
+    tl.to(".arrow",{y:22,duration:.6,ease:"sine.inOut",repeat:3,yoyo:true},.9);
+    window.__timelines["main"]=tl;
+  </script>
+</body></html>

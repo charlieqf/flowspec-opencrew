@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "brief": { "type": "object", "required": ["project_id", "creative_revision", "brand", "product", "audience", "channel", "constraints", "mock_model_output"] },
+    "storyboard": { "type": "object", "required": ["project_id", "creative_revision", "dialogues", "mock_model_output"] },
+    "approval": { "type": "object", "required": ["decision", "actor", "reason", "expected_revision"] },
+    "revision": { "type": "object", "required": ["project_id", "creative_revision", "scope", "reason", "status"] },
+    "references": { "type": "object", "required": ["project_id", "reference_keys", "mock_model_output"] },
+    "mediaMock": { "type": "object", "required": ["asset_key", "kind", "duration_seconds", "provider_operation_key", "mock"] },
+    "visualPrompt": { "type": "object", "required": ["asset_key", "prompt", "reference_keys", "mock_model_output"] },
+    "deliveryManifest": { "type": "object", "required": ["project_id", "creative_revision", "segments", "binding_status"] },
+    "qa": { "type": "object", "required": ["passed", "checks", "revision_asset_keys", "mock_model_output"] },
+    "deliveryReceipt": { "type": "object", "required": ["project_id", "channel", "operation_key", "status", "delivered_at"] }
+  }
+}

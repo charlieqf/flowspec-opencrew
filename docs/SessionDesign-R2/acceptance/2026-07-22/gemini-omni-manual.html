@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OpenCrew Gemini Omni 有状态视频编辑操作手册</title>
+  <style>
+    :root{--ink:#152039;--muted:#5e6b80;--purple:#5746e8;--blue:#315ee8;--line:#dce3ef;--soft:#f4f6fb;--green:#13795b;--amber:#8d5b00;--red:#b73d45}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font:15px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}a{color:var(--blue)}header{background:radial-gradient(circle at 85% 20%,#7968ff 0,transparent 27%),linear-gradient(135deg,#171d37,#313072 58%,#273f90);color:#fff}.hero{max-width:1160px;margin:auto;padding:70px 34px}.eyebrow{color:#c8c1ff;font-weight:800;letter-spacing:.09em}.hero h1{font-size:42px;line-height:1.17;margin:12px 0}.hero p{max-width:860px;color:#e0e2f7;font-size:18px}.hero a{color:#e5e6ff}.layout{max-width:1160px;margin:auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:42px;padding:42px 34px 80px}nav{position:sticky;top:20px;align-self:start;border:1px solid var(--line);border-radius:14px;padding:15px}nav a{display:block;text-decoration:none;color:var(--muted);padding:7px 9px;border-radius:7px}nav a:hover{background:var(--soft);color:var(--purple)}main{min-width:0}section{margin-bottom:58px}h2{font-size:29px;margin:0 0 13px}h3{font-size:20px;margin:27px 0 8px}.lead{font-size:17px;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card,.callout{border:1px solid var(--line);border-radius:13px;padding:18px}.card strong{display:block;font-size:17px}.card span{color:var(--muted)}.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}.step{flex:1;min-width:140px;padding:14px;background:var(--soft);border-radius:11px}.step b{display:block;color:var(--purple)}.arrow{align-self:center;color:#929cb0;font-size:22px}.callout{border-left:4px solid var(--purple);background:#f7f6ff}.callout.warn{border-left-color:#e0a22c;background:#fff8e9;color:#654300}.callout.good{border-left-color:var(--green);background:#eefaf5}figure{margin:24px 0 37px}figure img{display:block;width:100%;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 45px rgba(29,40,76,.11)}figcaption{margin-top:9px;color:var(--muted);font-size:13px}.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare figure{margin-top:16px}.badge{display:inline-block;background:#ece9ff;color:#4938c9;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:800}.mock{background:#fff4d9;color:#704800;border-radius:5px;padding:2px 6px;font-weight:750}.real{background:#e5f7ef;color:#0d704f;border-radius:5px;padding:2px 6px;font-weight:750}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.table th{background:var(--soft)}code{background:#eef1f7;padding:2px 6px;border-radius:5px;font-size:13px}.checks li{margin:7px 0}.checks li::marker{color:var(--green)}footer{border-top:1px solid var(--line);padding:30px;text-align:center;color:var(--muted)}@media(max-width:860px){.layout{grid-template-columns:1fr}.compare,.cards{grid-template-columns:1fr}nav{position:static}.hero h1{font-size:33px}}
+  </style>
+</head>
+<body>
+  <header><div class="hero"><div class="eyebrow">文档二 · 操作、原理与价值</div><h1>Gemini Omni Flash 有状态视频编辑</h1><p>这不是“再加一个普通视频模型”，而是一条可持续编辑同一视频上下文的版本链：每次生成都留下独立本地 MP4，同时服务端安全保存供应商状态，让用户可以继续修改。</p><a href="index.html">← 返回验收手册首页</a></div></header>
+  <div class="layout">
+    <nav aria-label="目录"><a href="#value">1. 它解决什么问题</a><a href="#start">2. 开始使用</a><a href="#modes">3. 三种业务操作</a><a href="#versions">4. 版本链</a><a href="#billing">5. 确认、费用与限制</a><a href="#cloud">6. 云端上下文</a><a href="#principle">7. 工作原理</a><a href="#evidence">8. 验收与证据边界</a><a href="#manual-check">9. 人工验收</a></nav>
+    <main>
+      <section id="value">
+        <span class="badge">macmini-4 真实入口已启用</span>
+        <h2>1. 它解决什么问题</h2>
+        <p class="lead">传统视频生成每次都是“重新抽签”。有状态编辑让后一次修改建立在已生成版本上，更适合反复打磨构图、动作、镜头或局部内容。</p>
+        <div class="cards"><div class="card"><strong>降低重做成本</strong><span>满意的版本不被覆盖；后续修改从明确版本继续，而不是重新描述全部上下文。</span></div><div class="card"><strong>可追溯选择</strong><span>每次付费动作形成 turn，成功后才推进当前版本，失败不会污染主线。</span></div><div class="card"><strong>本地资产独立</strong><span>每个结果落为本地 MP4；即使删除或过期云端上下文，历史视频仍可播放和另起编辑链。</span></div></div>
+      </section>
+
+      <section id="start">
+        <h2>2. 开始使用</h2>
+        <h3>2.1 本机管理员配置</h3>
+        <p>macmini-4 已在 Connection 的视频模型中保留原有 7 个别名，并新增 <strong>Omni Flash</strong>。服务端功能开关和 Gemini 连接级启用必须同时满足，普通任务接口才会看到这一别名。</p>
+        <figure><img src="assets/17-omni-real-model-settings.png" alt="真实 Omni Flash 模型设置"><figcaption><span class="real">真实本机配置</span> 图 1：任务 305 的视频智能体设置。Omni Flash 是第 8 个视频模型；选择后参数自动约束为 3 秒，参考素材为最多 8 图 + 1 视频。</figcaption></figure>
+        <h3>2.2 用户入口</h3>
+        <ol><li>进入“故事版（口播）”，打开一个任务的 Asset Library。</li><li>选择左侧“视频智能体”（对话式）或“视频生成”（直接工作区）。</li><li>点击输入区的“设置”，在“视频模型”中选择 Omni Flash，然后点击“完成”。</li><li>界面出现“有状态视频编辑”和三个操作入口，即说明能力生效。</li></ol>
+        <figure><img src="assets/16-omni-real-local-config.png" alt="真实本机 Omni 操作入口"><figcaption><span class="real">真实本机配置</span> 图 2：Omni Flash 选中后的实际界面。新建视频、上传视频编辑、继续编辑按当前版本状态启用或禁用。</figcaption></figure>
+      </section>
+
+      <section id="modes">
+        <h2>3. 三种业务操作</h2>
+        <table class="table"><thead><tr><th>操作</th><th>什么时候使用</th><th>结果</th></tr></thead><tbody><tr><td><strong>新建视频</strong></td><td>只有文本或参考图，想建立全新创作链</td><td>创建 thread 与版本 1</td></tr><tr><td><strong>上传视频编辑</strong></td><td>已有本地视频，希望以它为起点修改</td><td>上传视频到 Files API，创建新的编辑链</td></tr><tr><td><strong>继续编辑</strong></td><td>要基于当前或历史成功版本做下一轮修改</td><td>从选中的 parent turn 创建新版本</td></tr></tbody></table>
+        <h3>3.1 新建视频</h3><ol><li>点击“新建视频”。</li><li>可选择 0–8 张参考图；输入清晰的画面、动作和修改目标。</li><li>发送后阅读付费确认，再点击“生成”。成功结果进入 Videos 区和当前版本链。</li></ol>
+        <h3>3.2 上传视频编辑</h3><ol><li>点击“上传视频编辑”，从素材区选择一个视频作为唯一视频输入；当前 Preview 优先使用不超过约 3 秒的短视频。</li><li>可额外添加参考图；不要添加音频，当前 Omni 接入不支持音频输入。</li><li>描述要保留与要改变的部分。系统会先把视频上传到供应商 Files API、等待 ACTIVE，再由模型根据文件输入推断 edit；输出画幅和时长继承输入视频。</li></ol>
+        <h3>3.3 继续编辑</h3><ol><li>在版本树中选中一个成功且云端状态仍有效的版本。</li><li>点击“继续编辑”，描述增量修改，例如“保持人物与镜头，只把背景改成黄昏”。</li><li>确认后生成新 turn。原版本不被覆盖，可以继续作为其他分支的父版本。</li></ol>
+        <figure><img src="assets/11-omni-video-workspace.png" alt="视频直接工作区"><figcaption><span class="mock">能力模拟截图</span> 图 3：直接视频工作区可从素材区选择参考图，然后用自然语言生成。该图由浏览器路由模拟能力配置，不触发付费调用。</figcaption></figure>
+      </section>
+
+      <section id="versions">
+        <h2>4. 版本链如何使用</h2>
+        <div class="flow"><div class="step"><b>Thread</b>一次创作/编辑链</div><div class="arrow">→</div><div class="step"><b>Turn 1</b>新建或上传编辑</div><div class="arrow">→</div><div class="step"><b>Turn 2+</b>从指定版本继续</div></div>
+        <p>新聊天默认显示“尚未创建版本”，不会偷偷继承同一任务中其他聊天的旧链。只有用户从素材或历史版本明确选择继续，才会加载对应 OpenCrew thread。</p>
+        <figure><img src="assets/12-omni-new-chat.png" alt="新聊天不继承旧版本"><figcaption><span class="mock">能力模拟截图</span> 图 4：新聊天没有版本，防止无意把上一段对话的付费状态带入新任务意图。</figcaption></figure>
+        <p>加载历史版本后，顶部显示当前版本和每个 turn 的状态。只有 <code>completed + active</code> 的版本能直接继续；失败、过期或已删除云状态的版本会提供“从本地视频新建链”回退。</p>
+        <figure><img src="assets/13-omni-version-tree.png" alt="Omni 版本树"><figcaption><span class="mock">能力模拟截图</span> 图 5：版本 1 已完成并成为当前版本；“清除云端上下文”属于显式高风险操作。</figcaption></figure>
+        <div class="callout"><strong>成功才前移。</strong>OpenCrew 在本地数据库中把 thread 的 head 指向最新成功 turn；供应商超时、请求未知或落盘失败都不会把失败版本冒充为当前版本。</div>
+      </section>
+
+      <section id="billing">
+        <h2>5. 确认、费用与输入限制</h2>
+        <p>每次“新建、上传编辑、继续编辑”都是一次新的付费动作，不能把聊天中的一次确认复用到下一次。界面默认在发送前显示确认框。</p>
+        <figure><img src="assets/14-omni-paid-confirmation.png" alt="付费操作确认"><figcaption><span class="mock">能力模拟截图</span> 图 6：确认框明确说明将关联当前 OpenCrew 版本，且供应商状态标识不会发送到浏览器或智能体模型。</figcaption></figure>
+        <table class="table"><thead><tr><th>项目</th><th>当前接入约束</th></tr></thead><tbody><tr><td>输出时长</td><td>新建/连续编辑首期固定 3 秒；上传 edit 继承输入时长；统一按最终 ffprobe 实际时长计量</td></tr><tr><td>画幅</td><td>新建/连续编辑选择 16:9 或 9:16；上传 edit 继承输入画幅</td></tr><tr><td>参考图片</td><td>0–8 张</td></tr><tr><td>参考视频</td><td>0–1 个；上传编辑使用 Files API，当前官方限制对约 3 秒短视频仍标为 Preview 风险</td></tr><tr><td>参考音频</td><td>本期不支持</td></tr><tr><td>价格快照</td><td>720p 视频输出约 US$0.10/秒，另有少量输入 token；Preview 价格可能变化，生成前应复核供应商价格页</td></tr></tbody></table>
+        <p>确认后浏览器只提交 OpenCrew 的 <code>video_thread_id</code>、<code>parent_turn_id</code> 和每次动作唯一的 UUID。供应商 interaction ID 永远不进入浏览器请求。</p>
+        <figure><img src="assets/15-omni-request-dispatched.png" alt="确认后请求派发"><figcaption><span class="mock">无费用请求模拟</span> 图 7：确认后进入“等待智能体响应”。浏览器测试断言 UUIDv4、continue 操作和 OpenCrew 版本字段正确，且请求全文不含供应商状态 ID。</figcaption></figure>
+      </section>
+
+      <section id="cloud">
+        <h2>6. 云端上下文、过期和删除</h2>
+        <ul><li><strong>云端状态：</strong>供应商保存 interaction 上下文，OpenCrew 只在后端加密边界内持有其标识。</li><li><strong>本地视频：</strong>每个成功结果下载、校验、清除容器元数据并落为 MP4；删除云状态不会删除本地 MP4。</li><li><strong>清除云端上下文：</strong>需要明确确认；删除失败会保留“待重试”状态，不伪装成功。</li><li><strong>未知 POST：</strong>如果请求结果未知且没有拿到供应商 ID，系统绝不自动重发；用户显式清除后会把该本地 turn 标为失败/已删除并释放并发槽。</li><li><strong>过期：</strong>上下文过期后不能继续原链，但可以从本地视频发起新的“上传视频编辑”链。</li><li><strong>自动恢复：</strong>服务重启后，已获得供应商 ID 的请求只继续查询，不再次创建付费请求。</li></ul>
+        <div class="callout warn"><strong>来源水印仍保留。</strong>OpenCrew 会清除 MP4 容器中的可见内部元数据，但不会、也不应声称能移除供应商强制的来源水印。用户界面已明确披露这一点。</div>
+      </section>
+
+      <section id="principle">
+        <h2>7. 工作原理（面向产品与技术）</h2>
+        <table class="table"><thead><tr><th>阶段</th><th>OpenCrew 做什么</th><th>业务意义</th></tr></thead><tbody>
+          <tr><td>能力发现</td><td>只有服务端开关开启、Gemini 连接启用、Omni 别名存在时，公开 API 才返回 <code>stateful_edit</code> 能力。</td><td>独立灰度和快速止损，不影响其他视频模型。</td></tr>
+          <tr><td>动作准入</td><td>服务端按用户、会话和任务锁检查并发、小时/日次数和日预算；同一动作 UUID 可重放读取但不能重复付费。</td><td>控制成本，避免双击、网络重试或双 worker 重复生成。</td></tr>
+          <tr><td>供应商调用</td><td>上传视频先走 Files API 并等待 ACTIVE，以 <code>document</code> 输入让模型推断 edit，不发送 task/画幅/时长；首轮文本/图片显式发送任务，连续编辑只发送 <code>previous_interaction_id</code> 和输出格式。非幂等 POST 最多一次，拿到 ID 后立即持久化。</td><td>兼容当前 Preview 的三类不同请求结构，避免重复付费，并把“可能已经扣费但响应丢失”的风险限制在可审计状态。</td></tr>
+          <tr><td>状态隔离</td><td>供应商 ID 只存后端表；浏览器、智能体提示、SSE 和公开素材对象只看到 OpenCrew thread/turn。</td><td>避免供应商细节泄漏，也防止客户端伪造上游状态。</td></tr>
+          <tr><td>结果落盘</td><td>下载受信任 HTTPS 输出，校验大小/媒体、清洗容器元数据，记录实际时长用量，再推进 head。</td><td>本地资产可独立使用，计量贴近真实结果，失败不污染版本链。</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="evidence">
+        <h2>8. 本轮验收结果与证据边界</h2>
+        <ul class="checks"><li>macmini-4 重启后前端 18080、后端 8011 健康；迁移 <code>0025_video_interaction_threads</code> 已应用。</li><li>真实公开配置返回 Omni Flash，包含 text/image/reference/edit、stateful、固定 3 秒、16:9/9:16 能力，但不含 provider/model 内部字段。</li><li>真实 Chromium 选择 Omni Flash、验证 3s/min=3/max=3、显示设置与三种操作入口通过；测试后恢复任务原设置。</li><li>真实直接探针和真实浏览器产品链均通过：首轮、连续编辑各生成一个视频，第二轮父 turn 精确指向第一轮。</li><li>真实上传编辑通过：浏览器选择蓝色视频，Files API 上传后生成独立 edit turn，输出圆形变红；无父 turn，作为新链版本 1。</li><li>三段最终浏览器输出均为 1280×720、24fps、H.264 + AAC、3.008 秒；计量各记录 3.008 个 <code>video_720p_second</code>。</li><li>两轮链和上传 edit 均从浏览器清除云端状态成功，版本不可继续，但全部本地 MP4 仍可播放。</li><li>unknown POST 防重发、并发槽保护和用户显式放弃均在真实浏览器测试中验证；失败不会推进链头。</li><li>公开 API、SSE、浏览器 artifact 均不含 Key、原始 Interaction ID 或视频 base64；设置和失败测试历史已恢复/清理。</li><li>本次变更后 Omni 专项：36 passed、3 subtests；PostgreSQL 行锁并发：1 passed；全量后端契约：1158 passed、1 skipped、233 subtests。</li><li>前端 Omni 契约、模型包泄漏守卫、泄漏策略自测和生产构建全部通过；模型目录探测 HTTP 200。</li></ul>
+        <div class="callout good"><strong>三种真实业务操作均已完成。</strong>直接供应商证据为 <code>gemini-omni-paid-chain-20260723-v4.json</code>；浏览器新建→继续编辑证据为 <code>gemini-omni-paid-browser-20260723-v2.json</code>；浏览器上传视频编辑证据为 <code>gemini-omni-paid-upload-browser-20260723-v9.json</code>。最终浏览器产品验收共 3 次成功调用、9 秒输出，名义约 US$0.90。</div>
+        <div class="compare"><figure><img src="assets/18-omni-paid-turn-1-blue.png" alt="真实首轮蓝色圆形视频抽帧"><figcaption><span class="real">真实付费输出</span> 图 8：首轮 1.5 秒处抽帧，蓝色圆形、白色背景。</figcaption></figure><figure><img src="assets/19-omni-paid-turn-2-green.png" alt="真实连续编辑绿色圆形视频抽帧"><figcaption><span class="real">真实付费输出</span> 图 9：基于首轮状态继续编辑后的同一时刻抽帧；圆形变绿，构图保持。</figcaption></figure></div>
+        <figure><img src="assets/22-omni-browser-paid-turn-2-confirm.png" alt="真实浏览器连续编辑确认"><figcaption><span class="real">真实浏览器付费链</span> 图 10：版本 1 的蓝色视频已经落盘；继续编辑前再次出现独立付费确认，操作说明明确为“继续编辑当前版本”。</figcaption></figure>
+        <figure><img src="assets/23-omni-browser-paid-turn-2-completed.png" alt="真实浏览器两轮编辑完成"><figcaption><span class="real">真实浏览器付费链</span> 图 11：版本 1 和版本 2 均为 completed，蓝、绿两段视频都是独立素材；版本 2 的父版本为版本 1。</figcaption></figure>
+        <figure><img src="assets/24-omni-browser-paid-local-results-after-cloud-cleanup.png" alt="删除云端状态后的本地结果"><figcaption><span class="real">真实清理结果</span> 图 12：云端上下文删除后不再展示可继续版本，但两段本地视频仍保留在素材区和对话历史，验证“删云状态、不删本地资产”。</figcaption></figure>
+        <figure><img src="assets/47-omni-browser-paid-upload-edit-confirm.png" alt="真实上传视频编辑确认"><figcaption><span class="real">真实浏览器上传编辑</span> 图 13：蓝色视频被选入唯一 Video 参考槽；确认框明确显示“以上传视频新建编辑链”，本次动作单独计费。</figcaption></figure>
+        <figure><img src="assets/48-omni-browser-paid-upload-edit-completed.png" alt="真实上传视频编辑完成"><figcaption><span class="real">真实浏览器上传编辑</span> 图 14：Files API 与 Omni edit 完成，圆形从蓝色变红，版本 1、对话结果和本地素材卡同时出现。</figcaption></figure>
+        <figure><img src="assets/49-omni-browser-paid-upload-edit-after-cleanup.png" alt="上传编辑云状态清理后"><figcaption><span class="real">真实上传编辑清理</span> 图 15：从 UI 删除该 Interaction 后版本链为空，红色视频仍留在本地素材区；本次清理 deleted=1、failed=0。</figcaption></figure>
+        <div class="callout warn"><strong>Preview API 漂移记录。</strong>旧实现的 1 秒请求被当前 API 拒绝（最短 3 秒）；旧版把画幅/时长放在 <code>generation_config.video_config</code> 也被拒绝；连续编辑不能同时发送 <code>previous_interaction_id</code> 与 task；上传 edit 必须使用 Files URI 的 <code>document</code> 输入并由模型推断任务，不能发送 task、aspect 或 duration。适配器、恢复路径、模型能力和契约均已按当前行为修正。</div>
+        <div class="callout warn"><strong>真实浏览器测试发现并修复了落盘缺陷。</strong>首次产品链中供应商已成功生成 3 秒视频，但临时文件名以 <code>.tmp</code> 结束，导致 ffmpeg 无法推断 MP4 输出格式；现已改为 <code>.provider.mp4</code>。同时把清洗/校验异常统一映射为稳定公开错误码，避免本机路径和原始 ffmpeg 输出进入 SSE 或历史消息；相关失败测试消息已从本机测试会话清理，失败 turn 保留在数据库中供审计。</div>
+        <div class="callout warn"><strong>上传编辑测试另外修复了两个产品问题。</strong>直接工作区原先在构造 edit payload 前清空参考素材，导致本地误报“需要 1 个视频”；现已先固化 stateful action 再消费槽位。对于没有供应商 ID 的 unknown POST，用户现在可显式清理并释放并发槽，系统仍绝不自动重发。</div>
+        <p>费用口径：最终直接链约 US$0.60，最终浏览器新建/继续链约 US$0.60，最终浏览器上传 edit 约 US$0.30；另有一次 3 秒 API 漂移定位输出和一次“供应商成功、首次本地落盘失败”的 3 秒输出。整个调试窗口共产生约 21 秒供应商视频输出，按 US$0.10/秒名义约 <strong>US$2.10</strong>，另有少量输入 token。上传编辑的参数校验请求均未产生 Interaction ID 或视频输出。</p>
+        <p>外部行为依据（检索日期 2026-07-23）：<a href="https://ai.google.dev/gemini-api/docs/omni">Gemini Omni 官方文档</a>、<a href="https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash">Omni 模型卡</a>、<a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API 定价</a>、<a href="https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026">Interactions 2026-05 迁移说明</a>。Preview 能力和价格仍可能变化，上线前应重新核对。</p>
+      </section>
+
+      <section id="manual-check">
+        <h2>9. 建议人工验收步骤</h2>
+        <ol><li>在任务 305 的视频智能体设置中确认 Omni Flash 可见，选择后固定为 3s，参考位变为 8 图 + 1 视频。</li><li>分别切换“新建视频、上传视频编辑、继续编辑”，确认没有版本时“继续编辑”禁用。</li><li>新建聊天，确认不会继承同任务的旧版本；再从一个历史视频选择继续，确认对应版本树加载。</li><li>输入提示词并发送，只检查付费确认框后取消；确认每次都重新询问，不直接扣费。</li><li>上传编辑时确认恰好选择 1 个短视频，付费确认写明“以上传视频新建编辑链”；输出应继承输入画幅/时长。</li><li>如需重复供应商冒烟测试，先复核官方价格；两轮链使用 US$1.20/2 次/6 秒门禁，上传 edit 使用 US$0.30/1 次/3 秒门禁，均不得加入默认测试。</li><li>检查每个成功版本均落盘；前端只见 OpenCrew ID；计量使用 ffprobe 实际时长；清除云端上下文后本地 MP4 仍保留。</li><li>模拟云状态过期/删除/unknown，确认不会自动重发，显式清理可释放并发槽并保留审计记录。</li><li>关闭 <code>OPENCREW_GEMINI_OMNI_ENABLED</code> 并重启，确认 Omni 入口完全隐藏、其他视频模型不受影响；再恢复为 1。</li></ol>
+      </section>
+    </main>
+  </div>
+  <footer>OpenCrew Gemini Omni Flash · macmini-4 local acceptance · 2026-07-22–23</footer>
+</body>
+</html>

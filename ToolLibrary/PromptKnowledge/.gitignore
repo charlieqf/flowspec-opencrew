@@ -1,0 +1,7 @@
+__pycache__/
+raw/
+reports/
+index/*.sqlite
+index/*.sqlite-*
+index/*.tmp
+index/*.tmp-*

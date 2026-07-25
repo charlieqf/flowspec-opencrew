@@ -1,0 +1,12 @@
+{
+  "mock": true,
+  "logical_name": "Audio_dlg-001.wav",
+  "payload": {
+    "asset_key": "dlg-001",
+    "kind": "audio",
+    "duration_seconds": 7.0,
+    "provider_operation_key": "tts:run_video_20260724_001:dlg-001",
+    "voice": "mock-voice-au-01",
+    "mock": true
+  }
+}

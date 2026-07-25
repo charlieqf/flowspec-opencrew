@@ -1,0 +1,105 @@
+{
+  "schema_version": "opencrew_session_design_r2_acceptance_v1",
+  "acceptance_window": {
+    "started": "2026-07-22",
+    "completed": "2026-07-23",
+    "timezone": "Australia/Sydney",
+    "target": "macmini-4 local only"
+  },
+  "deployment": {
+    "frontend": "http://127.0.0.1:18080",
+    "backend": "http://127.0.0.1:8011",
+    "frontend_healthy": true,
+    "backend_healthy": true,
+    "database_migration": "0025_video_interaction_threads",
+    "persistent_local_flags": [
+      "OPENCREW_GEMINI_OMNI_ENABLED=1",
+      "OPENCREW_MEDIA_LIBRARY_PROXY_TIMEBASE_GUARD=1"
+    ],
+    "production_touched": false
+  },
+  "automated_tests": {
+    "backend_contracts": {
+      "passed": 1158,
+      "skipped": 1,
+      "subtests_passed": 233
+    },
+    "gemini_omni_backend_focused": {
+      "passed": 36,
+      "subtests_passed": 3
+    },
+    "gemini_omni_postgres_concurrency": {
+      "passed": 1
+    },
+    "frontend_contracts": [
+      "media library view/tag component contract",
+      "media library editor timeline contract",
+      "Gemini Omni capability/component contract",
+      "frontend bundle leakage contract",
+      "model bundle leakage policy self-test",
+      "production frontend build"
+    ],
+    "browser": [
+      "media library tags/cards/timeline real E2E",
+      "Gemini Omni stateful request contract E2E (provider routes mocked, no paid call)",
+      "Gemini Omni real local config/UI E2E (3-second capability and operation UI)",
+      "Gemini Omni paid two-turn direct provider chain",
+      "Gemini Omni paid two-turn product chain through real Chromium, SSE, persistence, MP4 materialization, metering, and cloud cleanup",
+      "Gemini Omni paid uploaded-video edit through real Chromium, Files API, inferred edit task, MP4 materialization, metering, and UI cloud cleanup"
+    ]
+  },
+  "online_evidence": {
+    "model_directory_probe": "passed HTTP 200",
+    "model_id": "models/gemini-omni-flash-preview",
+    "paid_chain_probe": "passed",
+    "paid_chain_artifact": "gemini-omni-paid-chain-20260723-v4.json",
+    "paid_chain_result": "two HTTP 200 completed interactions; previous interaction continuation proven; both provider states deleted",
+    "paid_chain_requested_seconds": 6,
+    "paid_chain_nominal_video_output_usd": 0.6,
+    "paid_browser_chain": "passed",
+    "paid_browser_chain_artifact": "gemini-omni-paid-browser-20260723-v2.json",
+    "paid_browser_chain_result": "two completed OpenCrew turns with parent linkage; two sanitized local MP4s; actual-duration usage rows; both provider states deleted; provider IDs absent from public evidence",
+    "paid_browser_chain_requested_seconds": 6,
+    "paid_browser_chain_nominal_video_output_usd": 0.6,
+    "paid_upload_edit": "passed",
+    "paid_upload_edit_artifact": "gemini-omni-paid-upload-browser-20260723-v9.json",
+    "paid_upload_edit_result": "one uploaded Files API video edited from blue to red; completed OpenCrew edit turn; sanitized 3.008s local MP4; actual-duration usage row; provider state deleted through browser UI",
+    "paid_upload_edit_requested_seconds": 3,
+    "paid_upload_edit_nominal_video_output_usd": 0.3,
+    "debugging_window_provider_output_seconds": 21,
+    "debugging_window_nominal_video_output_usd": 2.1,
+    "debugging_window_cost_note": "includes the final direct chain (6s), final two-turn browser chain (6s), final uploaded-video edit (3s), one earlier successful direct output (3s), and one provider-success/local-materialization-failure output (3s); excludes requests rejected before video generation; input token cost is additional"
+  },
+  "screenshots": {
+    "media_library": [
+      "assets/01-media-library-list.png",
+      "assets/02-tag-editor.png",
+      "assets/03-tag-server-validation.png",
+      "assets/04-card-view-two-columns.png",
+      "assets/05-card-actions.png",
+      "assets/06-video-editor-timeline.png",
+      "assets/07-playhead-after-drag.png",
+      "assets/08-timeline-edge-auto-scroll.png"
+    ],
+    "gemini_omni": [
+      "assets/11-omni-video-workspace.png",
+      "assets/12-omni-new-chat.png",
+      "assets/13-omni-version-tree.png",
+      "assets/14-omni-paid-confirmation.png",
+      "assets/15-omni-request-dispatched.png",
+      "assets/16-omni-real-local-config.png",
+      "assets/17-omni-real-model-settings.png",
+      "assets/18-omni-paid-turn-1-blue.png",
+      "assets/19-omni-paid-turn-2-green.png",
+      "assets/20-omni-browser-paid-turn-1-confirm.png",
+      "assets/21-omni-browser-paid-turn-1-completed.png",
+      "assets/22-omni-browser-paid-turn-2-confirm.png",
+      "assets/23-omni-browser-paid-turn-2-completed.png",
+      "assets/24-omni-browser-paid-local-results-after-cloud-cleanup.png",
+      "assets/40-omni-browser-unknown-turn-explicitly-abandoned.png",
+      "assets/47-omni-browser-paid-upload-edit-confirm.png",
+      "assets/48-omni-browser-paid-upload-edit-completed.png",
+      "assets/49-omni-browser-paid-upload-edit-after-cleanup.png"
+    ]
+  }
+}

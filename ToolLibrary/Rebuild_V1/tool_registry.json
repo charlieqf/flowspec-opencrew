@@ -1,0 +1,1854 @@
+{
+  "schema_version": "1.0",
+  "description": "Machine-readable registry for Agent-driven OpenClip Rebuild V1 standalone tools.",
+  "conventions": {
+    "cost_levels": [
+      "very_low",
+      "low",
+      "medium",
+      "high",
+      "very_high"
+    ],
+    "default_workspace_layout": [
+      "assets",
+      "hyperframes",
+      "logs",
+      "renders",
+      "reports"
+    ],
+    "implementation": "standalone_python_files",
+    "workflow_policy": "agents_orchestrate_tools_explicitly",
+    "agent_instruction": "Use Rebuild_V1 when the user wants standalone Rebuild tools. Run each tool directly and use --check-dependencies-only before execution when inputs are uncertain. Registered tool script filenames use Tool ID-style PascalCase segments; short legacy ids 01, 02, 04, and 04_1 keep their ids but use descriptive script names."
+  },
+  "tools": [
+    {
+      "id": "01",
+      "name": "01_Rebuild_SourcePackageLoad",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/01_Rebuild_SourcePackageLoad.py",
+      "stage": "intent_package",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": false,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "analysis_scheme_segments",
+        "task_final_prompt"
+      ],
+      "soft_dependencies": [
+        "video_metadata",
+        "segment_descriptions",
+        "scheme_exports",
+        "visual_keyframes",
+        "visual_ocr_timeline"
+      ],
+      "run_when": [
+        "user has generated Final Prompt",
+        "source and intent package should be refreshed"
+      ],
+      "skip_when": [
+        "trusted source_package.json and rebuild_intent.json already exist and user does not need refresh"
+      ],
+      "estimated_runtime": {
+        "basis": "local JSON/file metadata collection plus Final Prompt normalization",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "source_package.json",
+        "rebuild_input_check.json",
+        "rebuild_intent.json"
+      ],
+      "agent_notes": "Clean SRT Phase 1 entrypoint. Use --task-id or --session-id to fetch Final Prompt from the OpenCrew database; writes source_package.json, rebuild_input_check.json, and rebuild_intent.json."
+    },
+    {
+      "id": "02",
+      "name": "02_Rebuild_ShotPlanBuilder",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/02_Rebuild_ShotPlanBuilder.py",
+      "stage": "shot_plan",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": false,
+      "supports_resume": false,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "source_package.json",
+        "rebuild_intent.json",
+        "task_final_prompt",
+        "task_run_model"
+      ],
+      "soft_dependencies": [
+        "segment_reference_videos",
+        "keyframes",
+        "retake_fields"
+      ],
+      "run_when": [
+        "intent package is ready",
+        "frontend needs a shot-level rebuild plan"
+      ],
+      "skip_when": [
+        "trusted rebuild_shot_plan.json already exists and user does not need refresh"
+      ],
+      "estimated_runtime": {
+        "basis": "one OpenCode LLM call over compact source package",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "rebuild_shot_plan.json"
+      ],
+      "agent_notes": "Clean SRT Phase 1 shot plan builder. Generates a UI-presentable shot plan only and preserves Analysis-aligned SRT in shot.reference.srt_text; it must not create asset tasks or render plans."
+    },
+    {
+      "id": "02_01_Shot_KeyframesRefresh",
+      "name": "02_01_Shot_KeyframesRefresh",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/02_01_Shot_KeyframesRefresh.py",
+      "stage": "shot_keyframe_refresh",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": false,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "shot_id"
+      ],
+      "soft_dependencies": [
+        "analysis_keyframes",
+        "pyscenedetect_scenes",
+        "visual_candidates"
+      ],
+      "run_when": [
+        "a shot has missing or too few reference.keyframes",
+        "the operator wants to backfill one shot without rebuilding the whole shot plan"
+      ],
+      "skip_when": [
+        "the shot already has enough trusted keyframes and no refresh is requested"
+      ],
+      "estimated_runtime": {
+        "basis": "local JSON and filesystem keyframe selection only",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "rebuild_shot_plan.json",
+        "reports/rebuild_v1/02_01_Shot_KeyframesRefresh.json",
+        "reports/rebuild_v1/02_01_Shot_KeyframesRefresh_<shot_id>.json"
+      ],
+      "agent_notes": "Standalone single-shot keyframe backfill tool. Use --task-id and --shot-id. It merges existing shot keyframes, source_package keyframes, Analysis pyscenedetect_scenes, and Analysis visual_candidates; dedupes by path/time; preserves existing frames by default; and fills first/middle/last coverage up to --target-count. Use --dry-run to inspect without writing or --replace to recompute the shot selection."
+    },
+    {
+      "id": "04",
+      "name": "04_ShotPlan_AssetTaskBuilder",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_ShotPlan_AssetTaskBuilder.py",
+      "stage": "asset_tasks",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": false,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "variant_list",
+        "subtitle_text",
+        "generation_hints"
+      ],
+      "run_when": [
+        "shot plan has been generated or manually keyframe-edited",
+        "asset task DAG should be refreshed"
+      ],
+      "skip_when": [
+        "trusted asset_tasks.json already exists after the latest keyframe save"
+      ],
+      "estimated_runtime": {
+        "basis": "local JSON planning and deterministic keyframe-pair selection",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "asset_tasks.json"
+      ],
+      "agent_notes": "Planning only. Uses saved reference.keyframes from rebuild_shot_plan.json; does not execute ComfyUI, HyperFrames, ffmpeg, GPT, Gemini, or Bailian tasks. reuse_reference_clip is disabled unless explicitly requested for debug smoke tests. Rebuild_V1 copied standalone tool; dependency contract will be normalized during V1 hardening."
+    },
+    {
+      "id": "04_1",
+      "name": "04_01_Shot_AssetTaskBuilder",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_01_Shot_AssetTaskBuilder.py",
+      "stage": "single_shot_asset_prompts",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": false,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "task_run_model",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "scene_marks",
+        "subtitle_text",
+        "generation_hints"
+      ],
+      "run_when": [
+        "a single shot needs regenerated image prompts and VEO/Wan/Sora video prompts",
+        "user selects single or first_last generation mode for one shot"
+      ],
+      "skip_when": [
+        "trusted asset prompt package already exists for the selected shot and scene mark"
+      ],
+      "estimated_runtime": {
+        "basis": "one OpenCode VLM call over one shot and one or two keyframe images",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "asset_tasks.json",
+        "asset_prompts_<shot_id>.json"
+      ],
+      "agent_notes": "Single-shot prompt asset builder. Reuses the OC-Rebuild Task bound OpenCode Session and run model. Produces regenerated image prompts, model-specific VEO/Wan/Sora video prompts, and prompt-driven asset task entries without executing generation. Rebuild_V1 copied standalone tool; dependency contract will be normalized during V1 hardening."
+    },
+    {
+      "id": "03_01_ShotPlan_TTSReferenceAudioExtract",
+      "name": "03_01_ShotPlan_TTSReferenceAudioExtract",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_01_ShotPlan_TTSReferenceAudioExtract.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "source_package.json"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/03_01_ShotPlan_TTSReferenceAudioExtract.json"
+      ],
+      "agent_notes": "Optional Clean SRT Phase 1 tool. Run only when voice reference extraction or TTS recommendation is needed; run this standalone file directly."
+    },
+    {
+      "id": "03_02_ShotPlan_TTSVoiceRecommend",
+      "name": "03_02_ShotPlan_TTSVoiceRecommend",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_02_ShotPlan_TTSVoiceRecommend.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": true,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json"
+      ],
+      "soft_dependencies": [
+        "tts/tts_reference_audio_manifest.json",
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/03_02_ShotPlan_TTSVoiceRecommend.json"
+      ],
+      "agent_notes": "Optional Clean SRT Phase 1 tool. Run only when the user wants TTS voice recommendations; run this standalone file directly."
+    },
+    {
+      "id": "03_02_ShotPlan_GTTSVoiceBuilder",
+      "name": "03_02_ShotPlan_GTTSVoiceBuilder",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_02_ShotPlan_GTTSVoiceBuilder.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "session_reference_audio"
+      ],
+      "soft_dependencies": [
+        "tts/tts_reference_audio_manifest.json",
+        "task_id",
+        "session_id",
+        "google_tts_api_key",
+        "gemini-3.1-flash-tts-preview"
+      ],
+      "run_when": [
+        "User wants a Gemini TTS voice and prompt builder",
+        "Workflow needs global Top 3 Gemini TTS candidates from a 16s session reference audio clip"
+      ],
+      "skip_when": [
+        "trusted tts/gtts_voice_builder/gtts_voice_builder_manifest.json already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Gemini TTS candidate generation, local acoustic scoring, fitted WAV creation, and HTML review output",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "tts/gtts_voice_builder/gtts_voice_builder_manifest.json",
+        "tts/gtts_voice_builder/gtts_voice_builder_review.html",
+        "tts/gtts_voice_builder/gtts_voice_builder_selection.json",
+        "tts/tts_voice_recommendations.json",
+        "reports/rebuild_v1/03_02_ShotPlan_GTTSVoiceBuilder.json"
+      ],
+      "agent_notes": "Optional Gemini-specific TTS builder. It clips the Session reference audio to 16s by default, searches Gemini 3.1 Flash TTS voice/prompt candidates, writes global Top 3 candidates, and emits a compatible recommendation file for 03_03."
+    },
+    {
+      "id": "03_02_ShotPlan_QTTSVoiceBuilder",
+      "name": "03_02_ShotPlan_QTTSVoiceBuilder",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_02_ShotPlan_QTTSVoiceBuilder.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "session_reference_audio"
+      ],
+      "soft_dependencies": [
+        "tts/tts_reference_audio_manifest.json",
+        "task_id",
+        "session_id",
+        "qwen_tts_api_key",
+        "qwen3-tts-flash-2025-11-27",
+        "qwen3-tts-instruct-flash-2026-01-26"
+      ],
+      "run_when": [
+        "User wants a Qwen TTS two-stage voice and prompt builder",
+        "Workflow needs no-instruct Top 3 plus instruct-refined Top 3 from a 16s session reference audio clip"
+      ],
+      "skip_when": [
+        "trusted tts/qtts_voice_builder/qtts_voice_builder_manifest.json already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Qwen TTS no-instruct candidate generation, instruct prompt refinement, local acoustic scoring, fitted WAV creation, and HTML review output",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "tts/qtts_voice_builder/qtts_voice_builder_manifest.json",
+        "tts/qtts_voice_builder/qtts_voice_builder_review.html",
+        "tts/qtts_voice_builder/qtts_voice_builder_selection.json",
+        "tts/tts_voice_recommendations.json",
+        "reports/rebuild_v1/03_02_ShotPlan_QTTSVoiceBuilder.json"
+      ],
+      "agent_notes": "Optional Qwen-specific TTS builder. Stage 1 uses qwen3-tts-flash-2025-11-27 without instruct to pick Top 3 voices; Stage 2 uses those voices with qwen3-tts-instruct-flash-2026-01-26 instructions to pick another Top 3; final HTML shows all 6 and emits compatible recommendations for 03_03."
+    },
+    {
+      "id": "03_03_ShotPlan_TTSVoiceSelectionWrite",
+      "name": "03_03_ShotPlan_TTSVoiceSelectionWrite",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_03_ShotPlan_TTSVoiceSelectionWrite.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json"
+      ],
+      "soft_dependencies": [
+        "tts/tts_voice_recommendations.json",
+        "task_id",
+        "session_id",
+        "default_tts_provider",
+        "default_tts_model",
+        "default_tts_voice"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/03_03_ShotPlan_TTSVoiceSelectionWrite.json"
+      ],
+      "agent_notes": "Clean SRT Phase 1 required tool. If tts/tts_voice_recommendations.json exists it is used; otherwise CLI/default TTS provider/model/voice are written. Run this standalone file directly."
+    },
+    {
+      "id": "03_04_ShotPlan_PreDeleteReadinessCheck",
+      "name": "03_04_ShotPlan_PreDeleteReadinessCheck",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/03_04_ShotPlan_PreDeleteReadinessCheck.py",
+      "stage": "phase_1_pre_delete",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/03_04_ShotPlan_PreDeleteReadinessCheck.json"
+      ],
+      "agent_notes": "Clean SRT Phase 1 required readiness check. Checks shots, keyframes, TTS selection, and spoken text only; it does not require scene marks or first/last confirmation. Run this standalone file directly."
+    },
+    {
+      "id": "04_01_Shot_FirstLastFrameMark",
+      "name": "04_01_Shot_FirstLastFrameMark",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_01_Shot_FirstLastFrameMark.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_01_Shot_FirstLastFrameMark.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Marks first/last frames for all Scene Marks in that Shot; do not pass --scene-mark-id. Use --check-dependencies-only before mutation when inputs are uncertain."
+    },
+    {
+      "id": "04_01_ShotPlan_FirstLastFrameMark",
+      "name": "04_01_ShotPlan_FirstLastFrameMark",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_01_ShotPlan_FirstLastFrameMark.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_01_ShotPlan_FirstLastFrameMark.json"
+      ],
+      "agent_notes": "Run this standalone file directly. Marks first/last frames across the ShotPlan or a scoped --shot-id list; do not pass --scene-mark-id. Use --check-dependencies-only before mutation when inputs are uncertain."
+    },
+    {
+      "id": "04_02_Scene_FirstLastFrameConfirm",
+      "name": "04_02_Scene_FirstLastFrameConfirm",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_02_Scene_FirstLastFrameConfirm.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_02_Scene_FirstLastFrameConfirm.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id and one --scene-mark-id. Confirms the selected Scene first/last state only; Agent decides the next tool from dependency output."
+    },
+    {
+      "id": "04_02_Shot_FirstLastFrameConfirm",
+      "name": "04_02_Shot_FirstLastFrameConfirm",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_02_Shot_FirstLastFrameConfirm.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_02_Shot_FirstLastFrameConfirm.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Confirms all Scene Marks in that Shot; Agent decides the next tool from dependency output."
+    },
+    {
+      "id": "04_02_ShotPlan_FirstLastFrameConfirm",
+      "name": "04_02_ShotPlan_FirstLastFrameConfirm",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_02_ShotPlan_FirstLastFrameConfirm.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_02_ShotPlan_FirstLastFrameConfirm.json"
+      ],
+      "agent_notes": "Run this standalone file directly. Confirms all target ShotPlan Scene Marks, optionally scoped by --shot-id; Agent decides the next tool from dependency output."
+    },
+    {
+      "id": "04_03_ShotPlan_FirstLastReadinessCheck",
+      "name": "04_03_ShotPlan_FirstLastReadinessCheck",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_03_ShotPlan_FirstLastReadinessCheck.py",
+      "stage": "phase_2_first_last",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "saved_shot_keyframes"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Rebuild workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/04_03_ShotPlan_FirstLastReadinessCheck.json"
+      ],
+      "agent_notes": "Run this standalone file directly. Read-only readiness check for confirmed first/last state across the ShotPlan or scoped --shot-id list; Agent should inspect blockers before running 05_01."
+    },
+    {
+      "id": "04_04_ShotPlan_SceneAssetCanonicalize",
+      "name": "04_04_ShotPlan_SceneAssetCanonicalize",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/04_04_ShotPlan_SceneAssetCanonicalize.py",
+      "stage": "phase_2_scene_asset_canonicalize",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json"
+      ],
+      "soft_dependencies": [
+        "scene_marks.json",
+        "asset_tasks.json",
+        "asset_prompts_shot_*.json",
+        "asset_workflow_dirs"
+      ],
+      "run_when": [
+        "scene mark ids or asset directories need canonical naming before Scene Prompt Refresh or Scene Image Rebuild",
+        "manual scene mark edits may have left stale scene asset directories"
+      ],
+      "skip_when": [
+        "scene ids are already canonical and no stale asset/workflow directories need cleanup"
+      ],
+      "estimated_runtime": {
+        "basis": "local JSON normalization and optional stale directory cleanup",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "rebuild_shot_plan.json",
+        "scene_marks.json",
+        "asset_tasks.json",
+        "asset_prompts_shot_*.json"
+      ],
+      "agent_notes": "Run after 04_03 readiness when scene ids or asset paths need canonicalization. Use --check-dependencies-only for a safe prerequisite check, omit --apply for dry-run, and pass --apply to update JSON files and remove stale asset/workflow directories."
+    },
+    {
+      "id": "05_01_Scene_ScenePromptRefresh",
+      "name": "05_01_Scene_ScenePromptRefresh",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/05_01_Scene_ScenePromptRefresh.py",
+      "stage": "phase_2_scene_srt_prompt",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "confirmed_first_last",
+        "task_id",
+        "opencode_session_context",
+        "task_run_model"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Phase 2 needs confirmed Scene SRT and refreshed prompt before Phase 3 generation"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/05_01_Scene_ScenePromptRefresh.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id and one --scene-mark-id. Refreshes the selected Scene SRT/prompt fields after first/last confirmation; Agent decides whether to proceed to TTS prompt or image rebuild."
+    },
+    {
+      "id": "05_01_Shot_ScenePromptRefresh",
+      "name": "05_01_Shot_ScenePromptRefresh",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/05_01_Shot_ScenePromptRefresh.py",
+      "stage": "phase_2_scene_srt_prompt",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "confirmed_first_last",
+        "task_id",
+        "opencode_session_context",
+        "task_run_model"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Phase 2 needs confirmed Scene SRT and refreshed prompts before Phase 3 generation"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/05_01_Shot_ScenePromptRefresh.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Refreshes Scene SRT/prompt fields for all Scene Marks in that Shot; Agent decides whether to proceed to TTS prompt or image rebuild."
+    },
+    {
+      "id": "05_01_Shot_StoryboardReferencePromptRefresh",
+      "name": "05_01_Shot_StoryboardReferencePromptRefresh",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/05_01_Shot_StoryboardReferencePromptRefresh.py",
+      "stage": "phase_2_scene_srt_prompt",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "storyboard_scene_marks",
+        "storyboard_dialogue_plan.json",
+        "reference_task_rebuild_shot_plan.json",
+        "shot_id"
+      ],
+      "soft_dependencies": [
+        "source_shot_id",
+        "source_scene_mark_id",
+        "reference_final_prompt_package",
+        "task_id",
+        "session_id"
+      ],
+      "run_when": [
+        "A shot was generated from StoryBoard references and has no original OCR/visual prompt source to refresh against",
+        "Current shot scenes should inherit structural prompt context from a reference Rebuild task such as Task #5"
+      ],
+      "skip_when": [
+        "The shot already has trusted scene_description and storyboard_reference_match fields for the same reference task"
+      ],
+      "estimated_runtime": {
+        "basis": "Local JSON matching and deterministic prompt-field merge; no OpenCode, VLM, image generation, TTS, or video generation",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "rebuild_shot_plan.json",
+        "reports/rebuild_v1/05_01_Shot_StoryboardReferencePromptRefresh.json",
+        "Assets/<variant_id>/<shot_id>/reports/storyboard_reference_prompt_refresh.json"
+      ],
+      "agent_notes": "StoryBoard-specific 05_01 shot-level refresh. Use this instead of 05_01_Shot_ScenePromptRefresh when the current shot is made from storyboard images and cannot rely on original OCR/video visual evidence. It keeps current scene timing/keyframes/dialogue, loads storyboard_dialogue_plan.json to recover one-to-many Task #5 coverage, matches back to a reference task by source ids or dialogue similarity, then writes scene_description, final_prompts seed fields, storyboard_reference_match, and storyboard_reference_coverage metadata for later 05_02 and Plan D 12_00."
+    },
+    {
+      "id": "05_01_ShotPlan_ScenePromptRefresh",
+      "name": "05_01_ShotPlan_ScenePromptRefresh",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/05_01_ShotPlan_ScenePromptRefresh.py",
+      "stage": "phase_2_scene_srt_prompt",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "source_package.json",
+        "confirmed_first_last",
+        "task_id",
+        "opencode_session_context",
+        "task_run_model"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Phase 2 needs confirmed Scene SRT and refreshed prompts across the shot plan before Phase 3 generation"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/rebuild_v1/05_01_ShotPlan_ScenePromptRefresh.json"
+      ],
+      "agent_notes": "Run this standalone file directly. Refreshes Scene SRT/prompt fields across the ShotPlan or scoped --shot-id list; Agent uses dependency output and reports to decide the next Phase 3 tool."
+    },
+    {
+      "id": "05_02_Shot_FinalPromptPackageBuild",
+      "name": "05_02_Shot_FinalPromptPackageBuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/05_02_Shot_FinalPromptPackageBuild.py",
+      "stage": "phase_3_prompt_package",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "scene_srt",
+        "scene_prompt",
+        "tts_selection",
+        "shot_id"
+      ],
+      "soft_dependencies": [
+        "prompt_references",
+        "default_video_target_model"
+      ],
+      "run_when": [
+        "a shot should expose all final executable prompts before any TTS, image, or video generation",
+        "operator wants a reviewable TTS prompt, first-frame image prompt, and Grok video prompt package"
+      ],
+      "skip_when": [
+        "trusted Assets/<variant_id>/<shot_id>/final_prompt_package.json already exists for the current shot plan state"
+      ],
+      "estimated_runtime": {
+        "basis": "local prompt packaging from refreshed scene prompts, selected TTS model prompt/speed, and copied consistency references",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "rebuild_shot_plan.json",
+        "Assets/<variant_id>/<shot_id>/final_prompt_package.json",
+        "reports/rebuild_v1/05_02_Shot_FinalPromptPackageBuild.json"
+      ],
+      "agent_notes": "Run this after 05_01_Shot_ScenePromptRefresh and before 07_02/06_01/11_01. It writes final_prompt_package metadata back to the shot, stores scene final_prompts, defaults video target prompts to Grok, and preserves selected TTS model prompt/speed instructions."
+    },
+    {
+      "id": "06_01_Scene_PlanA_SceneImageRebuild",
+      "name": "06_01_Scene_PlanA_SceneImageRebuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_01_Scene_PlanA_SceneImageRebuild.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 rebuilds Scene images after shot-level TTS is locked and validated"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_01_Scene_PlanA_SceneImageRebuild.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id and one --scene-mark-id. Rebuilds the selected Scene image; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "06_01_Shot_PlanA_SceneImageRebuild",
+      "name": "06_01_Shot_PlanA_SceneImageRebuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_01_Shot_PlanA_SceneImageRebuild.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 rebuilds all Scene images in one Shot after shot-level TTS is locked and validated"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_01_Shot_PlanA_SceneImageRebuild.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Rebuilds Scene images for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "06_01_ShotPlan_PlanA_SceneImageRebuild",
+      "name": "06_01_ShotPlan_PlanA_SceneImageRebuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_01_ShotPlan_PlanA_SceneImageRebuild.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": true,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "default_image_provider_config",
+        "opencode_session_prompt_execution"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs first-image Scene assets after shot-level TTS is locked and validated"
+      ],
+      "skip_when": [
+        "all Scene first images already exist under assets/variant_001/<shot>/<scene>/first.png"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration loops Shot level SceneImageRebuild; Shot level loops Scene level SceneImageRebuild",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_01_ShotPlan_PlanA_SceneImageRebuild.json",
+        "assets/variant_001/<shot_id>/<scene_mark_id>/first.png",
+        "assets/variant_001/<shot_id>/<scene_mark_id>/asset_manifest.json"
+      ],
+      "agent_notes": "Invoke after 07_03 TTS timeline validation. ShotPlan calls Shot level, and Shot level calls Scene level; Auto v0 uses only each Scene's confirmed first keyframe. Rebuild_V1 standalone tool: run this file directly; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "06_02_Scene_PlanA_SceneImageSelect",
+      "name": "06_02_Scene_PlanA_SceneImageSelect",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_02_Scene_PlanA_SceneImageSelect.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 selects Scene images after image rebuild"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_02_Scene_PlanA_SceneImageSelect.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id and one --scene-mark-id. Selects the generated Scene image; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "06_02_Shot_PlanA_SceneImageSelect",
+      "name": "06_02_Shot_PlanA_SceneImageSelect",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_02_Shot_PlanA_SceneImageSelect.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 selects all Scene images in one Shot after image rebuild"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_02_Shot_PlanA_SceneImageSelect.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Selects generated Scene images for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "06_02_ShotPlan_PlanA_SceneImageSelect",
+      "name": "06_02_ShotPlan_PlanA_SceneImageSelect",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/06_02_ShotPlan_PlanA_SceneImageSelect.py",
+      "stage": "plan_a_phase_3_scene_assets",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last",
+        "assets/variant_001/<shot_id>/<scene_mark_id>/first.png"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution"
+      ],
+      "run_when": [
+        "Plan A Auto v0 should select and validate all Scene first-image assets after TTS and image rebuild, before HyperFrames"
+      ],
+      "skip_when": [
+        "trusted selected Scene assets are already written to rebuild_shot_plan.json"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration loops Shot level SceneImageSelect; Shot level loops Scene level SceneImageSelect",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/06_02_ShotPlan_PlanA_SceneImageSelect.json",
+        "plan_a/scene_image_select_06_02_ShotPlan_PlanA_SceneImageSelect.json"
+      ],
+      "agent_notes": "Invoke after 06_01 image rebuild. ShotPlan calls Shot level, and Shot level calls Scene level. It selects only first.png for every Scene and reports missing assets as blocking_errors. Rebuild_V1 standalone tool: run this file directly; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_01_Shot_PlanA_TTSPromptBuild",
+      "name": "07_01_Shot_PlanA_TTSPromptBuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_01_Shot_PlanA_TTSPromptBuild.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_01_Shot_PlanA_TTSPromptBuild.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Builds the Shot TTS prompt package; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_01_ShotPlan_PlanA_TTSPromptBuild",
+      "name": "07_01_ShotPlan_PlanA_TTSPromptBuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_01_ShotPlan_PlanA_TTSPromptBuild.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level TTS prompt build actions"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot level TTSPromptBuild logic",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_01_ShotPlan_PlanA_TTSPromptBuild.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 TTS prompt build. Use the Shot-level tool with --shot-id for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_02_Shot_PlanA_TTSGenerateAndLock",
+      "name": "07_02_Shot_PlanA_TTSGenerateAndLock",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_02_Shot_PlanA_TTSGenerateAndLock.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_02_Shot_PlanA_TTSGenerateAndLock.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Generates and locks TTS for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_02_ShotPlan_PlanA_TTSGenerateAndLock",
+      "name": "07_02_ShotPlan_PlanA_TTSGenerateAndLock",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_02_ShotPlan_PlanA_TTSGenerateAndLock.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level TTS generation and lock actions"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot level TTSGenerateAndLock logic",
+        "relative": "medium"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_02_ShotPlan_PlanA_TTSGenerateAndLock.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 TTS generation and locking. Use the Shot-level tool with --shot-id for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_03_Shot_PlanA_TTSTimelineValidate",
+      "name": "07_03_Shot_PlanA_TTSTimelineValidate",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_03_Shot_PlanA_TTSTimelineValidate.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_03_Shot_PlanA_TTSTimelineValidate.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Validates the locked TTS timeline for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "07_03_ShotPlan_PlanA_TTSTimelineValidate",
+      "name": "07_03_ShotPlan_PlanA_TTSTimelineValidate",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/07_03_ShotPlan_PlanA_TTSTimelineValidate.py",
+      "stage": "plan_a_phase_3_tts",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "rebuild_shot_plan.json",
+        "confirmed_first_last"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level TTS timeline validation actions"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot level TTSTimelineValidate logic",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/07_03_ShotPlan_PlanA_TTSTimelineValidate.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 TTS timeline validation. Use the Shot-level tool with --shot-id for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_01_Scene_PlanA_ImageSequenceClipPlan",
+      "name": "08_01_Scene_PlanA_ImageSequenceClipPlan",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_01_Scene_PlanA_ImageSequenceClipPlan.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_01_Scene_PlanA_ImageSequenceClipPlan.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id and one --scene-mark-id. Builds the Scene image-sequence clip plan; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_01_Shot_PlanA_ImageSequenceClipPlan",
+      "name": "08_01_Shot_PlanA_ImageSequenceClipPlan",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_01_Shot_PlanA_ImageSequenceClipPlan.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_01_Shot_PlanA_ImageSequenceClipPlan.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Builds image-sequence clip plans for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_01_ShotPlan_PlanA_ImageSequenceClipPlan",
+      "name": "08_01_ShotPlan_PlanA_ImageSequenceClipPlan",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_01_ShotPlan_PlanA_ImageSequenceClipPlan.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level image sequence clip planning"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot and Scene level ImageSequenceClipPlan logic",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_01_ShotPlan_PlanA_ImageSequenceClipPlan.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 image-sequence clip planning. Use Shot or Scene level variants for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_02_Shot_PlanA_HyperframeSubtitleAlign",
+      "name": "08_02_Shot_PlanA_HyperframeSubtitleAlign",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_02_Shot_PlanA_HyperframeSubtitleAlign.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_02_Shot_PlanA_HyperframeSubtitleAlign.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Aligns HyperFrames subtitles for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_02_ShotPlan_PlanA_HyperframeSubtitleAlign",
+      "name": "08_02_ShotPlan_PlanA_HyperframeSubtitleAlign",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_02_ShotPlan_PlanA_HyperframeSubtitleAlign.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level HyperFrames subtitle alignment"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot level HyperframeSubtitleAlign logic",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_02_ShotPlan_PlanA_HyperframeSubtitleAlign.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 HyperFrames subtitle alignment. Use the Shot-level tool with --shot-id for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_03_Shot_PlanA_ImageSequenceCompose",
+      "name": "08_03_Shot_PlanA_ImageSequenceCompose",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_03_Shot_PlanA_ImageSequenceCompose.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_03_Shot_PlanA_ImageSequenceCompose.json"
+      ],
+      "agent_notes": "Run this standalone file directly with exactly one --shot-id. Composes the image-sequence video for that Shot; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "08_03_ShotPlan_PlanA_ImageSequenceCompose",
+      "name": "08_03_ShotPlan_PlanA_ImageSequenceCompose",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/08_03_ShotPlan_PlanA_ImageSequenceCompose.py",
+      "stage": "plan_a_phase_3_shot_video",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "scene_assets",
+        "locked_tts",
+        "shot_srt"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 needs a ShotPlan-level entrypoint that loops all Shot-level image sequence video compose actions"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "ShotPlan level orchestration that loops Shot level ImageSequenceCompose logic",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/08_03_ShotPlan_PlanA_ImageSequenceCompose.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Phase 3 image-sequence composition. Use the Shot-level tool with --shot-id for local reruns; use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "09_01_ShotPlan_PlanA_AssemblyBuild",
+      "name": "09_01_ShotPlan_PlanA_AssemblyBuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/09_01_ShotPlan_PlanA_AssemblyBuild.py",
+      "stage": "plan_a_phase_3_assembly",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "plan_a_videos"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/09_01_ShotPlan_PlanA_AssemblyBuild.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan assembly build. Use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "09_02_ShotPlan_PlanA_Compose",
+      "name": "09_02_ShotPlan_PlanA_Compose",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/09_02_ShotPlan_PlanA_Compose.py",
+      "stage": "plan_a_phase_3_assembly",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "plan_a_videos"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/09_02_ShotPlan_PlanA_Compose.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Auto V0 composition. Use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "09_03_ShotPlan_PlanA_QualityCheck",
+      "name": "09_03_ShotPlan_PlanA_QualityCheck",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/09_03_ShotPlan_PlanA_QualityCheck.py",
+      "stage": "plan_a_phase_3_assembly",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": [
+        "plan_a_videos"
+      ],
+      "soft_dependencies": [
+        "task_id",
+        "session_id",
+        "opencode_session_prompt_execution",
+        "default_tts_provider"
+      ],
+      "run_when": [
+        "Plan A Auto v0 workflow needs this level-specific action"
+      ],
+      "skip_when": [
+        "trusted output for this tool id already exists and inputs are unchanged"
+      ],
+      "estimated_runtime": {
+        "basis": "Plan A deterministic orchestration; generation tools create manifests/status unless backend output already exists",
+        "relative": "very_low"
+      },
+      "main_outputs": [
+        "reports/plan_a/09_03_ShotPlan_PlanA_QualityCheck.json"
+      ],
+      "agent_notes": "Run this standalone file directly for full-plan Auto V0 quality check. Use --check-dependencies-only to inspect missing prerequisites."
+    },
+    {
+      "id": "11_01_Shot_PlanC_ReadinessCheck",
+      "name": "11_01_Shot_PlanC_ReadinessCheck",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/11_01_Shot_PlanC_ReadinessCheck.py",
+      "stage": "plan_c_phase_3_readiness",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["locked_tts", "shot_srt", "shot_tts_timeline", "scene_assets"],
+      "soft_dependencies": ["task_id", "session_id", "active_video_config"],
+      "run_when": ["Plan C shot needs readiness validation before R2V generation"],
+      "skip_when": ["trusted shot-local Plan C readiness report already exists and inputs are unchanged"],
+      "estimated_runtime": {"basis": "Local file and manifest checks", "relative": "very_low"},
+      "main_outputs": ["Assets/<variant_id>/<shot_id>/reports/plan_c_11_01_readiness_check.json"],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with --shot-id. Does not create a top-level plan_c directory."
+    },
+    {
+      "id": "11_02_Shot_PlanC_PerSceneR2VGenerate",
+      "name": "11_02_Shot_PlanC_PerSceneR2VGenerate",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/11_02_Shot_PlanC_PerSceneR2VGenerate.py",
+      "stage": "plan_c_phase_3_r2v",
+      "required_by_default": false,
+      "cost_level": "high",
+      "uses_llm": false,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["locked_tts", "shot_srt", "shot_tts_timeline", "scene_assets", "active_video_config"],
+      "soft_dependencies": ["task_id", "session_id"],
+      "run_when": ["Plan C shot needs R2V clips generated from shared scene images"],
+      "skip_when": ["trusted Plan C R2V outputs already exist and --force is not set"],
+      "estimated_runtime": {"basis": "One or more external video generation requests", "relative": "high"},
+      "main_outputs": ["Assets/<variant_id>/<shot_id>/<scene_mark_id>/plan_c_video_plan.json"],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with --shot-id. Writes batch intermediates under the shot reports folder, not a top-level plan_c directory."
+    },
+    {
+      "id": "11_03_Shot_PlanC_SRTRetimeCompose",
+      "name": "11_03_Shot_PlanC_SRTRetimeCompose",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/11_03_Shot_PlanC_SRTRetimeCompose.py",
+      "stage": "plan_c_phase_3_retime",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["plan_c_video_plan", "plan_c_batch_video", "shot_srt"],
+      "soft_dependencies": ["task_id", "session_id"],
+      "run_when": ["Plan C shot R2V clips need retiming to locked TTS/SRT"],
+      "skip_when": ["trusted plan_c_alignment.json and scene retime manifests already exist"],
+      "estimated_runtime": {"basis": "Local ffmpeg slicing, retiming, and concat", "relative": "very_low"},
+      "main_outputs": ["Assets/<variant_id>/<shot_id>/plan_c_alignment.json", "Assets/<variant_id>/<shot_id>/<scene_mark_id>/plan_c_retime.json", "Assets/<variant_id>/<shot_id>/plan_c.srt"],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with --shot-id."
+    },
+    {
+      "id": "11_04_Shot_PlanC_FinalCompose",
+      "name": "11_04_Shot_PlanC_FinalCompose",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/11_04_Shot_PlanC_FinalCompose.py",
+      "stage": "plan_c_phase_3_shot_video",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["plan_c_alignment", "locked_tts", "plan_c_srt"],
+      "soft_dependencies": ["task_id", "session_id"],
+      "run_when": ["Plan C shot needs final video composition"],
+      "skip_when": ["Assets/<variant_id>/<shot_id>/plan_c.mp4 exists and validates unless --force is set"],
+      "estimated_runtime": {"basis": "Local ffmpeg composition", "relative": "very_low"},
+      "main_outputs": ["Assets/<variant_id>/<shot_id>/plan_c.mp4", "Assets/<variant_id>/<shot_id>/reports/plan_c_11_04_final_compose.json"],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with --shot-id. Output filename is plan_c.mp4."
+    },
+    {
+      "id": "12_00_Shot_PlanD_ReplacementImagePromptBuild",
+      "name": "12_00_Shot_PlanD_ReplacementImagePromptBuild",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/12_00_Shot_PlanD_ReplacementImagePromptBuild.py",
+      "stage": "plan_d_phase_2_replacement_image_prompt_build",
+      "required_by_default": false,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["rebuild_shot_plan.json", "shot_id", "shot_plan_scene_first_keyframes", "host_consistency_reference", "product_consistency_reference"],
+      "soft_dependencies": ["final_prompt_package", "task_id", "session_id"],
+      "run_when": ["Shot needs the unified final Image, TTS, and Video prompt package for each scene"],
+      "skip_when": ["final_prompt_package.json already has prompt_package_version=final_v1 with tts_prompt plus image_prompt and video_prompt for every scene unless --force is set"],
+      "estimated_runtime": {"basis": "Local deterministic prompt package build", "relative": "very_low"},
+      "main_outputs": [
+        "Assets/<variant_id>/<shot_id>/final_prompt_package.json",
+        "Assets/<variant_id>/<shot_id>/reports/plan_d_12_00_replacement_image_prompt_build.json"
+      ],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with exactly one --shot-id. It writes one unified final_prompt_package.json with fields: shot_id, updated_at, prompt_package_version, references.host_image, references.product_image, tts_prompt, tts_speed_notes, scenes[].scene_mark_id, scenes[].reference_image, scenes[].image_prompt, scenes[].video_prompt. scenes[].reference_image is the original source first/single keyframe from rebuild_shot_plan.json used to write the replacement-image prompt; the generated Scene first image is the downstream output at Assets/<variant_id>/<shot_id>/<scene_mark_id>/first.png. It requires host/product consistency references and a source first/single keyframe for every scene mark. If a scene has no source first/single keyframe, the tool returns status=blocked and does not generate draft prompts."
+    },
+    {
+      "id": "12_02_Shot_PlanD_CodexImageGenFirstFrameGenerate",
+      "name": "12_02_Shot_PlanD_CodexImageGenFirstFrameGenerate",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/12_02_Shot_PlanD_CodexImageGenFirstFrameGenerate.py",
+      "stage": "plan_d_phase_3_codex_imagegen_first_frame_generate",
+      "required_by_default": false,
+      "cost_level": "external_skill",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "uses_image_gen_skill": true,
+      "supports_resume": true,
+      "supports_progress_log": true,
+      "hard_dependencies": ["final_prompt_package", "shot_plan_scene_first_keyframes", "host_consistency_reference", "product_consistency_reference"],
+      "soft_dependencies": ["task_id", "session_id"],
+      "run_when": ["Shot Plan D needs generated replacement first-frame images for every scene using Codex built-in image_gen"],
+      "skip_when": ["Assets/<variant_id>/<shot_id>/<scene_mark_id>/first.png already exists for every scene unless --force is set"],
+      "estimated_runtime": {"basis": "Depends on Codex image_gen execution; prepare/import are local", "relative": "medium"},
+      "main_outputs": [
+        "Assets/<variant_id>/<shot_id>/codex_imagegen_jobs.json",
+        "Assets/<variant_id>/<shot_id>/<scene_mark_id>/codex_imagegen_prompt.txt",
+        "Assets/<variant_id>/<shot_id>/<scene_mark_id>/first.png",
+        "Assets/<variant_id>/<shot_id>/<scene_mark_id>/asset_manifest.json",
+        "Assets/<variant_id>/<shot_id>/reports/plan_d_12_02_codex_imagegen_first_frame_jobs.json"
+      ],
+      "agent_notes": "Python cannot directly call the Codex built-in image_gen skill. Run this tool in --mode prepare to create per-scene Codex image_gen jobs and prompt files from final_prompt_package.json. Codex should then call the built-in imagegen skill for each job using source first frame, host reference, and product reference. After each image is generated, run this tool in --mode import with --scene-mark-id and --generated-image to copy the result to Assets/<variant_id>/<shot_id>/<scene_mark_id>/first.png, write asset_manifest.json, and sync rebuild_shot_plan.json."
+    },
+    {
+      "id": "12_01_Shot_PlanD_TTSDrivenLipSyncVideoGenerate",
+      "name": "12_01_Shot_PlanD_TTSDrivenLipSyncVideoGenerate",
+      "script": "OpenCrew/ToolLibrary/Rebuild_V1/12_01_Shot_PlanD_TTSDrivenLipSyncVideoGenerate.py",
+      "stage": "plan_d_phase_3_tts_driven_lipsync_video",
+      "required_by_default": false,
+      "cost_level": "very_high",
+      "uses_llm": false,
+      "uses_vlm": true,
+      "supports_resume": true,
+      "supports_progress_log": false,
+      "hard_dependencies": ["final_prompt_package", "confirmed_srt", "tts_config", "active_video_config"],
+      "soft_dependencies": ["task_id", "session_id", "scene_assets"],
+      "run_when": ["Shot needs the standard TTS-driven active-video-model generation; Sync.so lip sync is only called when at least one Scene has a visible mouth/lip-sync task"],
+      "skip_when": ["Assets/<variant_id>/<shot_id>/plan_d.mp4 exists and --force / --force-lipsync-refresh is not set"],
+      "estimated_runtime": {"basis": "One TTS request, one video generation request, one Sync.so lip-sync request", "relative": "very_high"},
+      "main_outputs": [
+        "Assets/<variant_id>/<shot_id>/plan_d.mp4",
+        "Assets/<variant_id>/<shot_id>/plan_d_raw.mp4",
+        "Assets/<variant_id>/<shot_id>/plan_d_video_prompt_timed.txt",
+        "Assets/<variant_id>/<shot_id>/plan_d_video_prompt_timed.json",
+        "Assets/<variant_id>/<shot_id>/tts/locked.wav",
+        "Assets/<variant_id>/<shot_id>/tts/shot_tts_timeline.locked.json",
+        "Assets/<variant_id>/<shot_id>/reports/plan_d_12_01_tts_driven_lipsync_video_generate.json"
+      ],
+      "agent_notes": "Run this Rebuild_V1 standalone file directly with exactly one --shot-id. Final video is written directly as Assets/<variant_id>/<shot_id>/plan_d.mp4, not inside a plan_d folder. Video models are read from Connection config; lipsync config is read only when the Shot has at least one Scene requiring visible mouth sync. The timed prompt saved in plan_d_video_prompt_timed.txt/json is the exact prompt sent to the video model and is synced back into final_prompt_package.json."
+    }
+  ]
+}

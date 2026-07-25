@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenCrew SVG 图标替换可视化对比表</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --line: #dbe2ea;
+      --text: #172033;
+      --muted: #627083;
+      --strong: #111827;
+      --blue: #2563eb;
+      --indigo: #4f46e5;
+      --emerald: #059669;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --purple: #7c3aed;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --surface: #111827;
+        --surface-soft: #1e293b;
+        --line: #334155;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --strong: #f8fafc;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 1120px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1480px, calc(100vw - 48px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--strong);
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      min-width: 360px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+      height: 26px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .pill.p0 {
+      color: #fff;
+      background: var(--rose);
+      border-color: transparent;
+    }
+
+    .pill.p1 {
+      color: #fff;
+      background: var(--blue);
+      border-color: transparent;
+    }
+
+    .pill.p2 {
+      color: #fff;
+      background: var(--purple);
+      border-color: transparent;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .summary-card {
+      min-height: 104px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card strong {
+      display: block;
+      color: var(--strong);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .summary-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--surface-soft);
+      color: var(--strong);
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      text-align: left;
+      padding: 12px 14px;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      font-size: 13px;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: color-mix(in srgb, var(--surface-soft) 42%, transparent);
+    }
+
+    .col-category { width: 132px; }
+    .col-current { width: 190px; }
+    .col-gemini { width: 210px; }
+    .col-priority { width: 86px; }
+    .col-location { width: 250px; }
+    .col-reason { width: auto; }
+    .col-action { width: 190px; }
+
+    .category {
+      color: var(--strong);
+      font-weight: 800;
+    }
+
+    .icon-panel {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .icon-box svg {
+      width: 26px;
+      height: 26px;
+      flex: 0 0 auto;
+    }
+
+    .icon-box.current {
+      color: var(--muted);
+    }
+
+    .icon-box.gemini.audio,
+    .icon-box.gemini.workflow {
+      color: var(--indigo);
+    }
+
+    .icon-box.gemini.image {
+      color: var(--emerald);
+    }
+
+    .icon-box.gemini.video {
+      color: var(--blue);
+    }
+
+    .icon-box.gemini.sync,
+    .icon-box.gemini.segment {
+      color: var(--amber);
+    }
+
+    .icon-box.gemini.operation {
+      color: var(--purple);
+    }
+
+    .icon-name {
+      display: block;
+      color: var(--strong);
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-source {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    code {
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-soft);
+      color: var(--strong);
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 28px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .status.p0 { background: var(--rose); }
+    .status.p1 { background: var(--blue); }
+    .status.p2 { background: var(--purple); }
+    .status.keep {
+      color: var(--muted);
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .action {
+      color: var(--strong);
+      font-weight: 700;
+    }
+
+    .notes {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .notes strong {
+      color: var(--strong);
+    }
+
+    .notes ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>OpenCrew SVG 图标替换可视化对比表</h1>
+        <p class="subtitle">
+          左侧是当前 OpenClip / Koubo / Analysis_V1 中的手写图标，右侧是 `SessionDesign-R2/icons.tsx` 和 `ExecutionPlanModal.tsx` 里更推荐的 Gemini 图标。优先级按语义错误、视觉收益、替换风险综合排序。
+        </p>
+      </div>
+      <div class="legend" aria-label="优先级说明">
+        <span class="pill p0">P0 先换</span>
+        <span class="pill p1">P1 建议换</span>
+        <span class="pill p2">P2 可统一</span>
+        <span class="pill">KEEP 保留</span>
+      </div>
+    </header>
+
+    <section class="summary-grid" aria-label="替换摘要">
+      <div class="summary-card">
+        <strong>第一批</strong>
+        <span>KouboVideoPlanModal：Audio、Scene、Segment、Video、Sync，直接套用 ExecutionPlanModal 的业务映射。</span>
+      </div>
+      <div class="summary-card">
+        <strong>第二批</strong>
+        <span>DialogueCard / KouboSidebar：图片、视频、音频素材槽、切分操作，统一媒体语义。</span>
+      </div>
+      <div class="summary-card">
+        <strong>第三批</strong>
+        <span>Analysis_V1：TTS Builder、Prompt Builder、文档、上传、设置类工具按钮逐步统一。</span>
+      </div>
+      <div class="summary-card">
+        <strong>暂不替换</strong>
+        <span>播放态、保存、价格、模型配置里的专用模型图标，当前语义仍然更明确。</span>
+      </div>
+    </section>
+
+    <main class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-category">类别</th>
+            <th class="col-current">当前图标</th>
+            <th class="col-gemini">建议图标</th>
+            <th class="col-priority">优先级</th>
+            <th class="col-location">建议替换位置</th>
+            <th class="col-reason">原因</th>
+            <th class="col-action">替换动作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="category">Audio 任务</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+                </span>
+                <span><span class="icon-name">PauseIcon</span><span class="icon-source">当前：KouboVideoPlanModal</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini audio">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                </span>
+                <span><span class="icon-name">Mic</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p0">P0</span></td>
+            <td><code>KouboVideoPlanModal.jsx</code> 顶部任务统计、AUDIO badge</td>
+            <td>Pause 是播放暂停状态，不是音频生成任务；Mic 更适合 TTS / 声音生成。</td>
+            <td class="action">`PauseIcon` -> `Mic`</td>
+          </tr>
+
+          <tr>
+            <td class="category">Sync / Lipsync</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15a7 7 0 0 1 14 0"/><path d="M12 15l4-4"/><path d="M8 19h8"/></svg>
+                </span>
+                <span><span class="icon-name">SpeedIcon</span><span class="icon-source">当前：Sync Tasks</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini sync">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+                </span>
+                <span><span class="icon-name">AudioLines</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p0">P0</span></td>
+            <td><code>KouboVideoPlanModal.jsx</code> 顶部 Sync、pipeline SYNC badge</td>
+            <td>Speed 表示速度设置，容易误解；AudioLines 至少能表达“声音驱动同步”。</td>
+            <td class="action">`SpeedIcon` -> `AudioLines`，后续补专用 LipsyncIcon</td>
+          </tr>
+
+          <tr>
+            <td class="category">Segment 统计</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15a7 7 0 0 1 14 0"/><path d="M12 15l4-4"/><path d="M8 19h8"/></svg>
+                </span>
+                <span><span class="icon-name">SpeedIcon</span><span class="icon-source">当前：Segments</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini segment">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><path d="M14 4h7"/><path d="M14 9h7"/><path d="M14 15h7"/><path d="M14 20h7"/></svg>
+                </span>
+                <span><span class="icon-name">LayoutList</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p0">P0</span></td>
+            <td><code>KouboVideoPlanModal.jsx</code> 顶部 Segment 指标</td>
+            <td>Segment 是计划切片/列表，不是速度；LayoutList 的语义和视觉都更准。</td>
+            <td class="action">`SpeedIcon` -> `LayoutList`</td>
+          </tr>
+
+          <tr>
+            <td class="category">Scene 统计</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M9 6h3a3 3 0 0 1 3 3v6"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></svg>
+                </span>
+                <span><span class="icon-name">WorkflowIcon</span><span class="icon-source">当前：Scenes</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini workflow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l-10 5 10 5 10-5-10-5z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg>
+                </span>
+                <span><span class="icon-name">Layers</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p0">P0</span></td>
+            <td><code>KouboVideoPlanModal.jsx</code> 顶部 Scene 指标</td>
+            <td>主标题已经用 Workflow，Scene Count 用 Layers 更像场景层级，也减少重复。</td>
+            <td class="action">`WorkflowIcon` -> `Layers`</td>
+          </tr>
+
+          <tr>
+            <td class="category">Video 任务</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 9h16M4 15h16"/></svg>
+                </span>
+                <span><span class="icon-name">FilmIcon</span><span class="icon-source">当前：Video Tasks</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini video">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+                </span>
+                <span><span class="icon-name">Clapperboard</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>KouboVideoPlanModal.jsx</code> Video Tasks、pipeline VIDEO badge</td>
+            <td>Film 更适合 Shot / 素材片段；Clapperboard 更适合生成视频任务。</td>
+            <td class="action">`FilmIcon` -> `Clapperboard`</td>
+          </tr>
+
+          <tr>
+            <td class="category">Shot / 视频片段</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 9h16M4 15h16"/></svg>
+                </span>
+                <span><span class="icon-name">FilmIcon</span><span class="icon-source">当前：Shot / brand</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini video">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
+                </span>
+                <span><span class="icon-name">Film</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>KouboSidebar.jsx</code>、Shot 指标、视频素材槽</td>
+            <td>Gemini 版本胶片孔更完整，小尺寸下也更像“片段/镜头”。</td>
+            <td class="action">`FilmIcon` -> `Film`</td>
+          </tr>
+
+          <tr>
+            <td class="category">Image / 首帧图</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m7 15 3-3 3 3 2-2 3 3"/><circle cx="8" cy="9" r="1.2"/></svg>
+                </span>
+                <span><span class="icon-name">ImageIcon</span><span class="icon-source">当前：Koubo</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </span>
+                <span><span class="icon-name">ImageIcon</span><span class="icon-source">Gemini：ExecutionPlanModal</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>DialogueCard.jsx</code>、<code>KouboSidebar.jsx</code>、Frame Tasks</td>
+            <td>Gemini 图片图标构图更饱满，适合原图、新图、首帧图统一使用。</td>
+            <td class="action">替换为 Gemini `ImageIcon`</td>
+          </tr>
+
+          <tr>
+            <td class="category">音频素材槽</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9.5a4 4 0 0 1 0 5"/><path d="M19 7a8 8 0 0 1 0 10"/></svg>
+                </span>
+                <span><span class="icon-name">VolumeIcon</span><span class="icon-source">当前：Audio slot</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini sync">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+                </span>
+                <span><span class="icon-name">AudioLines</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>DialogueCard.jsx</code> 音频素材槽、<code>KouboSidebar.jsx</code> 绑定状态</td>
+            <td>Volume 更像输出音量；AudioLines 更像素材/波形。播放按钮里仍可保留 Volume/Play/Pause。</td>
+            <td class="action">素材槽 `VolumeIcon` -> `AudioLines`</td>
+          </tr>
+
+          <tr>
+            <td class="category">切分操作</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><path d="M8 8.5 19 17M8 15.5 19 7"/></svg>
+                </span>
+                <span><span class="icon-name">ScissorIcon</span><span class="icon-source">当前：split scene / shot</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+                </span>
+                <span><span class="icon-name">Scissors</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>DialogueCard.jsx</code> Split Scene / Split Shot</td>
+            <td>Gemini scissors 更完整，剪辑语义更明显。</td>
+            <td class="action">`ScissorIcon` -> `Scissors`</td>
+          </tr>
+
+          <tr>
+            <td class="category">刷新 / 重跑</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.7L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4.7L20 16"/><path d="M20 20v-4h-4"/></svg>
+                </span>
+                <span><span class="icon-name">RefreshIcon</span><span class="icon-source">当前：timing / reload</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                </span>
+                <span><span class="icon-name">RefreshCw</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>KouboTimingMenu.jsx</code>、reload / regenerate 入口</td>
+            <td>Gemini 版本视觉更平衡，和同套图标的箭头风格一致。</td>
+            <td class="action">`RefreshIcon` -> `RefreshCw`</td>
+          </tr>
+
+          <tr>
+            <td class="category">上传</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+                </span>
+                <span><span class="icon-name">UploadIcon</span><span class="icon-source">当前：TTS Builder</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 13v8"/><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m8 17 4-4 4 4"/></svg>
+                </span>
+                <span><span class="icon-name">UploadCloud</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td><code>AnalysisV1TTSBuilder.jsx</code> 上传参考声音</td>
+            <td>UploadCloud 更像素材/服务上传；如果是本地导入，也可以用 ArrowUpToLine。</td>
+            <td class="action">`UploadIcon` -> `UploadCloud`</td>
+          </tr>
+
+          <tr>
+            <td class="category">参数 / 设置</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h5"/><path d="M15 7h5"/><circle cx="12" cy="7" r="3"/><path d="M4 17h9"/><path d="M19 17h1"/><circle cx="16" cy="17" r="3"/></svg>
+                </span>
+                <span><span class="icon-name">SlidersIcon</span><span class="icon-source">当前：Prompt / timing</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 17H5"/><path d="M19 7h-9"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                </span>
+                <span><span class="icon-name">Settings2</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td>Prompt Builder、Builder-G Timing、参数面板入口</td>
+            <td>Settings2 更紧凑，适合作为工具按钮；真实滑杆界面可保留 Sliders。</td>
+            <td class="action">入口按钮换 `Settings2`</td>
+          </tr>
+
+          <tr>
+            <td class="category">文档 / 提示词</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+                </span>
+                <span><span class="icon-name">DocumentIcon</span><span class="icon-source">当前：Prompt preview</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                </span>
+                <span><span class="icon-name">FileText</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td>查看最终提示词、计划详情、文档入口</td>
+            <td>FileText 文档折角和文本线更完整，和 Code 图标搭配更统一。</td>
+            <td class="action">`DocumentIcon` -> `FileText`</td>
+          </tr>
+
+          <tr>
+            <td class="category">智能生成</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8Z"/></svg>
+                </span>
+                <span><span class="icon-name">SparkIcon</span><span class="icon-source">当前：Storyboard</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>
+                </span>
+                <span><span class="icon-name">Sparkles</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status p1">P1</span></td>
+            <td>自动生成、AI 建议、重写建议</td>
+            <td>Sparkles 更丰富，更像 AI 生成动作；普通保存/刷新不要滥用。</td>
+            <td class="action">`SparkIcon` -> `Sparkles`</td>
+          </tr>
+
+          <tr>
+            <td class="category">播放状态</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5a1 1 0 0 1 1.5-.86l8 5a1 1 0 0 1 0 1.72l-8 5A1 1 0 0 1 8 15.5z"/></svg>
+                </span>
+                <span><span class="icon-name">PlayIcon</span><span class="icon-source">当前：播放控件</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box gemini operation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
+                </span>
+                <span><span class="icon-name">Play</span><span class="icon-source">Gemini：icons.tsx</span></span>
+              </div>
+            </td>
+            <td><span class="status keep">KEEP</span></td>
+            <td>音频播放、视频播放、timeline 播放</td>
+            <td>播放态用实心图标更醒目，Gemini 描边版更适合“执行计划”入口。</td>
+            <td class="action">播放器保留；执行按钮可换</td>
+          </tr>
+
+          <tr>
+            <td class="category">保存</td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+                </span>
+                <span><span class="icon-name">SaveIcon</span><span class="icon-source">当前：保存</span></span>
+              </div>
+            </td>
+            <td>
+              <div class="icon-panel">
+                <span class="icon-box current">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <span><span class="icon-name">暂缺 Save</span><span class="icon-source">Gemini：无同语义图标</span></span>
+              </div>
+            </td>
+            <td><span class="status keep">KEEP</span></td>
+            <td>Header 保存、TTS 保存、版本保存</td>
+            <td>Gemini 当前没有 SaveIcon；用 Check 代替会把“保存动作”和“已完成状态”混在一起。</td>
+            <td class="action">保留当前 SaveIcon，后续补 Gemini 风格 Save</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <section class="notes">
+      <strong>第一批建议直接按 ExecutionPlanModal 映射替换：</strong>
+      <ul>
+        <li><code>Shot=Film</code>、<code>Scene=Layers</code>、<code>Segment=LayoutList</code>、<code>Audio=Mic</code>、<code>Image=ImageIcon</code>、<code>Video=Clapperboard</code>、<code>Sync=AudioLines</code>。</li>
+        <li>当前最刺眼的问题是 <code>Audio Tasks</code> 用暂停图标、<code>Segment/Sync</code> 用速度表图标，建议优先处理。</li>
+        <li>本轮已扩展到整个 OpenCrew 前端系统：主壳导航、Debug Console、WorkflowAssistant、OpenClip、OCRebuild、OCStoryBoard、Analysis_V1、ModelConfig 中的 P0/P1 通用图标都纳入替换。</li>
+        <li>真正缺口是 <code>LipsyncIcon</code>、<code>SaveIcon</code>、<code>VoiceTimingIcon</code>，这几个最好后续按 Gemini 风格补齐。</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

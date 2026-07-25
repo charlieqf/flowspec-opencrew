@@ -1,0 +1,700 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run_dd_20260724_001",
+  "session_id": "matter_PROJECT_ATLAS",
+  "task_id": "matter_PROJECT_ATLAS_t",
+  "run_sequence": 1,
+  "supersedes_run_id": null,
+  "process_snapshot": {
+    "process_id": "buyer_due_diligence",
+    "version": "1.1.0",
+    "digest": "sha256:0731b88a8c5c99106146729243bab3a320b5350cfce693d9bf1418a17d545818",
+    "tool_registry_id": "due_diligence_mock_tools",
+    "tool_registry_version": "1.1.0",
+    "tool_registry_digest": "sha256:f5dd7633656578fa2afb34e37d4ad2238ef1a81e3194760d4f9cbb59aefcf2b5",
+    "profiles": [
+      {
+        "profile_id": "dd_evidence_extraction",
+        "version": "1.0.0",
+        "digest": "sha256:e6ea4ecebe378f2d35102f2bc3534538f87886997a0f6345e3556ab58c1ca3c4"
+      },
+      {
+        "profile_id": "dd_financial_review",
+        "version": "1.0.0",
+        "digest": "sha256:2c787bb164f60492c006141621d00ebc855f33a25588ec628f8e368b3637a433"
+      },
+      {
+        "profile_id": "dd_legal_review_agent",
+        "version": "1.0.0",
+        "digest": "sha256:3f31fd382eef0307ba3d417d9085a171c218b4fd4256fee23e225bc4e31cc073"
+      }
+    ]
+  },
+  "definition_snapshot_ref": "definition/process.snapshot.json",
+  "storage_index_ref": "storage-index.json",
+  "input_revision_hash": "sha256:5ff5c25a78384a55668e43f4e2faf033a8038475590e9086021ede308b956a59",
+  "status": "completed",
+  "outcome": "supplement_requested",
+  "started_at": "2026-07-24T05:00:00Z",
+  "finished_at": "2026-07-24T05:00:22Z",
+  "context": {
+    "matter_id": "MAT-ATLAS-01",
+    "target_name": "Atlas Components Pty Ltd",
+    "scope_revision": "scope-r1",
+    "required_categories": [
+      "corporate",
+      "contracts",
+      "financial",
+      "tax"
+    ],
+    "document_manifest_fixture": [
+      {
+        "document_id": "DOC-001",
+        "name": "constitution.pdf",
+        "category": "corporate",
+        "page_count": 48
+      },
+      {
+        "document_id": "DOC-002",
+        "name": "material-contracts.pdf",
+        "category": "contracts",
+        "page_count": 132
+      }
+    ],
+    "review_decision": null,
+    "document_count": 2,
+    "missing_materials": [
+      "financial",
+      "tax"
+    ],
+    "inventory_complete": false
+  },
+  "steps": [
+    {
+      "step_id": "S1_inventory",
+      "tool_id": "inventory_data_room",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_9b363a2ea22f6851",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_dd_20260724_001:S1_inventory:sha256:5ff5c25a78384a55668e43f4e2faf033a8038475590e9086021ede308b956a59",
+          "input_snapshot_hash": "sha256:7311023ba8d9321dccfc029b432cf7adfaf845b79ecf49c9ef9f17a9d58aae3e",
+          "started_at": "2026-07-24T05:00:01Z",
+          "finished_at": "2026-07-24T05:00:05Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_88f601788ac7d888"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S2_request_supplement",
+      "tool_id": "request_supplement",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_88f480df8a7b02db",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_dd_20260724_001:S2_request_supplement:sha256:5ff5c25a78384a55668e43f4e2faf033a8038475590e9086021ede308b956a59",
+          "input_snapshot_hash": "sha256:39d6aff09e1144288481e7e40414a2348575e7bd9e355a7a418130f5f57bfef6",
+          "started_at": "2026-07-24T05:00:07Z",
+          "finished_at": "2026-07-24T05:00:11Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_188c13cdd86a77bb"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S3_extract_documents",
+      "tool_id": "extract_document_evidence",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (False)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S4_index_evidence",
+      "tool_id": "index_evidence",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "dependency_outcome",
+        "detail": "all acceptable upstream outcomes are terminal and unreachable"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S5_legal_review",
+      "tool_id": "review_legal_evidence",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "dependency_outcome",
+        "detail": "all acceptable upstream outcomes are terminal and unreachable"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S6_financial_review",
+      "tool_id": "review_financial_evidence",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "dependency_outcome",
+        "detail": "all acceptable upstream outcomes are terminal and unreachable"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S7_synthesize_findings",
+      "tool_id": "synthesize_findings",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "dependency_outcome",
+        "detail": "all acceptable upstream outcomes are terminal and unreachable"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S8_professional_review",
+      "tool_id": "review_findings",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "dependency_outcome",
+        "detail": "all acceptable upstream outcomes are terminal and unreachable"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S9_issue_report",
+      "tool_id": "issue_dd_report",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (None)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S10_request_findings_revision",
+      "tool_id": "request_findings_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (None)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "art_88f601788ac7d888",
+      "name": "Documents.json",
+      "path_base": "run",
+      "path": "artifacts/Documents.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/documents",
+      "classification": "restricted",
+      "sha256": "sha256:8bed6d103407aa6f62dc4687b318d2b82c484a3e5b82f278e59a4eda54e26fe8",
+      "size": 418,
+      "producer": {
+        "step_id": "S1_inventory",
+        "attempt_id": "sa_9b363a2ea22f6851",
+        "tool_id": "inventory_data_room",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "matter_id": "MAT-ATLAS-01",
+        "scope_revision": "scope-r1"
+      },
+      "created_at": "2026-07-24T05:00:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_188c13cdd86a77bb",
+      "name": "SupplementRequest.json",
+      "path_base": "run",
+      "path": "artifacts/SupplementRequest.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/supplement",
+      "classification": "restricted",
+      "sha256": "sha256:5efdcd839f7a98847c5d3a88b1ab0c53269b06d133380155dfe146b250032bcc",
+      "size": 151,
+      "producer": {
+        "step_id": "S2_request_supplement",
+        "attempt_id": "sa_88f480df8a7b02db",
+        "tool_id": "request_supplement",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "matter_id": "MAT-ATLAS-01",
+        "scope_revision": "scope-r1"
+      },
+      "created_at": "2026-07-24T05:00:09Z",
+      "mock": true
+    }
+  ],
+  "usage_records": [],
+  "human_tasks": [],
+  "events": [
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0001",
+      "cursor": 1,
+      "kind": "run.started",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "process_id": "buyer_due_diligence",
+        "version": "1.1.0",
+        "input_revision_hash": "sha256:5ff5c25a78384a55668e43f4e2faf033a8038475590e9086021ede308b956a59"
+      },
+      "at": "2026-07-24T05:00:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0002",
+      "cursor": 2,
+      "kind": "step.started",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S1_inventory",
+      "tool_id": "inventory_data_room",
+      "step_attempt_id": "sa_9b363a2ea22f6851",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_9b363a2ea22f6851",
+        "tool_id": "inventory_data_room",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T05:00:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0003",
+      "cursor": 3,
+      "kind": "artifact.published",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S1_inventory",
+      "tool_id": "inventory_data_room",
+      "step_attempt_id": "sa_9b363a2ea22f6851",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_88f601788ac7d888",
+        "name": "Documents.json",
+        "sha256": "sha256:8bed6d103407aa6f62dc4687b318d2b82c484a3e5b82f278e59a4eda54e26fe8"
+      },
+      "at": "2026-07-24T05:00:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0004",
+      "cursor": 4,
+      "kind": "step.completed",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S1_inventory",
+      "tool_id": "inventory_data_room",
+      "step_attempt_id": "sa_9b363a2ea22f6851",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_9b363a2ea22f6851",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T05:00:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0005",
+      "cursor": 5,
+      "kind": "step.started",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S2_request_supplement",
+      "tool_id": "request_supplement",
+      "step_attempt_id": "sa_88f480df8a7b02db",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_88f480df8a7b02db",
+        "tool_id": "request_supplement",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T05:00:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0006",
+      "cursor": 6,
+      "kind": "artifact.published",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S2_request_supplement",
+      "tool_id": "request_supplement",
+      "step_attempt_id": "sa_88f480df8a7b02db",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_188c13cdd86a77bb",
+        "name": "SupplementRequest.json",
+        "sha256": "sha256:5efdcd839f7a98847c5d3a88b1ab0c53269b06d133380155dfe146b250032bcc"
+      },
+      "at": "2026-07-24T05:00:10Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0007",
+      "cursor": 7,
+      "kind": "step.completed",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S2_request_supplement",
+      "tool_id": "request_supplement",
+      "step_attempt_id": "sa_88f480df8a7b02db",
+      "step_attempt_no": 1,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_88f480df8a7b02db",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T05:00:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0008",
+      "cursor": 8,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S3_extract_documents",
+      "tool_id": "extract_document_evidence",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (False)"
+        }
+      },
+      "at": "2026-07-24T05:00:13Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0009",
+      "cursor": 9,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S4_index_evidence",
+      "tool_id": "index_evidence",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "dependency_outcome",
+          "detail": "all acceptable upstream outcomes are terminal and unreachable"
+        }
+      },
+      "at": "2026-07-24T05:00:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0010",
+      "cursor": 10,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S5_legal_review",
+      "tool_id": "review_legal_evidence",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "dependency_outcome",
+          "detail": "all acceptable upstream outcomes are terminal and unreachable"
+        }
+      },
+      "at": "2026-07-24T05:00:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0011",
+      "cursor": 11,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S6_financial_review",
+      "tool_id": "review_financial_evidence",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "dependency_outcome",
+          "detail": "all acceptable upstream outcomes are terminal and unreachable"
+        }
+      },
+      "at": "2026-07-24T05:00:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0012",
+      "cursor": 12,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S7_synthesize_findings",
+      "tool_id": "synthesize_findings",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "dependency_outcome",
+          "detail": "all acceptable upstream outcomes are terminal and unreachable"
+        }
+      },
+      "at": "2026-07-24T05:00:17Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0013",
+      "cursor": 13,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S8_professional_review",
+      "tool_id": "review_findings",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "dependency_outcome",
+          "detail": "all acceptable upstream outcomes are terminal and unreachable"
+        }
+      },
+      "at": "2026-07-24T05:00:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0014",
+      "cursor": 14,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S9_issue_report",
+      "tool_id": "issue_dd_report",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (None)"
+        }
+      },
+      "at": "2026-07-24T05:00:19Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0015",
+      "cursor": 15,
+      "kind": "step.skipped",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": "S10_request_findings_revision",
+      "tool_id": "request_findings_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (None)"
+        }
+      },
+      "at": "2026-07-24T05:00:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_dd_20260724_001_0016",
+      "cursor": 16,
+      "kind": "run.completed",
+      "session_id": "matter_PROJECT_ATLAS",
+      "task_id": "matter_PROJECT_ATLAS_t",
+      "run_id": "run_dd_20260724_001",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_dd_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "outcome": "supplement_requested"
+      },
+      "at": "2026-07-24T05:00:21Z"
+    }
+  ],
+  "budget_summary": {
+    "currency": "USD",
+    "limit": "15",
+    "reserved": "0",
+    "settled": "0",
+    "available": "15",
+    "status": "within_budget",
+    "ledger_ref": "budget-ledger.json"
+  },
+  "warnings": []
+}

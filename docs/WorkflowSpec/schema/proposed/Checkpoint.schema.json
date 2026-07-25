@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/Checkpoint.schema.json",
+  "title": "FlowSpec Tool Checkpoint (PROPOSED)",
+  "description": "An immutable recovery artifact produced at a Tool-declared safe completion boundary; it is not a DAG node or terminal state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "checkpoint_id",
+    "run_id",
+    "step_id",
+    "tool_id",
+    "tool_contract_version",
+    "input_snapshot_hash",
+    "boundary",
+    "resume_token",
+    "state_ref",
+    "created_at",
+    "writer_id"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "checkpoint_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "step_id": { "type": "string", "minLength": 1 },
+    "tool_id": { "type": "string", "minLength": 1 },
+    "tool_contract_version": { "type": "string", "minLength": 1 },
+    "input_snapshot_hash": { "$ref": "#/$defs/sha256" },
+    "boundary": { "type": "string", "minLength": 1 },
+    "resume_token": { "type": "string", "minLength": 1 },
+    "completed_units": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "state_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "size"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "size": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "writer_id": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "run_id": "run_dd_20260724_001", "session_id": "matter_PROJECT_ATLAS", "task_id": "matter_PROJECT_ATLAS_t", "run_sequence": 1, "supersedes_run_id": null,
+    "started_at": "2026-07-24T05:00:00Z", "source_revision": "scope-r1-incomplete",
+    "context": { "matter_id": "MAT-ATLAS-01", "target_name": "Atlas Components Pty Ltd", "scope_revision": "scope-r1", "required_categories": ["corporate", "contracts", "financial", "tax"], "document_manifest_fixture": [{ "document_id": "DOC-001", "name": "constitution.pdf", "category": "corporate", "page_count": 48 }, { "document_id": "DOC-002", "name": "material-contracts.pdf", "category": "contracts", "page_count": 132 }], "review_decision": null },
+    "human_decisions": {}, "callbacks": {}
+  },
+  {
+    "run_id": "run_dd_20260724_002", "session_id": "matter_PROJECT_ATLAS", "task_id": "matter_PROJECT_ATLAS_t", "run_sequence": 2, "supersedes_run_id": "run_dd_20260724_001",
+    "started_at": "2026-07-24T07:00:00Z", "source_revision": "scope-r2-complete",
+    "context": { "matter_id": "MAT-ATLAS-01", "target_name": "Atlas Components Pty Ltd", "scope_revision": "scope-r2", "required_categories": ["corporate", "contracts", "financial", "tax"], "document_manifest_fixture": [{ "document_id": "DOC-001", "name": "constitution.pdf", "category": "corporate", "page_count": 48 }, { "document_id": "DOC-002", "name": "material-contracts.pdf", "category": "contracts", "page_count": 132 }, { "document_id": "DOC-003", "name": "audited-financials.pdf", "category": "financial", "page_count": 96 }, { "document_id": "DOC-004", "name": "tax-returns.pdf", "category": "tax", "page_count": 74 }], "review_decision": null },
+    "human_decisions": { "S8_professional_review": { "decision": "approved", "reason": "Candidate findings reconciled to cited evidence; two matters retained as report qualifications.", "expected_revision": 0, "actor": { "type": "user", "id": "dd_lead_8", "roles": ["dd_lead"] } } },
+    "callbacks": {}
+  }
+]

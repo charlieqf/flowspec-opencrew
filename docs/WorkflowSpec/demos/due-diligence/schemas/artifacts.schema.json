@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "documents": { "type": "object", "required": ["matter_id", "scope_revision", "documents", "missing_categories"] },
+    "supplement": { "type": "object", "required": ["matter_id", "scope_revision", "requested_categories", "status"] },
+    "extract": { "type": "object", "required": ["document_id", "category", "facts", "page_count", "mock_model_output"] },
+    "evidenceIndex": { "type": "object", "required": ["matter_id", "scope_revision", "documents", "evidence_count"] },
+    "findings": { "type": "object", "required": ["discipline", "candidates", "evidence_refs", "mock_model_output"] },
+    "riskFindings": { "type": "object", "required": ["findings", "evidence_coverage", "candidate_only"] },
+    "review": { "type": "object", "required": ["decision", "actor", "reason", "dispositions"] },
+    "report": { "type": "object", "required": ["document_type", "matter_id", "target_name", "scope_revision", "included_refs"] },
+    "revisionRequest": { "type": "object", "required": ["matter_id", "scope_revision", "reason", "status"] }
+  }
+}

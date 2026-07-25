@@ -1,0 +1,12 @@
+{
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "editor_12",
+    "roles": [
+      "editor"
+    ]
+  },
+  "reason": "Scoped QA correction retained the approved script and dialogue keys.",
+  "expected_revision": 0
+}

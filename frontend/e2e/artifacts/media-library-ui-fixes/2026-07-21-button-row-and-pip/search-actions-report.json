@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "responseStatus": 200,
+  "cardCount": 2,
+  "metrics": [
+    {
+      "index": 1,
+      "card": {
+        "x": 547,
+        "y": 317.59375,
+        "width": 826,
+        "height": 327
+      },
+      "actions": {
+        "x": 782,
+        "y": 595.59375,
+        "width": 576,
+        "height": 36
+      },
+      "styles": {
+        "flexShrink": "0",
+        "overflow": "hidden"
+      },
+      "buttonCount": 3
+    },
+    {
+      "index": 2,
+      "card": {
+        "x": 547,
+        "y": 654.59375,
+        "width": 826,
+        "height": 327
+      },
+      "actions": {
+        "x": 782,
+        "y": 932.59375,
+        "width": 576,
+        "height": 36
+      },
+      "styles": {
+        "flexShrink": "0",
+        "overflow": "hidden"
+      },
+      "buttonCount": 3
+    }
+  ]
+}

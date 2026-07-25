@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OpenCrew SessionDesign R2 本机验收与操作手册</title>
+  <style>
+    :root{color-scheme:light;--ink:#15213a;--muted:#5d6b82;--line:#dce3ef;--blue:#315ee8;--soft:#f4f7fc;--green:#12805c;--amber:#9a5a00}*{box-sizing:border-box}body{margin:0;background:#eef3f9;color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}.hero,main{max-width:1120px;margin:auto}.hero{padding:72px 32px 44px}.eyebrow{color:var(--blue);font-weight:750;letter-spacing:.08em}.hero h1{font-size:42px;line-height:1.16;margin:12px 0}.hero p{max-width:780px;color:var(--muted);font-size:18px}.status{display:inline-flex;gap:8px;align-items:center;background:#e8f7f1;color:var(--green);border:1px solid #bce8d8;border-radius:999px;padding:7px 13px;font-weight:700}.status:before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}main{padding:0 32px 72px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 12px 35px rgba(32,54,92,.07)}.card{padding:28px;display:flex;flex-direction:column}.card .num{color:var(--blue);font-size:13px;font-weight:800}.card h2{margin:8px 0 8px;font-size:25px}.card p{color:var(--muted);margin:0 0 20px}.button{display:inline-block;margin-top:auto;width:max-content;color:#fff;background:var(--blue);text-decoration:none;border-radius:10px;padding:10px 16px;font-weight:700}.panel{margin-top:22px;padding:26px}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.fact{background:var(--soft);border-radius:12px;padding:15px}.fact strong{display:block;font-size:21px}.fact span{color:var(--muted);font-size:13px}.note{border-left:4px solid #e5a129;background:#fff7e8;padding:14px 16px;border-radius:8px;color:#654000}code{background:#edf1f8;padding:2px 6px;border-radius:5px}footer{max-width:1120px;margin:auto;padding:0 32px 48px;color:var(--muted)}@media(max-width:760px){.grid,.facts{grid-template-columns:1fr}.hero h1{font-size:32px}.hero{padding-top:42px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">OPENCREW · SESSIONDESIGN R2</div>
+    <h1>macmini-4 本机验收与操作手册</h1>
+    <p>两份需求已部署到 macmini-4 本机，并完成后端契约、前端组件、真实浏览器交互与截图验收。本页是统一入口；所有图片均来自本轮本机浏览器测试。</p>
+    <span class="status">本机服务健康 · 2026-07-23</span>
+  </header>
+  <main>
+    <section class="grid" aria-label="操作手册">
+      <article class="card">
+        <span class="num">文档一</span>
+        <h2>素材标签、卡片视图与时间轴拖动</h2>
+        <p>涵盖标签编辑和历史数据兼容、2–6 列卡片布局、两种视图的操作一致性，以及播放头连续拖动、画面同步、边缘滚动和代理预览时基守卫。</p>
+        <a class="button" href="media-library-r2-manual.html">打开图文手册</a>
+      </article>
+      <article class="card">
+        <span class="num">文档二</span>
+        <h2>Gemini Omni 有状态视频编辑</h2>
+        <p>从选择本机 Omni Flash 别名开始，介绍新建、上传编辑、继续编辑、版本链、费用确认、云端上下文清理，以及服务端状态隔离原理和业务价值。</p>
+        <a class="button" href="gemini-omni-manual.html">打开图文手册</a>
+      </article>
+    </section>
+    <section class="panel">
+      <h2>验收摘要</h2>
+      <div class="facts">
+        <div class="fact"><strong>1155</strong><span>后端契约通过</span></div>
+        <div class="fact"><strong>233</strong><span>附加子测试通过</span></div>
+        <div class="fact"><strong>15</strong><span>浏览器验收截图</span></div>
+        <div class="fact"><strong>2/2</strong><span>本机服务健康</span></div>
+      </div>
+      <p>环境：<code>macmini-4</code>；前端 <code>http://127.0.0.1:18080</code>；后端 <code>http://127.0.0.1:8011</code>；数据库迁移 <code>0025_video_interaction_threads</code> 已应用。</p>
+      <p class="note"><strong>付费边界：</strong>Omni 模型目录在线探测已通过，真实本机配置和 UI 已验收；浏览器的“确认并派发”使用无费用路由模拟。由于当前系统 Key 未被证明属于独立测试项目，本轮没有冒充隔离条件运行付费链式生成。详情见 Omni 手册的“证据边界”。</p>
+      <p>机器可读结果：<a href="acceptance-results.json">acceptance-results.json</a></p>
+    </section>
+  </main>
+  <footer>OpenCrew · SessionDesign R2 · local acceptance on macmini-4 only</footer>
+</body>
+</html>

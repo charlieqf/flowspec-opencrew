@@ -1,0 +1,1171 @@
+<!doctype html><html><head><meta charset='utf-8'><style>
+    *{box-sizing:border-box}body{margin:0;padding:18px;background:#f5f7fb;color:#172033;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+    .actual-case{width:1160px;background:#fff;border:1px solid #d4deec;border-radius:8px;padding:14px}
+    .compare-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;font-size:16px}
+    .pill{border:1px solid #d4deec;background:#f3f6fa;border-radius:999px;padding:5px 10px;color:#39475e;font-size:12px;font-weight:700}
+    .vp-segment{display:grid;grid-template-columns:230px 1fr;gap:12px;align-items:center;border:1px solid #d4deec;border-radius:8px;padding:10px;margin:8px 0;background:#fff}
+    .segment-id{font-weight:800;color:#172033;overflow-wrap:anywhere}.segment-dialogues{font-weight:700;color:#344258;margin-bottom:7px;font-size:13px}
+    .slot-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+    .slot{display:inline-flex;align-items:center;min-height:25px;border-radius:999px;padding:4px 10px;border:1px solid #d7e0eb;background:#eef2f6;color:#2f3b4e;font-weight:800;font-size:12px;white-space:nowrap}
+    .slot.white{background:#fff;color:#172033;border-color:#cbd7e6}.slot.green{background:#dcf7e8;color:#08733f;border-color:#9be0b8}
+    .slot.yellow{background:#fff1c2;color:#8b5a00;border-color:#e4c158}.slot.red{background:#ffe3e1;color:#b42318;border-color:#ffa6a0}
+    .expect{margin-top:7px;color:#52627a;font-size:12px;line-height:1.45;border-top:1px dashed #d0dae8;padding-top:7px}
+    </style></head><body>
+      <section class="actual-case" id="video-01">
+        <div class="compare-title">
+          <strong>Case 1：按时长拆分 + 尾帧连续</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 1s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-02">
+        <div class="compare-title">
+          <strong>Case 2：视觉锚点切 1 刀，中间新图重开 Segment</strong>
+          <span class="pill">实际运行 / 2 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4, D5 / 3s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot white">新视频白</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=generated_image / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-03">
+        <div class="compare-title">
+          <strong>Case 3：首句缺视觉，不能从中间偷拆</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed_with_skipped_items</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4, D5 / 5s</div>
+              <div class="slot-row"><span class="slot gray">音频灰</span><span class="slot gray">首帧灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=missing</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-04">
+        <div class="compare-title">
+          <strong>Case 4：时长阈值，max=4s 拆成 3 段</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-05">
+        <div class="compare-title">
+          <strong>Case 5：时长阈值，max=8s 拆成 2 段</strong>
+          <span class="pill">实际运行 / 2 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4 / 8s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-06">
+        <div class="compare-title">
+          <strong>Case 6：时长阈值，max=15s 不拆分</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-07">
+        <div class="compare-title">
+          <strong>Case 7：视觉锚点切 2 刀，原图 + 新图连续重开 Segment</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 1s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot white">新视频白</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=generated_image / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-08">
+        <div class="compare-title">
+          <strong>Case 8：音频合并完成，D1 + D2 都有音频</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot green">音频绿</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 1s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-09">
+        <div class="compare-title">
+          <strong>Case 9：首个 D 有音频，但后续 D 缺音频</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 1s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-10">
+        <div class="compare-title">
+          <strong>Case 10：首个 D 缺音频，但后续 D 有音频</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_003</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D5 / 1s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-11">
+        <div class="compare-title">
+          <strong>Case 11：只有新视频，终视频待确认</strong>
+          <span class="pill">实际运行 / 2 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot white">终视频白</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=generated_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-12">
+        <div class="compare-title">
+          <strong>Case 12：终视频已完成，尾帧待抽取</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span><span class="slot white">尾帧白</span></div>
+              <div class="expect">source_type=bound_video / 终视频任务=替换音频</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-13">
+        <div class="compare-title">
+          <strong>Case 13：终视频和尾帧都已完成</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span><span class="slot green">尾帧绿</span></div>
+              <div class="expect">source_type=bound_video / 终视频任务=替换音频</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-14">
+        <div class="compare-title">
+          <strong>Case 14：绑定终视频作为视觉锚点重开 Segment</strong>
+          <span class="pill">实际运行 / 2 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D3, D4, D5 / 3s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">新视频灰</span><span class="slot green">终视频绿</span><span class="slot white">尾帧白</span></div>
+              <div class="expect">source_type=bound_video / 终视频任务=替换音频</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-15">
+        <div class="compare-title">
+          <strong>Case 15：口播首帧，终视频任务 = 对口型</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4, D5 / 5s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-16">
+        <div class="compare-title">
+          <strong>Case 16：空镜首帧，终视频任务 = 替换音频</strong>
+          <span class="pill">实际运行 / 1 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：D1, D2, D3, D4, D5 / 5s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=替换音频</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-17">
+        <div class="compare-title">
+          <strong>Case 17：Task 范围，计划尾帧跨 Shot 连续</strong>
+          <span class="pill">实际运行 / 8 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：S1C1-D1, S1C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：S1C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_002 / 包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_002 / 包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C2-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-18">
+        <div class="compare-title">
+          <strong>Case 18：只生成 Shot2，继承 Shot1 已存在尾帧</strong>
+          <span class="pill">实际运行 / 4 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">尾帧 srt_0006_TailFrame绿</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_scene_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-19">
+        <div class="compare-title">
+          <strong>Case 19：Shot2 起点缺 TailFrame，Scene2 自有视觉恢复</strong>
+          <span class="pill">实际运行 / 4 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">尾帧 srt_0004_TailFrame绿</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_scene_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-20">
+        <div class="compare-title">
+          <strong>Case 20：上游为空镜，TailFrame 存在但不可继承</strong>
+          <span class="pill">实际运行 / 3 个实际 Segment / tool=completed_with_blocked_items</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D1, S2C1-D2, S2C1-D3 / 6s</div>
+              <div class="slot-row"><span class="slot gray">音频灰</span><span class="slot red">首帧红</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=missing</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=original_image / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video-21">
+        <div class="compare-title">
+          <strong>Case 21：绑定终视频跨 Shot 作为上游尾帧来源</strong>
+          <span class="pill">实际运行 / 7 个实际 Segment / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">S1C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_001 / 包含 D：S1C1-D1, S1C1-D2, S1C1-D3 / 6s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">新视频灰</span><span class="slot green">终视频绿</span><span class="slot green">尾帧绿</span></div>
+              <div class="expect">source_type=bound_video / 终视频任务=替换音频</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_002 / 包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">尾帧 S1C1-segment_001绿</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S1C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_001 / scene_002 / 包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S1C2-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C1-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_003 / 包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_001</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C1-segment_002灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2C2-segment_002</span>
+            <div>
+              <div class="segment-dialogues">范围：shot_002 / scene_004 / 包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">尾帧 S2C2-segment_001灰</span><span class="slot gray">新视频灰</span><span class="slot gray">终视频灰</span><span class="slot gray">尾帧灰</span></div>
+              <div class="expect">source_type=previous_segment_tail_frame / 终视频任务=对口型</div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-01">
+        <div class="compare-title">
+          <strong>Case 1：只有原图，先生成 Image Prompt</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">提示词白</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-02">
+        <div class="compare-title">
+          <strong>Case 2：原图 + Prompt 存在，可生成新图</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot white">新图白</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-03">
+        <div class="compare-title">
+          <strong>Case 3：新图已存在，Prompt 不需要补</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot green">新图绿</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-04">
+        <div class="compare-title">
+          <strong>Case 4：Prompt 存在但没有原图</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-05">
+        <div class="compare-title">
+          <strong>Case 5：Raw 已存在，新图缺失也不补</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-06">
+        <div class="compare-title">
+          <strong>Case 6：Final 已存在，Prompt 存在仍绿</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-07">
+        <div class="compare-title">
+          <strong>Case 7：音频不影响 Image Plan</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">提示词白</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-08">
+        <div class="compare-title">
+          <strong>Case 8：新图执行中</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot yellow">新图黄</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-09">
+        <div class="compare-title">
+          <strong>Case 9：新图执行失败</strong>
+          <span class="pill">实际运行 / 1 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot red">新图红</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-10">
+        <div class="compare-title">
+          <strong>Case 10：跨 Shot 完整 Image Plan，Prompt 控制新图</strong>
+          <span class="pill">实际运行 / 8 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D1, S1C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot green">提示词绿</span><span class="slot white">新图白</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0003_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0004_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0006_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0007_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0009_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0010_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0012_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="image-11">
+        <div class="compare-title">
+          <strong>Case 11：跨 Shot 下游 Raw/Final 已存在，Image Plan 不补图</strong>
+          <span class="pill">实际运行 / 8 个实际 Image Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D1, S1C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot green">新图绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0003_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0004_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0006_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0007_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0009_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0010_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot gray">提示词灰</span><span class="slot green">新图绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0012_image</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">提示词白</span><span class="slot gray">新图灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-01">
+        <div class="compare-title">
+          <strong>Case 1：只有原图，Video Only Plan 先补新图</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-02">
+        <div class="compare-title">
+          <strong>Case 2：新图存在但 Prompt 不存在</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot white">提示词白</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-03">
+        <div class="compare-title">
+          <strong>Case 3：新图 + Prompt 存在，可生成 Raw</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">提示词绿</span><span class="slot white">新视频白</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-04">
+        <div class="compare-title">
+          <strong>Case 4：Raw 存在，Confirm Final 待执行</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-05">
+        <div class="compare-title">
+          <strong>Case 5：Final 存在，Raw 缺失不反向点亮</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-06">
+        <div class="compare-title">
+          <strong>Case 6：Raw + Final 都存在</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-07">
+        <div class="compare-title">
+          <strong>Case 7：音频不影响 Confirm Final</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-08">
+        <div class="compare-title">
+          <strong>Case 8：Raw 生成运行中</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">提示词绿</span><span class="slot yellow">新视频黄</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-09">
+        <div class="compare-title">
+          <strong>Case 9：Raw 生成失败</strong>
+          <span class="pill">实际运行 / 1 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5 / 10s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">提示词绿</span><span class="slot red">新视频红</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-10">
+        <div class="compare-title">
+          <strong>Case 10：跨 Shot 完整 Video Only Plan，Prompt 控制 Raw</strong>
+          <span class="pill">实际运行 / 8 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D1, S1C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">提示词绿</span><span class="slot white">新视频白</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0003_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0004_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0006_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0007_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0009_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0010_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0012_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot gray">新视频灰</span><span class="slot gray">拷贝终视频灰</span></div>
+            </div>
+          </div></div>
+      </section>
+
+      <section class="actual-case" id="video_only-11">
+        <div class="compare-title">
+          <strong>Case 11：跨 Shot Raw 已存在，可逐段 Confirm Final</strong>
+          <span class="pill">实际运行 / 8 个实际 Video Only Task / tool=completed</span>
+        </div>
+        <div class="actual-body">
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0001_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D1, S1C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_001_srt_0003_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0004_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D1, S1C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_001_scene_002_srt_0006_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S1C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot green">拷贝终视频绿</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0007_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D1, S2C1-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_003_srt_0009_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C1-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0010_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D1, S2C2-D2 / 4s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">shot_002_scene_004_srt_0012_video_only</span>
+            <div>
+              <div class="segment-dialogues">包含 D：S2C2-D3 / 2s</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot gray">新图灰</span><span class="slot gray">提示词灰</span><span class="slot green">新视频绿</span><span class="slot white">拷贝终视频白</span></div>
+            </div>
+          </div></div>
+      </section>
+    </body></html>

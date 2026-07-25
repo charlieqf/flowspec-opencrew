@@ -1,0 +1,47 @@
+{
+  "suite": "image",
+  "number": 9,
+  "title": "Case 9：新图执行失败",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 15,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "total_tasks": 1,
+    "planned_prompt_tasks": 1,
+    "planned_image_tasks": 1,
+    "ready_existing_images": 0,
+    "existing_prompts": 1,
+    "stale_prompts": 0,
+    "blocked_tasks": 0
+  },
+  "expected_count": 1,
+  "actual": {
+    "actualCount": 1,
+    "dpr": 1,
+    "rect": {
+      "height": 264.25,
+      "left": 741,
+      "top": 321.375,
+      "width": 438
+    },
+    "segmentRows": [
+      "S1\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图"
+    ],
+    "summaryLine": "Task 1\nPrompt 1\nImage 1",
+    "text": "图像计划\nTask 1\nPrompt 1\nImage 1\n1/1\n0/1\nShot_001\n提示词\n新图\n提示词+新图\nScene_001\nS1\n提示词\n→\n新图",
+    "title": "图像计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "image_case_09.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [729, 309, 1191, 597]}"
+}

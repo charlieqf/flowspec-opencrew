@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.1", "profile_id": "dd_evidence_extraction", "version": "1.0.0", "description": "Per-document evidence extraction with restricted data and per-item media/token caps.", "kind": "model",
+  "model": { "provider": "mock-provider", "model_id": "mock-evidence-extractor", "model_revision": "2026-07-24", "deployment_id": "demo-local", "region": "local", "runtime": "flowspec-mock", "modality": "vision", "selection_source": "explicit", "fallback_policy": "deny" },
+  "budget": { "max_wall_seconds": 90, "max_input_tokens": 18000, "max_output_tokens": 2500, "max_media_units": { "page_count": 200 }, "max_cost": "0.25", "currency": "USD" },
+  "data_policy": { "sensitivity": "restricted", "external_transfer": "denied", "redaction_required": true, "residency": ["local"], "provider_retention": "denied", "provider_training": "denied", "purpose": "matter-scoped evidence extraction", "deletion_policy_ref": "policy://matter-retention/v1" },
+  "output": { "schema_ref": "schemas/artifacts.schema.json#/$defs/extract", "validation": "strict", "max_repair_attempts": 1, "safety_policy_ref": "policy://dd-ai/v1", "moderation_required": false, "grounding_required": true, "evidence_required": true },
+  "streaming": { "enabled": false, "partial_output_authoritative": false }
+}

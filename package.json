@@ -1,0 +1,31 @@
+{
+  "name": "opencrew",
+  "version": "1.0.0",
+  "description": "OpenCrew is a local desktop bridge built with:",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "check:koubo-cache": "scripts/check_koubo_frontend_cache_bump.sh",
+    "install:git-hooks": "scripts/install_opencrew_git_hooks.sh",
+    "test:g1d-controller-contract": "npm --prefix frontend run test:g1d-controller-contract",
+    "lint:backend": "scripts/check_backend_lint.sh",
+    "lint:frontend-api-freeze": "python3 scripts/check_frontend_api_helper_freeze.py",
+    "lint:storyboard-context": "python3 scripts/check_storyboard_context_migration.py",
+    "preflight:frontend": "scripts/opencrew_frontend_preflight.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BalanceDuh/OpenCrew.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BalanceDuh/OpenCrew/issues"
+  },
+  "homepage": "https://github.com/BalanceDuh/OpenCrew#readme"
+}

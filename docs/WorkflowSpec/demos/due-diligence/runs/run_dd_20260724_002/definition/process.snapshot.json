@@ -1,0 +1,545 @@
+{
+  "schema_version": "0.4",
+  "contract_level": "executable",
+  "process_id": "buyer_due_diligence",
+  "version": "1.1.0",
+  "title": "买方交易尽调",
+  "description": "Inventory a revision-scoped data room, request missing material or extract documents by stable key, perform bounded AI review, obtain professional disposition, and issue a report.",
+  "tool_registry_ref": "tool_registry.json",
+  "context_schema_ref": "schemas/context.schema.json",
+  "branch_closure": "skip_unreachable",
+  "failure_propagation": "continue_independent",
+  "run_budget": {
+    "max_cost": "15.00",
+    "currency": "USD",
+    "reservation_policy": "required"
+  },
+  "resource_pools": {
+    "document_ai": {
+      "type": "semaphore",
+      "limit": 16
+    }
+  },
+  "defaults": {
+    "retry": {
+      "policy": "fail_fast"
+    },
+    "on_error": [],
+    "resources": []
+  },
+  "stages": [
+    "scope",
+    "extract",
+    "review",
+    "findings",
+    "approval",
+    "report"
+  ],
+  "artifact_contracts": {
+    "Documents.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/documents",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "SupplementRequest.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/supplement",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "Extract_{document_id}.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/extract",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision",
+        "document_id"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "EvidenceIndex.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/evidenceIndex",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "LegalFindings.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/findings",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "FinancialFindings.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/findings",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "RiskFindings.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/riskFindings",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "ProfessionalReview.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/review",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "DDReport.pdf": {
+      "media_type": "application/pdf",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/report",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    },
+    "FindingsRevisionRequest.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/revisionRequest",
+      "classification": "restricted",
+      "binding_keys": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "retention_class": "matter-policy"
+    }
+  },
+  "steps": [
+    {
+      "id": "S1_inventory",
+      "tool": "inventory_data_room",
+      "type": "script",
+      "description": "Freeze document identity and scope before any model sees content.",
+      "stage": "scope",
+      "reads": [
+        "matter_id",
+        "target_name",
+        "scope_revision",
+        "required_categories",
+        "document_manifest_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "Documents.json"
+      ],
+      "writes": [
+        "document_count",
+        "missing_materials",
+        "inventory_complete"
+      ],
+      "depends_on": [],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S2_request_supplement",
+      "tool": "request_supplement",
+      "type": "service",
+      "description": "Close an incomplete scope as a supplement-request outcome; new material creates a new Run.",
+      "stage": "scope",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "missing_materials"
+      ],
+      "consumes": [
+        "Documents.json"
+      ],
+      "produces": [
+        "SupplementRequest.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S1_inventory",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "inventory_complete",
+        "equals": false
+      },
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S3_extract_documents",
+      "tool": "extract_document_evidence",
+      "type": "model",
+      "description": "Instantiate one child execution per immutable document_id and meter each invocation separately.",
+      "stage": "extract",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "Documents.json"
+      ],
+      "produces": [
+        "Extract_{document_id}.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S1_inventory",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "inventory_complete",
+        "equals": true
+      },
+      "fanout": {
+        "over": "Documents.json#/documents",
+        "as": "document",
+        "item_key": "document_id",
+        "concurrency_pool": "document_ai",
+        "max_concurrency": 16,
+        "failure_policy": {
+          "mode": "tolerate",
+          "max_failed_items": 0
+        },
+        "reduce": {
+          "order_by": "document_id",
+          "require_binding_key": true
+        }
+      },
+      "resources": [
+        {
+          "kind": "semaphore",
+          "pool": "document_ai",
+          "amount": 1
+        }
+      ],
+      "side_effect_class": "pure",
+      "ai_profile_ref": "profiles/evidence-extraction.json"
+    },
+    {
+      "id": "S4_index_evidence",
+      "tool": "index_evidence",
+      "type": "script",
+      "description": "Fan in by stable document key and preserve every page/span citation.",
+      "stage": "extract",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "document_count"
+      ],
+      "consumes": [
+        "Extract_*.json"
+      ],
+      "produces": [
+        "EvidenceIndex.json"
+      ],
+      "writes": [
+        "extracted_count"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S3_extract_documents",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S5_legal_review",
+      "tool": "review_legal_evidence",
+      "type": "agent",
+      "description": "A bounded agent may look up evidence but cannot write the final transaction conclusion.",
+      "stage": "review",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "LegalFindings.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S4_index_evidence",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure",
+      "ai_profile_ref": "profiles/legal-review-agent.json"
+    },
+    {
+      "id": "S6_financial_review",
+      "tool": "review_financial_evidence",
+      "type": "model",
+      "description": "Financial review runs independently against the same evidence index.",
+      "stage": "review",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "FinancialFindings.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S4_index_evidence",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure",
+      "ai_profile_ref": "profiles/financial-review.json"
+    },
+    {
+      "id": "S7_synthesize_findings",
+      "tool": "synthesize_findings",
+      "type": "script",
+      "description": "Join legal and financial candidates without losing source evidence IDs.",
+      "stage": "findings",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "LegalFindings.json",
+        "FinancialFindings.json",
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "RiskFindings.json"
+      ],
+      "writes": [
+        "finding_count"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S5_legal_review",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S6_financial_review",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S8_professional_review",
+      "tool": "review_findings",
+      "type": "confirm",
+      "description": "A named professional disposes candidate findings against the frozen input hash.",
+      "stage": "approval",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "finding_count"
+      ],
+      "consumes": [
+        "RiskFindings.json"
+      ],
+      "produces": [
+        "ProfessionalReview.json"
+      ],
+      "writes": [
+        "review_decision"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S7_synthesize_findings",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "idempotent",
+      "human_gate": {
+        "type": "confirm",
+        "form": "dd_findings_review",
+        "roles": [
+          "dd_lead"
+        ],
+        "sla_seconds": 86400,
+        "allowed_decisions": [
+          "approved",
+          "revision_requested"
+        ],
+        "bind_to_input_hash": true,
+        "require_reason": true,
+        "separation_of_duties": {
+          "exclude_step_actors": [
+            "S5_legal_review",
+            "S6_financial_review"
+          ],
+          "minimum_distinct_approvers": 1
+        }
+      }
+    },
+    {
+      "id": "S9_issue_report",
+      "tool": "issue_dd_report",
+      "type": "script",
+      "description": "Issue the reviewed report as a mock PDF artifact with evidence and scope lineage.",
+      "stage": "report",
+      "reads": [
+        "matter_id",
+        "target_name",
+        "scope_revision",
+        "review_decision"
+      ],
+      "consumes": [
+        "RiskFindings.json",
+        "ProfessionalReview.json",
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "DDReport.pdf"
+      ],
+      "writes": [
+        "report_ref"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S8_professional_review",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "review_decision",
+        "equals": "approved"
+      },
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S10_request_findings_revision",
+      "tool": "request_findings_revision",
+      "type": "service",
+      "description": "Close a professional revision request explicitly instead of leaving report issuance pending.",
+      "stage": "report",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "review_decision"
+      ],
+      "consumes": [
+        "RiskFindings.json",
+        "ProfessionalReview.json"
+      ],
+      "produces": [
+        "FindingsRevisionRequest.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S8_professional_review",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "review_decision",
+        "equals": "revision_requested"
+      },
+      "side_effect_class": "idempotent"
+    }
+  ],
+  "completion": {
+    "mode": "exactly_one_outcome",
+    "outcomes": [
+      {
+        "id": "supplement_requested",
+        "title": "Missing materials requested",
+        "when": {
+          "variable": "inventory_complete",
+          "equals": false
+        },
+        "terminal_steps": [
+          "S2_request_supplement"
+        ],
+        "required_artifacts": [
+          "SupplementRequest.json"
+        ]
+      },
+      {
+        "id": "report_issued",
+        "title": "Professionally reviewed report issued",
+        "when": {
+          "variable": "review_decision",
+          "equals": "approved"
+        },
+        "terminal_steps": [
+          "S9_issue_report"
+        ],
+        "required_artifacts": [
+          "DDReport.pdf"
+        ]
+      },
+      {
+        "id": "findings_revision_requested",
+        "title": "Professional revision requested",
+        "when": {
+          "variable": "review_decision",
+          "equals": "revision_requested"
+        },
+        "terminal_steps": [
+          "S10_request_findings_revision"
+        ],
+        "required_artifacts": [
+          "FindingsRevisionRequest.json"
+        ]
+      }
+    ]
+  }
+}

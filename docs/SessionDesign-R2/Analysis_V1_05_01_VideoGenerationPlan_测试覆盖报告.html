@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05_01 VideoGenerationPlan 测试覆盖报告</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #627084;
+      --line: #d9e0e8;
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --warn: #9a5b00;
+      --bad: #b42318;
+      --code: #253044;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 56px;
+    }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 32px 0 12px; font-size: 22px; }
+    h3 { margin: 20px 0 8px; font-size: 17px; }
+    p { margin: 8px 0; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .metric, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      color: var(--accent);
+    }
+    .metric span { color: var(--muted); font-size: 13px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0 20px;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef3f7;
+      color: #263447;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: 0; }
+    code {
+      color: var(--code);
+      background: #eef3f7;
+      border: 1px solid #dde6ef;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92em;
+    }
+    pre {
+      background: #1d2633;
+      color: #f4f7fb;
+      padding: 14px 16px;
+      overflow: auto;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      background: #e7f6f2;
+      color: var(--accent);
+      border: 1px solid #bfe7dd;
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+    .warn { color: var(--warn); font-weight: 700; }
+    .bad { color: var(--bad); font-weight: 700; }
+    .muted { color: var(--muted); }
+    @media (max-width: 800px) {
+      main { padding: 20px 12px 40px; }
+      .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table { font-size: 13px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>05_01 VideoGenerationPlan 测试覆盖报告</h1>
+  <p class="muted">文档版本：2026-05-30；目标工具：<code>OpenCrew/ToolLibrary/Analysis_V1/05_01_VideoPlanGenerator.py</code></p>
+
+  <div class="summary">
+    <div class="metric"><strong>28</strong><span>pytest 覆盖用例</span></div>
+    <div class="metric"><strong>28 passed</strong><span>本轮执行结果</span></div>
+    <div class="metric"><strong>3</strong><span>目标范围：Scene / Shot / Task</span></div>
+    <div class="metric"><strong>0</strong><span>Prompt 目录生成</span></div>
+  </div>
+
+  <section>
+    <h2>验证命令</h2>
+    <pre>PYTHONPYCACHEPREFIX=/private/tmp/pycache ./.venv/bin/python -m pytest -q tests/analysis_v1/test_video_generation_plan.py</pre>
+    <p>执行结果：</p>
+    <pre>............................                                             [100%]
+28 passed in 3.17s</pre>
+  </section>
+
+  <h2>核心规则覆盖</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>规则</th>
+        <th>验证方式</th>
+        <th>关键字段</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>每张落位图片形成视频锚点；每句都有图时，每句一个 segment。</td>
+        <td><code>test_every_dialogue_has_image_creates_one_segment_per_dialogue</code><br><code>test_each_short_dialogue_with_image_uses_model_minimum_video_duration</code></td>
+        <td><code>dialogue_ids</code>、<code>planned_video_duration</code></td>
+      </tr>
+      <tr>
+        <td>短句视频允许超过原 dialogue 时间，按视频模型最小时长生成。</td>
+        <td><code>test_each_short_dialogue_with_image_uses_model_minimum_video_duration</code></td>
+        <td><code>duration=0.8</code>、<code>planned_video_duration=4.0</code>、<code>duration_policy=model_minimum_extended</code></td>
+      </tr>
+      <tr>
+        <td>首 / 中 / 中 / 尾均有图时，按图片锚点切出多个 segment。</td>
+        <td><code>test_first_middle_middle_tail_images_split_expected_segments</code></td>
+        <td><code>[d1,d2]</code>、<code>[d3,d4]</code>、<code>[d5]</code>、<code>[d6]</code></td>
+      </tr>
+      <tr>
+        <td>单图长 Scene 按 4 秒附近 dialogue 边界切分，后段依赖前段尾帧。</td>
+        <td><code>test_single_image_long_scene_splits_near_max_dialogue_boundary</code></td>
+        <td><code>previous_segment_tail_frame</code>、<code>depends_on_segment_id</code></td>
+      </tr>
+      <tr>
+        <td>单条 dialogue 超过 4 秒时不得切割。</td>
+        <td><code>test_single_overlong_dialogue_is_not_split</code></td>
+        <td><code>duration_exceeds_limit_unavoidable=true</code></td>
+      </tr>
+      <tr>
+        <td>第一个 Scene 无视觉来源时 skipped，不从中间有图处补跑。</td>
+        <td><code>test_first_scene_without_visual_source_is_skipped_but_later_visual_scene_runs</code><br><code>test_unplaced_upload_asset_cannot_be_first_frame</code></td>
+        <td><code>status=skipped</code>、<code>first_scene_missing_visual_source</code></td>
+      </tr>
+      <tr>
+        <td>非首 Scene 无图时，可继承上一 segment / Scene 尾帧；缺失则 blocked。</td>
+        <td><code>test_zero_image_non_first_scene_uses_previous_planned_tail</code><br><code>test_scene_scope_can_use_existing_previous_tail_file</code><br><code>test_zero_image_non_first_scene_blocks_without_previous_tail</code></td>
+        <td><code>depends_on_tail_frame_path</code>、<code>blocked_reason</code></td>
+      </tr>
+      <tr>
+        <td>跨 Shot 可继承上一 Shot 最后视频尾帧。</td>
+        <td><code>test_task_scope_carries_tail_frame_across_shots</code></td>
+        <td><code>shot_002.scene_002.segment_001.dependencies</code></td>
+      </tr>
+      <tr>
+        <td>blocked / skipped 不终止后续有图 Scene。</td>
+        <td><code>test_blocked_scene_does_not_drop_following_visual_scene</code><br><code>test_first_scene_without_visual_source_is_skipped_but_later_visual_scene_runs</code></td>
+        <td><code>skipped -> blocked -> planned</code></td>
+      </tr>
+      <tr>
+        <td>从原素材 / 上传素材拖入新图时，记录复制来源和 Working 目标。</td>
+        <td><code>test_placed_uploaded_image_records_materialize_copy_action</code></td>
+        <td><code>materialize_first_frame.copy_from_path</code>、<code>copy_to_path</code></td>
+      </tr>
+      <tr>
+        <td>视频按该 segment 第一个 dialogue key 落位。</td>
+        <td><code>test_video_outputs_use_first_dialogue_key_and_audio_is_dialogue_level</code></td>
+        <td><code>srt_0001_Video_Final.mp4</code>、<code>srt_0001_TailFrame.jpg</code></td>
+      </tr>
+      <tr>
+        <td>工具不创建 Prompt 目录。</td>
+        <td><code>test_no_prompt_directory_created_and_resume_reuses_matching_output</code></td>
+        <td><code>S8_05_01_VideoPlanGenerator/Prompt</code> 不存在</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>场景组合矩阵</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>组合</th>
+        <th>输入结构</th>
+        <th>预期生成计划步骤</th>
+        <th>对应测试</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>单 Scene：首句旧图</td>
+        <td><code>d1=image</code>，其余无图</td>
+        <td>旧图触发 <code>need_image_prompt=true</code>、<code>need_image=true</code>，生成一个或多个视频 segment。</td>
+        <td><code>test_video_outputs_use_first_dialogue_key_and_audio_is_dialogue_level</code></td>
+      </tr>
+      <tr>
+        <td>单 Scene：首 / 中 / 中 / 尾有图</td>
+        <td><code>d1=image, d3=image, d5=image, d6=image</code></td>
+        <td>切为 <code>d1-d2</code>、<code>d3-d4</code>、<code>d5</code>、<code>d6</code>。</td>
+        <td><code>test_first_middle_middle_tail_images_split_expected_segments</code></td>
+      </tr>
+      <tr>
+        <td>单 Scene：每句都有图且句子很短</td>
+        <td><code>d1..d4</code> 每句都有图，每句约 0.7 秒</td>
+        <td>每句一个 segment；每个 segment 的 <code>planned_video_duration=4.0</code>。</td>
+        <td><code>test_every_dialogue_has_image_creates_one_segment_per_dialogue</code></td>
+      </tr>
+      <tr>
+        <td>单 Scene：一张图覆盖长段</td>
+        <td><code>d1=image</code>，<code>d2..d6</code> 无图，总时长 6 秒</td>
+        <td>切为 <code>d1-d4</code> 和 <code>d5-d6</code>，第二段依赖第一段尾帧。</td>
+        <td><code>test_single_image_long_scene_splits_near_max_dialogue_boundary</code></td>
+      </tr>
+      <tr>
+        <td>单 Scene：首 Scene 无图，中间有图</td>
+        <td><code>d1=no image</code>，后续可能有图</td>
+        <td>整个首 Scene <code>skipped</code>，不从中间图片处补生成。</td>
+        <td><code>test_unplaced_upload_asset_cannot_be_first_frame</code></td>
+      </tr>
+      <tr>
+        <td>多 Scene：首 Scene skipped，后 Scene 有图</td>
+        <td><code>scene1=no image</code>，<code>scene2=image</code></td>
+        <td><code>scene1=skipped</code>，<code>scene2=planned</code>。</td>
+        <td><code>test_first_scene_without_visual_source_is_skipped_but_later_visual_scene_runs</code></td>
+      </tr>
+      <tr>
+        <td>多 Scene：首 Scene skipped，后 Scene 无图</td>
+        <td><code>scene1=no image</code>，<code>scene2=no image</code></td>
+        <td><code>scene2=blocked</code>，因为没有可继承尾帧。</td>
+        <td><code>test_blocked_scene_does_not_drop_following_visual_scene</code></td>
+      </tr>
+      <tr>
+        <td>Task 多 Shot：跨 Shot 尾帧继承</td>
+        <td><code>shot1.scene1=image</code>，<code>shot2.scene1=no image</code></td>
+        <td>shot2 的第一个 segment 使用 shot1 最后 segment 的尾帧。</td>
+        <td><code>test_task_scope_carries_tail_frame_across_shots</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>生成计划字段查验点</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>字段</th>
+        <th>查验意义</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>segments[].dialogue_ids</code></td>
+        <td>确认每个视频片段覆盖哪些 dialogue，且每个 dialogue 只出现一次。</td>
+      </tr>
+      <tr>
+        <td><code>segments[].duration</code></td>
+        <td>原始时间轴长度，来自 dialogue 的 start / end。</td>
+      </tr>
+      <tr>
+        <td><code>segments[].planned_video_duration</code></td>
+        <td>给视频模型生成时使用的时长，至少等于 <code>min-video-seconds</code>。</td>
+      </tr>
+      <tr>
+        <td><code>segments[].first_frame.source_type</code></td>
+        <td>确认首帧来源：原图生成新图、新图片、上传素材落位、上一段尾帧。</td>
+      </tr>
+      <tr>
+        <td><code>segments[].dependencies</code></td>
+        <td>确认依赖上一段视频或上一 Scene 尾帧时，后续工具能按依赖顺序执行。</td>
+      </tr>
+      <tr>
+        <td><code>materialize_first_frame</code></td>
+        <td>确认从原素材 / 上传素材拖入的新图片，后续视频工具知道从哪里拷贝到 Working。</td>
+      </tr>
+      <tr>
+        <td><code>planned_outputs.video_path</code></td>
+        <td>确认视频落位使用该 segment 第一个 dialogue key。</td>
+      </tr>
+      <tr>
+        <td><code>status</code> / <code>blocked_reason</code> / <code>skipped_reason</code></td>
+        <td>确认 planned、skipped、blocked 三类状态不会被混淆。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>文件清单</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>工具</th>
+        <td><code>OpenCrew/ToolLibrary/Analysis_V1/05_01_VideoPlanGenerator.py</code></td>
+      </tr>
+      <tr>
+        <th>测试</th>
+        <td><code>tests/analysis_v1/test_video_generation_plan.py</code></td>
+      </tr>
+      <tr>
+        <th>需求</th>
+        <td><code>docs/SessionDesign-R2/Analysis_V1_05_01_VideoGenerationPlan_工具需求整理.md</code></td>
+      </tr>
+      <tr>
+        <th>报告</th>
+        <td><code>docs/SessionDesign-R2/Analysis_V1_05_01_VideoGenerationPlan_测试覆盖报告.html</code></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

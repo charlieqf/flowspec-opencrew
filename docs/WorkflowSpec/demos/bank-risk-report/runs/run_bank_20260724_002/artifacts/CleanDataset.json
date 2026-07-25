@@ -1,0 +1,10 @@
+{
+  "entity_id": "BANK01",
+  "period": "2026-06",
+  "data_cut_id": "cut-20260724-b",
+  "quality_basis": {
+    "accepted": true,
+    "basis": "dq_pass",
+    "waiver_applied": false
+  }
+}

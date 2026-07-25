@@ -1,0 +1,61 @@
+{
+  "suite": "video_only",
+  "number": 11,
+  "title": "Case 11：跨 Shot Raw 已存在，可逐段 Confirm Final",
+  "target_type": "task",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 4,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "total_tasks": 8,
+    "planned_prompt_tasks": 0,
+    "planned_video_tasks": 0,
+    "raw_completed_count": 8,
+    "final_completed_count": 4,
+    "pending_confirm_final_count": 4,
+    "blocked_tasks": 0
+  },
+  "expected_count": 8,
+  "actual": {
+    "actualCount": 8,
+    "dpr": 1,
+    "rect": {
+      "height": 770.9375,
+      "left": 580,
+      "top": 68.03125,
+      "width": 760
+    },
+    "segmentRows": [
+      "S1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S1",
+      "S2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S2",
+      "S1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S1",
+      "S2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S2",
+      "S1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S1",
+      "S2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S2",
+      "S1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S1",
+      "S2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S2"
+    ],
+    "summaryLine": "Task 8\nPrompt 8\nRaw 8/8",
+    "text": "视频计划\nTask 8\nPrompt 8\nRaw 8/8\n0/8\n8/8\n4/8\nshot_001\n提示词\n新视频\n提示词+新视频\nscene_001\nS1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nS2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nscene_002\nS1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nS2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nshot_002\n提示词\n新视频\n提示词+新视频\nscene_003\nS1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nS2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nscene_004\nS1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频\nS2\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+    "title": "视频计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_only_case_11.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [568, 56, 1352, 850]}"
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": "media_library_visual_four_image_live_probe_v1",
+  "executed_at": "2026-07-22T03:12:49.370344+00:00",
+  "status": "passed",
+  "source": {
+    "asset_id": "mla_1784601908573_70c828790521",
+    "source_version": "c147e8745599bfa2446cfdc772a3142b579bce5af53ea5bedacba08e40a3de1c",
+    "visual_structure_run_id": "mlar_visual_structure_1784689791965_ff664499acc3",
+    "visual_structure_result_hash": "beeacfb0578b6c8d4f71c4e349c5942c80f56bcada901c378de604416f2fb7c3",
+    "structure_json": "/Users/macmini-4/.opencrew/sessions/382/workspace/tool_use_sessions/tus_1784689791970_a22a4e1ccc72/SessionOutput/visual/visual_structure_segments.json"
+  },
+  "fragment": {
+    "fragment_id": "scene_0001",
+    "start_ms": 0,
+    "end_ms": 13000,
+    "sampling_strategy": "scene_uniform_4_v1",
+    "frames": [
+      {
+        "keyframe_id": "scene_0001-sample-01",
+        "keyframe_time_ms": 1625,
+        "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-01.jpg",
+        "image_sha256": "809964b1a93bccad5ba78b2c3075abf84557aab0ff01580fc8fd773a0bc33503",
+        "size_bytes": 188373
+      },
+      {
+        "keyframe_id": "scene_0001-sample-02",
+        "keyframe_time_ms": 4875,
+        "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-02.jpg",
+        "image_sha256": "a5612d23f002898be4803ea26cecdc46114f7bd7501f81cdb663df9c8f9b38a4",
+        "size_bytes": 197069
+      },
+      {
+        "keyframe_id": "scene_0001-sample-03",
+        "keyframe_time_ms": 8125,
+        "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-03.jpg",
+        "image_sha256": "0c9e665435f32df45feb402bd95a3817d21776331f0a0f29b957a28611f42308",
+        "size_bytes": 190826
+      },
+      {
+        "keyframe_id": "scene_0001-sample-04",
+        "keyframe_time_ms": 11375,
+        "image_path": "SessionOutput/visual/scene_frames/scene_0001-sample-04.jpg",
+        "image_sha256": "9e035df09e9bd94461427412e2e5480fa22ed984a7a2e48d734f8c691d05fc49",
+        "size_bytes": 189066
+      }
+    ]
+  },
+  "model": {
+    "provider_id": "openai",
+    "model_id": "gpt-5.5",
+    "catalog_image_input": true,
+    "catalog_max_images_per_request": null,
+    "capability_proof": "one successful live request containing four images"
+  },
+  "request": {
+    "model_session_id": "ses_078303727ffeysFnC01uV6VACx",
+    "model_call_count": 1,
+    "text_part_count": 1,
+    "image_part_count": 4,
+    "ordered_keyframe_ids": [
+      "scene_0001-sample-01",
+      "scene_0001-sample-02",
+      "scene_0001-sample-03",
+      "scene_0001-sample-04"
+    ],
+    "prompt_version": "visual_semantic_prompt_v3",
+    "system_prompt_sha256": "3a3ffd389a11cb4cb20bc3750a2adae0ea8c4e9ae6db9d58f208c9ea0a7b8974",
+    "tools_enabled": false,
+    "customer_video_uploaded": false,
+    "data_urls_retained": false
+  },
+  "response": {
+    "candidate": {
+      "visual_summary": "透明纹理碗放在绿色包装盒上，后几帧可见深色液体和竖直细流。",
+      "people": [],
+      "objects": [
+        "透明纹理碗",
+        "绿色包装盒",
+        "深色液体",
+        "竖直细流"
+      ],
+      "scene": "浅蓝背景前的产品静物特写。",
+      "action": null,
+      "keywords": [
+        "透明碗",
+        "绿色包装盒",
+        "深色液体",
+        "细流",
+        "浅蓝背景",
+        "静物特写"
+      ],
+      "claim_evidence": {
+        "people": [],
+        "objects": [
+          "scene_0001-sample-01",
+          "scene_0001-sample-02",
+          "scene_0001-sample-03",
+          "scene_0001-sample-04"
+        ],
+        "scene": [
+          "scene_0001-sample-01",
+          "scene_0001-sample-02",
+          "scene_0001-sample-03",
+          "scene_0001-sample-04"
+        ],
+        "action": []
+      },
+      "confidence": 0.94,
+      "needs_review": false
+    },
+    "validated_item": {
+      "fragment_id": "scene_0001",
+      "start_ms": 0,
+      "end_ms": 13000,
+      "duration_ms": 13000,
+      "keyframe_refs": [
+        "scene_0001-sample-01",
+        "scene_0001-sample-02",
+        "scene_0001-sample-03",
+        "scene_0001-sample-04"
+      ],
+      "visual_summary": "透明纹理碗放在绿色包装盒上，后几帧可见深色液体和竖直细流。",
+      "people": [],
+      "objects": [
+        "透明纹理碗",
+        "绿色包装盒",
+        "深色液体",
+        "竖直细流"
+      ],
+      "scene": "浅蓝背景前的产品静物特写。",
+      "action": null,
+      "keywords": [
+        "透明碗",
+        "绿色包装盒",
+        "深色液体",
+        "细流",
+        "浅蓝背景",
+        "静物特写"
+      ],
+      "claim_evidence": {
+        "people": [],
+        "objects": [
+          "scene_0001-sample-01",
+          "scene_0001-sample-02",
+          "scene_0001-sample-03",
+          "scene_0001-sample-04"
+        ],
+        "scene": [
+          "scene_0001-sample-01",
+          "scene_0001-sample-02",
+          "scene_0001-sample-03",
+          "scene_0001-sample-04"
+        ],
+        "action": []
+      },
+      "confidence": 0.94,
+      "needs_review": false
+    },
+    "error": null
+  },
+  "security": {
+    "credentials_included": false,
+    "raw_image_bytes_included": false,
+    "only_four_registered_keyframes_sent": true
+  }
+}

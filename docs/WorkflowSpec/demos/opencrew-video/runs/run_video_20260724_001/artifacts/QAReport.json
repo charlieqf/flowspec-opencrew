@@ -1,0 +1,25 @@
+{
+  "passed": false,
+  "checks": [
+    {
+      "name": "media_decode",
+      "passed": true
+    },
+    {
+      "name": "asset_binding",
+      "passed": true
+    },
+    {
+      "name": "product_identity",
+      "passed": false
+    },
+    {
+      "name": "brand_claims",
+      "passed": true
+    }
+  ],
+  "revision_asset_keys": [
+    "dlg-002"
+  ],
+  "mock_model_output": true
+}

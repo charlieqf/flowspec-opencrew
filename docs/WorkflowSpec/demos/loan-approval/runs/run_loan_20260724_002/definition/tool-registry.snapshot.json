@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "loan_approval_mock_tools",
+  "version": "1.2.0",
+  "description": "Deterministic mock tools for the FlowSpec consumer-loan demo.",
+  "tools": [
+    {
+      "tool_id": "validate_application",
+      "version": "1.0.0",
+      "entrypoint": "tools:validate_application",
+      "type": "script",
+      "description": "Validate application fields.",
+      "side_effect_class": "pure",
+      "reads": [
+        "application_id",
+        "applicant_name",
+        "loan_amount",
+        "stated_income"
+      ],
+      "consumes": [],
+      "produces": [
+        "ValidatedApplication.json"
+      ],
+      "writes": [
+        "application_valid"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "extract_application_evidence",
+      "version": "1.0.0",
+      "entrypoint": "tools:extract_application_evidence",
+      "type": "model",
+      "description": "Mock evidence extraction.",
+      "side_effect_class": "pure",
+      "reads": [
+        "application_id",
+        "document_revision"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "ApplicationEvidence.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "pull_credit_report",
+      "version": "1.0.0",
+      "entrypoint": "tools:pull_credit_report",
+      "type": "service",
+      "description": "Mock credit bureau enquiry.",
+      "side_effect_class": "reconcilable",
+      "reads": [
+        "application_id",
+        "credit_score_fixture"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "CreditReport.json"
+      ],
+      "writes": [
+        "credit_score"
+      ],
+      "mock": true,
+      "supports_reconciliation": true
+    },
+    {
+      "tool_id": "screen_fraud",
+      "version": "1.0.0",
+      "entrypoint": "tools:screen_fraud",
+      "type": "script",
+      "description": "Mock fraud rules.",
+      "side_effect_class": "pure",
+      "reads": [
+        "application_id",
+        "fraud_score_fixture"
+      ],
+      "consumes": [
+        "ValidatedApplication.json"
+      ],
+      "produces": [
+        "FraudSignals.json"
+      ],
+      "writes": [
+        "fraud_flag"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "verify_income",
+      "version": "1.0.0",
+      "entrypoint": "tools:verify_income",
+      "type": "service",
+      "description": "Mock income verification.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "application_id",
+        "verified_income_fixture"
+      ],
+      "consumes": [
+        "ApplicationEvidence.json"
+      ],
+      "produces": [
+        "IncomeVerification.json"
+      ],
+      "writes": [
+        "verified_income"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "calculate_risk_decision",
+      "version": "1.0.0",
+      "entrypoint": "tools:calculate_risk_decision",
+      "type": "script",
+      "description": "Deterministic risk policy.",
+      "side_effect_class": "pure",
+      "reads": [
+        "credit_score",
+        "fraud_flag",
+        "verified_income",
+        "loan_amount"
+      ],
+      "consumes": [
+        "CreditReport.json",
+        "FraudSignals.json",
+        "IncomeVerification.json"
+      ],
+      "produces": [
+        "RiskAssessment.json",
+        "ApprovalPlan.json"
+      ],
+      "writes": [
+        "risk_score",
+        "proposed_decision",
+        "review_required"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "review_credit_decision",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_credit_decision",
+      "type": "confirm",
+      "description": "Mock human review response.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "application_id",
+        "proposed_decision"
+      ],
+      "consumes": [
+        "ApprovalPlan.json",
+        "RiskAssessment.json"
+      ],
+      "produces": [
+        "HumanReviewDecision.json"
+      ],
+      "writes": [
+        "review_decision"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "finalize_credit_decision",
+      "version": "1.0.0",
+      "entrypoint": "tools:finalize_credit_decision",
+      "type": "script",
+      "description": "Resolve authoritative decision.",
+      "side_effect_class": "pure",
+      "reads": [
+        "proposed_decision",
+        "review_required",
+        "review_decision"
+      ],
+      "consumes": [
+        "ApprovalPlan.json"
+      ],
+      "produces": [
+        "FinalDecision.json"
+      ],
+      "writes": [
+        "decision"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "capture_offer_acceptance",
+      "version": "1.0.0",
+      "entrypoint": "tools:capture_offer_acceptance",
+      "type": "suspend",
+      "description": "Mock customer callback.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "application_id",
+        "decision",
+        "loan_amount"
+      ],
+      "consumes": [
+        "FinalDecision.json"
+      ],
+      "produces": [
+        "AcceptedOffer.json"
+      ],
+      "writes": [
+        "offer_accepted_at"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "disburse_funds",
+      "version": "1.0.0",
+      "entrypoint": "tools:disburse_funds",
+      "type": "service",
+      "description": "Mock reconcilable disbursement.",
+      "side_effect_class": "reconcilable",
+      "reads": [
+        "application_id",
+        "loan_amount",
+        "offer_accepted_at"
+      ],
+      "consumes": [
+        "AcceptedOffer.json"
+      ],
+      "produces": [
+        "DisbursementReceipt.json"
+      ],
+      "writes": [
+        "disbursed_at"
+      ],
+      "mock": true,
+      "supports_reconciliation": true
+    },
+    {
+      "tool_id": "issue_rejection_notice",
+      "version": "1.0.0",
+      "entrypoint": "tools:issue_rejection_notice",
+      "type": "service",
+      "description": "Mock rejection notice delivery.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "application_id",
+        "decision"
+      ],
+      "consumes": [
+        "FinalDecision.json"
+      ],
+      "produces": [
+        "RejectionNotice.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "request_application_revision",
+      "version": "1.0.0",
+      "entrypoint": "tools:request_application_revision",
+      "type": "service",
+      "description": "Mock request for corrected application evidence.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "application_id",
+        "decision"
+      ],
+      "consumes": [
+        "FinalDecision.json",
+        "HumanReviewDecision.json"
+      ],
+      "produces": [
+        "ApplicationRevisionRequest.json"
+      ],
+      "writes": [],
+      "mock": true
+    }
+  ]
+}

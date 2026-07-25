@@ -1,0 +1,71 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_id": {
+      "title": "Tool Id",
+      "type": "string"
+    },
+    "tool_name": {
+      "default": "",
+      "title": "Tool Name",
+      "type": "string"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "outputs": {
+      "title": "Outputs",
+      "type": "object"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "result_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Result Paths",
+      "type": "array"
+    },
+    "metrics": {
+      "title": "Metrics",
+      "type": "object"
+    },
+    "context_patch": {
+      "title": "Context Patch",
+      "type": "object"
+    }
+  },
+  "required": [
+    "tool_id",
+    "step_id",
+    "status"
+  ],
+  "title": "ToolResult",
+  "type": "object"
+}

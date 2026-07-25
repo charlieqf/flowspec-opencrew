@@ -1,0 +1,66 @@
+{
+  "schema_version": "media_library_migration_0023_0024_evidence_v1",
+  "recorded_at": "2026-07-22T14:53:03+10:00",
+  "database": {
+    "engine": "PostgreSQL 16.14 (Homebrew)",
+    "host": "127.0.0.1",
+    "port": 5433,
+    "database": "opencrew",
+    "applied_migrations": [
+      {
+        "id": "0023_media_library_visual_search",
+        "description": "Allow visual-semantic fragments in the shared media search index",
+        "applied_at": 1784689697009
+      },
+      {
+        "id": "0024_media_library_clip_search",
+        "description": "Add explicit metadata-only global search eligibility for derived clips",
+        "applied_at": 1784694202308
+      }
+    ],
+    "pre_0024_clip_count": 17,
+    "pre_0024_search_eligible_clip_count": 0,
+    "pre_0024_tagged_clip_count": 0,
+    "post_e2e_clip_count": 17,
+    "post_e2e_search_eligible_clip_count": 0,
+    "post_e2e_tagged_clip_count": 1,
+    "existing_clips_auto_opened": false
+  },
+  "pre_0024_backup": {
+    "path": "pre-0024-opencrew.pgcustom",
+    "format": "PostgreSQL custom archive",
+    "size_bytes": 15139989,
+    "sha256": "dfe3a648410a97762bc1126c2359309bbc519e1852addb134e60e3bd8af8b795",
+    "pg_restore_list_validated": true
+  },
+  "test_run": {
+    "command": "OPENCREW_TEST_POSTGRES_URL=postgresql+psycopg://opencrew@127.0.0.1:5433/opencrew backend/.venv/bin/python -m pytest -q backend/tests/contracts/test_media_library_migration_0023_contract.py backend/tests/contracts/test_media_library_migration_0024_contract.py backend/tests/integration/test_media_library_migrations_postgres.py",
+    "result": "12 passed in 0.71s",
+    "covered_paths": [
+      "empty schema through 0023 and 0024",
+      "existing 0018 through 0023 and 0024",
+      "existing 0022 through 0023 and 0024",
+      "existing 0023 through 0024"
+    ],
+    "sqlite_checks": [
+      "current schema equals upgraded schema",
+      "rows and row hashes preserved",
+      "primary keys, unique constraints, checks, indexes, foreign keys and triggers preserved",
+      "PRAGMA foreign_key_check is empty",
+      "PRAGMA integrity_check is ok",
+      "forced rebuild failure rolls back all changes"
+    ],
+    "postgresql_checks": [
+      "isolated random schemas are created and dropped",
+      "migration order and data preservation",
+      "0023 visual scheme eligibility",
+      "0024 closed eligibility default"
+    ]
+  },
+  "semantic_guards": {
+    "historical_scene_midpoint_v1_promoted_to_visual_search": false,
+    "historical_single_frame_presented_as_four_frame": false,
+    "existing_clips_auto_opened": false
+  },
+  "passed": true
+}

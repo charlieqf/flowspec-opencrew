@@ -1,0 +1,45 @@
+[
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_loan_20260724_002_0001",
+    "operation_id": "op_8c0e72d3d5e125b2",
+    "operation_idempotency_key": "run_loan_20260724_002:S2_extract_evidence:single:1",
+    "observation_idempotency_key": "run_loan_20260724_002:S2_extract_evidence:single:1:observation:1",
+    "model_invocation_id": "mi_b61378bccbdaf386",
+    "agent_execution_id": null,
+    "run_id": "run_loan_20260724_002",
+    "step_id": "S2_extract_evidence",
+    "step_attempt_id": "sa_62b51376ae830b12",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "loan_document_extraction",
+      "version": "1.0.0",
+      "digest": "sha256:15fb9cf5c9aad85e02f96bf309faaade950732f2958c201359d984724fcb84c2"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-document-extractor",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_ce212da3ffb2bdc2",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 1260,
+      "output_tokens": 188,
+      "total_tokens": 1448
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.009",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T02:40:13Z",
+    "finished_at": "2026-07-24T02:40:15Z",
+    "recorded_at": "2026-07-24T02:40:17Z",
+    "supersedes_usage_record_id": null
+  }
+]

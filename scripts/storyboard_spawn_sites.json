@@ -1,0 +1,248 @@
+[
+  {
+    "code": "threading.Thread(target=worker, daemon=True).start()",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/agent_chat_routes.py",
+    "kind": "threading.Thread",
+    "line": 1506
+  },
+  {
+    "code": "thread = threading.Thread(target=client.collect_events, args=(chat_session_id, stop_event, on_event), daemon=True)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/agent_chat_routes.py",
+    "kind": "threading.Thread",
+    "line": 1610
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(run_batch))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_digital_human_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 251
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(run_batch))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_digital_human_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 251
+  },
+  {
+    "code": "threading.Thread(target=worker, daemon=True).start()",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "threading.Thread",
+    "line": 2475
+  },
+  {
+    "code": "thread = threading.Thread(target=client.collect_events, args=(chat_session_id, stop_event, on_event), daemon=True)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "threading.Thread",
+    "line": 2515
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(run_batch))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 2709
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(run_batch))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 2709
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(generate_asset_library_image, task_id, payload))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 2809
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(generate_asset_library_image, task_id, payload))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 2809
+  },
+  {
+    "code": "return await asyncio.to_thread(_json_request_sync, url, headers, timeout)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_providers.py",
+    "kind": "asyncio.to_thread",
+    "line": 248
+  },
+  {
+    "code": "return await asyncio.to_thread(",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_providers.py",
+    "kind": "asyncio.to_thread",
+    "line": 858
+  },
+  {
+    "code": "return await asyncio.to_thread(_build_storyboard_asset_search_plan_sync, task, payload or {}, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 795
+  },
+  {
+    "code": "return await asyncio.to_thread(_build_asset_search_plan_sync, task, payload or {}, role, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 861
+  },
+  {
+    "code": "candidates, stats = await asyncio.to_thread(_search_local_asset_candidates, workspace, task, plan, request, settings, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 1616
+  },
+  {
+    "code": "provider_tasks.append(asyncio.create_task(_run_asset_search_provider(workspace, task, provider_id, plan, request, settings, sc=sc)))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_services.py",
+    "kind": "asyncio.create_task",
+    "line": 1670
+  },
+  {
+    "code": "result = await asyncio.to_thread(",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_search_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 2004
+  },
+  {
+    "code": "threading.Thread(",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/asset_video_generation_services.py",
+    "kind": "threading.Thread",
+    "line": 795
+  },
+  {
+    "code": "generation = await asyncio.to_thread(deps.generate_clean_image, task, payload, sc=deps)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/clean_image_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 48
+  },
+  {
+    "code": "job = asyncio.create_task(deps.run_composer_background(task_id, int(task[\"session_id\"]), workspace, job_id, target, settings, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/composer_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 84
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(deps.generate_host_product_final_prompt, task_id, payload, role, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/host_product_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 140
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(deps.generate_host_product_final_prompt, task_id, payload, role, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/host_product_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 140
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(deps.generate_host_product_image, task_id, payload, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/host_product_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 178
+  },
+  {
+    "code": "worker = asyncio.create_task(asyncio.to_thread(deps.generate_host_product_image, task_id, payload, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/host_product_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 178
+  },
+  {
+    "code": "completed = await asyncio.to_thread(_run_render, cmd)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/hyperframe_template_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 65
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(deps.run_image_plan_tool, workspace, target, settings)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/image_plan_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 418
+  },
+  {
+    "code": "job = asyncio.create_task(deps.run_image_plan_execution_background(task_id, int(task[\"session_id\"]), workspace, job_id, current_hash, mode, target_task_id, target_asset_key, model_selection, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/image_plan_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 528
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(run_composer_tool, workspace, target, settings)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 277
+  },
+  {
+    "code": "await asyncio.to_thread(ensure_talking_head_session_variables, task, workspace, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 427
+  },
+  {
+    "code": "audio_preparation = await asyncio.to_thread(sc.prepare_video_plan_selected_tts_audio, task, workspace, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 428
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(run_video_plan_execution_tool, workspace, job_id, source_plan_hash, model_selection, sc=sc)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 442
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 631
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tool_runner_services.py",
+    "kind": "asyncio.to_thread",
+    "line": 938
+  },
+  {
+    "code": "messages = await asyncio.to_thread(client.messages, opencode_session_id, limit=120)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tts_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 278
+  },
+  {
+    "code": "async_task = asyncio.create_task(asyncio.to_thread(deps.run_scene_tts_candidate, task, workspace, request_payload, prompt_item, output_rel, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tts_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 656
+  },
+  {
+    "code": "async_task = asyncio.create_task(asyncio.to_thread(deps.run_scene_tts_candidate, task, workspace, request_payload, prompt_item, output_rel, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/tts_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 656
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(deps.run_video_only_plan_tool, workspace, target, settings)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/video_only_plan_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 728
+  },
+  {
+    "code": "job = asyncio.create_task(deps.run_video_only_plan_execution_background(task_id, int(task[\"session_id\"]), workspace, job_id, current_hash, mode, target_task_id, target_asset_key, model_selection, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/video_only_plan_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 791
+  },
+  {
+    "code": "result = await asyncio.to_thread(deps.reload_video_only_plan_prompt, workspace, deps.text(plan.get(\"plan_hash\")), asset_key)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/video_only_plan_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 854
+  },
+  {
+    "code": "result, stdout, stderr, returncode = await asyncio.to_thread(deps.run_video_plan_tool, workspace, target, settings)",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/video_plan_routes.py",
+    "kind": "asyncio.to_thread",
+    "line": 324
+  },
+  {
+    "code": "job = asyncio.create_task(deps.run_video_plan_execution_background(task_id, int(task[\"session_id\"]), workspace, job_id, current_hash, model_selection, sc=deps))",
+    "file": "backend/opcrew_backend/koubo/koubo_storyboard/video_plan_routes.py",
+    "kind": "asyncio.create_task",
+    "line": 519
+  }
+]

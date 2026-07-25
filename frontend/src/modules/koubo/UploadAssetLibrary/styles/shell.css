@@ -1,0 +1,102 @@
+.ual-overlay {
+  align-items: stretch;
+  background: rgba(15, 23, 42, 0.48);
+  display: flex;
+  height: 100dvh;
+  inset: 0;
+  overflow: hidden;
+  padding: 0;
+  position: fixed;
+  z-index: 1200;
+}
+.ual-overlay.is-page {
+  background: transparent;
+  min-height: 100vh;
+  position: relative;
+  z-index: auto;
+}
+.ual-shell {
+  --ual-bg: #f6f8fb;
+  --ual-panel: #ffffff;
+  --ual-panel-soft: #f1f5f9;
+  --ual-border: #dbe4f0;
+  --ual-text: #172033;
+  --ual-muted: #66758f;
+  --ual-accent: #5b6cff;
+  --ual-accent-soft: #e8ecff;
+  background: var(--ual-bg);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--ual-text);
+  display: grid;
+  grid-template-columns: clamp(64px, 14vw, 224px) minmax(220px, 1fr) clamp(360px, 34vw, 640px);
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  width: 100%;
+}
+.ual-shell.is-sidebar-collapsed {
+  grid-template-columns: 64px minmax(220px, 1fr) clamp(360px, 34vw, 640px);
+}
+.ual-shell.is-main-expanded {
+  grid-template-columns: clamp(64px, 14vw, 224px) minmax(220px, 1fr);
+}
+.ual-shell.is-main-expanded.is-sidebar-collapsed {
+  grid-template-columns: 64px minmax(220px, 1fr);
+}
+.ual-theme-dark .ual-shell {
+  --ual-bg: #07090d;
+  --ual-panel: #121418;
+  --ual-panel-soft: #1b1e24;
+  --ual-border: #2d3442;
+  --ual-text: #f4f7fb;
+  --ual-muted: #9aa7b9;
+  --ual-accent: #8b9cff;
+  --ual-accent-soft: rgba(139, 156, 255, 0.16);
+}
+.ual-main {
+  background: var(--ual-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.ual-action-error {
+  background: #fee2e2;
+  border-bottom: 1px solid #fecaca;
+  color: #991b1b;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  padding: 9px 22px;
+}
+.ual-theme-dark .ual-action-error {
+  background: rgba(127, 29, 29, 0.42);
+  border-bottom-color: rgba(248, 113, 113, 0.28);
+  color: #fecaca;
+}
+@media (max-width: 820px) {
+  .ual-shell,
+  .ual-shell.is-sidebar-collapsed {
+    grid-template-columns: 64px minmax(0, 1fr) minmax(320px, 44vw);
+  }
+  .ual-shell.is-main-expanded,
+  .ual-shell.is-main-expanded.is-sidebar-collapsed {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+}
+.ual-empty {
+  align-items: center;
+  border: 1px dashed var(--ual-border);
+  border-radius: 8px;
+  color: var(--ual-muted);
+  display: flex;
+  font-size: 13px;
+  justify-content: center;
+  margin: 18px;
+  min-height: 220px;
+}

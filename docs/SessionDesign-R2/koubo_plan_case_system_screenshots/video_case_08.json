@@ -1,0 +1,46 @@
+{
+  "suite": "video",
+  "number": 8,
+  "title": "Case 8：音频合并完成，D1 + D2 都有音频",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 4,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "shot_count": 1,
+    "scene_count": 1,
+    "dialogue_count": 5,
+    "segment_count": 3,
+    "blocked_segment_count": 0,
+    "skipped_scene_count": 0,
+    "blocked_scene_count": 0,
+    "need_audio_count": 3,
+    "need_image_prompt_count": 1,
+    "need_image_count": 1,
+    "need_video_prompt_count": 3,
+    "need_video_count": 3,
+    "segment_audio_count": 3,
+    "need_lipsync_count": 3,
+    "need_audio_video_sync_count": 0,
+    "need_sync_count": 3
+  },
+  "expected_count": 3,
+  "actual": {
+    "actualCount": 3,
+    "summaryLine": "Shot 1\nScene 1\nSegment 3",
+    "segmentRows": [
+      "S1\n4.00s",
+      "S2\n4.00s",
+      "S3\n2.00s"
+    ],
+    "text": "生成计划\nShot 1\nScene 1\nSegment 3\nS1 4.00s\nS2 4.00s\nS3 2.00s",
+    "title": "生成计划"
+  },
+  "assertion": {
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "error_code": "provider_rate_limited",
+  "category": "rate_limit",
+  "phase": "run",
+  "retryable": true,
+  "resume_supported": true,
+  "user_action_required": false,
+  "safe_message": "外部服务暂时限流，请稍后重试",
+  "suggested_action": "按 Retry-After 等待后重试",
+  "debug_ref": "report://S3/attempt-2/error-01"
+}

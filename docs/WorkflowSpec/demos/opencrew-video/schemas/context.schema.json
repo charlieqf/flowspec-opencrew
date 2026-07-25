@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "additionalProperties": false,
+  "required": ["project_id", "creative_revision", "brand", "product", "audience", "channel", "duration_seconds", "storyboard_fixture", "qa_pass_fixture", "storyboard_decision", "publish_decision"],
+  "properties": {
+    "project_id": { "type": "string" }, "creative_revision": { "type": "string" }, "brand": { "type": "string" }, "product": { "type": "string" }, "audience": { "type": "string" }, "channel": { "type": "string" }, "duration_seconds": { "type": "number" },
+    "storyboard_fixture": { "type": "array", "items": { "type": "object", "required": ["asset_key", "text", "duration_seconds", "visual"] } }, "qa_pass_fixture": { "type": "boolean" },
+    "storyboard_decision": { "type": ["string", "null"] }, "publish_decision": { "type": ["string", "null"] },
+    "brief_hash": { "type": "string" }, "dialogue_count": { "type": "integer" }, "qa_passed": { "type": "boolean" }, "delivered_at": { "type": "string" }
+  }
+}

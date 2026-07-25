@@ -1,0 +1,24 @@
+{
+  "findings": [
+    {
+      "finding_id": "LEGAL-01",
+      "title": "Change-of-control consent",
+      "severity": "medium",
+      "evidence_refs": [
+        "DOC-002-F1"
+      ],
+      "status": "candidate"
+    },
+    {
+      "finding_id": "FIN-01",
+      "title": "Working-capital normalization",
+      "severity": "medium",
+      "evidence_refs": [
+        "DOC-003-F1"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "evidence_coverage": 1.0,
+  "candidate_only": true
+}

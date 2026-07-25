@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Koubo Image Plan 测试案例</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18202a;
+      --muted: #667085;
+      --line: #d7dde6;
+      --panel: #ffffff;
+      --page: #f6f7f9;
+      --green: #16794c;
+      --green-bg: #eaf6ef;
+      --amber: #946200;
+      --amber-bg: #fff4da;
+      --red: #b3261e;
+      --red-bg: #fdebea;
+      --slate: #475467;
+      --slate-bg: #eef1f5;
+      --blue: #2266aa;
+      --blue-bg: #eaf2fb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      display: grid;
+      gap: 14px;
+    }
+    header, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: 24px; line-height: 1.25; }
+    h2 { font-size: 17px; margin-bottom: 10px; }
+    .sub { color: var(--muted); margin-top: 8px; }
+    .small { color: var(--muted); font-size: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .stack { display: grid; gap: 12px; }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d9dee7;
+      background: var(--slate-bg);
+      color: var(--slate);
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .note {
+      border-left: 4px solid var(--blue);
+      background: var(--blue-bg);
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: #1f3f65;
+    }
+    .compare-case {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .compare-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      background: #f1f4f8;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-title strong { font-size: 15px; }
+    .compare-body {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.96fr) minmax(430px, 1.3fr);
+      gap: 0;
+    }
+    .matrix-side, .plan-side {
+      padding: 14px;
+      min-width: 0;
+    }
+    .matrix-side {
+      border-right: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+    .side-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: #344054;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .scene-label, .plan-shot {
+      display: flex;
+      align-items: center;
+      min-height: 26px;
+      margin: 10px 0 7px;
+      padding: 3px 9px;
+      border-radius: 7px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .scene-label:first-of-type, .plan-shot:first-of-type { margin-top: 0; }
+    .dialogue-line, .image-task {
+      display: grid;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #dbe2ea;
+      border-radius: 8px;
+      background: #fff;
+      padding: 9px;
+      margin-bottom: 8px;
+    }
+    .dialogue-line { grid-template-columns: 78px 118px 1fr; }
+    .cross .dialogue-line { grid-template-columns: 96px 118px 1fr; }
+    .image-task { grid-template-columns: 96px 1fr; }
+    .dialogue-id, .task-id {
+      font-weight: 800;
+      color: #202939;
+    }
+    .dialogue-id small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+    }
+    .slot-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d9dee7;
+      background: var(--slate-bg);
+      color: var(--slate);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .slot.white { color: var(--ink); background: #fff; border-color: #d9dee7; }
+    .slot.green { color: var(--green); background: var(--green-bg); border-color: #bce5ca; }
+    .slot.yellow { color: var(--amber); background: var(--amber-bg); border-color: #f3d58b; }
+    .slot.red { color: var(--red); background: var(--red-bg); border-color: #f3bbb7; }
+    .segment-dialogues {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      margin-bottom: 7px;
+      border-radius: 7px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: #202939;
+      font-weight: 850;
+      font-size: 12px;
+    }
+    .expect {
+      border-top: 1px dashed #d7dde6;
+      padding-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 860px) {
+      main { width: min(100vw - 20px, 1180px); padding-top: 16px; }
+      .compare-body { grid-template-columns: 1fr; }
+      .matrix-side { border-right: 0; border-bottom: 1px solid var(--line); }
+      .dialogue-line, .cross .dialogue-line, .image-task { grid-template-columns: 1fr; }
+    }
+
+    .actual-shot { border-top: 1px solid #d4deec; padding: 14px; background: #fff; }
+
+    .actual-shot { border-top: 1px solid #d4deec; padding: 14px; background: #fff; }
+    .actual-shot img { display: block; width: 100%; border: 1px solid #d4deec; border-radius: 8px; background: #fff; margin-top: 10px; }
+    .actual-shot figure { margin: 12px 0 0; }
+    .actual-shot figcaption { font-size: 12px; color: #526179; margin-bottom: 6px; }
+    .actual-status { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 800; margin: 8px 0 6px; border: 1px solid transparent; }
+    .actual-status.pass { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+    .actual-status.fail { color: #b42318; background: #fef3f2; border-color: #fecdca; }
+    .actual-summary { color: #475467; font-size: 12px; line-height: 1.45; white-space: pre-line; }
+    .actual-reason { color: #475467; font-size: 12px; line-height: 1.45; margin-top: 8px; }
+
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Image Plan 测试案例</h1>
+    <p class="sub">输入矩阵沿用 <span class="mono">[A,O,N,V,F]</span>，右侧严格按照 Image Plan 固定步骤显示：提示词 / 新图。</p>
+    <div class="legend">
+      <span class="pill">A 音频，不影响 Image Plan</span>
+      <span class="pill">O 原图 / Image_Source</span>
+      <span class="pill">N 新图 / Image_New</span>
+      <span class="pill">V 新视频 / Raw，下游消费</span>
+      <span class="pill">F 终视频 / Final，下游消费</span>
+      <span class="pill">P Image Prompt，右侧额外标注</span>
+    </div>
+  </header>
+
+  <section class="stack">
+    <h2>判定口径</h2>
+    <div class="note">
+      Image Plan 只负责“原图 + Image Prompt -> 新图”。它不看音频，不生成 Raw，不生成 Final。与 Video Plan 最大差异是：只有原图时，Image Plan 是“提示词白 / 新图灰”；必须等 Image Prompt 存在后，新图才变白。
+    </div>
+    <p class="small">颜色口径：白=可执行/待执行，灰=条件不满足或被下游产物消费，绿=文件存在/完成，黄=正在运行且文件尚未存在，红=执行失败且文件尚未存在。真实 Working 文件存在时绿色优先。</p>
+  </section>
+
+  <section id="single-scene-cases" class="stack"></section>
+
+  <section class="stack cross">
+    <h2>跨 Shot 完整 Image Plan 显示</h2>
+    <p class="small">Image Plan 的任务来自 05_01 的 source Segment。跨 Shot 这里完整显示 2 Shot × 2 Scene × 3 D；右侧每个 source Segment 只显示 Image Plan 的提示词 / 新图。</p>
+    <div id="cross-shot-cases" class="stack"></div>
+  </section>
+</main>
+
+<script>
+  const labels = ["音频", "原图", "新图", "新视频", "终视频"];
+  const cls = { white: "white", green: "green", yellow: "yellow", red: "red", gray: "" };
+  const esc = value => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+  const slot = ([label, tone = "gray"]) => `<span class="slot ${cls[tone] || ""}">${esc(label)}</span>`;
+  const slotRow = items => `<span class="slot-row">${items.map(slot).join("")}</span>`;
+  const toneName = tone => ({ white: "白", green: "绿", yellow: "黄", red: "红", gray: "灰" }[tone] || "灰");
+
+  function imageStates(input) {
+    const O = !!input.O;
+    const N = !!input.N;
+    const V = !!input.V;
+    const F = !!input.F;
+    const P = !!input.P;
+    const execution = input.execution || {};
+    const base = {
+      prompt: P ? ["提示词绿", "green"] : (N || V || F) ? ["提示词灰", "gray"] : O ? ["提示词白", "white"] : ["提示词灰", "gray"],
+      image: N ? ["新图绿", "green"] : (V || F) ? ["新图灰", "gray"] : (O && P) ? ["新图白", "white"] : ["新图灰", "gray"],
+    };
+    for (const key of Object.keys(execution)) {
+      if (base[key] && base[key][1] !== "green") {
+        if (execution[key] === "running") base[key] = [base[key][0].replace(/[白灰红黄绿]$/, "黄"), "yellow"];
+        if (execution[key] === "failed") base[key] = [base[key][0].replace(/[白灰红黄绿]$/, "红"), "red"];
+      }
+    }
+    return base;
+  }
+
+  function matrixRow(row) {
+    const tones = [row.A ? "green" : "gray", row.O ? "green" : "gray", row.N ? "green" : "gray", row.V ? "green" : "gray", row.F ? "green" : "gray"];
+    return `
+      <div class="dialogue-line">
+        <span class="dialogue-id">${esc(row.id)}<small>${esc(row.note)}</small></span>
+        <span class="mono">[${[row.A,row.O,row.N,row.V,row.F].map(Number).join(",")}]</span>
+        ${slotRow(labels.map((label, index) => [`${label}${toneName(tones[index])}`, tones[index]]))}
+      </div>`;
+  }
+
+  function sceneRows(scene) {
+    return `<div class="scene-label">${esc(scene.title)}</div>${scene.rows.map(matrixRow).join("")}`;
+  }
+
+  function imageTask(task) {
+    const states = imageStates(task.input);
+    const promptNote = task.input.P ? "；Image Prompt 文件存在" : "；Image Prompt 文件不存在";
+    return `
+      <div class="image-task">
+        <span class="task-id">${esc(task.id)}</span>
+        <div>
+          <div class="segment-dialogues">包含 D：${esc(task.ds)}；时长：${esc(task.duration)}</div>
+          ${slotRow([states.prompt, states.image])}
+          <div class="expect">${esc(task.expect + promptNote)}</div>
+        </div>
+      </div>`;
+  }
+
+  function caseBlock(item) {
+    return `
+      <div class="compare-case">
+        <div class="compare-title"><strong>${esc(item.title)}</strong><span class="pill">${esc(item.pill)}</span></div>
+        <div class="compare-body">
+          <div class="matrix-side">
+            <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+            ${item.matrix.map(sceneRows).join("")}
+          </div>
+          <div class="plan-side">
+            <div class="side-head"><span>应得到的 Image Plan</span><span>${esc(item.summary)}</span></div>
+            ${item.plan.map(part => part.title ? `<div class="plan-shot">${esc(part.title)}</div>` : imageTask(part)).join("")}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  const d = (id, start, values, note = "2s") => ({ id, note: `${start}-${start + 2}s / ${note}`, A: values[0], O: values[1], N: values[2], V: values[3], F: values[4] });
+  const base5 = (values, firstNote = "2s") => [
+    d("D1", 0, values, firstNote),
+    d("D2", 2, [0,0,0,0,0]),
+    d("D3", 4, [0,0,0,0,0]),
+    d("D4", 6, [0,0,0,0,0]),
+    d("D5", 8, [0,0,0,0,0]),
+  ];
+  const oneScene = rows => [{ title: "Scene 1 / 5 个 D", rows }];
+  const taskInput = (values, P = false, execution = {}) => ({ A: values[0], O: values[1], N: values[2], V: values[3], F: values[4], P, execution });
+
+  const singleCases = [
+    {
+      title: "Case 1：只有原图，先生成 Image Prompt",
+      pill: "Prompt 白 / 新图灰",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,1,0,0,0], "2s / 原图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,1,0,0,0]), expect: "提示词白；新图灰。Image Plan 不像 Video Plan 那样在只有原图时直接让新图白。" }],
+    },
+    {
+      title: "Case 2：原图 + Prompt 存在，可生成新图",
+      pill: "Prompt 绿 / 新图白",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,1,0,0,0], "2s / 原图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,1,0,0,0], true), expect: "提示词绿；新图白。原图和 Image Prompt 都满足时才可执行新图。" }],
+    },
+    {
+      title: "Case 3：新图已存在，Prompt 不需要补",
+      pill: "新图绿 / Prompt 灰",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,0,1,0,0], "2s / 新图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,0,1,0,0]), expect: "新图绿；提示词灰。已有 Image_New 时不要求补 Prompt。" }],
+    },
+    {
+      title: "Case 4：Prompt 存在但没有原图",
+      pill: "Prompt 绿 / 新图灰",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,0,0,0,0], "2s / 空")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,0,0,0,0], true), expect: "Prompt 文件绿色优先；但缺少原图，不能生成新图。" }],
+    },
+    {
+      title: "Case 5：Raw 已存在，新图缺失也不补",
+      pill: "Raw 下游消费",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,1,0,1,0], "2s / Raw")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,1,0,1,0]), expect: "提示词灰；新图灰。Raw 已存在时，新图被下游消费，无需重跑图片。" }],
+    },
+    {
+      title: "Case 6：Final 已存在，Prompt 存在仍绿",
+      pill: "Final 下游消费 / Prompt 绿",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,0,0,0,1], "2s / Final")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,0,0,0,1], true), expect: "提示词绿；新图灰。Prompt 文件存在始终绿色，但 Final 已存在时不补新图。" }],
+    },
+    {
+      title: "Case 7：音频不影响 Image Plan",
+      pill: "A=1 不改变提示词/新图",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([1,1,0,0,0], "2s / 音频+原图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([1,1,0,0,0]), expect: "即使音频绿，Image Plan 仍是提示词白 / 新图灰；音频不参与判断。" }],
+    },
+    {
+      title: "Case 8：新图执行中",
+      pill: "新图黄",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,1,0,0,0], "2s / 原图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,1,0,0,0], true, { image: "running" }), expect: "新图黄表示执行中且 Image_New 文件尚未落盘；文件存在后绿色优先。" }],
+    },
+    {
+      title: "Case 9：新图执行失败",
+      pill: "新图红",
+      summary: "1 个 Image Task",
+      matrix: oneScene(base5([0,1,0,0,0], "2s / 原图")),
+      plan: [{ id: "IP-S1", ds: "D1, D2, D3, D4, D5", duration: "10s", input: taskInput([0,1,0,0,0], true, { image: "failed" }), expect: "新图红表示执行失败且 Image_New 文件尚未存在。" }],
+    },
+  ];
+
+  const cd = (id, start, values, note = "2s") => d(id, start, values, note);
+  const emptyScene = prefix => [cd(`${prefix}-D1`, 0, [0,0,0,0,0]), cd(`${prefix}-D2`, 2, [0,0,0,0,0]), cd(`${prefix}-D3`, 4, [0,0,0,0,0])];
+  const crossCases = [
+    {
+      title: "Case 10：跨 Shot 完整 Image Plan，Prompt 控制新图",
+      pill: "2 Shot × 2 Scene × 3 D / max=4s",
+      summary: "8 个 Image Task",
+      matrix: [
+        { title: "Shot1 / Scene1", rows: [cd("S1C1-D1", 0, [0,1,0,0,0], "2s / 原图"), cd("S1C1-D2", 2, [0,0,0,0,0]), cd("S1C1-D3", 4, [0,0,0,0,0])] },
+        { title: "Shot1 / Scene2", rows: emptyScene("S1C2") },
+        { title: "Shot2 / Scene1", rows: emptyScene("S2C1") },
+        { title: "Shot2 / Scene2", rows: emptyScene("S2C2") },
+      ],
+      plan: [
+        { title: "Shot1 / Scene1" },
+        { id: "S1C1-IP1", ds: "S1C1-D1, S1C1-D2", duration: "4s", input: taskInput([0,1,0,0,0], true), expect: "该 source Segment 有原图和 Image Prompt，所以新图白。" },
+        { id: "S1C1-IP2", ds: "S1C1-D3", duration: "2s", input: taskInput([0,0,0,0,0]), expect: "没有原图，提示词/新图均灰。" },
+        { title: "Shot1 / Scene2" },
+        { id: "S1C2-IP1", ds: "S1C2-D1, S1C2-D2", duration: "4s", input: taskInput([0,0,0,0,0]), expect: "跨 Scene 任务完整显示；无原图时 Image Plan 不可执行。" },
+        { id: "S1C2-IP2", ds: "S1C2-D3", duration: "2s", input: taskInput([0,0,0,0,0]), expect: "完整显示 Scene2 第二段，不省略。" },
+        { title: "Shot2 / Scene1" },
+        { id: "S2C1-IP1", ds: "S2C1-D1, S2C1-D2", duration: "4s", input: taskInput([0,0,0,0,0]), expect: "跨 Shot 任务同样按 source Segment 展示。" },
+        { id: "S2C1-IP2", ds: "S2C1-D3", duration: "2s", input: taskInput([0,0,0,0,0]), expect: "完整显示 Shot2 Scene1 第二段。" },
+        { title: "Shot2 / Scene2" },
+        { id: "S2C2-IP1", ds: "S2C2-D1, S2C2-D2", duration: "4s", input: taskInput([0,0,0,0,0]), expect: "完整显示 Shot2 Scene2 第一段。" },
+        { id: "S2C2-IP2", ds: "S2C2-D3", duration: "2s", input: taskInput([0,0,0,0,0]), expect: "完整显示最后一个 Segment。" },
+      ],
+    },
+    {
+      title: "Case 11：跨 Shot 下游 Raw/Final 已存在，Image Plan 不补图",
+      pill: "Raw / Final 消费新图",
+      summary: "8 个 Image Task",
+      matrix: [
+        { title: "Shot1 / Scene1", rows: [cd("S1C1-D1", 0, [0,0,1,1,1], "2s / 已完成"), cd("S1C1-D2", 2, [0,0,0,0,0]), cd("S1C1-D3", 4, [0,0,0,1,1], "2s / Raw+Final")] },
+        { title: "Shot1 / Scene2", rows: [cd("S1C2-D1", 0, [0,0,0,1,0], "2s / Raw"), cd("S1C2-D2", 2, [0,0,0,0,0]), cd("S1C2-D3", 4, [0,0,0,0,1], "2s / Final")] },
+        { title: "Shot2 / Scene1", rows: [cd("S2C1-D1", 0, [0,1,0,1,0], "2s / 原图+Raw"), cd("S2C1-D2", 2, [0,0,0,0,0]), cd("S2C1-D3", 4, [0,1,0,0,1], "2s / 原图+Final")] },
+        { title: "Shot2 / Scene2", rows: [cd("S2C2-D1", 0, [0,0,1,0,0], "2s / 新图"), cd("S2C2-D2", 2, [0,0,0,0,0]), cd("S2C2-D3", 4, [0,1,0,0,0], "2s / 原图")] },
+      ],
+      plan: [
+        { title: "Shot1 / Scene1" },
+        { id: "S1C1-IP1", ds: "S1C1-D1, S1C1-D2", duration: "4s", input: taskInput([0,0,1,1,1]), expect: "新图已存在，所以新图绿；Prompt 缺失时灰。" },
+        { id: "S1C1-IP2", ds: "S1C1-D3", duration: "2s", input: taskInput([0,0,0,1,1]), expect: "Raw/Final 已存在，新图不补，提示词也灰。" },
+        { title: "Shot1 / Scene2" },
+        { id: "S1C2-IP1", ds: "S1C2-D1, S1C2-D2", duration: "4s", input: taskInput([0,0,0,1,0]), expect: "Raw 已存在，新图灰，不补图。" },
+        { id: "S1C2-IP2", ds: "S1C2-D3", duration: "2s", input: taskInput([0,0,0,0,1]), expect: "Final 已存在，新图灰，不补图。" },
+        { title: "Shot2 / Scene1" },
+        { id: "S2C1-IP1", ds: "S2C1-D1, S2C1-D2", duration: "4s", input: taskInput([0,1,0,1,0]), expect: "即使原图存在，只要 Raw 已存在，Image Plan 不补新图。" },
+        { id: "S2C1-IP2", ds: "S2C1-D3", duration: "2s", input: taskInput([0,1,0,0,1]), expect: "即使原图存在，只要 Final 已存在，Image Plan 不补新图。" },
+        { title: "Shot2 / Scene2" },
+        { id: "S2C2-IP1", ds: "S2C2-D1, S2C2-D2", duration: "4s", input: taskInput([0,0,1,0,0]), expect: "新图已存在，Image Plan 显示新图绿。" },
+        { id: "S2C2-IP2", ds: "S2C2-D3", duration: "2s", input: taskInput([0,1,0,0,0]), expect: "只有原图时，提示词白，新图灰，等待 Prompt。" },
+      ],
+    },
+  ];
+
+  document.getElementById("single-scene-cases").innerHTML = `<h2>单 Scene 最小覆盖案例</h2><p class="small">这些案例用同一套输入矩阵验证 Image Plan 槽位颜色；右侧只显示提示词 / 新图。</p>${singleCases.map(caseBlock).join("")}`;
+  document.getElementById("cross-shot-cases").innerHTML = crossCases.map(caseBlock).join("");
+</script>
+
+  <script id="koubo-plan-actual-image">
+    (() => {
+      const results = [{"case": 1, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_01.png", "extra": []}, {"case": 2, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_02.png", "extra": []}, {"case": 3, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 0\nImage 0", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_03.png", "extra": []}, {"case": 4, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 0\nImage 0", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_04.png", "extra": []}, {"case": 5, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_05.png", "extra": []}, {"case": 6, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 0\nImage 0", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_06.png", "extra": []}, {"case": 7, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_07.png", "extra": []}, {"case": 8, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_08.png", "extra": []}, {"case": 9, "pass": true, "expected": 1, "actual": 1, "summary": "Task 1\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_09.png", "extra": []}, {"case": 10, "pass": true, "expected": 8, "actual": 8, "summary": "Task 8\nPrompt 1\nImage 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_10.png", "extra": []}, {"case": 11, "pass": true, "expected": 8, "actual": 8, "summary": "Task 8\nPrompt 2\nImage 2", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/image_case_11.png", "extra": []}];
+      const attach = () => {
+        document.querySelectorAll(".actual-shot").forEach((node) => node.remove());
+        document.querySelectorAll(".compare-case").forEach((node, index) => {
+          const item = results[index];
+          if (!item) return;
+          const section = document.createElement("div");
+          section.className = `actual-shot ${item.pass ? "is-pass" : "is-fail"}`;
+          const status = item.pass ? "PASS" : "FAIL";
+          const statusText = `${status} · 期望 ${item.expected} / 系统 ${item.actual}`;
+          const extra = (item.extra || []).map((src, extraIndex) => `<figure><figcaption>滚动补图 ${extraIndex + 1}</figcaption><img src="${src}" alt="系统滚动补图 Case ${item.case}-${extraIndex + 1}"></figure>`).join("");
+          section.innerHTML = `<div class="side-head"><span>Chrome 系统实测截图</span><span>Case ${String(item.case).padStart(2, "0")}</span></div><div class="actual-status ${item.pass ? "pass" : "fail"}">${statusText}</div><div class="actual-summary">${item.summary || "-"}</div><img src="${item.screenshot}" alt="Chrome 系统实测截图 Case ${item.case}">${extra}<div class="actual-reason">${item.reason}</div>`;
+          node.appendChild(section);
+        });
+      };
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => requestAnimationFrame(attach));
+      else requestAnimationFrame(attach);
+    })();
+  </script>
+
+</body>
+</html>

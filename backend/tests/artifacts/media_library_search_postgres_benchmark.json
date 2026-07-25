@@ -1,0 +1,2639 @@
+{
+  "benchmark": "media_library_dialogue_visual_literal_search_postgresql_v3",
+  "executed_at": "2026-07-22T03:51:24.299034+00:00",
+  "database_target": {
+    "driver": "postgresql+psycopg",
+    "host": "127.0.0.1",
+    "port": 5433,
+    "database": "opencrew"
+  },
+  "database_version": "PostgreSQL 16.14 (Homebrew) on aarch64-apple-darwin25.4.0, compiled by Apple clang version 21.0.0 (clang-2100.0.123.102), 64-bit",
+  "retrieval_version": "dialogue_visual_literal_v1",
+  "normalization_version": "nfkc_casefold_ws_v1",
+  "worktree": {
+    "head": "0439292caeafd80dd96c443d7a28b79b1593ca9d",
+    "branch": "main",
+    "dirty": true,
+    "status_porcelain_sha256": "0f1cdea8136b1dfd5af645e2b7604afee12318457b4242c83d76efd5615eee6f",
+    "status_entry_count": 188
+  },
+  "isolation": {
+    "kind": "random_schema",
+    "schema_name": "oc_mlsearch_bench_bd8579409fbe4313aa54c8dbc8844236",
+    "main_schema_data_modified": false,
+    "main_schema_before": {
+      "table_count": 6,
+      "row_count_snapshot_sha256": "c5d107a97d4f01d8ad131817aa73be557439f7de9725750970202b8954a60b3c"
+    },
+    "main_schema_after": {
+      "table_count": 6,
+      "row_count_snapshot_sha256": "c5d107a97d4f01d8ad131817aa73be557439f7de9725750970202b8954a60b3c"
+    }
+  },
+  "dataset_seed": {
+    "generator_version": "real_workspace_distribution_v1",
+    "source_sample": {
+      "source_kind": "workspace_analysis_results",
+      "source_locator": "configured-root/*/workspace/SessionOutput/subtitle/final_srt_frame_items.json",
+      "discovery_pattern": "*/workspace/SessionOutput/subtitle/final_srt_frame_items.json",
+      "source_file_count": 85,
+      "source_fragment_count": 1129,
+      "source_snapshot_sha256": "a98aaa4e58543895289af716946f501f103279e8da384cfd4fe322954a88fcd2",
+      "fragment_count_per_video": {
+        "sample_count": 85,
+        "minimum": 1,
+        "maximum": 112,
+        "average": 13.282,
+        "p50": 8,
+        "p95": 42,
+        "p99": 112
+      },
+      "text_length_chars": {
+        "sample_count": 1129,
+        "minimum": 2,
+        "maximum": 681,
+        "average": 17.074,
+        "p50": 9,
+        "p95": 42,
+        "p99": 161
+      }
+    },
+    "generated_fragment_count_per_video": {
+      "sample_count": 500,
+      "minimum": 1,
+      "maximum": 112,
+      "average": 13.13,
+      "p50": 8,
+      "p95": 42,
+      "p99": 72
+    },
+    "generated_visual_fragment_count_per_video": {
+      "sample_count": 500,
+      "minimum": 1,
+      "maximum": 4,
+      "average": 2.5,
+      "p50": 2,
+      "p95": 4,
+      "p99": 4
+    },
+    "generated_text_length_chars": {
+      "sample_count": 6565,
+      "minimum": 2,
+      "maximum": 681,
+      "average": 17.019,
+      "p50": 9,
+      "p95": 42,
+      "p99": 161
+    }
+  },
+  "dataset": {
+    "ready_original_video_count": 500,
+    "active_dialogue_fragment_count": 6565,
+    "active_visual_semantic_fragment_count": 1250,
+    "current_ready_dialogue_run_count": 500,
+    "current_ready_visual_structure_run_count": 500,
+    "current_ready_visual_semantic_run_count": 500,
+    "ready_dialogue_task_count": 500,
+    "ready_visual_task_count": 500,
+    "portrait_video_count": 250,
+    "landscape_video_count": 250,
+    "duration_bucket_count": 5,
+    "dialogue_topic_count": 5,
+    "visual_topic_count": 3,
+    "dialogue_fragment_count_per_video": {
+      "sample_count": 500,
+      "minimum": 1,
+      "maximum": 112,
+      "average": 13.13,
+      "p50": 8,
+      "p95": 42,
+      "p99": 72
+    },
+    "fragment_count_per_video": {
+      "sample_count": 500,
+      "minimum": 1,
+      "maximum": 112,
+      "average": 13.13,
+      "p50": 8,
+      "p95": 42,
+      "p99": 72
+    },
+    "visual_fragment_count_per_video": {
+      "sample_count": 500,
+      "minimum": 1,
+      "maximum": 4,
+      "average": 2.5,
+      "p50": 2,
+      "p95": 4,
+      "p99": 4
+    },
+    "text_length_chars": {
+      "sample_count": 6565,
+      "minimum": 2,
+      "maximum": 681,
+      "average": 17.019,
+      "p50": 9,
+      "p95": 42,
+      "p99": 161
+    },
+    "repeated_dialogue_fragment_count": 4334,
+    "repository_max_recalled_fragments": 300,
+    "repository_max_fragments_per_asset": 3
+  },
+  "seed_latency_ms": 768.438,
+  "measurements": {
+    "warmup_count": 20,
+    "query_count": 200,
+    "measured_iteration_count": 200,
+    "query_distribution": [
+      "防水能力",
+      "夜间拍摄",
+      "产品开箱",
+      "户外露营",
+      "人物采访",
+      "玻璃碗",
+      "深色液体",
+      "绿色包装",
+      "真实使用场景",
+      "量子帆船术语零命中"
+    ],
+    "dialogue_query_distribution": [
+      "防水能力",
+      "夜间拍摄",
+      "产品开箱",
+      "户外露营",
+      "人物采访"
+    ],
+    "visual_query_distribution": [
+      "玻璃碗",
+      "深色液体",
+      "绿色包装"
+    ],
+    "retrieval_version": "dialogue_visual_literal_v1",
+    "planner_mode": "enabled_precached_normal_plan_v1",
+    "planner_cache": {
+      "cold_miss_count": 10,
+      "cached_hit_count": 220,
+      "entry_count": 10
+    },
+    "planner_cold_wall_latency_ms": {
+      "sample_count": 10,
+      "minimum": 0.062,
+      "maximum": 0.527,
+      "average": 0.123,
+      "p50": 0.07,
+      "p95": 0.527,
+      "p99": 0.527
+    },
+    "planner_cached_latency_ms": {
+      "sample_count": 200,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "average": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "retrieval_latency_ms": {
+      "sample_count": 200,
+      "minimum": 12.0,
+      "maximum": 130.0,
+      "average": 82.155,
+      "p50": 81.0,
+      "p95": 125.0,
+      "p99": 129.0
+    },
+    "total_without_external_provider_latency_ms": {
+      "sample_count": 200,
+      "minimum": 13.0,
+      "maximum": 131.0,
+      "average": 82.92,
+      "p50": 82.0,
+      "p95": 126.0,
+      "p99": 129.0
+    },
+    "wall_total_without_external_provider_latency_ms": {
+      "sample_count": 200,
+      "minimum": 13.33,
+      "maximum": 133.204,
+      "average": 84.703,
+      "p50": 84.019,
+      "p95": 128.023,
+      "p99": 131.338
+    },
+    "zero_result_count": 20,
+    "zero_result_rate": 0.1,
+    "top_query_plans": [
+      {
+        "query": "防水能力",
+        "query_sha256": "1192a71f46c98731563a786cd0aaf8362c57d8e37f8bdb0f059e822d66149083",
+        "exact_phrases": [
+          "防水能力"
+        ],
+        "optional_terms": [
+          "ip68",
+          "防护",
+          "进水"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 100,
+        "observed_candidate_count_max": 100
+      },
+      {
+        "query": "夜间拍摄",
+        "query_sha256": "9a9534463f3050732a4197f4f961b35e49804c5808ee047c29ca85ff71e80c5a",
+        "exact_phrases": [
+          "夜间拍摄"
+        ],
+        "optional_terms": [
+          "低光",
+          "夜景",
+          "暗光"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 100,
+        "observed_candidate_count_max": 100
+      },
+      {
+        "query": "产品开箱",
+        "query_sha256": "a497170922c84a3ed22936fa5cd2019327c464a9eb6e95c3291f8b62987c9f17",
+        "exact_phrases": [
+          "产品开箱"
+        ],
+        "optional_terms": [
+          "包装",
+          "配件",
+          "首次使用"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 137,
+        "observed_candidate_count_max": 137
+      },
+      {
+        "query": "户外露营",
+        "query_sha256": "406c3b57337880b1b4c229439efec2786c31fd25b72ad8e500b40367fdc2a6ea",
+        "exact_phrases": [
+          "户外露营"
+        ],
+        "optional_terms": [
+          "帐篷",
+          "户外",
+          "营地"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 100,
+        "observed_candidate_count_max": 100
+      },
+      {
+        "query": "人物采访",
+        "query_sha256": "d9212804d30a15abca0f06e01524479c22b4426385a4cf73fed0951c3ae577f4",
+        "exact_phrases": [
+          "人物采访"
+        ],
+        "optional_terms": [
+          "访谈",
+          "讲解",
+          "同期声"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 102,
+        "observed_candidate_count_max": 102
+      },
+      {
+        "query": "玻璃碗",
+        "query_sha256": "e491ed069b80d50998e907bca779ec63e2a4d49405d15c845d8079c71d59553d",
+        "exact_phrases": [
+          "玻璃碗"
+        ],
+        "optional_terms": [
+          "透明碗",
+          "碗",
+          "透明容器"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 133,
+        "observed_candidate_count_max": 133
+      },
+      {
+        "query": "深色液体",
+        "query_sha256": "7b6da31ee70493d27dc6f5a536d2966e4a64d575c9162980e7672a38ff728282",
+        "exact_phrases": [
+          "深色液体"
+        ],
+        "optional_terms": [
+          "深红色液体",
+          "液体",
+          "深色"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 133,
+        "observed_candidate_count_max": 133
+      },
+      {
+        "query": "绿色包装",
+        "query_sha256": "5005fcedad83dfd723ad748f352cd0613cf3e14e890fdc124cf1898725e8444f",
+        "exact_phrases": [
+          "绿色包装"
+        ],
+        "optional_terms": [
+          "绿色包装盒",
+          "包装",
+          "绿色"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 134,
+        "observed_candidate_count_max": 134
+      },
+      {
+        "query": "真实使用场景",
+        "query_sha256": "56c4dbfd8571ecb35c87a9ec41d4f1a9a1faf360287f0a76e7fcfcdec7731eea",
+        "exact_phrases": [
+          "真实使用场景"
+        ],
+        "optional_terms": [
+          "现场",
+          "实测",
+          "体验"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 133,
+        "observed_candidate_count_max": 133
+      },
+      {
+        "query": "量子帆船术语零命中",
+        "query_sha256": "7aa63731a1c6883b8a9d78a75bacc42f5a3eaba8beba5eb9a4b1654e3e5a8cf5",
+        "exact_phrases": [
+          "量子帆船术语零命中"
+        ],
+        "optional_terms": [
+          "不存在候选"
+        ],
+        "planner_version": "benchmark_precached_query_plan_v1",
+        "measured_query_count": 20,
+        "observed_candidate_count_min": 0,
+        "observed_candidate_count_max": 0
+      }
+    ],
+    "observed_candidate_count_range": {
+      "防水能力": {
+        "minimum": 100,
+        "maximum": 100
+      },
+      "夜间拍摄": {
+        "minimum": 100,
+        "maximum": 100
+      },
+      "产品开箱": {
+        "minimum": 137,
+        "maximum": 137
+      },
+      "户外露营": {
+        "minimum": 100,
+        "maximum": 100
+      },
+      "人物采访": {
+        "minimum": 102,
+        "maximum": 102
+      },
+      "玻璃碗": {
+        "minimum": 133,
+        "maximum": 133
+      },
+      "深色液体": {
+        "minimum": 133,
+        "maximum": 133
+      },
+      "绿色包装": {
+        "minimum": 134,
+        "maximum": 134
+      },
+      "真实使用场景": {
+        "minimum": 133,
+        "maximum": 133
+      },
+      "量子帆船术语零命中": {
+        "minimum": 0,
+        "maximum": 0
+      }
+    },
+    "gate": {
+      "threshold_p95_ms": 3000.0,
+      "retrieval_passed": true,
+      "total_passed": true,
+      "passed": true
+    },
+    "samples": [
+      {
+        "iteration": 1,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.541,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 2,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.306,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 3,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 110.0,
+        "total_latency_ms": 110.0,
+        "wall_total_latency_ms": 112.601,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 4,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.915,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 5,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 97.643,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 6,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.558,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 7,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.718,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 8,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 94.0,
+        "wall_total_latency_ms": 95.796,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 9,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 113.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 115.348,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 10,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.542,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 11,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.524,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 12,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.268,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 13,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 124.0,
+        "total_latency_ms": 125.0,
+        "wall_total_latency_ms": 126.854,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 14,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.929,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 15,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.857,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 16,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 81.038,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 17,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.67,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 18,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.92,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 19,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 116.251,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 20,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.971,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 21,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 97.183,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 22,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.686,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 23,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 111.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 114.191,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 24,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 98.446,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 25,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 97.41,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 26,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.782,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 27,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.981,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 28,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 94.0,
+        "wall_total_latency_ms": 96.326,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 29,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 116.104,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 30,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.654,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 31,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 83.297,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 32,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.438,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 33,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 124.0,
+        "total_latency_ms": 125.0,
+        "wall_total_latency_ms": 127.124,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 34,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.729,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 35,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.041,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 36,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 78.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 80.819,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 37,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.438,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 38,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 82.398,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 39,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 116.834,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 40,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.906,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 41,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.573,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 42,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 84.0,
+        "total_latency_ms": 84.0,
+        "wall_total_latency_ms": 87.731,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 43,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 113.0,
+        "wall_total_latency_ms": 114.964,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 44,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 97.0,
+        "total_latency_ms": 98.0,
+        "wall_total_latency_ms": 99.385,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 45,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 97.547,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 46,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.555,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 47,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.914,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 48,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 94.0,
+        "wall_total_latency_ms": 96.43,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 49,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 116.163,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 50,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.33,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 51,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 83.136,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 52,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 98.729,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 53,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 111.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 114.378,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 54,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.318,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 55,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 111.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 113.382,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 56,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 66.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.331,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 57,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 66.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.93,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 58,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.306,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 59,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 129.0,
+        "total_latency_ms": 130.0,
+        "wall_total_latency_ms": 131.931,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 60,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 13.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 14.268,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 61,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.514,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 62,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.991,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 63,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 113.0,
+        "wall_total_latency_ms": 114.4,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 64,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.539,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 65,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.538,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 66,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.116,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 67,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.963,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 68,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 94.0,
+        "wall_total_latency_ms": 95.511,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 69,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 116.841,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 70,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.826,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 71,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.533,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 72,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.291,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 73,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 111.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 113.842,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 74,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.487,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 75,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 110.0,
+        "total_latency_ms": 110.0,
+        "wall_total_latency_ms": 112.158,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 76,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 66.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.384,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 77,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.234,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 78,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 82.073,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 79,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 129.0,
+        "total_latency_ms": 129.0,
+        "wall_total_latency_ms": 131.338,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 80,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.83,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 81,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.907,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 82,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.845,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 83,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 128.0,
+        "total_latency_ms": 128.0,
+        "wall_total_latency_ms": 130.272,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 84,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 85.228,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 85,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.539,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 86,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.815,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 87,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.812,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 88,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.232,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 89,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 116.798,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 90,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.468,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 91,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.545,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 92,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 99.526,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 93,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 113.0,
+        "wall_total_latency_ms": 115.131,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 94,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.774,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 95,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 110.0,
+        "total_latency_ms": 111.0,
+        "wall_total_latency_ms": 112.589,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 96,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 67.593,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 97,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.77,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 98,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 78.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 80.723,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 99,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 127.0,
+        "total_latency_ms": 128.0,
+        "wall_total_latency_ms": 129.974,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 100,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.825,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 101,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.703,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 102,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.412,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 103,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 126.0,
+        "total_latency_ms": 127.0,
+        "wall_total_latency_ms": 128.834,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 104,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.507,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 105,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.263,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 106,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 67.429,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 107,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.988,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 108,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.733,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 109,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 113.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 116.28,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 110,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.646,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 111,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.7,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 112,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 98.71,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 113,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 113.0,
+        "wall_total_latency_ms": 114.283,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 114,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.964,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 115,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 110.0,
+        "total_latency_ms": 111.0,
+        "wall_total_latency_ms": 112.405,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 116,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.699,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 117,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.413,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 118,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 81.088,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 119,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 130.0,
+        "total_latency_ms": 131.0,
+        "wall_total_latency_ms": 133.204,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 120,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.461,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 121,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.778,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 122,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.716,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 123,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 125.0,
+        "total_latency_ms": 126.0,
+        "wall_total_latency_ms": 127.586,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 124,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.22,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 125,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.383,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 126,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 66.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.08,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 127,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 82.019,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 128,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.394,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 129,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 115.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 117.456,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 130,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.706,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 131,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.244,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 132,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.47,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 133,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 114.182,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 134,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.835,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 135,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 108.0,
+        "total_latency_ms": 109.0,
+        "wall_total_latency_ms": 110.321,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 136,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.482,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 137,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.415,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 138,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 81.177,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 139,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 128.0,
+        "total_latency_ms": 128.0,
+        "wall_total_latency_ms": 130.107,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 140,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 14.022,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 141,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.487,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 142,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.91,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 143,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 127.0,
+        "total_latency_ms": 128.0,
+        "wall_total_latency_ms": 129.236,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 144,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.372,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 145,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.491,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 146,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.528,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 147,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.956,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 148,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.508,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 149,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 115.0,
+        "total_latency_ms": 116.0,
+        "wall_total_latency_ms": 118.278,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 150,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.791,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 151,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.948,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 152,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.039,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 153,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 114.153,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 154,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 97.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 99.746,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 155,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 97.0,
+        "wall_total_latency_ms": 98.638,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 156,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.202,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 157,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 66.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 68.004,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 158,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.206,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 159,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 128.0,
+        "total_latency_ms": 129.0,
+        "wall_total_latency_ms": 131.113,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 160,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.746,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 161,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.398,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 162,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.925,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 163,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 126.0,
+        "total_latency_ms": 127.0,
+        "wall_total_latency_ms": 128.501,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 164,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.206,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 165,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.786,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 166,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 82.924,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 167,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.949,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 168,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 80.0,
+        "wall_total_latency_ms": 81.531,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 169,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 115.0,
+        "total_latency_ms": 116.0,
+        "wall_total_latency_ms": 117.833,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 170,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.662,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 171,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.053,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 172,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.019,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 173,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 112.0,
+        "total_latency_ms": 113.0,
+        "wall_total_latency_ms": 114.696,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 174,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 97.758,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 175,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.835,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 176,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.537,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 177,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.872,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 178,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 94.0,
+        "wall_total_latency_ms": 95.892,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 179,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 115.0,
+        "total_latency_ms": 115.0,
+        "wall_total_latency_ms": 117.679,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 180,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.745,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 181,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 83.649,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 182,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 80.0,
+        "total_latency_ms": 81.0,
+        "wall_total_latency_ms": 83.419,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 183,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 125.0,
+        "total_latency_ms": 126.0,
+        "wall_total_latency_ms": 128.023,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 184,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 82.0,
+        "total_latency_ms": 83.0,
+        "wall_total_latency_ms": 84.665,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 185,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 96.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 98.149,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 186,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 78.0,
+        "total_latency_ms": 78.0,
+        "wall_total_latency_ms": 80.094,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 187,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 67.14,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 188,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 79.0,
+        "total_latency_ms": 79.0,
+        "wall_total_latency_ms": 81.082,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 189,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 114.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 116.633,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 190,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.739,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      },
+      {
+        "iteration": 191,
+        "query": "防水能力",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.096,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 192,
+        "query": "夜间拍摄",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 81.0,
+        "total_latency_ms": 82.0,
+        "wall_total_latency_ms": 84.143,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 193,
+        "query": "产品开箱",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 111.0,
+        "total_latency_ms": 112.0,
+        "wall_total_latency_ms": 113.6,
+        "total_candidate_count": 137,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 194,
+        "query": "户外露营",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 95.0,
+        "total_latency_ms": 96.0,
+        "wall_total_latency_ms": 97.85,
+        "total_candidate_count": 100,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 195,
+        "query": "人物采访",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 94.0,
+        "total_latency_ms": 95.0,
+        "wall_total_latency_ms": 96.521,
+        "total_candidate_count": 102,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 196,
+        "query": "玻璃碗",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 65.0,
+        "total_latency_ms": 66.0,
+        "wall_total_latency_ms": 67.502,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 197,
+        "query": "深色液体",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 64.0,
+        "total_latency_ms": 65.0,
+        "wall_total_latency_ms": 66.792,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 198,
+        "query": "绿色包装",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 93.0,
+        "total_latency_ms": 93.0,
+        "wall_total_latency_ms": 95.467,
+        "total_candidate_count": 134,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 199,
+        "query": "真实使用场景",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 113.0,
+        "total_latency_ms": 114.0,
+        "wall_total_latency_ms": 115.766,
+        "total_candidate_count": 133,
+        "page_result_count": 50,
+        "zero_result": false
+      },
+      {
+        "iteration": 200,
+        "query": "量子帆船术语零命中",
+        "planner_latency_ms": 0.0,
+        "retrieval_latency_ms": 12.0,
+        "total_latency_ms": 13.0,
+        "wall_total_latency_ms": 13.631,
+        "total_candidate_count": 0,
+        "page_result_count": 0,
+        "zero_result": true
+      }
+    ]
+  },
+  "cleanup_confirmed": true,
+  "elapsed_ms": 19735.458
+}

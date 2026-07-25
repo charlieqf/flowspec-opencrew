@@ -1,0 +1,1 @@
+"""Workflow Assistant frontend package."""

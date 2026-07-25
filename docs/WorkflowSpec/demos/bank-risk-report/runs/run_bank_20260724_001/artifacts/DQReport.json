@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "discrepancy_rate": 0.12,
+  "issues": [
+    {
+      "code": "PAYMENT_POPULATION_BREAK",
+      "severity": "high",
+      "rate": 0.12
+    }
+  ],
+  "rule_version": "dq-rules-2026.06"
+}

@@ -1,0 +1,142 @@
+name: CI Gate
+
+# Required gate for the tech-debt remediation baseline (Step 0):
+# backend contract tests must be green and the frontend must build before merge.
+# See docs/contract_tests_triage_2026-07-01.md.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ci-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: python -m pip install --upgrade ruff==0.8.4
+
+      - name: Run backend lint
+        run: scripts/check_backend_lint.sh
+
+      - name: Run storyboard context migration gate
+        run: python scripts/check_storyboard_context_migration.py
+
+      - name: Run frontend API helper freeze gate
+        run: python scripts/check_frontend_api_helper_freeze.py
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm --prefix frontend ci
+
+      - name: Run frontend lint
+        run: npm --prefix frontend run lint
+
+      - name: Run Phase 1A frontend runtime contract
+        run: npm --prefix frontend run test:phase1a-runtime-contract
+
+      - name: Run G1d controller contract
+        run: npm --prefix frontend run test:g1d-controller-contract
+
+  backend-contract-tests:
+    name: Backend contract tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # ffmpeg/ffprobe are vendored in the (gitignored) ToolLibrary/.bin on dev
+    # machines; CI must supply them. imageio-ffmpeg ships ffmpeg but NOT ffprobe,
+    # so several tool tests need the system package. Point the tool resolver at
+    # the system binaries via the env vars it already honors.
+    env:
+      OPENCREW_FFMPEG_PATH: /usr/bin/ffmpeg
+      OPENCREW_FFPROBE_PATH: /usr/bin/ffprobe
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg (provides ffmpeg + ffprobe)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -1
+          ffprobe -version | head -1
+
+      - name: Provide vendored ffmpeg/ffprobe
+        # Some tools/tests resolve the binaries at ToolLibrary/.bin (vendored on
+        # dev machines, gitignored so absent in CI). Symlink the system binaries
+        # there so those code paths behave exactly as on a dev machine.
+        run: |
+          mkdir -p ToolLibrary/.bin
+          ln -sf "$(command -v ffmpeg)" ToolLibrary/.bin/ffmpeg
+          ln -sf "$(command -v ffprobe)" ToolLibrary/.bin/ffprobe
+          ls -l ToolLibrary/.bin
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r backend/requirements.txt
+
+      - name: Run model leakage guard
+        env:
+          PYTHONPYCACHEPREFIX: /tmp/opencrew-pycache
+        run: |
+          python scripts/check_model_leakage_guard.py
+
+      - name: Run contract tests
+        # Run from repo root: tests resolve REPO_ROOT via parents[3] and add
+        # backend/ to sys.path themselves. Keep pycache out of the tree.
+        env:
+          PYTHONPYCACHEPREFIX: /tmp/opencrew-pycache
+        run: |
+          python -m unittest discover -s backend/tests/contracts
+
+  frontend-build:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm --prefix frontend ci
+
+      - name: Self-test frontend model bundle leakage policy
+        run: npm --prefix frontend run test:model-bundle-policy-contract
+
+      - name: Build frontend
+        run: npm --prefix frontend run build
+
+      - name: Run frontend model bundle leakage contract
+        run: npm --prefix frontend run test:model-bundle-contract

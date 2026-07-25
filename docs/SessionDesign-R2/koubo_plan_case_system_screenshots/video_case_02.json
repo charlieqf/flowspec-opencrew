@@ -1,0 +1,56 @@
+{
+  "suite": "video",
+  "number": 2,
+  "title": "Case 2：视觉锚点切 1 刀，中间新图重开 Segment",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 5,
+  "min_seconds": 1,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "shot_count": 1,
+    "scene_count": 1,
+    "dialogue_count": 5,
+    "segment_count": 2,
+    "blocked_segment_count": 0,
+    "skipped_scene_count": 0,
+    "blocked_scene_count": 0,
+    "need_audio_count": 5,
+    "need_image_prompt_count": 1,
+    "need_image_count": 1,
+    "need_video_prompt_count": 2,
+    "need_video_count": 2,
+    "segment_audio_count": 2,
+    "need_lipsync_count": 2,
+    "need_audio_video_sync_count": 0,
+    "need_sync_count": 2
+  },
+  "expected_count": 2,
+  "actual": {
+    "actualCount": 2,
+    "dpr": 1,
+    "rect": {
+      "height": 320.25,
+      "left": 650,
+      "top": 293.375,
+      "width": 620
+    },
+    "segmentRows": [
+      "S1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "S2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 1\nScene 1\nSegment 2",
+    "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n1/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_case_02.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+}

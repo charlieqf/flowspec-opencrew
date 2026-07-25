@@ -1,0 +1,8 @@
+{
+  "project_id": "VID-LUMEN-01",
+  "reference_keys": [
+    "host-reference-v1",
+    "product-reference-v3"
+  ],
+  "mock_model_output": true
+}

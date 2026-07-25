@@ -1,0 +1,39 @@
+.kbsp-module {
+  min-height: 100%;
+}
+.kbsp-home {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kbsp-task-list {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.kbsp-task-card {
+  background: #fff;
+  border: 1px solid #d7e0ed;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 108px;
+  padding: 16px;
+}
+.kbsp-task-card strong,
+.kbsp-task-card span,
+.kbsp-task-card p {
+  display: block;
+}
+.kbsp-task-card span,
+.kbsp-task-card p {
+  color: #64748b;
+  font-size: 12px;
+}
+.kbsp-empty {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  color: #64748b;
+  padding: 24px;
+  text-align: center;
+}

@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "toolset_id": "TalkingHead_V1",
+  "workflow_id": "person_talking_head_v1",
+  "target": "person_talking_head_v1",
+  "description": "Workflow-specific ToolLibrary surface for person talking-head script-to-video workflows.",
+  "implementation_phase": "phase_1_person_talking_head_mvp",
+  "constraints": [
+    "TalkingHead_V1 owns workflow-specific 00, 04_01, 01, 02, 03, 05_02, and 06_01. Only 05_01 is reused from Analysis_V1.",
+    "TalkingHead_V1 must not execute Analysis_V1/04_03_StoryBoardQuick.py.",
+    "SRT lines are source sentences. StoryBoard Structure merges consecutive SRT lines into one Dialogue/Segment by single_video_length_seconds; it must not split a sentence.",
+    "The uploaded portrait image is the first-frame seed and is reused by portrait_segments_per_image policy.",
+    "TalkingHead_V1/05_02 accepts only Flush X, Max 1.5 X, Max 2.7 W, and Max SD 2.",
+    "Max SD 2 owns a TalkingHead-local OpenRouter module, expression-and-motion prompt, and privacy-grid implementation."
+  ],
+  "tools": [
+    {
+      "id": "00",
+      "name": "00_PrepareSessionVariables",
+      "display_name_zh": "运行变量准备",
+      "display_name_en": "Prepare session variables",
+      "script": "ToolLibrary/TalkingHead_V1/00_PrepareSessionVariables.py",
+      "implementation_status": "implemented_mvp",
+      "stage": "prepare",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionOutput/task_list/task_meta.json"],
+      "main_outputs": [
+        "SessionContext/Variables.json",
+        "SessionContext/TalkingHead_Portrait/*",
+        "S1_00_PrepareSessionVariables/Report/Result.json"
+      ]
+    },
+    {
+      "id": "04_01",
+      "name": "04_01_TalkingHeadSRTRewrite",
+      "display_name_zh": "口播脚本改写",
+      "display_name_en": "TalkingHead SRT rewrite",
+      "script": "ToolLibrary/TalkingHead_V1/04_01_SRTRewrite.py",
+      "implementation_status": "implemented_mvp",
+      "stage": "srt_rewrite",
+      "required_by_default": true,
+      "cost_level": "low",
+      "uses_llm": true,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionContext/Variables.json"],
+      "main_outputs": [
+        "SessionOutput/subtitle/final_srt_frame_items.json",
+        "SessionOutput/subtitle/rewritten_srt_items.json",
+        "SessionOutput/subtitle/rewritten_dialogue.srt",
+        "S6_04_01_SRTRewrite/Report/Result.json"
+      ]
+    },
+    {
+      "id": "01",
+      "name": "01_StoryBoardGenerate",
+      "display_name_zh": "故事版生成",
+      "display_name_en": "Generate StoryBoard",
+      "script": "ToolLibrary/TalkingHead_V1/01_StoryBoardGenerate.py",
+      "implementation_status": "implemented_mvp",
+      "stage": "storyboard_generate",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "supports_resume": true,
+      "hard_dependencies": [
+        "SessionContext/Variables.json",
+        "SessionOutput/subtitle/rewritten_srt_items.json"
+      ],
+      "main_outputs": [
+        "SessionOutput/storyboard/srt_storyboard.json",
+        "SessionOutput/storyboard/koubo_storyboard_edit.json",
+        "S2_01_StoryBoardGenerate/Report/Result.json"
+      ],
+      "notes": "Replaces Analysis_V1/04_03 for TalkingHead_V1. The final-prompt-to-storyboard capability belongs here, but this workflow must still output one Shot and one Scene."
+    },
+    {
+      "id": "02",
+      "name": "02_StoryBoardStructure",
+      "display_name_zh": "故事版分镜生成",
+      "display_name_en": "Build StoryBoard structure",
+      "script": "ToolLibrary/TalkingHead_V1/02_StoryBoardStructure.py",
+      "implementation_status": "implemented_mvp",
+      "stage": "storyboard_structure",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionOutput/storyboard/srt_storyboard.json"],
+      "main_outputs": [
+        "SessionOutput/subtitle/final_srt_frame_items.json",
+        "SessionOutput/subtitle/rewritten_srt_items.json",
+        "SessionOutput/subtitle/rewritten_dialogue.srt",
+        "SessionOutput/storyboard/srt_storyboard.json",
+        "SessionOutput/storyboard/koubo_storyboard_edit.json",
+        "S3_02_StoryBoardStructure/Report/Result.json"
+      ],
+      "notes": "Uses the selected clone voice + Tempo to calibrate seconds per spoken unit, writes cumulative per-line timing back to subtitle outputs, then forces one Shot and one Scene and merges consecutive SRT lines into Dialogue/Segment units up to the configured single video length."
+    },
+    {
+      "id": "03",
+      "name": "03_StoryBoardConfig",
+      "display_name_zh": "故事版配置",
+      "display_name_en": "Configure StoryBoard",
+      "script": "ToolLibrary/TalkingHead_V1/03_StoryBoardConfig.py",
+      "implementation_status": "implemented_mvp",
+      "stage": "storyboard_config",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "supports_resume": true,
+      "hard_dependencies": [
+        "SessionOutput/storyboard/srt_storyboard.json",
+        "SessionContext/Variables.json"
+      ],
+      "main_outputs": [
+        "SessionOutput/storyboard/srt_storyboard.json",
+        "SessionOutput/storyboard/koubo_storyboard_edit.json",
+        "SessionOutput/storyboard/Working/*_Image_New.png",
+        "SessionOutput/storyboard/Working/*_Audio_Final.wav",
+        "S4_03_StoryBoardConfig/Report/Result.json"
+      ],
+      "notes": "Places portrait first frames by reuse policy and generates/binds HeyGen clone voice Audio_Final per Dialogue when a voice is selected."
+    },
+    {
+      "id": "05_02",
+      "name": "05_02_TalkingHeadVideoPlanExecutor",
+      "display_name_zh": "逐句生成视频",
+      "display_name_en": "Generate talking-head segment videos",
+      "script": "ToolLibrary/TalkingHead_V1/05_02_VideoPlanExecutor.py",
+      "implementation_status": "implemented",
+      "stage": "video_plan_execution",
+      "required_by_default": false,
+      "cost_level": "very_high",
+      "uses_llm": false,
+      "uses_video": true,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionOutput/storyboard/video_generation_plan.json"],
+      "main_outputs": [
+        "SessionOutput/storyboard/video_plan_execution_result.json",
+        "SessionOutput/storyboard/Working",
+        "S9_05_02_TalkingHeadVideoPlanExecutor/Report/Result.json"
+      ],
+      "notes": "Only Flush X (grok-imagine-video via video_grok_10.py), Max 1.5 X (grok-imagine-video-1.5-preview via video_grok_15.py), Max 2.7 W (wan2.7-r2v), and Max SD 2 (bytedance/seedance-2.0 via the TalkingHead-local video_openrouter.py) are allowed. Max SD 2 uses Video_SDR2V_TalkingHead.md and TalkingHead-local privacy-grid tools."
+    },
+    {
+      "id": "06_01",
+      "name": "06_01_TalkingHeadVideoPlanComposer",
+      "display_name_zh": "合并成片",
+      "display_name_en": "Compose talking-head movie",
+      "script": "ToolLibrary/TalkingHead_V1/06_01_VideoPlanComposer.py",
+      "implementation_status": "implemented",
+      "stage": "video_plan_composition",
+      "required_by_default": false,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionOutput/storyboard/video_generation_plan.json", "05_02"],
+      "main_outputs": [
+        "SessionOutput/storyboard/video_plan_compose_result.json",
+        "SessionOutput/storyboard/Working",
+        "S10_06_01_TalkingHeadVideoPlanComposer/Report/Result.json"
+      ]
+    }
+  ]
+}

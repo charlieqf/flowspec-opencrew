@@ -1,0 +1,16 @@
+[
+  {
+    "run_id": "run_bank_20260724_001", "session_id": "risk_report_BANK01_2026M06", "task_id": "risk_report_BANK01_2026M06_t", "run_sequence": 1, "supersedes_run_id": null,
+    "started_at": "2026-07-24T01:00:00Z", "source_revision": "data-cut-r1",
+    "context": { "entity_id": "BANK01", "period": "2026-06", "data_cut_id": "cut-20260723-a", "transaction_count_fixture": 128420, "payment_count_fixture": 126880, "gl_total_fixture": 421500000.25, "discrepancy_rate_fixture": 0.12, "waiver_decision": null, "publish_decision": null },
+    "human_decisions": { "S3_dq_waiver": { "decision": "rejected", "reason": "Unexplained source-system break exceeds the waiver threshold.", "expected_revision": 0, "actor": { "type": "user", "id": "finance_controller_4", "roles": ["finance_controller"] } } },
+    "callbacks": {}
+  },
+  {
+    "run_id": "run_bank_20260724_002", "session_id": "risk_report_BANK01_2026M06", "task_id": "risk_report_BANK01_2026M06_t", "run_sequence": 2, "supersedes_run_id": "run_bank_20260724_001",
+    "started_at": "2026-07-24T04:00:00Z", "source_revision": "data-cut-r2-restated",
+    "context": { "entity_id": "BANK01", "period": "2026-06", "data_cut_id": "cut-20260724-b", "transaction_count_fixture": 128420, "payment_count_fixture": 128401, "gl_total_fixture": 421500000.25, "discrepancy_rate_fixture": 0.008, "waiver_decision": null, "publish_decision": null },
+    "human_decisions": { "S10_report_signoff": { "decision": "approved", "reason": "Restated cut reconciles; metrics and disclosures reviewed.", "expected_revision": 0, "actor": { "type": "user", "id": "cro_1", "roles": ["chief_risk_officer"] } } },
+    "callbacks": {}
+  }
+]

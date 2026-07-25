@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.opencrew.opencode-gateway.system</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/macmini-4/work/code/OpenCrew/scripts/deploy/_boot_remote.sh</string>
+    <string>opencode-gateway</string>
+  </array>
+  <key>UserName</key>
+  <string>macmini-4</string>
+  <key>GroupName</key>
+  <string>staff</string>
+  <key>WorkingDirectory</key>
+  <string>/Users/macmini-4/work/code/macminis</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>/Users/macmini-4</string>
+    <key>USER</key>
+    <string>macmini-4</string>
+    <key>LOGNAME</key>
+    <string>macmini-4</string>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/opt/homebrew/sbin:/Users/macmini-4/.bun/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>ThrottleInterval</key>
+  <integer>5</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/opencrew-system-opencode-gateway.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/opencrew-system-opencode-gateway.err.log</string>
+</dict>
+</plist>

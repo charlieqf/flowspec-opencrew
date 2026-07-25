@@ -1,0 +1,2059 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run_bank_20260724_002",
+  "session_id": "risk_report_BANK01_2026M06",
+  "task_id": "risk_report_BANK01_2026M06_t",
+  "run_sequence": 2,
+  "supersedes_run_id": "run_bank_20260724_001",
+  "process_snapshot": {
+    "process_id": "monthly_bank_risk_report",
+    "version": "1.2.0",
+    "digest": "sha256:e668e74d70c3c4c77f5c161d04b219df0b3cbb79d129fc1ed9d663150fec933f",
+    "tool_registry_id": "bank_risk_report_mock_tools",
+    "tool_registry_version": "1.2.0",
+    "tool_registry_digest": "sha256:db898d796ac23cf9b0bcaf56e64ed356ca0de4e0c75491a84c8e923eae429720",
+    "profiles": [
+      {
+        "profile_id": "bank_grounded_risk_narrative",
+        "version": "1.0.0",
+        "digest": "sha256:33886ab7556702c576e0aa6ca71442a79c7aa6e07da83953f5f9c8ee8bf63f75"
+      }
+    ]
+  },
+  "definition_snapshot_ref": "definition/process.snapshot.json",
+  "storage_index_ref": "storage-index.json",
+  "input_revision_hash": "sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+  "status": "completed",
+  "outcome": "report_distributed",
+  "started_at": "2026-07-24T04:00:00Z",
+  "finished_at": "2026-07-24T04:01:35Z",
+  "context": {
+    "entity_id": "BANK01",
+    "period": "2026-06",
+    "data_cut_id": "cut-20260724-b",
+    "transaction_count_fixture": 128420,
+    "payment_count_fixture": 128401,
+    "gl_total_fixture": 421500000.25,
+    "discrepancy_rate_fixture": 0.008,
+    "waiver_decision": null,
+    "publish_decision": "approved",
+    "transaction_count": 128420,
+    "payment_count": 128401,
+    "gl_total": 421500000.25,
+    "dq_passed": true,
+    "waiver_required": false,
+    "dq_accepted": true,
+    "metric_version": "risk-metrics-4.7",
+    "distributed_at": "2026-07-24T04:20:00Z"
+  },
+  "steps": [
+    {
+      "step_id": "S1a_freeze_transactions",
+      "tool_id": "freeze_transactions",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_fa62d8b2da6cf884",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S1a_freeze_transactions:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:d585a148ffe43ca49ea93a42f24db9a2b816eb3f987520325015acdbfedfd868",
+          "started_at": "2026-07-24T04:00:01Z",
+          "finished_at": "2026-07-24T04:00:05Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_59588e94b3a06e80"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S1b_freeze_payments",
+      "tool_id": "freeze_payments",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_101f80247d1c1aa8",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S1b_freeze_payments:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:ad4bd50f1493bb0a2973e71db05fe5b6385d937bc610d4e63de438a7c7886045",
+          "started_at": "2026-07-24T04:00:07Z",
+          "finished_at": "2026-07-24T04:00:11Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_3ae593979a385a18"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S1c_freeze_gl",
+      "tool_id": "freeze_gl_controls",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_72933f9e1cfbaed2",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S1c_freeze_gl:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:822cd732bbaa29f18b24a7dfc75b35c5169215d2e2c90bcf126e76f182c3948f",
+          "started_at": "2026-07-24T04:00:13Z",
+          "finished_at": "2026-07-24T04:00:17Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_9f92d1ec6db27259"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S2_reconcile_quality",
+      "tool_id": "reconcile_quality",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_ec359bbf14605bde",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S2_reconcile_quality:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:7319787dc7a3c616ff88c1cd01b783f97d2f05de286f10365797b83431322565",
+          "started_at": "2026-07-24T04:00:19Z",
+          "finished_at": "2026-07-24T04:00:25Z",
+          "metrics": {
+            "artifact_count": 2,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_75f40245579d1cf7",
+        "art_2e84205f11b9d127"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S3_dq_waiver",
+      "tool_id": "review_dq_waiver",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (False)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S4_finalize_quality",
+      "tool_id": "finalize_quality_decision",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_c40212b8cc3c62f8",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S4_finalize_quality:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:30f92b4a6ec533113cc0631cc6904b8facd66dd0e51381754d1c1b2291e565d4",
+          "started_at": "2026-07-24T04:00:28Z",
+          "finished_at": "2026-07-24T04:00:32Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_495f8639ae5c1233"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S5_prepare_dataset",
+      "tool_id": "prepare_clean_dataset",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_f1fc86f9c1a24339",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S5_prepare_dataset:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:00b0dd55e6758eb70fb3b7618b3a425ee4d447921b7dcc9543c05975896b18f5",
+          "started_at": "2026-07-24T04:00:34Z",
+          "finished_at": "2026-07-24T04:00:38Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_667c3aab85d0ae2a"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S6_calculate_metrics",
+      "tool_id": "calculate_risk_metrics",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_aa5d34afdd7cb95e",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S6_calculate_metrics:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:542169d1b79576b15a9ac00e8a50e1d12d4c5d3769a77928172716f0b7a6e6a3",
+          "started_at": "2026-07-24T04:00:40Z",
+          "finished_at": "2026-07-24T04:00:44Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_45915dda06eae364"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_cf028fd249e6967c",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S7_draft_narrative:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:e31a84dc7b908fc7dcb77d2f00da69aa16b09a2d04abbbbaa5054eb909196e04",
+          "started_at": "2026-07-24T04:00:46Z",
+          "finished_at": "2026-07-24T04:01:01Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 1,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_c65f23fbf8e360f5"
+      ],
+      "usage_record_ids": [
+        "usage_run_bank_20260724_002_0001"
+      ]
+    },
+    {
+      "step_id": "S8_build_appendix",
+      "tool_id": "build_compliance_appendix",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_4a90c9fc36008c4f",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S8_build_appendix:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:e6e9963b1ed7392ecc93441c1c10561726e1552e66a3f7e43eb437b786e9ee71",
+          "started_at": "2026-07-24T04:01:03Z",
+          "finished_at": "2026-07-24T04:01:07Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_f6388ccfb85ea247"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S9_assemble_report",
+      "tool_id": "assemble_risk_report",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_94d2a996112265bb",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S9_assemble_report:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:91c3470a604eca0ac71f63a01917b0fb5b6daca1d672a2834a6b70a79bbc9828",
+          "started_at": "2026-07-24T04:01:09Z",
+          "finished_at": "2026-07-24T04:01:13Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_70eeb9b44fcae1ce"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_e492ec4962529848",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S10_report_signoff:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:e76b1ab07dc53e78de19eede172dfec82216f55fe2d5b822e7b28454f3fee1f9",
+          "started_at": "2026-07-24T04:01:15Z",
+          "finished_at": "2026-07-24T04:01:24Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_8d1d7559fef1a520"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S11_distribute_report",
+      "tool_id": "distribute_report",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_0e51dafb1415dfc0",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_bank_20260724_002:S11_distribute_report:sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2",
+          "input_snapshot_hash": "sha256:50e0419211529dfab9f6685476531f06544121e0488064889448791489f406d5",
+          "started_at": "2026-07-24T04:01:26Z",
+          "finished_at": "2026-07-24T04:01:30Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_a97c14b96ca653e1"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S12_request_remediation",
+      "tool_id": "request_data_remediation",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (True)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S13_request_report_revision",
+      "tool_id": "request_report_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('approved')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "art_59588e94b3a06e80",
+      "name": "TransactionsSnapshot.json",
+      "path_base": "run",
+      "path": "artifacts/TransactionsSnapshot.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/sourceSnapshot",
+      "classification": "restricted",
+      "sha256": "sha256:0fd9a803dbdea16c75fe9f313a33f96eb3f3aa598cd71cfcad27ba553be9a827",
+      "size": 171,
+      "producer": {
+        "step_id": "S1a_freeze_transactions",
+        "attempt_id": "sa_fa62d8b2da6cf884",
+        "tool_id": "freeze_transactions",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_3ae593979a385a18",
+      "name": "PaymentsSnapshot.json",
+      "path_base": "run",
+      "path": "artifacts/PaymentsSnapshot.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/sourceSnapshot",
+      "classification": "restricted",
+      "sha256": "sha256:ff82d836a4a43c992ea33f66be0720044adbb775ecc3c6606e66ffdcaad7b806",
+      "size": 167,
+      "producer": {
+        "step_id": "S1b_freeze_payments",
+        "attempt_id": "sa_101f80247d1c1aa8",
+        "tool_id": "freeze_payments",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:09Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_9f92d1ec6db27259",
+      "name": "GLControlTotals.json",
+      "path_base": "run",
+      "path": "artifacts/GLControlTotals.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/glControl",
+      "classification": "restricted",
+      "sha256": "sha256:12f055e8d4048d2318d98b52eb042252b224d4d9947e12ecc06697e748d0b9a3",
+      "size": 119,
+      "producer": {
+        "step_id": "S1c_freeze_gl",
+        "attempt_id": "sa_72933f9e1cfbaed2",
+        "tool_id": "freeze_gl_controls",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:15Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_75f40245579d1cf7",
+      "name": "DQReport.json",
+      "path_base": "run",
+      "path": "artifacts/DQReport.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/dqReport",
+      "classification": "restricted",
+      "sha256": "sha256:2c97d647ac84bd9341acb08fd8554010498f01a0a293fd95ef8afa40ec3b19e0",
+      "size": 104,
+      "producer": {
+        "step_id": "S2_reconcile_quality",
+        "attempt_id": "sa_ec359bbf14605bde",
+        "tool_id": "reconcile_quality",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:21Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_2e84205f11b9d127",
+      "name": "Reconciliation.json",
+      "path_base": "run",
+      "path": "artifacts/Reconciliation.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/reconciliation",
+      "classification": "restricted",
+      "sha256": "sha256:c2104594f926b2074491547b484088308966373b90404ecdd6cf17e86b4a3803",
+      "size": 112,
+      "producer": {
+        "step_id": "S2_reconcile_quality",
+        "attempt_id": "sa_ec359bbf14605bde",
+        "tool_id": "reconcile_quality",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:23Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_495f8639ae5c1233",
+      "name": "QualityDecision.json",
+      "path_base": "run",
+      "path": "artifacts/QualityDecision.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/qualityDecision",
+      "classification": "restricted",
+      "sha256": "sha256:5fc13c21e4bf7e701aa76db8fe43a62fc70ed89a5b989547476f42df6a7aff45",
+      "size": 72,
+      "producer": {
+        "step_id": "S4_finalize_quality",
+        "attempt_id": "sa_c40212b8cc3c62f8",
+        "tool_id": "finalize_quality_decision",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:30Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_667c3aab85d0ae2a",
+      "name": "CleanDataset.json",
+      "path_base": "run",
+      "path": "artifacts/CleanDataset.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/cleanDataset",
+      "classification": "restricted",
+      "sha256": "sha256:d6cec8905e231754206797f52dcfedfe1cf34fba06be8c9804e5f1abd3c56bb8",
+      "size": 186,
+      "producer": {
+        "step_id": "S5_prepare_dataset",
+        "attempt_id": "sa_f1fc86f9c1a24339",
+        "tool_id": "prepare_clean_dataset",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:36Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_45915dda06eae364",
+      "name": "RiskMetrics.json",
+      "path_base": "run",
+      "path": "artifacts/RiskMetrics.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/riskMetrics",
+      "classification": "restricted",
+      "sha256": "sha256:b9cf8779f317b49e63139525011df5c759e8f6c2e244370e38c970d22e8b6475",
+      "size": 332,
+      "producer": {
+        "step_id": "S6_calculate_metrics",
+        "attempt_id": "sa_aa5d34afdd7cb95e",
+        "tool_id": "calculate_risk_metrics",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:42Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_c65f23fbf8e360f5",
+      "name": "RiskNarrative.json",
+      "path_base": "run",
+      "path": "artifacts/RiskNarrative.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/narrative",
+      "classification": "restricted",
+      "sha256": "sha256:069c7b64581b1df06155538d3dcd606e9cab77cdc68c44362124245e9d186f7e",
+      "size": 627,
+      "producer": {
+        "step_id": "S7_draft_narrative",
+        "attempt_id": "sa_cf028fd249e6967c",
+        "tool_id": "draft_grounded_narrative",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:00:48Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_f6388ccfb85ea247",
+      "name": "ComplianceAppendix.pdf",
+      "path_base": "run",
+      "path": "artifacts/ComplianceAppendix.pdf.mock.json",
+      "media_type": "application/pdf",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mockDocument",
+      "classification": "restricted",
+      "sha256": "sha256:7e10cb540a0ae76f2ab1403128e86ae9dec2ff21b38b002085347165a9533929",
+      "size": 251,
+      "producer": {
+        "step_id": "S8_build_appendix",
+        "attempt_id": "sa_4a90c9fc36008c4f",
+        "tool_id": "build_compliance_appendix",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:01:05Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_70eeb9b44fcae1ce",
+      "name": "RiskReport.pdf",
+      "path_base": "run",
+      "path": "artifacts/RiskReport.pdf.mock.json",
+      "media_type": "application/pdf",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mockDocument",
+      "classification": "restricted",
+      "sha256": "sha256:7e34ab38cd06efaf79ef1ddc8caf8d688058e395934e6a2614a630c96337fd97",
+      "size": 274,
+      "producer": {
+        "step_id": "S9_assemble_report",
+        "attempt_id": "sa_94d2a996112265bb",
+        "tool_id": "assemble_risk_report",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:01:11Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_8d1d7559fef1a520",
+      "name": "ReportApproval.json",
+      "path_base": "run",
+      "path": "artifacts/ReportApproval.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approval",
+      "classification": "restricted",
+      "sha256": "sha256:a8fa61fcb188e2a25f75e75bd36baf41de4cbf0e9824829c3311e9bcf31c02c0",
+      "size": 248,
+      "producer": {
+        "step_id": "S10_report_signoff",
+        "attempt_id": "sa_e492ec4962529848",
+        "tool_id": "review_report_signoff",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:01:22Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_a97c14b96ca653e1",
+      "name": "DistributionReceipt.json",
+      "path_base": "run",
+      "path": "artifacts/DistributionReceipt.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/distribution",
+      "classification": "restricted",
+      "sha256": "sha256:2f9fd21df66cf5d397ae1a4602b724bac4f4a51a6351d3951be61520ccd339f2",
+      "size": 228,
+      "producer": {
+        "step_id": "S11_distribute_report",
+        "attempt_id": "sa_0e51dafb1415dfc0",
+        "tool_id": "distribute_report",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "entity_id": "BANK01",
+        "period": "2026-06",
+        "data_cut_id": "cut-20260724-b"
+      },
+      "created_at": "2026-07-24T04:01:28Z",
+      "mock": true
+    }
+  ],
+  "usage_records": [
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_bank_20260724_002_0001",
+      "operation_id": "op_e890f1e4493a65da",
+      "operation_idempotency_key": "run_bank_20260724_002:S7_draft_narrative:single:1",
+      "observation_idempotency_key": "run_bank_20260724_002:S7_draft_narrative:single:1:observation:1",
+      "model_invocation_id": "mi_29f99e5b4423d0b9",
+      "agent_execution_id": null,
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "bank_grounded_risk_narrative",
+        "version": "1.0.0",
+        "digest": "sha256:33886ab7556702c576e0aa6ca71442a79c7aa6e07da83953f5f9c8ee8bf63f75"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-grounded-writer",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_2b265c6d40402dc0",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 6430,
+        "output_tokens": 812,
+        "cached_input_tokens": 1200,
+        "total_tokens": 7242
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.021",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T04:00:52Z",
+      "finished_at": "2026-07-24T04:00:54Z",
+      "recorded_at": "2026-07-24T04:00:56Z",
+      "supersedes_usage_record_id": null
+    }
+  ],
+  "human_tasks": [
+    {
+      "work_item_id": "human_c71504901c3ea09f",
+      "step_id": "S10_report_signoff",
+      "status": "completed",
+      "revision": 1,
+      "form": "risk_report_signoff",
+      "roles": [
+        "chief_risk_officer"
+      ],
+      "input_snapshot_hash": "sha256:e76b1ab07dc53e78de19eede172dfec82216f55fe2d5b822e7b28454f3fee1f9",
+      "created_at": "2026-07-24T04:01:17Z",
+      "completed_at": "2026-07-24T04:01:20Z",
+      "decision": "approved",
+      "decision_id": "decision_22113ab1d3d31053",
+      "actor": {
+        "type": "user",
+        "id": "cro_1",
+        "roles": [
+          "chief_risk_officer"
+        ]
+      },
+      "reason": "Restated cut reconciles; metrics and disclosures reviewed.",
+      "expected_revision": 0
+    }
+  ],
+  "events": [
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0001",
+      "cursor": 1,
+      "kind": "run.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "process_id": "monthly_bank_risk_report",
+        "version": "1.2.0",
+        "input_revision_hash": "sha256:5e20bef8c7021db5246adad08d197ade11075868d49e180cc314d17a45c84dc2"
+      },
+      "at": "2026-07-24T04:00:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0002",
+      "cursor": 2,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1a_freeze_transactions",
+      "tool_id": "freeze_transactions",
+      "step_attempt_id": "sa_fa62d8b2da6cf884",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_fa62d8b2da6cf884",
+        "tool_id": "freeze_transactions",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0003",
+      "cursor": 3,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1a_freeze_transactions",
+      "tool_id": "freeze_transactions",
+      "step_attempt_id": "sa_fa62d8b2da6cf884",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_59588e94b3a06e80",
+        "name": "TransactionsSnapshot.json",
+        "sha256": "sha256:0fd9a803dbdea16c75fe9f313a33f96eb3f3aa598cd71cfcad27ba553be9a827"
+      },
+      "at": "2026-07-24T04:00:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0004",
+      "cursor": 4,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1a_freeze_transactions",
+      "tool_id": "freeze_transactions",
+      "step_attempt_id": "sa_fa62d8b2da6cf884",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_fa62d8b2da6cf884",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0005",
+      "cursor": 5,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1b_freeze_payments",
+      "tool_id": "freeze_payments",
+      "step_attempt_id": "sa_101f80247d1c1aa8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_101f80247d1c1aa8",
+        "tool_id": "freeze_payments",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0006",
+      "cursor": 6,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1b_freeze_payments",
+      "tool_id": "freeze_payments",
+      "step_attempt_id": "sa_101f80247d1c1aa8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_3ae593979a385a18",
+        "name": "PaymentsSnapshot.json",
+        "sha256": "sha256:ff82d836a4a43c992ea33f66be0720044adbb775ecc3c6606e66ffdcaad7b806"
+      },
+      "at": "2026-07-24T04:00:10Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0007",
+      "cursor": 7,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1b_freeze_payments",
+      "tool_id": "freeze_payments",
+      "step_attempt_id": "sa_101f80247d1c1aa8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_101f80247d1c1aa8",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0008",
+      "cursor": 8,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1c_freeze_gl",
+      "tool_id": "freeze_gl_controls",
+      "step_attempt_id": "sa_72933f9e1cfbaed2",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_72933f9e1cfbaed2",
+        "tool_id": "freeze_gl_controls",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0009",
+      "cursor": 9,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1c_freeze_gl",
+      "tool_id": "freeze_gl_controls",
+      "step_attempt_id": "sa_72933f9e1cfbaed2",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_9f92d1ec6db27259",
+        "name": "GLControlTotals.json",
+        "sha256": "sha256:12f055e8d4048d2318d98b52eb042252b224d4d9947e12ecc06697e748d0b9a3"
+      },
+      "at": "2026-07-24T04:00:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0010",
+      "cursor": 10,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S1c_freeze_gl",
+      "tool_id": "freeze_gl_controls",
+      "step_attempt_id": "sa_72933f9e1cfbaed2",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_72933f9e1cfbaed2",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0011",
+      "cursor": 11,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S2_reconcile_quality",
+      "tool_id": "reconcile_quality",
+      "step_attempt_id": "sa_ec359bbf14605bde",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ec359bbf14605bde",
+        "tool_id": "reconcile_quality",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0012",
+      "cursor": 12,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S2_reconcile_quality",
+      "tool_id": "reconcile_quality",
+      "step_attempt_id": "sa_ec359bbf14605bde",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_75f40245579d1cf7",
+        "name": "DQReport.json",
+        "sha256": "sha256:2c97d647ac84bd9341acb08fd8554010498f01a0a293fd95ef8afa40ec3b19e0"
+      },
+      "at": "2026-07-24T04:00:22Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0013",
+      "cursor": 13,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S2_reconcile_quality",
+      "tool_id": "reconcile_quality",
+      "step_attempt_id": "sa_ec359bbf14605bde",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_2e84205f11b9d127",
+        "name": "Reconciliation.json",
+        "sha256": "sha256:c2104594f926b2074491547b484088308966373b90404ecdd6cf17e86b4a3803"
+      },
+      "at": "2026-07-24T04:00:24Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0014",
+      "cursor": 14,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S2_reconcile_quality",
+      "tool_id": "reconcile_quality",
+      "step_attempt_id": "sa_ec359bbf14605bde",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ec359bbf14605bde",
+        "artifact_count": 2,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0015",
+      "cursor": 15,
+      "kind": "step.skipped",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S3_dq_waiver",
+      "tool_id": "review_dq_waiver",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (False)"
+        }
+      },
+      "at": "2026-07-24T04:00:27Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0016",
+      "cursor": 16,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S4_finalize_quality",
+      "tool_id": "finalize_quality_decision",
+      "step_attempt_id": "sa_c40212b8cc3c62f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_c40212b8cc3c62f8",
+        "tool_id": "finalize_quality_decision",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0017",
+      "cursor": 17,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S4_finalize_quality",
+      "tool_id": "finalize_quality_decision",
+      "step_attempt_id": "sa_c40212b8cc3c62f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_495f8639ae5c1233",
+        "name": "QualityDecision.json",
+        "sha256": "sha256:5fc13c21e4bf7e701aa76db8fe43a62fc70ed89a5b989547476f42df6a7aff45"
+      },
+      "at": "2026-07-24T04:00:31Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0018",
+      "cursor": 18,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S4_finalize_quality",
+      "tool_id": "finalize_quality_decision",
+      "step_attempt_id": "sa_c40212b8cc3c62f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_c40212b8cc3c62f8",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:33Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0019",
+      "cursor": 19,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S5_prepare_dataset",
+      "tool_id": "prepare_clean_dataset",
+      "step_attempt_id": "sa_f1fc86f9c1a24339",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_f1fc86f9c1a24339",
+        "tool_id": "prepare_clean_dataset",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:35Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0020",
+      "cursor": 20,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S5_prepare_dataset",
+      "tool_id": "prepare_clean_dataset",
+      "step_attempt_id": "sa_f1fc86f9c1a24339",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_667c3aab85d0ae2a",
+        "name": "CleanDataset.json",
+        "sha256": "sha256:d6cec8905e231754206797f52dcfedfe1cf34fba06be8c9804e5f1abd3c56bb8"
+      },
+      "at": "2026-07-24T04:00:37Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0021",
+      "cursor": 21,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S5_prepare_dataset",
+      "tool_id": "prepare_clean_dataset",
+      "step_attempt_id": "sa_f1fc86f9c1a24339",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_f1fc86f9c1a24339",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:39Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0022",
+      "cursor": 22,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S6_calculate_metrics",
+      "tool_id": "calculate_risk_metrics",
+      "step_attempt_id": "sa_aa5d34afdd7cb95e",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_aa5d34afdd7cb95e",
+        "tool_id": "calculate_risk_metrics",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:41Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0023",
+      "cursor": 23,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S6_calculate_metrics",
+      "tool_id": "calculate_risk_metrics",
+      "step_attempt_id": "sa_aa5d34afdd7cb95e",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_45915dda06eae364",
+        "name": "RiskMetrics.json",
+        "sha256": "sha256:b9cf8779f317b49e63139525011df5c759e8f6c2e244370e38c970d22e8b6475"
+      },
+      "at": "2026-07-24T04:00:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0024",
+      "cursor": 24,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S6_calculate_metrics",
+      "tool_id": "calculate_risk_metrics",
+      "step_attempt_id": "sa_aa5d34afdd7cb95e",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_aa5d34afdd7cb95e",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:00:45Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0025",
+      "cursor": 25,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_cf028fd249e6967c",
+        "tool_id": "draft_grounded_narrative",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:00:47Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0026",
+      "cursor": 26,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_c65f23fbf8e360f5",
+        "name": "RiskNarrative.json",
+        "sha256": "sha256:069c7b64581b1df06155538d3dcd606e9cab77cdc68c44362124245e9d186f7e"
+      },
+      "at": "2026-07-24T04:00:49Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0027",
+      "cursor": 27,
+      "kind": "budget.reserved",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_e890f1e4493a65da",
+        "amount": "0.03",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T04:00:51Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0028",
+      "cursor": 28,
+      "kind": "model.invocation.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_29f99e5b4423d0b9",
+        "profile_id": "bank_grounded_risk_narrative",
+        "item_key": null
+      },
+      "at": "2026-07-24T04:00:53Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0029",
+      "cursor": 29,
+      "kind": "model.invocation.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_29f99e5b4423d0b9",
+        "usage_record_id": "usage_run_bank_20260724_002_0001",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.021",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T04:00:57Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0030",
+      "cursor": 30,
+      "kind": "budget.settled",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_e890f1e4493a65da",
+        "settled": "0.021",
+        "released": "0.009"
+      },
+      "at": "2026-07-24T04:01:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0031",
+      "cursor": 31,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S7_draft_narrative",
+      "tool_id": "draft_grounded_narrative",
+      "step_attempt_id": "sa_cf028fd249e6967c",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_cf028fd249e6967c",
+        "artifact_count": 1,
+        "usage_record_count": 1,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:01:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0032",
+      "cursor": 32,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S8_build_appendix",
+      "tool_id": "build_compliance_appendix",
+      "step_attempt_id": "sa_4a90c9fc36008c4f",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_4a90c9fc36008c4f",
+        "tool_id": "build_compliance_appendix",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:01:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0033",
+      "cursor": 33,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S8_build_appendix",
+      "tool_id": "build_compliance_appendix",
+      "step_attempt_id": "sa_4a90c9fc36008c4f",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_f6388ccfb85ea247",
+        "name": "ComplianceAppendix.pdf",
+        "sha256": "sha256:7e10cb540a0ae76f2ab1403128e86ae9dec2ff21b38b002085347165a9533929"
+      },
+      "at": "2026-07-24T04:01:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0034",
+      "cursor": 34,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S8_build_appendix",
+      "tool_id": "build_compliance_appendix",
+      "step_attempt_id": "sa_4a90c9fc36008c4f",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_4a90c9fc36008c4f",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:01:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0035",
+      "cursor": 35,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S9_assemble_report",
+      "tool_id": "assemble_risk_report",
+      "step_attempt_id": "sa_94d2a996112265bb",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_94d2a996112265bb",
+        "tool_id": "assemble_risk_report",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:01:10Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0036",
+      "cursor": 36,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S9_assemble_report",
+      "tool_id": "assemble_risk_report",
+      "step_attempt_id": "sa_94d2a996112265bb",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_70eeb9b44fcae1ce",
+        "name": "RiskReport.pdf",
+        "sha256": "sha256:7e34ab38cd06efaf79ef1ddc8caf8d688058e395934e6a2614a630c96337fd97"
+      },
+      "at": "2026-07-24T04:01:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0037",
+      "cursor": 37,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S9_assemble_report",
+      "tool_id": "assemble_risk_report",
+      "step_attempt_id": "sa_94d2a996112265bb",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_94d2a996112265bb",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:01:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0038",
+      "cursor": 38,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e492ec4962529848",
+        "tool_id": "review_report_signoff",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:01:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0039",
+      "cursor": 39,
+      "kind": "human_task.created",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "work_item_id": "human_c71504901c3ea09f",
+        "roles": [
+          "chief_risk_officer"
+        ],
+        "input_snapshot_hash": "sha256:e76b1ab07dc53e78de19eede172dfec82216f55fe2d5b822e7b28454f3fee1f9"
+      },
+      "at": "2026-07-24T04:01:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0040",
+      "cursor": 40,
+      "kind": "step.waiting",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "wait_reason": {
+          "kind": "user",
+          "detail": "human_c71504901c3ea09f"
+        }
+      },
+      "at": "2026-07-24T04:01:19Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0041",
+      "cursor": 41,
+      "kind": "human_task.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "user",
+        "id": "cro_1",
+        "roles": [
+          "chief_risk_officer"
+        ]
+      },
+      "payload": {
+        "work_item_id": "human_c71504901c3ea09f",
+        "decision_id": "decision_22113ab1d3d31053",
+        "decision": "approved",
+        "reason": "Restated cut reconciles; metrics and disclosures reviewed.",
+        "expected_revision": 0,
+        "revision": 1
+      },
+      "at": "2026-07-24T04:01:21Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0042",
+      "cursor": 42,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_8d1d7559fef1a520",
+        "name": "ReportApproval.json",
+        "sha256": "sha256:a8fa61fcb188e2a25f75e75bd36baf41de4cbf0e9824829c3311e9bcf31c02c0"
+      },
+      "at": "2026-07-24T04:01:23Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0043",
+      "cursor": 43,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S10_report_signoff",
+      "tool_id": "review_report_signoff",
+      "step_attempt_id": "sa_e492ec4962529848",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e492ec4962529848",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:01:25Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0044",
+      "cursor": 44,
+      "kind": "step.started",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S11_distribute_report",
+      "tool_id": "distribute_report",
+      "step_attempt_id": "sa_0e51dafb1415dfc0",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_0e51dafb1415dfc0",
+        "tool_id": "distribute_report",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T04:01:27Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0045",
+      "cursor": 45,
+      "kind": "artifact.published",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S11_distribute_report",
+      "tool_id": "distribute_report",
+      "step_attempt_id": "sa_0e51dafb1415dfc0",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_a97c14b96ca653e1",
+        "name": "DistributionReceipt.json",
+        "sha256": "sha256:2f9fd21df66cf5d397ae1a4602b724bac4f4a51a6351d3951be61520ccd339f2"
+      },
+      "at": "2026-07-24T04:01:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0046",
+      "cursor": 46,
+      "kind": "step.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S11_distribute_report",
+      "tool_id": "distribute_report",
+      "step_attempt_id": "sa_0e51dafb1415dfc0",
+      "step_attempt_no": 1,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_0e51dafb1415dfc0",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T04:01:31Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0047",
+      "cursor": 47,
+      "kind": "step.skipped",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S12_request_remediation",
+      "tool_id": "request_data_remediation",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (True)"
+        }
+      },
+      "at": "2026-07-24T04:01:32Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0048",
+      "cursor": 48,
+      "kind": "step.skipped",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": "S13_request_report_revision",
+      "tool_id": "request_report_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('approved')"
+        }
+      },
+      "at": "2026-07-24T04:01:33Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_bank_20260724_002_0049",
+      "cursor": 49,
+      "kind": "run.completed",
+      "session_id": "risk_report_BANK01_2026M06",
+      "task_id": "risk_report_BANK01_2026M06_t",
+      "run_id": "run_bank_20260724_002",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_bank_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "outcome": "report_distributed"
+      },
+      "at": "2026-07-24T04:01:34Z"
+    }
+  ],
+  "budget_summary": {
+    "currency": "USD",
+    "limit": "5",
+    "reserved": "0",
+    "settled": "0.021",
+    "available": "4.979",
+    "status": "within_budget",
+    "ledger_ref": "budget-ledger.json"
+  },
+  "warnings": []
+}

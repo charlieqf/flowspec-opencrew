@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "due_diligence_mock_tools",
+  "version": "1.1.0",
+  "description": "Deterministic mock tools for the buyer due-diligence demo.",
+  "tools": [
+    {
+      "tool_id": "inventory_data_room",
+      "version": "1.0.0",
+      "entrypoint": "tools:inventory_data_room",
+      "type": "script",
+      "description": "Inventory data room.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "target_name",
+        "scope_revision",
+        "required_categories",
+        "document_manifest_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "Documents.json"
+      ],
+      "writes": [
+        "document_count",
+        "missing_materials",
+        "inventory_complete"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "request_supplement",
+      "version": "1.0.0",
+      "entrypoint": "tools:request_supplement",
+      "type": "service",
+      "description": "Request missing material.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "missing_materials"
+      ],
+      "consumes": [
+        "Documents.json"
+      ],
+      "produces": [
+        "SupplementRequest.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "extract_document_evidence",
+      "version": "1.0.0",
+      "entrypoint": "tools:extract_document_evidence",
+      "type": "model",
+      "description": "Extract one document.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "Documents.json"
+      ],
+      "produces": [
+        "Extract_{document_id}.json"
+      ],
+      "writes": [],
+      "mock": true,
+      "supports_checkpoint": true
+    },
+    {
+      "tool_id": "index_evidence",
+      "version": "1.0.0",
+      "entrypoint": "tools:index_evidence",
+      "type": "script",
+      "description": "Index extracted evidence.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "document_count"
+      ],
+      "consumes": [
+        "Extract_*.json"
+      ],
+      "produces": [
+        "EvidenceIndex.json"
+      ],
+      "writes": [
+        "extracted_count"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "review_legal_evidence",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_legal_evidence",
+      "type": "agent",
+      "description": "Mock bounded legal agent.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "LegalFindings.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "review_financial_evidence",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_financial_evidence",
+      "type": "model",
+      "description": "Mock financial review.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "FinancialFindings.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "synthesize_findings",
+      "version": "1.0.0",
+      "entrypoint": "tools:synthesize_findings",
+      "type": "script",
+      "description": "Synthesize candidates.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "scope_revision"
+      ],
+      "consumes": [
+        "LegalFindings.json",
+        "FinancialFindings.json",
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "RiskFindings.json"
+      ],
+      "writes": [
+        "finding_count"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "review_findings",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_findings",
+      "type": "confirm",
+      "description": "Professional review.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "finding_count"
+      ],
+      "consumes": [
+        "RiskFindings.json"
+      ],
+      "produces": [
+        "ProfessionalReview.json"
+      ],
+      "writes": [
+        "review_decision"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "issue_dd_report",
+      "version": "1.0.0",
+      "entrypoint": "tools:issue_dd_report",
+      "type": "script",
+      "description": "Issue report.",
+      "side_effect_class": "pure",
+      "reads": [
+        "matter_id",
+        "target_name",
+        "scope_revision",
+        "review_decision"
+      ],
+      "consumes": [
+        "RiskFindings.json",
+        "ProfessionalReview.json",
+        "EvidenceIndex.json"
+      ],
+      "produces": [
+        "DDReport.pdf"
+      ],
+      "writes": [
+        "report_ref"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "request_findings_revision",
+      "version": "1.0.0",
+      "entrypoint": "tools:request_findings_revision",
+      "type": "service",
+      "description": "Request revision.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "matter_id",
+        "scope_revision",
+        "review_decision"
+      ],
+      "consumes": [
+        "RiskFindings.json",
+        "ProfessionalReview.json"
+      ],
+      "produces": [
+        "FindingsRevisionRequest.json"
+      ],
+      "writes": [],
+      "mock": true
+    }
+  ]
+}

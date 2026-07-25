@@ -1,0 +1,993 @@
+{
+  "acceptance": "media_library_e2e_sample_matrix_v1",
+  "executed_at": "2026-07-21T06:46:51.674879+00:00",
+  "status": "passed",
+  "runtime": {
+    "ffmpeg_path": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/.bin/ffmpeg",
+    "ffprobe_path": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/.bin/ffprobe",
+    "database_target": {
+      "driver": "postgresql+psycopg",
+      "host": "127.0.0.1",
+      "port": 5433,
+      "database": "opencrew"
+    },
+    "sessions_root": "/Users/macmini-4/.opencrew/sessions"
+  },
+  "integrity_policy": {
+    "real_media_only": true,
+    "hash_and_probe_revalidated": true,
+    "manual_visual_observations_are_bound_to_source_and_frame_hashes": true,
+    "near_matches_must_not_be_relabelled": true
+  },
+  "postgresql_quality_gate": {
+    "gate": "media_library_real_sample_synonym_postgresql_v1",
+    "status": "passed",
+    "database_target": {
+      "driver": "postgresql+psycopg",
+      "host": "127.0.0.1",
+      "port": 5433,
+      "database": "opencrew"
+    },
+    "isolation": {
+      "kind": "random_schema",
+      "schema_name": "oc_mlsearch_quality_fc0756d9c28f4b448c436dbaa1433e84",
+      "public_counts_before": {
+        "sessions": 166,
+        "media_library_assets": 12,
+        "media_library_tasks": 12,
+        "media_library_analysis_runs": 74,
+        "media_library_fragment_index": 236,
+        "media_library_search_runs": 145
+      },
+      "public_counts_after": {
+        "sessions": 166,
+        "media_library_assets": 12,
+        "media_library_tasks": 12,
+        "media_library_analysis_runs": 74,
+        "media_library_fragment_index": 236,
+        "media_library_search_runs": 145
+      },
+      "public_data_modified": false
+    },
+    "source_samples": [
+      {
+        "asset_id": "real-session-185",
+        "session_id": 185,
+        "media_path": "/Users/macmini-4/.opencrew/sessions/185/workspace/SessionContext/Video_Source.mp4",
+        "content_sha256": "fba70159f00b044e04c09793e8a5e4e0a51b6d772475586b5749e2b794ebe030",
+        "asr_path": "/Users/macmini-4/.opencrew/sessions/185/workspace/SessionContext/ASR_Segments.json",
+        "asr_sha256": "371c3a53fabdd2f6379ea6c7e6369bd095a5528134f6376cc635a439d86f3382",
+        "asr_segment_count": 16,
+        "dialogue_sha256": "32f41e5b6ec8e99aa2d6db4e5e2147a688200dd03554c30175722eabb82ad418",
+        "probe": {
+          "duration_ms": 24900,
+          "size_bytes": 5283451,
+          "bit_rate": 1697494,
+          "width": 720,
+          "height": 1280,
+          "orientation": "portrait",
+          "video_codec": "h264",
+          "frame_rate": "30/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 44100
+        }
+      },
+      {
+        "asset_id": "real-session-190",
+        "session_id": 190,
+        "media_path": "/Users/macmini-4/.opencrew/sessions/190/workspace/SessionContext/Video_Source.mp4",
+        "content_sha256": "84670b9fae5461147bd5397f0d55cbf438bd14d9b32f057cf3eb6528bcc3b27e",
+        "asr_path": "/Users/macmini-4/.opencrew/sessions/190/workspace/SessionContext/ASR_Segments.json",
+        "asr_sha256": "2d287adfb146b8ee7d71dc30dba52e523aaf277275131371b998d09cd58a5309",
+        "asr_segment_count": 27,
+        "dialogue_sha256": "57565bef6436b4b702d8f15bfd4086f82057340228f784d4b162960e187829df",
+        "probe": {
+          "duration_ms": 48467,
+          "size_bytes": 116347437,
+          "bit_rate": 19204528,
+          "width": 1080,
+          "height": 1920,
+          "orientation": "portrait",
+          "video_codec": "h264",
+          "frame_rate": "60/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 44100
+        }
+      }
+    ],
+    "query": {
+      "literal": "摆脱有毒社交关系",
+      "literal_sha256": "092cbf29145d3b6120db1c525335025fb4ecba9d9f54c964874c27911ce8ae94",
+      "exact_phrases": [
+        "摆脱有毒社交关系"
+      ],
+      "optional_terms": [
+        "烂关系",
+        "消耗你",
+        "远离消耗",
+        "社交圈",
+        "拉黑"
+      ],
+      "candidate_level_definition": "the normalized literal query is absent from each full candidate dialogue; recall and scoring come from optional synonym/related terms"
+    },
+    "first_search_id": "mls_1784616410864_1ef1efde148e",
+    "second_search_id": "mls_1784616410872_510e45a52c60",
+    "first_order": [
+      "real-session-190",
+      "real-session-185"
+    ],
+    "second_order": [
+      "real-session-190",
+      "real-session-185"
+    ],
+    "stable_order": true,
+    "candidate_level_synonym_only": true,
+    "candidates": [
+      {
+        "rank": 1,
+        "candidate_id": "real-session-190",
+        "asset_id": "real-session-190",
+        "source_session_id": 190,
+        "source_content_sha256": "84670b9fae5461147bd5397f0d55cbf438bd14d9b32f057cf3eb6528bcc3b27e",
+        "source_asr_sha256": "2d287adfb146b8ee7d71dc30dba52e523aaf277275131371b998d09cd58a5309",
+        "source_dialogue_sha256": "57565bef6436b4b702d8f15bfd4086f82057340228f784d4b162960e187829df",
+        "source_dialogue_literal_query_present": false,
+        "optional_terms_observed_in_full_dialogue": [
+          "消耗你",
+          "远离消耗",
+          "社交圈"
+        ],
+        "raw_score": 26.4,
+        "score_reasons": [
+          "规划关键词命中 2/5",
+          "规划关键词命中 1/5"
+        ],
+        "matched_fragments": [
+          {
+            "fragment_id": "asr_0026",
+            "dialogue_text": "远离消耗你的人，",
+            "raw_score": 24.0,
+            "score_reasons": [
+              "规划关键词命中 2/5"
+            ]
+          },
+          {
+            "fragment_id": "asr_0003",
+            "dialogue_text": "那个不停折磨你、消耗你的人，",
+            "raw_score": 12.0,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ]
+          },
+          {
+            "fragment_id": "asr_0020",
+            "dialogue_text": "不如先清理你的社交圈，",
+            "raw_score": 12.0,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ]
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "candidate_id": "real-session-185",
+        "asset_id": "real-session-185",
+        "source_session_id": 185,
+        "source_content_sha256": "fba70159f00b044e04c09793e8a5e4e0a51b6d772475586b5749e2b794ebe030",
+        "source_asr_sha256": "371c3a53fabdd2f6379ea6c7e6369bd095a5528134f6376cc635a439d86f3382",
+        "source_dialogue_sha256": "32f41e5b6ec8e99aa2d6db4e5e2147a688200dd03554c30175722eabb82ad418",
+        "source_dialogue_literal_query_present": false,
+        "optional_terms_observed_in_full_dialogue": [
+          "烂关系",
+          "消耗你",
+          "拉黑"
+        ],
+        "raw_score": 14.4,
+        "score_reasons": [
+          "规划关键词命中 1/5"
+        ],
+        "matched_fragments": [
+          {
+            "fragment_id": "asr_0002",
+            "dialogue_text": "也别在烂关系里折寿。",
+            "raw_score": 12.0,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ]
+          },
+          {
+            "fragment_id": "asr_0003",
+            "dialogue_text": "那种只会贬低你、消耗你的亲戚朋友，",
+            "raw_score": 12.0,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ]
+          },
+          {
+            "fragment_id": "asr_0005",
+            "dialogue_text": "必须立刻拉黑。",
+            "raw_score": 12.0,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ]
+          }
+        ]
+      }
+    ],
+    "zero_result_backend": {
+      "search_id": "mls_1784616410875_d313162f775a",
+      "query_sha256": "143d64755a4f66fe7588c4cfc34cd929499496f3c11fd7aa344fa91f5ef165a4",
+      "result_count": 0,
+      "passed": true
+    },
+    "cleanup_confirmed": true,
+    "elapsed_ms": 67.296
+  },
+  "public_runtime_evidence": {
+    "cross_session_original_import": {
+      "import_id": "mli_1784611445165_11a4e0c570a3",
+      "source_kind": "media_library_original",
+      "source_asset_id": "mla_1784604415914_0e96d4f546a0",
+      "source_session_id": 386,
+      "target_task_id": 310,
+      "target_session_id": 388,
+      "source_search_id": "mls_1784611425928_eff5a84f4cc3",
+      "status": "completed"
+    },
+    "planner_degraded_search_and_import": {
+      "import_id": "mli_1784532868589_548f0d699d82",
+      "source_search_id": "mls_1784532868498_14020c1ea5d8",
+      "source_asset_id": "mla_1784500575045_607e5f061102",
+      "target_task_id": 278,
+      "entry_point": "storyboard",
+      "search_status": "completed",
+      "result_count": 1,
+      "planner_degraded": true,
+      "telemetry_failure_injected": true,
+      "telemetry_failure_injection": {
+        "kind": "postgres_before_insert_trigger",
+        "table": "media_library_search_actions",
+        "installed_during_browser_run": true,
+        "effect": "raise_on_insert"
+      },
+      "browser_e2e_status": "passed",
+      "browser_e2e_expectations": {
+        "planner_degraded": true,
+        "telemetry_failure": true,
+        "search_completed": true,
+        "import_completed": true,
+        "ui_warning_visible": true
+      },
+      "search_action_count": 0,
+      "import_event_ids": [
+        106730,
+        106731
+      ],
+      "import_event_payload_sha256": [
+        "b28b6544a925ba7dd53fba8e2ede944f89fe6b036115ac5e2d6a9bf19420aa6f",
+        "b28b6544a925ba7dd53fba8e2ede944f89fe6b036115ac5e2d6a9bf19420aa6f"
+      ],
+      "import_event_kind": "media_library.storyboard_import.completed",
+      "import_event_search_action_recorded": false,
+      "cleanup": {
+        "user_trigger_count_on_action_table": 0,
+        "matching_function_count": 0
+      },
+      "browser_e2e_command": "MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_ALLOW_IMPORT=1 MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_EXPECT_PLANNER_DEGRADED=1 MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_EXPECT_TELEMETRY_FAILURE=1 npm run test:e2e:media-library-storyboard-search"
+    },
+    "agent_zero_result_run": {
+      "search_id": "mls_1784534184981_9ba41fed659f",
+      "entry_point": "agent",
+      "target_task_id": 278,
+      "status": "completed",
+      "result_count": 0,
+      "zero_result": true,
+      "planner_degraded": false
+    }
+  },
+  "matrix": [
+    {
+      "id": 1,
+      "requirement": "有硬字幕的竖屏口播",
+      "status": "passed",
+      "evidence": {
+        "label": "hard_subtitle_portrait",
+        "path": "/Users/macmini-4/.opencrew/sessions/185/workspace/inbox/微信视频_20260618102437.mp4",
+        "content_sha256": "21e33a659aa7273417a906d485fb06c784b53ecaf5274b139475f10a6c716b21",
+        "probe": {
+          "duration_ms": 26833,
+          "size_bytes": 5643848,
+          "bit_rate": 1682637,
+          "width": 720,
+          "height": 1280,
+          "orientation": "portrait",
+          "video_codec": "h264",
+          "frame_rate": "30/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 44100
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            12.0
+          ],
+          "extracted_frame_sha256": [
+            "c00a83e4fd621b9c3b5441f70d7877ec211fb9752d4fe0ce3b202fae587a36e6"
+          ],
+          "observation": "portrait real talking head with burned Chinese and English subtitle text visible in the sampled frame"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "requirement": "无字幕的竖屏口播",
+      "status": "passed",
+      "evidence": {
+        "label": "no_subtitle_portrait",
+        "path": "/Users/macmini-4/.opencrew/sessions/364/workspace/inbox/ShotPlan_Subtitled_Final (9).mp4",
+        "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+        "probe": {
+          "duration_ms": 19200,
+          "size_bytes": 6419103,
+          "bit_rate": 2674626,
+          "width": 720,
+          "height": 1280,
+          "orientation": "portrait",
+          "video_codec": "h264",
+          "frame_rate": "24/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 48000
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            3.0,
+            9.0,
+            15.0
+          ],
+          "extracted_frame_sha256": [
+            "48c4db5400f91af9b8a0bb4ed9370930b919522a92e4d14d084338ea1e364a21",
+            "b7c4091af699014351b8221f7a6f2c946d667caae955e5fc27b4796d7a0a42ac",
+            "6e97e54f83372d9c93a71c8e7a8265dc14c585fbbd7b3529dbc0d0c99a0c6671"
+          ],
+          "observation": "portrait presenter footage; no burned subtitle text is visible at the beginning, middle, or near-end audited frames despite the legacy filename"
+        },
+        "asr_manifest_path": "/Users/macmini-4/.opencrew/sessions/364/workspace/tool_use_sessions/tus_1784527464893_63b48579752e/S3_02_01_AudioASR/Output/ASR_Segments.json",
+        "asr_manifest_sha256": "65a0044f7f2954a63ad900f1f96c1f602eea7a1ab4376c702e959cdbe7d06731",
+        "asr_segment_count": 8
+      }
+    },
+    {
+      "id": 3,
+      "requirement": "横屏采访",
+      "status": "passed",
+      "evidence": {
+        "status": "passed",
+        "path": "/Users/macmini-4/.opencrew/sessions/337/workspace/SessionOutput/storyboard/assets/videos/1784533128471_001_pexels_8873202_https_www_pexels_com_video_a_woman_talking_to_a_.mp4",
+        "content_sha256": "9a123fbbeff3287cf4c85cb54f3b73010683e2de4ddb8cbd91ab9d66c7ac78b8",
+        "probe": {
+          "duration_ms": 10400,
+          "size_bytes": 3714239,
+          "bit_rate": 2857106,
+          "width": 1920,
+          "height": 1080,
+          "orientation": "landscape",
+          "video_codec": "h264",
+          "frame_rate": "25/1",
+          "has_audio": false,
+          "audio_codec": null,
+          "audio_sample_rate": null
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            1.0,
+            5.0,
+            9.0
+          ],
+          "extracted_frame_sha256": [
+            "66d7ad1c3bae5c4f0489484daea7aca0ac872ddf1fb7115a9ad6ef7c4e82bc63",
+            "28ec85feff362e09fd1fb067e61867a40a25a4e19d584bc4175d31e58f2cea31",
+            "16f38b41350935a7dfc11ba1914e4a39db9f314871cbf66c19d192cb441e69c5"
+          ],
+          "observation": "wide two-person interview throughout the sampled frames: a woman speaks with a handheld microphone while a male interviewer listens with a clipboard"
+        },
+        "audio_note": "The licensed Pexels stock clip has no audio stream; it supplies the required visual interview-form sample. Real spoken-dialogue coverage is supplied separately by matrix items 4, 6, and 9.",
+        "real_search_and_import": {
+          "search_manifest_path": "/Users/macmini-4/.opencrew/sessions/337/workspace/SessionContext/AssetSearchAgent/SearchRuns/search_1784533105974_4e42ee.json",
+          "search_manifest_sha256": "bf7602f9af5c46c6d6caecb9dcd8486705075fce37103ab53f8a369db236de91",
+          "search_id": "search_1784533105974_4e42ee",
+          "task_id": 278,
+          "session_id": 337,
+          "request": {
+            "user_text": "two person interview conversation in office landscape",
+            "media_types": [
+              "video"
+            ],
+            "aspect": "16:9",
+            "sources": [
+              "pexels"
+            ],
+            "limit_per_source": 12
+          },
+          "candidate": {
+            "candidate_id": "pexels_video_8873202",
+            "provider": "pexels",
+            "provider_asset_id": "8873202",
+            "media_type": "video",
+            "source_url": "https://www.pexels.com/video/a-woman-talking-to-a-man-at-an-interview-8873202/",
+            "download_url": "https://videos.pexels.com/video-files/8873202/8873202-hd_1920_1080_25fps.mp4",
+            "creator": {
+              "name": "Mikhail Nilov",
+              "url": "https://www.pexels.com/@mikhail-nilov"
+            },
+            "license": {
+              "name": "Pexels License",
+              "url": "https://www.pexels.com/license/",
+              "requires_attribution": false,
+              "attribution_text": "Video by Mikhail Nilov on Pexels",
+              "license_status": "confirmed"
+            },
+            "width": 1920,
+            "height": 1080,
+            "duration_seconds": 10.0,
+            "orientation": "landscape",
+            "score": 0.8929,
+            "score_reasons": [
+              "provider relevance rank",
+              "landscape ratio",
+              "license metadata confirmed",
+              "text embedding rerank"
+            ]
+          },
+          "import_manifest_path": "/Users/macmini-4/.opencrew/sessions/337/workspace/SessionContext/AssetSearchAgent/Imports/import_1784533130238_6a5439.json",
+          "import_manifest_sha256": "cfd05b9d473043c0ba50123bf2b255d9ad5a9669a521bb40c74ccd7be37e4f6c",
+          "import_id": "import_1784533130238_6a5439",
+          "imported_asset_path": "SessionOutput/storyboard/assets/videos/1784533128471_001_pexels_8873202_https_www_pexels_com_video_a_woman_talking_to_a_.mp4",
+          "asset_manifest_path": "/Users/macmini-4/.opencrew/sessions/337/workspace/SessionOutput/storyboard/assets/videos/1784533128471_001_pexels_8873202_https_www_pexels_com_video_a_woman_talking_to_a_.json",
+          "asset_manifest_sha256": "0ae57318bc02b63563d82f081661d6c81ef341e8cc8126949b1566e790529f52",
+          "download": {
+            "ok": true,
+            "content_sha256": "9a123fbbeff3287cf4c85cb54f3b73010683e2de4ddb8cbd91ab9d66c7ac78b8",
+            "bytes": 3714239,
+            "content_type": "video/mp4",
+            "final_url": "https://videos.pexels.com/video-files/8873202/8873202-hd_1920_1080_25fps.mp4",
+            "redirect_chain": []
+          },
+          "origin": {
+            "tool": "asset_search_agent",
+            "search_id": "search_1784533105974_4e42ee",
+            "candidate_id": "pexels_video_8873202",
+            "provider": "pexels",
+            "media_type": "video",
+            "provider_asset_id": "8873202",
+            "source_url": "https://www.pexels.com/video/a-woman-talking-to-a-man-at-an-interview-8873202/",
+            "download_url": "https://videos.pexels.com/video-files/8873202/8873202-hd_1920_1080_25fps.mp4",
+            "creator": {
+              "name": "Mikhail Nilov",
+              "url": "https://www.pexels.com/@mikhail-nilov"
+            },
+            "license": {
+              "name": "Pexels License",
+              "url": "https://www.pexels.com/license/",
+              "requires_attribution": false,
+              "attribution_text": "Video by Mikhail Nilov on Pexels",
+              "license_status": "confirmed"
+            },
+            "query": "two person interview conversation in office landscape",
+            "score": 0.8929,
+            "storyboard_ref": {}
+          }
+        },
+        "rejected_near_matches": [
+          {
+            "path": "/Users/macmini-4/.opencrew/sessions/190/workspace/SessionOutput/storyboard/assets/videos/1782283382185_heygen_digital_human_1_good_day_everyone__i_m_ma_lianghua__but_in_sydne_66b73764.mp4",
+            "reason": "landscape single-person digital presenter; not an interview"
+          },
+          {
+            "path": "/Users/macmini-4/.opencrew/sessions/328/workspace/inbox/江城子掐头去尾.mp4",
+            "reason": "landscape multi-character narrative drama; not an interview"
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "requirement": "多 Scene、对白跨镜头的视频",
+      "status": "passed",
+      "evidence": {
+        "label": "multiscene_crossshot",
+        "path": "/Users/macmini-4/.opencrew/sessions/328/workspace/inbox/江城子掐头去尾.mp4",
+        "content_sha256": "f764a37e2d21e615504b3aea514eddc1ddddd009bf910359d87c8a8b3a59b609",
+        "probe": {
+          "duration_ms": 117888,
+          "size_bytes": 9579568,
+          "bit_rate": 650079,
+          "width": 960,
+          "height": 416,
+          "orientation": "landscape",
+          "video_codec": "h264",
+          "frame_rate": "29/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 44100
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            18.0,
+            75.0
+          ],
+          "extracted_frame_sha256": [
+            "66af066b6f9d36631bc054cfc6361888880558fa4d7686ba2e9eabab4fd36474",
+            "d9ef26297e04aa0cd7355fb912b3f5274dcf31b9d50d913f5b923321c791e6d0"
+          ],
+          "observation": "landscape narrative video with visibly different shots and characters at the two sampled dialogue positions"
+        },
+        "asr_manifest_path": "/Users/macmini-4/.opencrew/sessions/328/workspace/S3_02_01_AudioASR/Output/ASR_Segments.json",
+        "asr_manifest_sha256": "bbb1f623dc2f9b524f65b255272484f4cda7ec8dadeedf06f909ba5e7d261958",
+        "asr_segment_count": 33,
+        "storyboard_path": "/Users/macmini-4/.opencrew/sessions/328/workspace/SessionOutput/storyboard/srt_storyboard.json",
+        "storyboard_sha256": "e3ad31cf24e73d613465e1f4df7debddd167b0ae1d3081c13ca5c547db436585",
+        "shot_count": 6,
+        "scene_count": 17,
+        "compose_result_path": "/Users/macmini-4/.opencrew/sessions/328/workspace/SessionOutput/storyboard/video_plan_compose_result.json",
+        "compose_result_sha256": "1d8f88da41a8e82271b17d2eb372b4066cd54d43b91a2977887f099ae565445b",
+        "compose_status": "completed"
+      }
+    },
+    {
+      "id": 5,
+      "requirement": "无对白 B-roll",
+      "status": "passed",
+      "evidence": {
+        "label": "silent_broll",
+        "path": "/Users/macmini-4/.opencrew/sessions/216/workspace/SessionOutput/reference/Video_Reference_Silent.mp4",
+        "content_sha256": "ee2e1053fdff0e2fde28ef738dbcbe48a53d8f7e1c20711fcd1a3497f59a9b4e",
+        "probe": {
+          "duration_ms": 14042,
+          "size_bytes": 5444238,
+          "bit_rate": 3101761,
+          "width": 1280,
+          "height": 720,
+          "orientation": "landscape",
+          "video_codec": "h264",
+          "frame_rate": "24/1",
+          "has_audio": false,
+          "audio_codec": null,
+          "audio_sample_rate": null
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            7.0
+          ],
+          "extracted_frame_sha256": [
+            "cb40319b11eb219feff7d0ebccc7eb8a7fcea1232fd9da4663f43d9b88db36e5"
+          ],
+          "observation": "landscape outdoor hula-hoop/dance B-roll; no dialogue subject"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "requirement": "同义表达检索样本",
+      "status": "passed",
+      "evidence": {
+        "postgresql_gate": "media_library_real_sample_synonym_postgresql_v1",
+        "query": {
+          "literal": "摆脱有毒社交关系",
+          "literal_sha256": "092cbf29145d3b6120db1c525335025fb4ecba9d9f54c964874c27911ce8ae94",
+          "exact_phrases": [
+            "摆脱有毒社交关系"
+          ],
+          "optional_terms": [
+            "烂关系",
+            "消耗你",
+            "远离消耗",
+            "社交圈",
+            "拉黑"
+          ],
+          "candidate_level_definition": "the normalized literal query is absent from each full candidate dialogue; recall and scoring come from optional synonym/related terms"
+        },
+        "candidate_level_synonym_only": true,
+        "candidates": [
+          {
+            "rank": 1,
+            "candidate_id": "real-session-190",
+            "asset_id": "real-session-190",
+            "source_session_id": 190,
+            "source_content_sha256": "84670b9fae5461147bd5397f0d55cbf438bd14d9b32f057cf3eb6528bcc3b27e",
+            "source_asr_sha256": "2d287adfb146b8ee7d71dc30dba52e523aaf277275131371b998d09cd58a5309",
+            "source_dialogue_sha256": "57565bef6436b4b702d8f15bfd4086f82057340228f784d4b162960e187829df",
+            "source_dialogue_literal_query_present": false,
+            "optional_terms_observed_in_full_dialogue": [
+              "消耗你",
+              "远离消耗",
+              "社交圈"
+            ],
+            "raw_score": 26.4,
+            "score_reasons": [
+              "规划关键词命中 2/5",
+              "规划关键词命中 1/5"
+            ],
+            "matched_fragments": [
+              {
+                "fragment_id": "asr_0026",
+                "dialogue_text": "远离消耗你的人，",
+                "raw_score": 24.0,
+                "score_reasons": [
+                  "规划关键词命中 2/5"
+                ]
+              },
+              {
+                "fragment_id": "asr_0003",
+                "dialogue_text": "那个不停折磨你、消耗你的人，",
+                "raw_score": 12.0,
+                "score_reasons": [
+                  "规划关键词命中 1/5"
+                ]
+              },
+              {
+                "fragment_id": "asr_0020",
+                "dialogue_text": "不如先清理你的社交圈，",
+                "raw_score": 12.0,
+                "score_reasons": [
+                  "规划关键词命中 1/5"
+                ]
+              }
+            ]
+          },
+          {
+            "rank": 2,
+            "candidate_id": "real-session-185",
+            "asset_id": "real-session-185",
+            "source_session_id": 185,
+            "source_content_sha256": "fba70159f00b044e04c09793e8a5e4e0a51b6d772475586b5749e2b794ebe030",
+            "source_asr_sha256": "371c3a53fabdd2f6379ea6c7e6369bd095a5528134f6376cc635a439d86f3382",
+            "source_dialogue_sha256": "32f41e5b6ec8e99aa2d6db4e5e2147a688200dd03554c30175722eabb82ad418",
+            "source_dialogue_literal_query_present": false,
+            "optional_terms_observed_in_full_dialogue": [
+              "烂关系",
+              "消耗你",
+              "拉黑"
+            ],
+            "raw_score": 14.4,
+            "score_reasons": [
+              "规划关键词命中 1/5"
+            ],
+            "matched_fragments": [
+              {
+                "fragment_id": "asr_0002",
+                "dialogue_text": "也别在烂关系里折寿。",
+                "raw_score": 12.0,
+                "score_reasons": [
+                  "规划关键词命中 1/5"
+                ]
+              },
+              {
+                "fragment_id": "asr_0003",
+                "dialogue_text": "那种只会贬低你、消耗你的亲戚朋友，",
+                "raw_score": 12.0,
+                "score_reasons": [
+                  "规划关键词命中 1/5"
+                ]
+              },
+              {
+                "fragment_id": "asr_0005",
+                "dialogue_text": "必须立刻拉黑。",
+                "raw_score": 12.0,
+                "score_reasons": [
+                  "规划关键词命中 1/5"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "requirement": "跨 Task/Session 检索同一全局原始素材",
+      "status": "passed",
+      "evidence": {
+        "import_id": "mli_1784611445165_11a4e0c570a3",
+        "source_kind": "media_library_original",
+        "source_asset_id": "mla_1784604415914_0e96d4f546a0",
+        "source_session_id": 386,
+        "target_task_id": 310,
+        "target_session_id": 388,
+        "source_search_id": "mls_1784611425928_eff5a84f4cc3",
+        "status": "completed"
+      }
+    },
+    {
+      "id": 8,
+      "requirement": "秒/毫秒边界和不足一秒的短片段",
+      "status": "passed",
+      "evidence": {
+        "artifact_path": "/Users/macmini-4/work/code/OpenCrew/backend/tests/artifacts/media_library_ffmpeg_acceptance.json",
+        "artifact_sha256": "e470dd7ff332957f1ebec7afbdfc5a22bcc29ad3de0b9ec4fb808d0ea92ff1ce",
+        "minimum_duration_matrix": [
+          {
+            "frame_rate": "24/1",
+            "audio": false,
+            "portrait": false,
+            "requested_duration_ms": 250,
+            "actual_duration_ms": 250,
+            "dynamic_tolerance_ms": 42,
+            "status": "passed"
+          },
+          {
+            "frame_rate": "30/1",
+            "audio": false,
+            "portrait": true,
+            "requested_duration_ms": 250,
+            "actual_duration_ms": 267,
+            "absolute_delta_ms": 17,
+            "dynamic_tolerance_ms": 34,
+            "status": "passed"
+          },
+          {
+            "frame_rate": "60/1",
+            "audio": true,
+            "audio_sample_rate": 48000,
+            "portrait": false,
+            "requested_duration_ms": 250,
+            "actual_duration_ms": 250,
+            "dynamic_tolerance_ms": 22,
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "requirement": "包含相似对白但画面不同的排序样本",
+      "status": "passed",
+      "evidence": {
+        "postgresql_gate": "media_library_real_sample_synonym_postgresql_v1",
+        "first_order": [
+          "real-session-190",
+          "real-session-185"
+        ],
+        "second_order": [
+          "real-session-190",
+          "real-session-185"
+        ],
+        "stable_order": true,
+        "source_a": {
+          "asset_id": "real-session-185",
+          "session_id": 185,
+          "media_path": "/Users/macmini-4/.opencrew/sessions/185/workspace/SessionContext/Video_Source.mp4",
+          "content_sha256": "fba70159f00b044e04c09793e8a5e4e0a51b6d772475586b5749e2b794ebe030",
+          "asr_path": "/Users/macmini-4/.opencrew/sessions/185/workspace/SessionContext/ASR_Segments.json",
+          "asr_sha256": "371c3a53fabdd2f6379ea6c7e6369bd095a5528134f6376cc635a439d86f3382",
+          "asr_segment_count": 16,
+          "dialogue_sha256": "32f41e5b6ec8e99aa2d6db4e5e2147a688200dd03554c30175722eabb82ad418",
+          "probe": {
+            "duration_ms": 24900,
+            "size_bytes": 5283451,
+            "bit_rate": 1697494,
+            "width": 720,
+            "height": 1280,
+            "orientation": "portrait",
+            "video_codec": "h264",
+            "frame_rate": "30/1",
+            "has_audio": true,
+            "audio_codec": "aac",
+            "audio_sample_rate": 44100
+          },
+          "visual_audit": {
+            "kind": "manual_observation_tied_to_verified_source_hash",
+            "sample_timestamps_seconds": [
+              12.0
+            ],
+            "extracted_frame_sha256": [
+              "b015a250aa18c343c35bcda04e94dc5441c9d04f550dab162e62a003b8601f1a"
+            ],
+            "observation": "blue-shirt male presenter in office setting with burned subtitles"
+          }
+        },
+        "source_b": {
+          "asset_id": "real-session-190",
+          "session_id": 190,
+          "media_path": "/Users/macmini-4/.opencrew/sessions/190/workspace/SessionContext/Video_Source.mp4",
+          "content_sha256": "84670b9fae5461147bd5397f0d55cbf438bd14d9b32f057cf3eb6528bcc3b27e",
+          "asr_path": "/Users/macmini-4/.opencrew/sessions/190/workspace/SessionContext/ASR_Segments.json",
+          "asr_sha256": "2d287adfb146b8ee7d71dc30dba52e523aaf277275131371b998d09cd58a5309",
+          "asr_segment_count": 27,
+          "dialogue_sha256": "57565bef6436b4b702d8f15bfd4086f82057340228f784d4b162960e187829df",
+          "probe": {
+            "duration_ms": 48467,
+            "size_bytes": 116347437,
+            "bit_rate": 19204528,
+            "width": 1080,
+            "height": 1920,
+            "orientation": "portrait",
+            "video_codec": "h264",
+            "frame_rate": "60/1",
+            "has_audio": true,
+            "audio_codec": "aac",
+            "audio_sample_rate": 44100
+          },
+          "visual_audit": {
+            "kind": "manual_observation_tied_to_verified_source_hash",
+            "sample_timestamps_seconds": [
+              20.0
+            ],
+            "extracted_frame_sha256": [
+              "4043c87e93ae35f3ba8251ad17448dfe1970a9037b066da2e8c4b4d565bf2cfc"
+            ],
+            "observation": "white-shirt male presenter in a different home setting with different subtitle styling"
+          }
+        },
+        "different_content_hashes": true,
+        "different_visual_frames": true
+      }
+    },
+    {
+      "id": 10,
+      "requirement": "大文件和长视频样本",
+      "status": "passed",
+      "evidence": {
+        "label": "ten_minute",
+        "path": "/Users/macmini-4/.opencrew/sessions/368/workspace/inbox/OpenCrew_代表视频_十分钟.mp4",
+        "content_sha256": "d6c54c0de0cad47e41f9f730e4b4e6cca8c8a76c923ac8f24e10f0c9d04aa96e",
+        "probe": {
+          "duration_ms": 600000,
+          "size_bytes": 197994012,
+          "bit_rate": 2639920,
+          "width": 1280,
+          "height": 720,
+          "orientation": "landscape",
+          "video_codec": "h264",
+          "frame_rate": "30/1",
+          "has_audio": true,
+          "audio_codec": "aac",
+          "audio_sample_rate": 48000
+        },
+        "visual_audit": {
+          "kind": "manual_observation_tied_to_verified_source_hash",
+          "sample_timestamps_seconds": [
+            543.217
+          ],
+          "extracted_frame_sha256": [
+            "8d175ae13bc0f4ad14be00161e19fe5d7fb1b138a55905aac1ceb05ba1ed7e3a"
+          ],
+          "observation": "representative 10-minute 1280x720 gate source sampled near tail"
+        },
+        "ffmpeg_representative_gate": {
+          "source": {
+            "logical_name": "OpenCrew_代表视频_十分钟.mp4",
+            "duration_ms": 600000,
+            "width": 1280,
+            "height": 720,
+            "frame_rate": "30/1",
+            "video_codec": "h264",
+            "audio_codec": "aac",
+            "audio_sample_rate": 48000,
+            "size_bytes": 197994012,
+            "bit_rate": 2639920,
+            "gop_frames": 60,
+            "non_ascii_path": true
+          },
+          "request": {
+            "start_ms": 543217,
+            "end_ms": 548217,
+            "near_tail": true,
+            "non_keyframe_start": true
+          },
+          "output": {
+            "duration_ms": 5000,
+            "size_bytes": 2326551,
+            "video_frame_rate": "30/1",
+            "audio_codec": "aac",
+            "audio_sample_rate": 48000,
+            "elapsed_ms": 379,
+            "status": "passed"
+          },
+          "slow_reference_comparison": {
+            "reference_seek_position": "after_input",
+            "video_frame_sequence": "exact_match",
+            "audio_frame_sequence": "exact_match",
+            "reference_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+            "input_side_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76"
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "requirement": "查询规划 LLM 超时、关闭或配额耗尽的降级检索样本",
+      "status": "passed",
+      "evidence": {
+        "import_id": "mli_1784532868589_548f0d699d82",
+        "source_search_id": "mls_1784532868498_14020c1ea5d8",
+        "source_asset_id": "mla_1784500575045_607e5f061102",
+        "target_task_id": 278,
+        "entry_point": "storyboard",
+        "search_status": "completed",
+        "result_count": 1,
+        "planner_degraded": true,
+        "telemetry_failure_injected": true,
+        "telemetry_failure_injection": {
+          "kind": "postgres_before_insert_trigger",
+          "table": "media_library_search_actions",
+          "installed_during_browser_run": true,
+          "effect": "raise_on_insert"
+        },
+        "browser_e2e_status": "passed",
+        "browser_e2e_expectations": {
+          "planner_degraded": true,
+          "telemetry_failure": true,
+          "search_completed": true,
+          "import_completed": true,
+          "ui_warning_visible": true
+        },
+        "search_action_count": 0,
+        "import_event_ids": [
+          106730,
+          106731
+        ],
+        "import_event_payload_sha256": [
+          "b28b6544a925ba7dd53fba8e2ede944f89fe6b036115ac5e2d6a9bf19420aa6f",
+          "b28b6544a925ba7dd53fba8e2ede944f89fe6b036115ac5e2d6a9bf19420aa6f"
+        ],
+        "import_event_kind": "media_library.storyboard_import.completed",
+        "import_event_search_action_recorded": false,
+        "cleanup": {
+          "user_trigger_count_on_action_table": 0,
+          "matching_function_count": 0
+        },
+        "browser_e2e_command": "MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_ALLOW_IMPORT=1 MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_EXPECT_PLANNER_DEGRADED=1 MEDIA_LIBRARY_STORYBOARD_SEARCH_E2E_EXPECT_TELEMETRY_FAILURE=1 npm run test:e2e:media-library-storyboard-search"
+      }
+    },
+    {
+      "id": 12,
+      "requirement": "无字面命中的零结果与查询修改建议样本",
+      "status": "passed",
+      "evidence": {
+        "isolated_postgresql_zero_result": {
+          "search_id": "mls_1784616410875_d313162f775a",
+          "query_sha256": "143d64755a4f66fe7588c4cfc34cd929499496f3c11fd7aa344fa91f5ef165a4",
+          "result_count": 0,
+          "passed": true
+        },
+        "real_agent_zero_result": {
+          "search_id": "mls_1784534184981_9ba41fed659f",
+          "entry_point": "agent",
+          "target_task_id": 278,
+          "status": "completed",
+          "result_count": 0,
+          "zero_result": true,
+          "planner_degraded": false
+        },
+        "browser_e2e_contract": {
+          "status": "contract_present",
+          "e2e_path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/media-library-agent-search.mjs",
+          "e2e_sha256": "367684fd92b888f3281ac914ebaa7456608a644b3eadaaceb7b2c73654a38664",
+          "model_path": "/Users/macmini-4/work/code/OpenCrew/frontend/src/modules/koubo/mediaLibrarySearchModel.js",
+          "model_sha256": "2e492874c8d9d3d82c1782b66f420a77a8163c3a82d5c5b613be78fd3f24d878",
+          "asserts_empty_ui": true,
+          "asserts_exact_four_suggestions": true,
+          "expected_suggestions": [
+            "缩短关键词",
+            "移除可选限制",
+            "改用对白原句",
+            "确认相关原始视频已完成对白分析，必要时重新运行对白分析"
+          ],
+          "execution_command": "MEDIA_LIBRARY_AGENT_SEARCH_E2E_ALLOW_IMPORT=1 npm run test:e2e:media-library-agent-search"
+        }
+      }
+    }
+  ],
+  "passed_count": 12,
+  "required_count": 12,
+  "incomplete_items": []
+}

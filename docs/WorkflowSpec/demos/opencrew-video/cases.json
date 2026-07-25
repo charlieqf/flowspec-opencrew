@@ -1,0 +1,19 @@
+[
+  {
+    "run_id": "run_video_20260724_001", "session_id": "video_LUMEN_LAUNCH", "task_id": "video_LUMEN_LAUNCH_t", "run_sequence": 1, "supersedes_run_id": null,
+    "started_at": "2026-07-24T09:00:00Z", "source_revision": "creative-r1",
+    "context": { "project_id": "VID-LUMEN-01", "creative_revision": "creative-r1", "brand": "Lumen Labs", "product": "Hydra Daily", "audience": "Australian wellness shoppers 25-40", "channel": "instagram_reels", "duration_seconds": 24, "storyboard_fixture": [{ "asset_key": "dlg-001", "text": "Three o'clock slump? Start with hydration.", "duration_seconds": 7, "visual": "host at desk" }, { "asset_key": "dlg-002", "text": "Hydra Daily keeps the ritual simple.", "duration_seconds": 8, "visual": "product close-up" }, { "asset_key": "dlg-003", "text": "Mix, sip, and get back to your day.", "duration_seconds": 9, "visual": "host payoff" }], "qa_pass_fixture": false, "storyboard_decision": null, "publish_decision": null },
+    "human_decisions": { "S3_storyboard_confirm": { "decision": "approved", "reason": "Dialogue timing and brand claim scope approved for generation.", "expected_revision": 0, "actor": { "type": "user", "id": "editor_12", "roles": ["editor"] } } },
+    "callbacks": {}
+  },
+  {
+    "run_id": "run_video_20260724_002", "session_id": "video_LUMEN_LAUNCH", "task_id": "video_LUMEN_LAUNCH_t", "run_sequence": 2, "supersedes_run_id": "run_video_20260724_001",
+    "started_at": "2026-07-24T12:00:00Z", "source_revision": "creative-r2-qa-fix",
+    "context": { "project_id": "VID-LUMEN-01", "creative_revision": "creative-r2", "brand": "Lumen Labs", "product": "Hydra Daily", "audience": "Australian wellness shoppers 25-40", "channel": "instagram_reels", "duration_seconds": 24, "storyboard_fixture": [{ "asset_key": "dlg-001", "text": "Three o'clock slump? Start with hydration.", "duration_seconds": 7, "visual": "host at desk" }, { "asset_key": "dlg-002", "text": "Hydra Daily keeps the ritual simple.", "duration_seconds": 8, "visual": "corrected product close-up" }, { "asset_key": "dlg-003", "text": "Mix, sip, and get back to your day.", "duration_seconds": 9, "visual": "host payoff" }], "qa_pass_fixture": true, "storyboard_decision": null, "publish_decision": null },
+    "human_decisions": {
+      "S3_storyboard_confirm": { "decision": "approved", "reason": "Scoped QA correction retained the approved script and dialogue keys.", "expected_revision": 0, "actor": { "type": "user", "id": "editor_12", "roles": ["editor"] } },
+      "S13_publish_confirm": { "decision": "approved", "reason": "Brand, product binding, captions, and channel-safe master reviewed.", "expected_revision": 0, "actor": { "type": "user", "id": "brand_reviewer_3", "roles": ["brand_reviewer"] } }
+    },
+    "callbacks": {}
+  }
+]

@@ -1,0 +1,15 @@
+@import "./mediaLibraryDetailHeader.css";
+@import "./mediaLibraryDetailWorkspace.css";
+@import "./mediaLibraryDetailDrawer.css";
+
+.media-library-detail-page { padding-top: 18px; }
+.media-library-back { align-items: center; background: transparent; border: 0; color: #536785; cursor: pointer; display: inline-flex; gap: 4px; margin: 0 0 12px; padding: 4px 0; }
+.media-library-back svg { height: 18px; width: 18px; }
+.media-library-back:hover { color: #1d4ed8; }
+.media-library-detail-loading { background: #fff; border: 1px solid #dfe5ef; border-radius: 9px; color: #718096; padding: 48px; text-align: center; }
+.media-library-detail-shell { align-items: start; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr) 360px; }
+.media-library-detail-main { min-width: 0; }
+.media-library-detail-visual-rail { align-self: stretch; min-width: 0; }
+.media-library-detail-visual-rail .media-library-visual-panel { border: 1px solid #dfe5ef; border-radius: 10px; max-height: calc(100vh - 72px); min-height: calc(100vh - 84px); overflow-y: auto; overscroll-behavior-y: contain; position: sticky; scrollbar-gutter: stable; top: 12px; }
+.media-library-detail-visual-rail .media-library-visual-panel:focus-visible { box-shadow: 0 0 0 3px rgba(56, 107, 236, .16); outline: 2px solid #6f9cff; outline-offset: 2px; }
+@media (max-width: 1200px) { .media-library-detail-shell { grid-template-columns: 1fr; } .media-library-detail-visual-rail .media-library-visual-panel { max-height: none; min-height: auto; overflow-y: visible; position: static; scrollbar-gutter: auto; } }

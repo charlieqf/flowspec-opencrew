@@ -1,0 +1,1189 @@
+[
+  {
+    "suite": "video",
+    "number": 1,
+    "title": "Case 1：按时长拆分 + 尾帧连续",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_01.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 2,
+    "title": "Case 2：视觉锚点切 1 刀，中间新图重开 Segment",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 5,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 2,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 2,
+      "need_video_count": 2,
+      "segment_audio_count": 2,
+      "need_lipsync_count": 2,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 2
+    },
+    "expected_count": 2,
+    "actual": {
+      "actualCount": 2,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 2",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n1/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_02.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 3,
+    "title": "Case 3：首句缺视觉，不能从中间偷拆",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 5,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed_with_skipped_items",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 1,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 0,
+      "need_video_count": 0,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 0,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 0
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 298.25,
+        "left": 650,
+        "top": 304.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/0\n0/0\n0/0\n1 scene skipped. The plan is visible and remaining items can be reviewed.\nShot_001\nScene_001\nS1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_03.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 292, 1282, 614]}"
+  },
+  {
+    "suite": "video",
+    "number": 4,
+    "title": "Case 4：时长阈值，max=4s 拆成 3 段",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 378.25,
+        "left": 650,
+        "top": 264.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S3\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 3\n0/3\n0/3\n0/3\n0/3\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS3\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_04.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 252, 1282, 654]}"
+  },
+  {
+    "suite": "video",
+    "number": 5,
+    "title": "Case 5：时长阈值，max=8s 拆成 2 段",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 8,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 2,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 2,
+      "need_video_count": 2,
+      "segment_audio_count": 2,
+      "need_lipsync_count": 2,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 2
+    },
+    "expected_count": 2,
+    "actual": {
+      "actualCount": 2,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n8.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 2",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n8.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_05.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 6,
+    "title": "Case 6：时长阈值，max=15s 不拆分",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 15,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 1,
+      "need_video_count": 1,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 1,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 1
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n10.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/1\n0/1\n0/1\nShot_001\nScene_001\nS1\n10.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_06.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 7,
+    "title": "Case 7：视觉锚点切 2 刀，原图 + 新图连续重开 Segment",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 10,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 2,
+      "need_image_count": 2,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 378.25,
+        "left": 650,
+        "top": 264.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S3\n1.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 3\n0/3\n1/3\n0/3\n0/3\nShot_001\nScene_001\nS1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS3\n1.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_07.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 252, 1282, 654]}"
+  },
+  {
+    "suite": "video",
+    "number": 8,
+    "title": "Case 8：音频合并完成，D1 + D2 都有音频",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 3,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_08.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 9,
+    "title": "Case 9：首个 D 有音频，但后续 D 缺音频",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 4,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_09.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 10,
+    "title": "Case 10：首个 D 缺音频，但后续 D 有音频",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 3,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 4,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 3,
+      "need_video_count": 3,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 3,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 3
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/2\n0/2\n0/2\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n1.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_10.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 11,
+    "title": "Case 11：只有新视频，终视频待确认",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 4,
+      "segment_count": 2,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 4,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 2,
+      "need_video_count": 2,
+      "segment_audio_count": 2,
+      "need_lipsync_count": 2,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 2
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n1/1\n1/1\n0/1\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_11.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 12,
+    "title": "Case 12：终视频已完成，尾帧待抽取",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 4,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 4,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 0,
+      "need_video_count": 0,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 0,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 1
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/0\n1/1\n1/1\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_12.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 13,
+    "title": "Case 13：终视频和尾帧都已完成",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 2,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 4,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 4,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 0,
+      "need_video_count": 0,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 0,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 1
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/0\n1/1\n1/1\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_13.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 14,
+    "title": "Case 14：绑定终视频作为视觉锚点重开 Segment",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 5,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 2,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 1,
+      "need_video_count": 1,
+      "segment_audio_count": 2,
+      "need_lipsync_count": 1,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 2
+    },
+    "expected_count": 2,
+    "actual": {
+      "actualCount": 2,
+      "dpr": 1,
+      "rect": {
+        "height": 320.25,
+        "left": 650,
+        "top": 293.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 2",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 2\n0/2\n0/1\n0/1\n1/2\nShot_001\nScene_001\nS1\n2.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n3.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_14.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 281, 1282, 625]}"
+  },
+  {
+    "suite": "video",
+    "number": 15,
+    "title": "Case 15：口播首帧，终视频任务 = 对口型",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 15,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 1,
+      "need_video_count": 1,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 1,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 1
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/1\n0/1\n0/1\nShot_001\nScene_001\nS1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_15.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 16,
+    "title": "Case 16：空镜首帧，终视频任务 = 替换音频",
+    "target_type": "scene",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 15,
+    "min_seconds": 1,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 1,
+      "dialogue_count": 5,
+      "segment_count": 1,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 5,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 1,
+      "need_video_count": 1,
+      "segment_audio_count": 1,
+      "need_lipsync_count": 0,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 1
+    },
+    "expected_count": 1,
+    "actual": {
+      "actualCount": 1,
+      "dpr": 1,
+      "rect": {
+        "height": 262.25,
+        "left": 650,
+        "top": 322.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 1\nSegment 1",
+      "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/1\n0/1\n0/1\nShot_001\nScene_001\nS1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_16.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+  },
+  {
+    "suite": "video",
+    "number": 17,
+    "title": "Case 17：Task 范围，计划尾帧跨 Shot 连续",
+    "target_type": "task",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 2,
+      "scene_count": 4,
+      "dialogue_count": 12,
+      "segment_count": 8,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 12,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 8,
+      "need_video_count": 8,
+      "segment_audio_count": 8,
+      "need_lipsync_count": 8,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 8
+    },
+    "expected_count": 8,
+    "actual": {
+      "actualCount": 8,
+      "dpr": 1,
+      "rect": {
+        "height": 770.9375,
+        "left": 650,
+        "top": 68.03125,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 2\nScene 4\nSegment 8",
+      "text": "生成计划\nShot 2\nScene 4\nSegment 8\n0/8\n0/8\n0/8\n0/8\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_002\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_17.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 56, 1282, 850]}"
+  },
+  {
+    "suite": "video",
+    "number": 18,
+    "title": "Case 18：只生成 Shot2，继承 Shot1 已存在尾帧",
+    "target_type": "shot",
+    "shot_id": "shot_002",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 2,
+      "dialogue_count": 6,
+      "segment_count": 4,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 6,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 4,
+      "need_video_count": 4,
+      "segment_audio_count": 4,
+      "need_lipsync_count": 4,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 4
+    },
+    "expected_count": 4,
+    "actual": {
+      "actualCount": 4,
+      "dpr": 1,
+      "rect": {
+        "height": 494.25,
+        "left": 650,
+        "top": 206.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 2\nSegment 4",
+      "text": "生成计划\nShot 1\nScene 2\nSegment 4\n0/4\n0/4\n0/4\n0/4\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_18.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 194, 1282, 712]}"
+  },
+  {
+    "suite": "video",
+    "number": 19,
+    "title": "Case 19：Shot2 起点缺 TailFrame，Scene2 自有视觉恢复",
+    "target_type": "shot",
+    "shot_id": "shot_002",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 2,
+      "dialogue_count": 6,
+      "segment_count": 4,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 6,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 4,
+      "need_video_count": 4,
+      "segment_audio_count": 4,
+      "need_lipsync_count": 4,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 4
+    },
+    "expected_count": 4,
+    "actual": {
+      "actualCount": 4,
+      "dpr": 1,
+      "rect": {
+        "height": 494.25,
+        "left": 650,
+        "top": 206.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 2\nSegment 4",
+      "text": "生成计划\nShot 1\nScene 2\nSegment 4\n0/4\n0/4\n0/4\n0/4\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_19.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 194, 1282, 712]}"
+  },
+  {
+    "suite": "video",
+    "number": 20,
+    "title": "Case 20：上游为空镜，TailFrame 存在但不可继承",
+    "target_type": "shot",
+    "shot_id": "shot_002",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed_with_blocked_items",
+    "summary": {
+      "shot_count": 1,
+      "scene_count": 2,
+      "dialogue_count": 6,
+      "segment_count": 3,
+      "blocked_segment_count": 1,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 1,
+      "need_audio_count": 6,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 2,
+      "need_video_count": 2,
+      "segment_audio_count": 3,
+      "need_lipsync_count": 2,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 2
+    },
+    "expected_count": 3,
+    "actual": {
+      "actualCount": 3,
+      "dpr": 1,
+      "rect": {
+        "height": 546.25,
+        "left": 650,
+        "top": 180.375,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\n\nScene starts without a visual source and the previous segment is marked as cutaway, so its tail frame cannot be reused.",
+        "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 1\nScene 2\nSegment 3",
+      "text": "生成计划\nShot 1\nScene 2\nSegment 3\n0/3\n0/2\n0/2\n0/2\n1 scene blocked. The plan is visible, but these items need media or timing fixes before execution.\nShot_002\nScene_003\nS1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\n\nScene starts without a visual source and the previous segment is marked as cutaway, so its tail frame cannot be reused.\n\nScene_004\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_20.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 168, 1282, 738]}"
+  },
+  {
+    "suite": "video",
+    "number": 21,
+    "title": "Case 21：绑定终视频跨 Shot 作为上游尾帧来源",
+    "target_type": "task",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 2,
+      "scene_count": 4,
+      "dialogue_count": 12,
+      "segment_count": 7,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 12,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 6,
+      "need_video_count": 6,
+      "segment_audio_count": 7,
+      "need_lipsync_count": 6,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 7
+    },
+    "expected_count": 7,
+    "actual": {
+      "actualCount": 7,
+      "dpr": 1,
+      "rect": {
+        "height": 770.9375,
+        "left": 650,
+        "top": 68.03125,
+        "width": 620
+      },
+      "segmentRows": [
+        "S1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+        "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+      ],
+      "summaryLine": "Shot 2\nScene 4\nSegment 7",
+      "text": "生成计划\nShot 2\nScene 4\nSegment 7\n0/7\n0/6\n0/6\n1/7\nShot_001\nScene_001\nS1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nScene_002\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "title": "生成计划",
+      "viewport": {
+        "h": 907,
+        "w": 1920
+      }
+    },
+    "pass": true,
+    "reason": "PASS: 系统弹窗计数与测试计划一致",
+    "screenshot": "video_case_21.png",
+    "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 56, 1282, 850]}"
+  }
+]

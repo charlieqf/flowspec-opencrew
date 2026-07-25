@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/StorageIndex.schema.json",
+  "title": "FlowSpec Storage and Authority Index (PROPOSED)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "index_id", "layout_profile", "bundle_kind",
+    "session_id", "task_id", "run_id", "path_bases", "entries"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "index_id": { "type": "string", "minLength": 1 },
+    "layout_profile": { "const": "opencrew-compatible-v1" },
+    "bundle_kind": { "enum": ["live_workspace", "portable_evidence"] },
+    "session_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "path_bases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/pathBase" }
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "pathBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base", "resolved_by", "example"],
+      "properties": {
+        "base": {
+          "description": "StorageIndexBase is a superset of the five ArtifactPathBase values. run_bundle, database and platform index portable evidence, database facts and deployment-resolved service logs; they are not Artifact path bases.",
+          "enum": ["workspace", "run", "step", "step_attempt", "run_bundle", "database", "platform", "external"]
+        },
+        "resolved_by": { "enum": ["storage_resolver", "run_record", "step_directory_map", "attempt_record", "bundle_reader", "database_repository", "deployment", "uri_scheme"] },
+        "example": { "type": "string", "minLength": 1 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id", "owner_type", "owner_id", "purpose", "authority",
+        "base", "locator", "materialization", "description"
+      ],
+      "properties": {
+        "entry_id": { "type": "string", "minLength": 1 },
+        "owner_type": { "enum": ["session", "task", "run", "step", "step_attempt", "artifact", "service"] },
+        "owner_id": { "type": "string", "minLength": 1 },
+        "purpose": {
+          "enum": [
+            "business_record", "input", "input_manifest", "working", "prompt",
+            "diagnostic_log", "audit_event", "state_snapshot", "output_staging",
+            "published_artifact", "output_manifest", "output_projection", "usage",
+            "budget", "definition", "service_log"
+          ]
+        },
+        "authority": { "enum": ["database", "file", "object_store", "log_service", "projection"] },
+        "base": {
+          "description": "StorageIndexBase. Published Artifact records remain limited to workspace, run, step, step_attempt or external; platform is for Workspace-external service/process log sinks.",
+          "enum": ["workspace", "run", "step", "step_attempt", "run_bundle", "database", "platform", "external"]
+        },
+        "locator": { "type": "string", "minLength": 1 },
+        "materialization": { "enum": ["materialized", "layout_contract", "external", "projection"] },
+        "description": { "type": "string", "minLength": 1 },
+        "sha256": { "type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$" },
+        "size": { "type": ["integer", "null"], "minimum": 0 },
+        "retention_class": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "cro_1",
+    "roles": [
+      "chief_risk_officer"
+    ]
+  },
+  "reason": "Restated cut reconciles; metrics and disclosures reviewed.",
+  "report_hash": "mock:RiskReport.pdf"
+}

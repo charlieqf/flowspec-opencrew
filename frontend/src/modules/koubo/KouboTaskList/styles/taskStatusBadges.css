@@ -1,0 +1,46 @@
+.koubo-task-list-mode,
+.koubo-task-list-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border-radius: 999px;
+  padding: 0 9px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.koubo-task-list-mode.video {
+  background: #eef4ff;
+  color: #2353b8;
+}
+
+.koubo-task-list-mode.script {
+  background: #fff4e8;
+  color: #9a4f00;
+}
+
+.koubo-task-list-status.good {
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.koubo-task-list-status.busy {
+  background: #eff6ff;
+  color: #175cd3;
+}
+
+.koubo-task-list-status.bad {
+  background: #fff1f0;
+  color: #b42318;
+}
+
+.koubo-task-list-status.muted {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.koubo-task-list-status.neutral {
+  background: #f8fafc;
+  color: #475467;
+}

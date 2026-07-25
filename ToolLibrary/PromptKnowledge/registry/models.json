@@ -1,0 +1,25 @@
+{
+  "schema_version": "koubo_prompt_knowledge_models_0.1",
+  "updated_at": "2026-06-24T00:00:00Z",
+  "notes": "Model classification metadata for prompt knowledge filtering (model_family/provider). New models extend this file only — physical storage stays flat, no provider directories (design doc 5.1/5.4). Registry is the source of truth for valid family/provider values; retrieval filters on the normalized docs' model_family/provider fields.",
+  "families": ["image", "video", "digital_human", "lipsync", "general"],
+  "models": [
+    {"model_family": "image", "provider": "openai", "model_ids": ["gpt-image-2", "gpt-image-1.5", "gpt-image-1", "gpt-image-1-mini"], "aliases": []},
+    {"model_family": "image", "provider": "grok", "model_ids": [], "aliases": []},
+    {"model_family": "image", "provider": "gemini", "model_ids": ["gemini-3-pro-image", "gemini-2.5-flash-image"], "aliases": ["nano-banana"]},
+    {"model_family": "image", "provider": "midjourney", "model_ids": [], "aliases": []},
+    {"model_family": "image", "provider": "flux", "model_ids": [], "aliases": []},
+    {"model_family": "video", "provider": "wan", "model_ids": ["wan2.7-i2v", "wan2.7-r2v", "wan2.2-i2v-a14b", "wan2.2-ti2v-5b"], "aliases": ["MaxWR2.7"]},
+    {"model_family": "video", "provider": "seedance", "model_ids": ["bytedance/seedance-2.0", "bytedance/seedance-2.0-fast", "seedance-1.0"], "aliases": ["MaxSI2", "MaxSR2"]},
+    {"model_family": "video", "provider": "kling", "model_ids": ["kling-v2-5-turbo", "kling-v3-omni"], "aliases": []},
+    {"model_family": "video", "provider": "sora", "model_ids": [], "aliases": []},
+    {"model_family": "video", "provider": "veo", "model_ids": ["veo-3.1-generate-001", "veo-3.1-fast-generate-001", "veo-3.0-generate-001"], "aliases": ["gemini-veo"]},
+    {"model_family": "video", "provider": "grok_video", "model_ids": [], "aliases": []},
+    {"model_family": "digital_human", "provider": "heygen", "model_ids": ["avatar_iv", "avatar_v"], "aliases": []},
+    {"model_family": "digital_human", "provider": "talking_avatar", "model_ids": [], "aliases": []},
+    {"model_family": "lipsync", "provider": "syncso", "model_ids": [], "aliases": []},
+    {"model_family": "lipsync", "provider": "kling_lipsync", "model_ids": ["kling-lipsync-advanced"], "aliases": []},
+    {"model_family": "lipsync", "provider": "heygen", "model_ids": ["speed", "precision"], "aliases": []},
+    {"model_family": "general", "provider": "", "model_ids": [], "aliases": [], "topics": ["prompt_structure", "negative_prompt", "critique_methods"]}
+  ]
+}

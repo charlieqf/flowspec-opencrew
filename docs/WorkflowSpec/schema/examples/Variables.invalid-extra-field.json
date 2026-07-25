@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "tool_use_session_id": "tus_1737019200000_a1b2c3d4e5f6",
+  "workspace_dir": "/data/ws/loan_00123",
+  "tool_session_root": "tool_use_sessions/tus_1737019200000_a1b2c3d4e5f6",
+  "applicant_valid": true,
+  "risk_score": 720
+}

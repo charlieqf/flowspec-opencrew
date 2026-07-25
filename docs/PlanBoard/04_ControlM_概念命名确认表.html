@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PlanBoard Control-M 概念命名确认表</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #65758b;
+      --line: #d9e0e8;
+      --blue: #2563eb;
+      --green: #15803d;
+      --amber: #b45309;
+      --red: #b91c1c;
+      --gray: #64748b;
+      --soft-blue: #eaf1ff;
+      --soft-green: #eaf7ef;
+      --soft-amber: #fff4dd;
+      --soft-gray: #eef2f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 10px 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 650;
+      padding: 7px 10px;
+    }
+
+    button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    button:hover {
+      filter: brightness(0.98);
+    }
+
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 10px 18px 24px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 8px 10px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric-value {
+      margin-top: 0;
+      font-size: 19px;
+      font-weight: 760;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    select,
+    input[type="search"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 12px;
+      padding: 7px 9px;
+    }
+
+    textarea {
+      min-height: 32px;
+      resize: vertical;
+    }
+
+    .table-wrap {
+      overflow-x: hidden;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      max-height: calc(100vh - 178px);
+    }
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f9fafb;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 12px;
+    }
+
+    th {
+      color: #334155;
+      font-size: 11px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .category {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: var(--soft-gray);
+      color: #334155;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    .term {
+      font-weight: 750;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
+    .choice-group {
+      display: grid;
+      gap: 3px;
+    }
+
+    label.choice {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      color: #334155;
+      font-size: 12px;
+    }
+
+    .final-name {
+      font-weight: 760;
+      color: var(--blue);
+    }
+
+    .merged-detail {
+      display: grid;
+      gap: 5px;
+    }
+
+    .merged-detail strong {
+      color: #334155;
+      font-size: 11px;
+    }
+
+    .json-panel {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 12px;
+    }
+
+    .json-panel textarea {
+      min-height: 260px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        justify-content: flex-start;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>PlanBoard Control-M 概念命名确认表</h1>
+        <div class="subtitle">逐项确认是否沿用 Control-M 原名、沿用当前 PlanBoard 命名，或填写自定义命名；确认结果可导出为 JSON。</div>
+      </div>
+      <div class="toolbar">
+        <button type="button" id="useControlM">全部沿用 Control-M</button>
+        <button type="button" id="useCurrent">全部沿用当前命名</button>
+        <button type="button" id="saveLocal">保存到本页</button>
+        <button type="button" class="primary" id="exportJson">导出 JSON</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary" aria-label="确认统计">
+      <div class="metric">
+        <div class="metric-label">总概念数</div>
+        <div class="metric-value" id="countTotal">0</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">沿用 Control-M</div>
+        <div class="metric-value" id="countControlM">0</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">沿用当前命名</div>
+        <div class="metric-value" id="countCurrent">0</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">自定义命名</div>
+        <div class="metric-value" id="countCustom">0</div>
+      </div>
+    </section>
+
+    <section class="filters" aria-label="筛选">
+      <select id="categoryFilter" aria-label="按分类筛选">
+        <option value="">全部分类</option>
+      </select>
+      <input type="search" id="searchBox" placeholder="搜索 Control-M 名称、当前命名、说明">
+    </section>
+
+    <section class="table-wrap" aria-label="命名确认表">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 7%;">分类</th>
+            <th style="width: 11%;">Control-M 概念名</th>
+            <th style="width: 23%;">Control-M 字段意义 / 用途</th>
+            <th style="width: 12%;">当前 / 我的命名</th>
+            <th style="width: 19%;">含义说明</th>
+            <th style="width: 12%;">沿用选项</th>
+            <th style="width: 10%;">最终命名</th>
+            <th style="width: 6%;">备注</th>
+          </tr>
+        </thead>
+        <tbody id="conceptRows"></tbody>
+      </table>
+    </section>
+
+    <section class="json-panel hidden" id="jsonPanel" aria-label="导出 JSON 预览">
+      <div class="toolbar" style="justify-content: space-between; margin-bottom: 10px;">
+        <strong>导出 JSON 预览</strong>
+        <div>
+          <button type="button" id="copyJson">复制 JSON</button>
+          <button type="button" class="primary" id="downloadJson">下载 JSON</button>
+        </div>
+      </div>
+      <textarea id="jsonOutput" spellcheck="false"></textarea>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "planboard_controlm_naming_review_v01";
+
+    const concepts = [
+      {
+        id: "workspace",
+        category: "一级对象",
+        controlMName: "Workspace",
+        currentName: "Plan / Session Workspace",
+        description: "Planning domain 中创建 workflow 的工作区。OpenCrew 中可对应一个 Plan 创建后的 Session Workspace。",
+        recommended: "custom",
+        customName: "Session Workspace"
+      },
+      {
+        id: "folder",
+        category: "一级对象",
+        controlMName: "Folder",
+        currentName: "PlanBoard / Plan",
+        description: "组织 Job 的容器。可用于表达一个业务 Plan 或一个 PlanBoard 容器。",
+        recommended: "controlm"
+      },
+      {
+        id: "regular_folder",
+        category: "一级对象",
+        controlMName: "Regular Folder",
+        currentName: "PlanGroup",
+        description: "普通任务集合，内部 Job 相对独立，不继承 SMART Folder 的统一调度属性。",
+        recommended: "controlm"
+      },
+      {
+        id: "smart_folder",
+        category: "一级对象",
+        controlMName: "SMART Folder",
+        currentName: "PlanBoard",
+        description: "可继承调度、Prerequisites、Actions 的任务组。较适合表达可自动生成和统一派生状态的 PlanBoard。",
+        recommended: "controlm"
+      },
+      {
+        id: "sub_folder",
+        category: "一级对象",
+        controlMName: "Sub-folder",
+        currentName: "Row / Segment Row",
+        description: "Folder 下的子组织。可以考虑映射为 PlanBoard 中的一行或 Segment 分组。",
+        recommended: "custom",
+        customName: "Sub-folder Row"
+      },
+      {
+        id: "job",
+        category: "一级对象",
+        controlMName: "Job",
+        currentName: "Task Slot",
+        description: "最小可执行单元。建议 PlanBoard 的槽位标准名直接对齐 Job。",
+        recommended: "controlm"
+      },
+      {
+        id: "job_type",
+        category: "一级对象",
+        controlMName: "Job Type",
+        currentName: "Tool Stage / Action Type",
+        description: "Job 的执行类型，例如 OS Job 或集成任务。OpenCrew 中可对应工具阶段、模型调用、人工确认等。",
+        recommended: "controlm"
+      },
+      {
+        id: "application",
+        category: "归类字段",
+        controlMName: "Application",
+        currentName: "Domain",
+        description: "相关 Job 的大类。OpenCrew 中可对应 storyboard、analysis、asset-library 等 domain。",
+        recommended: "controlm"
+      },
+      {
+        id: "sub_application",
+        category: "归类字段",
+        controlMName: "Sub Application",
+        currentName: "PlanBoard Type / View",
+        description: "比 Application 更细的归类。可对应 Image Plan、Video Plan、Video Only Plan。",
+        recommended: "controlm"
+      },
+      {
+        id: "job_name",
+        category: "归类字段",
+        controlMName: "Job Name",
+        currentName: "Slot ID / Stage Name",
+        description: "Job 的唯一名称。OpenCrew 中建议由 row anchor 和 stage 组合生成稳定名称。",
+        recommended: "controlm"
+      },
+      {
+        id: "run_id",
+        category: "归类字段",
+        controlMName: "Run ID",
+        currentName: "Attempt ID / Marker UID",
+        description: "一次执行的唯一 ID。OpenCrew 中用于 Running / Failed 标记和外部 API 恢复。",
+        recommended: "controlm"
+      },
+      {
+        id: "general",
+        category: "定义页签",
+        controlMName: "General",
+        currentName: "Basic Metadata",
+        description: "Job 或 Folder 的通用属性。",
+        recommended: "controlm"
+      },
+      {
+        id: "scheduling",
+        category: "定义页签",
+        controlMName: "Scheduling",
+        currentName: "Schedule / Trigger",
+        description: "调度属性。第一版 PlanBoard 可以保留概念，不实现时间调度。",
+        recommended: "controlm"
+      },
+      {
+        id: "prerequisites",
+        category: "定义页签",
+        controlMName: "Prerequisites",
+        currentName: "In Conditions",
+        description: "Job 执行前必须满足的条件，包括事件、资源、锁和人工确认。",
+        recommended: "controlm"
+      },
+      {
+        id: "actions",
+        category: "定义页签",
+        controlMName: "Actions",
+        currentName: "Out Conditions / Post Actions",
+        description: "Job 执行后触发的动作，例如添加或删除 Events、通知、输出处理。",
+        recommended: "controlm"
+      },
+      {
+        id: "requires_user_confirmation",
+        category: "Prerequisites",
+        controlMName: "Requires User Confirmation",
+        currentName: "Manual Confirm",
+        description: "要求人工确认后才能提交执行。对应 Confirm Final、物化尾帧等人工动作。",
+        recommended: "controlm"
+      },
+      {
+        id: "wait_for_events",
+        category: "Prerequisites",
+        controlMName: "Wait for Events",
+        currentName: "In Conditions",
+        description: "等待一个或多个事件满足。OpenCrew 中可映射为等待标准 Working 产物。",
+        recommended: "controlm"
+      },
+      {
+        id: "event",
+        category: "Events",
+        controlMName: "Event",
+        currentName: "Condition / Artifact Event",
+        description: "Job 之间的依赖实体。前序 Job 添加 Event，后续 Job 等待 Event。",
+        recommended: "controlm"
+      },
+      {
+        id: "global_event",
+        category: "Events",
+        controlMName: "Global Event",
+        currentName: "Cross Session Event",
+        description: "跨 Control-M Server 的事件。OpenCrew 暂时可预留为跨 Session / 跨系统事件。",
+        recommended: "controlm"
+      },
+      {
+        id: "global_event_prefix",
+        category: "Events",
+        controlMName: "Global Event Prefix",
+        currentName: "Global Event Namespace",
+        description: "Global Event 的命名前缀，用于区分事件所在服务器或作用域。",
+        recommended: "controlm"
+      },
+      {
+        id: "wait_for_event_attributes",
+        category: "Events",
+        controlMName: "Wait for Event Attributes",
+        currentName: "In Event Attributes",
+        description: "后继 Job 等待事件时的属性，例如名称、Run Date、关系、删除策略。",
+        recommended: "controlm"
+      },
+      {
+        id: "event_attributes",
+        category: "Events",
+        controlMName: "Event Attributes",
+        currentName: "Out Event Attributes",
+        description: "前序 Job 执行后添加或删除事件时的属性。",
+        recommended: "controlm"
+      },
+      {
+        id: "relationship",
+        category: "Events",
+        controlMName: "Relationship",
+        currentName: "Condition Logic",
+        description: "多个事件之间的布尔关系。",
+        recommended: "controlm"
+      },
+      {
+        id: "and_between_all",
+        category: "Events",
+        controlMName: "AND Between All",
+        currentName: "All Conditions Required",
+        description: "等待所有事件都满足后才执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "or_between_all",
+        category: "Events",
+        controlMName: "OR Between All",
+        currentName: "Any Condition Required",
+        description: "任一事件满足即可执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "manually_set",
+        category: "Events",
+        controlMName: "Manually Set",
+        currentName: "Custom Relationship",
+        description: "手工定义事件之间的关系表达。",
+        recommended: "controlm"
+      },
+      {
+        id: "run_date",
+        category: "Events",
+        controlMName: "Run Date",
+        currentName: "Event Date",
+        description: "事件的日期属性，包含当前日期、任意日期、无日期、前一次运行日期、下一次运行日期等。",
+        recommended: "controlm"
+      },
+      {
+        id: "add_delete",
+        category: "Events",
+        controlMName: "Add/Delete",
+        currentName: "Emit / Clear Event",
+        description: "Job 完成后添加或删除事件。",
+        recommended: "controlm"
+      },
+      {
+        id: "adjust_events",
+        category: "Prerequisites",
+        controlMName: "Adjust Events",
+        currentName: "Skipped Dependency Handling",
+        description: "当前序 Job 未计划运行时，如何处理后续 Job 等待事件。",
+        recommended: "controlm"
+      },
+      {
+        id: "resource_pools",
+        category: "Resources",
+        controlMName: "Resource Pools",
+        currentName: "Resource Pools",
+        description: "可量化资源池，例如模型并发、数据库连接、GPU、外部 API 配额。",
+        recommended: "controlm"
+      },
+      {
+        id: "resource_pool_name",
+        category: "Resources",
+        controlMName: "Resource Pool Name",
+        currentName: "Resource Name",
+        description: "资源池名称。",
+        recommended: "controlm"
+      },
+      {
+        id: "quantity",
+        category: "Resources",
+        controlMName: "Quantity",
+        currentName: "Total Quantity",
+        description: "资源池总量。",
+        recommended: "controlm"
+      },
+      {
+        id: "available",
+        category: "Resources",
+        controlMName: "Available",
+        currentName: "Available Quantity",
+        description: "当前可分配资源数量。",
+        recommended: "controlm"
+      },
+      {
+        id: "amount",
+        category: "Resources",
+        controlMName: "Amount",
+        currentName: "Required Amount",
+        description: "某个 Job 运行所需资源数量。",
+        recommended: "controlm"
+      },
+      {
+        id: "lock_resources",
+        category: "Resources",
+        controlMName: "Lock Resources",
+        currentName: "Mutex / Lock",
+        description: "文件、表、数据库、业务槽位等物理或逻辑资源锁。",
+        recommended: "controlm"
+      },
+      {
+        id: "exclusive_lock_resources",
+        category: "Resources",
+        controlMName: "Exclusive Lock Resources",
+        currentName: "Exclusive Lock",
+        description: "独占锁，阻止其他 Job 并发执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "shared_lock_resources",
+        category: "Resources",
+        controlMName: "Shared Lock Resources",
+        currentName: "Shared Lock",
+        description: "共享锁，允许其他共享读或兼容任务并发执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "jobs_using",
+        category: "Resources",
+        controlMName: "Jobs Using",
+        currentName: "Jobs Using",
+        description: "正在使用该锁资源的 Job 数量。",
+        recommended: "controlm"
+      },
+      {
+        id: "jobs_requesting",
+        category: "Resources",
+        controlMName: "Jobs Requesting",
+        currentName: "Jobs Requesting",
+        description: "正在请求该锁资源的 Job 数量。",
+        recommended: "controlm"
+      },
+      {
+        id: "priority",
+        category: "调度控制",
+        controlMName: "Priority",
+        currentName: "Priority",
+        description: "资源竞争时的优先级。",
+        recommended: "controlm"
+      },
+      {
+        id: "critical",
+        category: "调度控制",
+        controlMName: "Critical",
+        currentName: "Critical Path",
+        description: "关键路径 Job，可优先获得资源或锁。",
+        recommended: "controlm"
+      },
+      {
+        id: "run_as_dummy",
+        category: "调度控制",
+        controlMName: "Run as Dummy",
+        currentName: "Dummy Job",
+        description: "只执行后处理动作，不提交真实执行。可用于占位、桥接或跳过仍释放事件。",
+        recommended: "controlm"
+      },
+      {
+        id: "pre_execution_command",
+        category: "Actions",
+        controlMName: "Pre-execution Command",
+        currentName: "Pre Action",
+        description: "Job 执行前命令。",
+        recommended: "controlm"
+      },
+      {
+        id: "post_execution_command",
+        category: "Actions",
+        controlMName: "Post-execution Command",
+        currentName: "Post Action",
+        description: "Job 执行后命令。",
+        recommended: "controlm"
+      },
+      {
+        id: "job_status",
+        category: "运行状态",
+        controlMName: "Job Status",
+        currentName: "Job Status / Slot State",
+        description: "Job 或 SMART Folder 当前运行状态。PlanBoard 中对应每个 Job 槽位的状态字段。",
+        recommended: "controlm"
+      },
+      {
+        id: "cm_application_job_status",
+        category: "运行状态",
+        controlMName: "CM Application Job Status",
+        currentName: "Provider Job Status",
+        description: "插件或外部应用 Job 的当前执行状态。PlanBoard 中可用于记录模型供应商、外部 API 或集成任务状态。",
+        recommended: "controlm"
+      },
+      {
+        id: "held",
+        category: "运行状态",
+        controlMName: "Held",
+        currentName: "Held",
+        description: "Job 被置为 hold，暂停或阻止继续执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "folder_held",
+        category: "运行状态",
+        controlMName: "Folder Held",
+        currentName: "Folder Held",
+        description: "Folder 处于 hold 状态，影响其内部 Job 的执行。",
+        recommended: "controlm"
+      },
+      {
+        id: "deleted_jobs",
+        category: "运行状态",
+        controlMName: "Deleted Jobs",
+        currentName: "Deleted Jobs",
+        description: "控制被删除的 Job 是否出现在监控视图中。",
+        recommended: "controlm"
+      },
+      {
+        id: "execution_time",
+        category: "运行状态",
+        controlMName: "Execution Time",
+        currentName: "Execution Time",
+        description: "Job 或 SMART Folder 的实际或预计执行时间。",
+        recommended: "controlm"
+      },
+      {
+        id: "ended_ok",
+        category: "状态值",
+        controlMName: "Ended OK",
+        currentName: "Succeeded / Green",
+        description: "Job 正常结束。PlanBoard 中对应绿色完成态。",
+        recommended: "controlm"
+      },
+      {
+        id: "ended_not_ok",
+        category: "状态值",
+        controlMName: "Ended Not OK",
+        currentName: "Failed / Red",
+        description: "Job 异常结束。PlanBoard 中对应红色失败态。",
+        recommended: "controlm"
+      },
+      {
+        id: "executing",
+        category: "状态值",
+        controlMName: "Executing",
+        currentName: "Running / Yellow",
+        description: "Job 正在执行。PlanBoard 中对应黄色运行态。",
+        recommended: "controlm"
+      },
+      {
+        id: "waiting",
+        category: "状态值",
+        controlMName: "Waiting",
+        currentName: "Waiting / White or Gray",
+        description: "Job 正在等待条件、资源、锁或人工确认。PlanBoard 中需要进一步区分白色可运行等待和灰色条件不满足。",
+        recommended: "controlm"
+      },
+      {
+        id: "wait_for_user",
+        category: "状态值",
+        controlMName: "Wait User",
+        currentName: "Wait User / Manual Confirmation",
+        description: "Job 等待人工确认。PlanBoard 中对应需要人工点击的步骤。",
+        recommended: "controlm"
+      },
+      {
+        id: "wait_for_events_status",
+        category: "状态值",
+        controlMName: "Wait for Events",
+        currentName: "Wait for Events / Waiting Prerequisites",
+        description: "Job 等待上游 Event。PlanBoard 中对应等待 Working 产物或依赖条件。",
+        recommended: "controlm"
+      },
+      {
+        id: "wait_for_resources",
+        category: "状态值",
+        controlMName: "Wait Resources",
+        currentName: "Wait Resources",
+        description: "Job 等待 Resource Pools 或 Lock Resources。PlanBoard 中对应资源池不足或互斥锁未释放。",
+        recommended: "controlm"
+      }
+    ];
+
+    const state = new Map();
+
+    const controlMFieldDetails = {
+      workspace: {
+        meaning: "Planning domain 中用于创建、编辑、导入、导出 workflow 的工作区。",
+        usage: "承载 Folder、SMART Folder、Sub-folder 和 Job 的定义草稿，提交前用于统一规划和检查。"
+      },
+      folder: {
+        meaning: "用于收集和组织一组 Job 的容器。",
+        usage: "把相关 Job 组织在同一业务流程中，并作为调度、权限、文档和发布的管理边界。"
+      },
+      regular_folder: {
+        meaning: "普通 Folder，主要用于分组，不把统一调度规则继承给内部 Job。",
+        usage: "适合内部 Job 相对独立、只需要逻辑收纳的流程。"
+      },
+      smart_folder: {
+        meaning: "可继承调度、Prerequisites 和 Actions 的智能 Folder。",
+        usage: "适合表达一组需要统一调度、统一条件和统一后处理的工作流。"
+      },
+      sub_folder: {
+        meaning: "Folder 或 SMART Folder 下的子容器。",
+        usage: "用于进一步分组 Job，减少大流程中的层级混乱。"
+      },
+      job: {
+        meaning: "Control-M 中最小的可执行定义单元。",
+        usage: "定义一个具体任务的类型、参数、调度条件、前置条件、执行后动作和资源要求。"
+      },
+      job_type: {
+        meaning: "Job 的执行类别。",
+        usage: "决定 Job 由哪类执行器处理，例如系统命令、文件传输、数据库、云服务或第三方集成。"
+      },
+      application: {
+        meaning: "用于描述一组相关 Job 的大业务分类。",
+        usage: "帮助监控、筛选、权限管理和业务视图归类。"
+      },
+      sub_application: {
+        meaning: "比 Application 更细的业务分类。",
+        usage: "用于把同一 Application 下的 Job 按更具体流程或模块分组。"
+      },
+      job_name: {
+        meaning: "Job 的名称，在 Folder 内必须唯一。",
+        usage: "作为任务识别、事件命名、日志、监控和依赖关系中的核心标识。"
+      },
+      run_id: {
+        meaning: "一次 Folder、Sub-folder 或 Job 执行的唯一运行编号。",
+        usage: "用于追踪一次具体运行、资源占用、日志、事件和恢复状态。"
+      },
+      general: {
+        meaning: "Job 或 Folder 的通用属性页。",
+        usage: "配置名称、类型、说明、Application、Sub Application、优先级、关键路径等基础属性。"
+      },
+      scheduling: {
+        meaning: "调度属性页。",
+        usage: "定义何时进入运行队列、日历、周期、手动或自动运行方式。"
+      },
+      prerequisites: {
+        meaning: "执行前必须满足的前置条件集合。",
+        usage: "控制 Job 何时允许提交执行，包括等待事件、人工确认、资源池和锁资源。"
+      },
+      actions: {
+        meaning: "执行后动作集合。",
+        usage: "在 Job 完成后添加或删除事件、发送通知、执行后置命令或处理输出。"
+      },
+      requires_user_confirmation: {
+        meaning: "要求用户手动确认后才允许提交 Job。",
+        usage: "用于高风险、需要人工审核或需要人工判断质量的步骤。"
+      },
+      wait_for_events: {
+        meaning: "等待一个或多个 Event 满足。",
+        usage: "建立前后 Job 的执行顺序，只有依赖事件满足后才进入可执行状态。"
+      },
+      event: {
+        meaning: "Job 或 SMART Folder 之间的依赖实体。",
+        usage: "前序 Job 完成后添加 Event，后续 Job 等待 Event，从而形成工作流顺序。"
+      },
+      global_event: {
+        meaning: "跨 Control-M/Server 的 Event。",
+        usage: "用于不同服务器或环境之间的流程依赖联动。"
+      },
+      global_event_prefix: {
+        meaning: "Global Event 的作用域前缀。",
+        usage: "标识 Global Event 属于哪些 Control-M/Server，避免跨环境事件混淆。"
+      },
+      wait_for_event_attributes: {
+        meaning: "后继 Job 等待 Event 时使用的属性。",
+        usage: "定义等待哪个 Event、等待哪个日期的 Event、多个 Event 之间是什么关系，以及是否删除。"
+      },
+      event_attributes: {
+        meaning: "前序 Job 添加或删除 Event 时使用的属性。",
+        usage: "定义 Job 完成后添加还是删除哪个 Event，以及 Event 使用什么日期属性。"
+      },
+      relationship: {
+        meaning: "多个 Wait for Events 之间的逻辑关系。",
+        usage: "决定后继 Job 是等待所有事件、任一事件，还是使用手工组合表达式。"
+      },
+      and_between_all: {
+        meaning: "所有等待事件都必须满足。",
+        usage: "用于多个上游 Job 都完成后才允许执行的场景。"
+      },
+      or_between_all: {
+        meaning: "任一等待事件满足即可。",
+        usage: "用于多个上游来源中只需要一个成功产物即可继续的场景。"
+      },
+      manually_set: {
+        meaning: "手工设置事件关系表达式。",
+        usage: "用于简单 AND / OR 无法表达的依赖组合。"
+      },
+      run_date: {
+        meaning: "Event 的运行日期属性。",
+        usage: "控制 Job 等待当前日期、任意日期、无日期、前一次运行日期或下一次运行日期的事件。"
+      },
+      add_delete: {
+        meaning: "Job 完成后对 Event 执行添加或删除。",
+        usage: "让一个 Job 的完成结果成为后续 Job 的触发条件，或清理不再需要的事件。"
+      },
+      adjust_events: {
+        meaning: "当前序 Job 未计划运行时，对等待事件进行调整。",
+        usage: "避免后继 Job 因等待当天不会运行的前序 Job 而永久卡住。"
+      },
+      resource_pools: {
+        meaning: "可量化逻辑资源池。",
+        usage: "限制可同时执行的 Job 数量，例如数据库连接、CPU、外部 API 并发或模型额度。"
+      },
+      resource_pool_name: {
+        meaning: "资源池名称。",
+        usage: "标识 Job 要申请或占用哪一个资源池。"
+      },
+      quantity: {
+        meaning: "资源池总数量。",
+        usage: "定义这个资源池最多可同时被分配多少单位。"
+      },
+      available: {
+        meaning: "当前可用资源数量。",
+        usage: "调度器据此判断 Job 是否能立即获得资源并执行。"
+      },
+      amount: {
+        meaning: "Job 运行所需的资源数量。",
+        usage: "Job 提交前从资源池申请指定数量，资源不足则等待。"
+      },
+      lock_resources: {
+        meaning: "物理或逻辑设备的锁资源。",
+        usage: "控制文件、数据库、表、业务槽位等对象不能被不兼容 Job 同时修改。"
+      },
+      exclusive_lock_resources: {
+        meaning: "独占锁资源。",
+        usage: "一个 Job 持有后，其他需要同一资源的 Job 必须等待。"
+      },
+      shared_lock_resources: {
+        meaning: "共享锁资源。",
+        usage: "允许多个兼容 Job 同时使用，但会阻塞需要独占访问的 Job。"
+      },
+      jobs_using: {
+        meaning: "当前正在使用该 Lock Resource 的 Job 数量。",
+        usage: "用于监控锁资源是否已被占用，以及占用规模。"
+      },
+      jobs_requesting: {
+        meaning: "当前正在请求该 Lock Resource 的 Job 数量。",
+        usage: "用于监控哪些 Job 正在等待锁资源释放。"
+      },
+      priority: {
+        meaning: "Job 的资源分配优先级。",
+        usage: "当多个 Job 竞争资源时，优先级更高的 Job 更早获得资源。"
+      },
+      critical: {
+        meaning: "关键路径 Job 标记。",
+        usage: "让关键任务在资源和锁竞争中优先于普通 Priority Job。"
+      },
+      run_as_dummy: {
+        meaning: "以 Dummy 方式运行，不提交真实执行。",
+        usage: "用于桥接流程、占位和只执行后处理动作的场景。"
+      },
+      pre_execution_command: {
+        meaning: "Job 执行前命令。",
+        usage: "在主执行前执行准备动作，但返回码通常不影响主 Job。"
+      },
+      post_execution_command: {
+        meaning: "Job 执行后命令。",
+        usage: "在主执行后执行清理、通知或辅助处理。"
+      },
+      job_status: {
+        meaning: "Job 或 SMART Folder 的当前状态字段。",
+        usage: "在 Monitoring / Viewpoints 中筛选和判断 Job 当前处于完成、失败、执行中、等待或暂停等状态。"
+      },
+      cm_application_job_status: {
+        meaning: "Control-M 插件或外部应用 Job 的执行状态。",
+        usage: "用于监控集成类 Job 的外部执行状态，PlanBoard 可映射到模型供应商或外部 API 任务状态。"
+      },
+      held: {
+        meaning: "Job 处于 hold 状态。",
+        usage: "暂停或阻止 Job 继续执行，通常用于人工干预、排障或临时冻结。"
+      },
+      folder_held: {
+        meaning: "Folder 处于 hold 状态。",
+        usage: "在监控视图中筛选或识别被暂停的 Folder，以及其对内部 Job 的影响。"
+      },
+      deleted_jobs: {
+        meaning: "是否展示已删除 Job。",
+        usage: "用于监控和历史追踪时决定 deleted jobs 是否纳入 Viewpoint。"
+      },
+      execution_time: {
+        meaning: "Job 或 SMART Folder 的实际或预计执行时间。",
+        usage: "用于监控长任务、识别耗时异常、做运行耗时分析和视图筛选。"
+      },
+      ended_ok: {
+        meaning: "Job 正常结束。",
+        usage: "作为成功完成的运行结果，PlanBoard 可映射为绿色完成态。"
+      },
+      ended_not_ok: {
+        meaning: "Job 异常结束。",
+        usage: "作为失败运行结果，PlanBoard 可映射为红色失败态并保留错误详情。"
+      },
+      executing: {
+        meaning: "Job 正在执行。",
+        usage: "表示任务已开始且尚未结束，PlanBoard 可映射为黄色运行态。"
+      },
+      waiting: {
+        meaning: "Job 正在等待。",
+        usage: "表示任务尚未执行，需要继续区分等待事件、资源、锁、人工确认或调度条件。"
+      },
+      wait_for_user: {
+        meaning: "Job 等待用户确认。",
+        usage: "用于需要人工确认后才能运行或继续的任务，PlanBoard 可映射为人工确认按钮。"
+      },
+      wait_for_events_status: {
+        meaning: "Job 等待 Event 满足。",
+        usage: "用于表达上游 Job 尚未释放依赖事件，PlanBoard 可映射为等待 Working 产物。"
+      },
+      wait_for_resources: {
+        meaning: "Job 等待资源。",
+        usage: "用于表达 Resource Pool 不足或 Lock Resource 未释放，PlanBoard 可映射为资源等待态。"
+      }
+    };
+
+    function defaultState(item) {
+      const namingRule = item.recommended || "controlm";
+      return {
+        id: item.id,
+        namingRule,
+        customName: item.customName || "",
+        note: ""
+      };
+    }
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      let parsed = {};
+      if (saved) {
+        try {
+          parsed = JSON.parse(saved).items || {};
+        } catch (error) {
+          parsed = {};
+        }
+      }
+      concepts.forEach((item) => {
+        const savedItem = parsed[item.id] || {};
+        state.set(item.id, {
+          ...defaultState(item),
+          namingRule: savedItem.namingRule || savedItem.naming_rule || defaultState(item).namingRule,
+          customName: savedItem.customName || savedItem.custom_name || defaultState(item).customName,
+          note: savedItem.note || ""
+        });
+      });
+    }
+
+    function finalNameFor(item, rowState) {
+      if (rowState.namingRule === "controlm") return item.controlMName;
+      if (rowState.namingRule === "current") return item.currentName;
+      return rowState.customName || item.customName || item.controlMName;
+    }
+
+    function controlMMeaningFor(item) {
+      return (controlMFieldDetails[item.id] && controlMFieldDetails[item.id].meaning) || item.description;
+    }
+
+    function controlMUsageFor(item) {
+      return (controlMFieldDetails[item.id] && controlMFieldDetails[item.id].usage) || "用于 Control-M 工作流定义、调度、监控或依赖治理。";
+    }
+
+    function populateFilters() {
+      const categoryFilter = document.getElementById("categoryFilter");
+      const categories = [...new Set(concepts.map((item) => item.category))];
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+      });
+    }
+
+    function render() {
+      const tbody = document.getElementById("conceptRows");
+      const categoryValue = document.getElementById("categoryFilter").value;
+      const searchValue = document.getElementById("searchBox").value.trim().toLowerCase();
+      tbody.innerHTML = "";
+
+      concepts
+        .filter((item) => {
+          const rowState = state.get(item.id);
+          const text = [
+            item.category,
+            item.controlMName,
+            controlMMeaningFor(item),
+            controlMUsageFor(item),
+            item.currentName,
+            item.description,
+            rowState.note,
+            rowState.customName
+          ].join(" ").toLowerCase();
+          return (!categoryValue || item.category === categoryValue)
+            && (!searchValue || text.includes(searchValue));
+        })
+        .forEach((item) => {
+          const rowState = state.get(item.id);
+          const tr = document.createElement("tr");
+          tr.dataset.id = item.id;
+          tr.innerHTML = `
+            <td><span class="category">${item.category}</span></td>
+            <td><div class="term">${item.controlMName}</div></td>
+            <td>
+              <div class="merged-detail">
+                <div><strong>意义：</strong>${escapeHtml(controlMMeaningFor(item))}</div>
+                <div><strong>用途：</strong>${escapeHtml(controlMUsageFor(item))}</div>
+              </div>
+            </td>
+            <td><div class="term">${item.currentName}</div></td>
+            <td><div>${item.description}</div></td>
+            <td>
+              <div class="choice-group">
+                <label class="choice"><input type="radio" name="rule_${item.id}" value="controlm" ${rowState.namingRule === "controlm" ? "checked" : ""}> 沿用 Control-M</label>
+                <label class="choice"><input type="radio" name="rule_${item.id}" value="current" ${rowState.namingRule === "current" ? "checked" : ""}> 沿用当前命名</label>
+                <label class="choice"><input type="radio" name="rule_${item.id}" value="custom" ${rowState.namingRule === "custom" ? "checked" : ""}> 自定义</label>
+              </div>
+            </td>
+            <td>
+              <input type="text" class="custom-input" value="${escapeHtml(rowState.customName)}" placeholder="自定义命名">
+              <div class="small muted" style="margin-top: 6px;">最终：<span class="final-name">${escapeHtml(finalNameFor(item, rowState))}</span></div>
+            </td>
+            <td><textarea class="note-input" placeholder="备注">${escapeHtml(rowState.note)}</textarea></td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      bindRowEvents();
+      updateSummary();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function bindRowEvents() {
+      document.querySelectorAll("#conceptRows tr").forEach((tr) => {
+        const id = tr.dataset.id;
+        const item = concepts.find((entry) => entry.id === id);
+        const rowState = state.get(id);
+
+        tr.querySelectorAll(`input[name="rule_${id}"]`).forEach((radio) => {
+          radio.addEventListener("change", () => {
+            rowState.namingRule = radio.value;
+            state.set(id, rowState);
+            render();
+          });
+        });
+
+        tr.querySelector(".custom-input").addEventListener("input", (event) => {
+          rowState.customName = event.target.value;
+          if (rowState.namingRule === "custom") {
+            tr.querySelector(".final-name").textContent = finalNameFor(item, rowState);
+          }
+          state.set(id, rowState);
+          updateSummary();
+        });
+
+        tr.querySelector(".note-input").addEventListener("input", (event) => {
+          rowState.note = event.target.value;
+          state.set(id, rowState);
+        });
+      });
+    }
+
+    function updateSummary() {
+      const rows = [...state.values()];
+      document.getElementById("countTotal").textContent = concepts.length;
+      document.getElementById("countControlM").textContent = rows.filter((item) => item.namingRule === "controlm").length;
+      document.getElementById("countCurrent").textContent = rows.filter((item) => item.namingRule === "current").length;
+      document.getElementById("countCustom").textContent = rows.filter((item) => item.namingRule === "custom").length;
+    }
+
+    function buildExportPayload() {
+      const items = concepts.map((item) => {
+        const rowState = state.get(item.id);
+        return {
+          id: item.id,
+          category: item.category,
+          control_m_name: item.controlMName,
+          control_m_meaning_zh: controlMMeaningFor(item),
+          control_m_usage_zh: controlMUsageFor(item),
+          current_name: item.currentName,
+          naming_rule: rowState.namingRule,
+          final_name: finalNameFor(item, rowState),
+          note: rowState.note,
+          description: item.description
+        };
+      });
+      return {
+        schema_version: "planboard_controlm_naming_review_0.1",
+        exported_at: new Date().toISOString(),
+        source_file: "OpenCrew/docs/PlanBoard/04_ControlM_概念命名确认表.html",
+        summary: {
+          total: items.length,
+          control_m: items.filter((item) => item.naming_rule === "controlm").length,
+          current: items.filter((item) => item.naming_rule === "current").length,
+          custom: items.filter((item) => item.naming_rule === "custom").length
+        },
+        items
+      };
+    }
+
+    function showJson() {
+      const payload = buildExportPayload();
+      document.getElementById("jsonOutput").value = JSON.stringify(payload, null, 2);
+      document.getElementById("jsonPanel").classList.remove("hidden");
+      document.getElementById("jsonPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function saveLocal() {
+      const items = {};
+      state.forEach((value, key) => {
+        items[key] = {
+          id: value.id,
+          namingRule: value.namingRule,
+          customName: value.customName,
+          note: value.note
+        };
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ saved_at: new Date().toISOString(), items }));
+    }
+
+    function downloadJson() {
+      const payload = buildExportPayload();
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "planboard_controlm_naming_review.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function setAll(rule) {
+      concepts.forEach((item) => {
+        const rowState = state.get(item.id);
+        rowState.namingRule = rule;
+        state.set(item.id, rowState);
+      });
+      render();
+    }
+
+    document.getElementById("categoryFilter").addEventListener("change", render);
+    document.getElementById("searchBox").addEventListener("input", render);
+    document.getElementById("useControlM").addEventListener("click", () => setAll("controlm"));
+    document.getElementById("useCurrent").addEventListener("click", () => setAll("current"));
+    document.getElementById("saveLocal").addEventListener("click", saveLocal);
+    document.getElementById("exportJson").addEventListener("click", showJson);
+    document.getElementById("downloadJson").addEventListener("click", downloadJson);
+    document.getElementById("copyJson").addEventListener("click", async () => {
+      const output = document.getElementById("jsonOutput");
+      output.select();
+      try {
+        await navigator.clipboard.writeText(output.value);
+      } catch (error) {
+        document.execCommand("copy");
+      }
+    });
+
+    loadState();
+    populateFilters();
+    render();
+  </script>
+</body>
+</html>

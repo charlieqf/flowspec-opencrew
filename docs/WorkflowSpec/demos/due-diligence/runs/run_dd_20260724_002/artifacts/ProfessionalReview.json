@@ -1,0 +1,21 @@
+{
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "dd_lead_8",
+    "roles": [
+      "dd_lead"
+    ]
+  },
+  "reason": "Candidate findings reconciled to cited evidence; two matters retained as report qualifications.",
+  "dispositions": [
+    {
+      "finding_id": "LEGAL-01",
+      "disposition": "retain"
+    },
+    {
+      "finding_id": "FIN-01",
+      "disposition": "retain"
+    }
+  ]
+}

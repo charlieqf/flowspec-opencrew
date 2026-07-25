@@ -1,0 +1,781 @@
+{
+  "schema_version": "0.4",
+  "contract_level": "executable",
+  "process_id": "monthly_bank_risk_report",
+  "version": "1.2.0",
+  "title": "月度银行风险报告",
+  "description": "Freeze a data cut, reconcile quality, calculate authoritative metrics, draft grounded narrative, obtain sign-off, and distribute or request remediation.",
+  "tool_registry_ref": "tool_registry.json",
+  "context_schema_ref": "schemas/context.schema.json",
+  "branch_closure": "skip_unreachable",
+  "failure_propagation": "continue_independent",
+  "run_budget": {
+    "max_cost": "5.00",
+    "currency": "USD",
+    "reservation_policy": "required"
+  },
+  "defaults": {
+    "retry": {
+      "policy": "fail_fast"
+    },
+    "on_error": [],
+    "resources": []
+  },
+  "stages": [
+    "freeze",
+    "quality",
+    "analytics",
+    "report",
+    "approval",
+    "distribution"
+  ],
+  "artifact_contracts": {
+    "TransactionsSnapshot.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/sourceSnapshot",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "PaymentsSnapshot.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/sourceSnapshot",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "GLControlTotals.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/glControl",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "DQReport.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/dqReport",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "Reconciliation.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/reconciliation",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "DQWaiverDecision.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/waiver",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "QualityDecision.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/qualityDecision",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "CleanDataset.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/cleanDataset",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "RiskMetrics.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/riskMetrics",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "RiskNarrative.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/narrative",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "ComplianceAppendix.pdf": {
+      "media_type": "application/pdf",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mockDocument",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "RiskReport.pdf": {
+      "media_type": "application/pdf",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mockDocument",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "ReportApproval.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approval",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "DistributionReceipt.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/distribution",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "DataRemediationRequest.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/remediation",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    },
+    "ReportRevisionRequest.json": {
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/reportRevision",
+      "classification": "restricted",
+      "binding_keys": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "retention_class": "reg-report-10y"
+    }
+  },
+  "steps": [
+    {
+      "id": "S1a_freeze_transactions",
+      "tool": "freeze_transactions",
+      "type": "service",
+      "description": "Freeze the transaction population for the declared data cut.",
+      "stage": "freeze",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "transaction_count_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "TransactionsSnapshot.json"
+      ],
+      "writes": [
+        "transaction_count"
+      ],
+      "depends_on": [],
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S1b_freeze_payments",
+      "tool": "freeze_payments",
+      "type": "service",
+      "description": "Freeze the payment population independently.",
+      "stage": "freeze",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "payment_count_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "PaymentsSnapshot.json"
+      ],
+      "writes": [
+        "payment_count"
+      ],
+      "depends_on": [],
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S1c_freeze_gl",
+      "tool": "freeze_gl_controls",
+      "type": "service",
+      "description": "Capture authoritative general-ledger control totals.",
+      "stage": "freeze",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "gl_total_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "GLControlTotals.json"
+      ],
+      "writes": [
+        "gl_total"
+      ],
+      "depends_on": [],
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S2_reconcile_quality",
+      "tool": "reconcile_quality",
+      "type": "script",
+      "description": "Three-way join with an explicit DQ result and reconciliation evidence.",
+      "stage": "quality",
+      "reads": [
+        "transaction_count",
+        "payment_count",
+        "gl_total",
+        "discrepancy_rate_fixture"
+      ],
+      "consumes": [
+        "TransactionsSnapshot.json",
+        "PaymentsSnapshot.json",
+        "GLControlTotals.json"
+      ],
+      "produces": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "writes": [
+        "dq_passed",
+        "waiver_required"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S1a_freeze_transactions",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S1b_freeze_payments",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S1c_freeze_gl",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S3_dq_waiver",
+      "tool": "review_dq_waiver",
+      "type": "confirm",
+      "description": "Create a segregated waiver work item; a rejection does not become a false DQ pass.",
+      "stage": "quality",
+      "reads": [
+        "entity_id",
+        "period"
+      ],
+      "consumes": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "DQWaiverDecision.json"
+      ],
+      "writes": [
+        "waiver_decision"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S2_reconcile_quality",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "waiver_required",
+        "equals": true
+      },
+      "side_effect_class": "idempotent",
+      "human_gate": {
+        "type": "confirm",
+        "form": "dq_waiver_review",
+        "roles": [
+          "data_steward",
+          "finance_controller"
+        ],
+        "sla_seconds": 14400,
+        "allowed_decisions": [
+          "approved",
+          "rejected",
+          "revision_requested"
+        ],
+        "bind_to_input_hash": true,
+        "require_reason": true,
+        "separation_of_duties": {
+          "exclude_step_actors": [
+            "S2_reconcile_quality"
+          ],
+          "minimum_distinct_approvers": 1
+        }
+      }
+    },
+    {
+      "id": "S4_finalize_quality",
+      "tool": "finalize_quality_decision",
+      "type": "script",
+      "description": "Reduce DQ and waiver results into one authoritative eligibility field.",
+      "stage": "quality",
+      "reads": [
+        "dq_passed",
+        "waiver_required",
+        "waiver_decision"
+      ],
+      "consumes": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "QualityDecision.json"
+      ],
+      "writes": [
+        "dq_accepted"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S3_dq_waiver",
+          "statuses": [
+            "completed",
+            "skipped"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S5_prepare_dataset",
+      "tool": "prepare_clean_dataset",
+      "type": "script",
+      "description": "Materialize the accepted data cut without hiding waiver provenance.",
+      "stage": "analytics",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "dq_accepted"
+      ],
+      "consumes": [
+        "TransactionsSnapshot.json",
+        "PaymentsSnapshot.json",
+        "QualityDecision.json"
+      ],
+      "produces": [
+        "CleanDataset.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S4_finalize_quality",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "dq_accepted",
+        "equals": true
+      },
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S6_calculate_metrics",
+      "tool": "calculate_risk_metrics",
+      "type": "script",
+      "description": "Authoritative deterministic metrics are calculated outside the language model.",
+      "stage": "analytics",
+      "reads": [
+        "entity_id",
+        "period",
+        "transaction_count",
+        "payment_count"
+      ],
+      "consumes": [
+        "CleanDataset.json"
+      ],
+      "produces": [
+        "RiskMetrics.json"
+      ],
+      "writes": [
+        "metric_version"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S5_prepare_dataset",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S7_draft_narrative",
+      "tool": "draft_grounded_narrative",
+      "type": "model",
+      "description": "Mock a grounded narrative that cites metric keys rather than recomputing them.",
+      "stage": "report",
+      "reads": [
+        "entity_id",
+        "period",
+        "metric_version"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "RiskNarrative.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S6_calculate_metrics",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure",
+      "ai_profile_ref": "profiles/grounded-narrative.json"
+    },
+    {
+      "id": "S8_build_appendix",
+      "tool": "build_compliance_appendix",
+      "type": "script",
+      "description": "Build a deterministic lineage and controls appendix in parallel with narrative drafting.",
+      "stage": "report",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "ComplianceAppendix.pdf"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S6_calculate_metrics",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S9_assemble_report",
+      "tool": "assemble_risk_report",
+      "type": "script",
+      "description": "Join authoritative metrics, grounded narrative, and appendix into a versioned report.",
+      "stage": "report",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "RiskNarrative.json",
+        "ComplianceAppendix.pdf"
+      ],
+      "produces": [
+        "RiskReport.pdf"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S7_draft_narrative",
+          "statuses": [
+            "completed"
+          ]
+        },
+        {
+          "step_id": "S8_build_appendix",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "pure"
+    },
+    {
+      "id": "S10_report_signoff",
+      "tool": "review_report_signoff",
+      "type": "confirm",
+      "description": "Bind accountable sign-off to the exact report and data-cut hash.",
+      "stage": "approval",
+      "reads": [
+        "entity_id",
+        "period"
+      ],
+      "consumes": [
+        "RiskReport.pdf"
+      ],
+      "produces": [
+        "ReportApproval.json"
+      ],
+      "writes": [
+        "publish_decision"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S9_assemble_report",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "side_effect_class": "idempotent",
+      "human_gate": {
+        "type": "confirm",
+        "form": "risk_report_signoff",
+        "roles": [
+          "chief_risk_officer"
+        ],
+        "sla_seconds": 28800,
+        "allowed_decisions": [
+          "approved",
+          "rejected",
+          "revision_requested"
+        ],
+        "bind_to_input_hash": true,
+        "require_reason": true,
+        "separation_of_duties": {
+          "exclude_step_actors": [
+            "S7_draft_narrative"
+          ],
+          "minimum_distinct_approvers": 1
+        }
+      }
+    },
+    {
+      "id": "S11_distribute_report",
+      "tool": "distribute_report",
+      "type": "service",
+      "description": "Distribute with a stable recipient-set operation key and reconciliation support.",
+      "stage": "distribution",
+      "reads": [
+        "entity_id",
+        "period",
+        "publish_decision"
+      ],
+      "consumes": [
+        "RiskReport.pdf",
+        "ReportApproval.json"
+      ],
+      "produces": [
+        "DistributionReceipt.json"
+      ],
+      "writes": [
+        "distributed_at"
+      ],
+      "depends_on": [
+        {
+          "step_id": "S10_report_signoff",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "publish_decision",
+        "equals": "approved"
+      },
+      "side_effect_class": "reconcilable"
+    },
+    {
+      "id": "S12_request_remediation",
+      "tool": "request_data_remediation",
+      "type": "service",
+      "description": "Close an unacceptable data cut as a business outcome rather than leaving analytics waiting forever.",
+      "stage": "distribution",
+      "reads": [
+        "entity_id",
+        "period",
+        "dq_accepted"
+      ],
+      "consumes": [
+        "QualityDecision.json",
+        "DQReport.json"
+      ],
+      "produces": [
+        "DataRemediationRequest.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S4_finalize_quality",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "dq_accepted",
+        "equals": false
+      },
+      "side_effect_class": "idempotent"
+    },
+    {
+      "id": "S13_request_report_revision",
+      "tool": "request_report_revision",
+      "type": "service",
+      "description": "Close a rejected or revision-requested sign-off as an explicit report-rework outcome.",
+      "stage": "distribution",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "publish_decision"
+      ],
+      "consumes": [
+        "RiskReport.pdf",
+        "ReportApproval.json"
+      ],
+      "produces": [
+        "ReportRevisionRequest.json"
+      ],
+      "writes": [],
+      "depends_on": [
+        {
+          "step_id": "S10_report_signoff",
+          "statuses": [
+            "completed"
+          ]
+        }
+      ],
+      "when": {
+        "variable": "publish_decision",
+        "in": [
+          "rejected",
+          "revision_requested"
+        ]
+      },
+      "side_effect_class": "idempotent"
+    }
+  ],
+  "completion": {
+    "mode": "exactly_one_outcome",
+    "outcomes": [
+      {
+        "id": "report_distributed",
+        "title": "Signed report distributed",
+        "when": {
+          "variable": "publish_decision",
+          "equals": "approved"
+        },
+        "terminal_steps": [
+          "S11_distribute_report"
+        ],
+        "required_artifacts": [
+          "DistributionReceipt.json"
+        ]
+      },
+      {
+        "id": "data_remediation_requested",
+        "title": "Data cut rejected for remediation",
+        "when": {
+          "variable": "dq_accepted",
+          "equals": false
+        },
+        "terminal_steps": [
+          "S12_request_remediation"
+        ],
+        "required_artifacts": [
+          "DataRemediationRequest.json"
+        ]
+      },
+      {
+        "id": "report_revision_requested",
+        "title": "Signed report returned for revision",
+        "when": {
+          "variable": "publish_decision",
+          "in": [
+            "rejected",
+            "revision_requested"
+          ]
+        },
+        "terminal_steps": [
+          "S13_request_report_revision"
+        ],
+        "required_artifacts": [
+          "ReportRevisionRequest.json"
+        ]
+      }
+    ]
+  }
+}

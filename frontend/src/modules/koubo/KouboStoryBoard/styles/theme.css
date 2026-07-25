@@ -1,0 +1,32 @@
+.kbsp-editor.is-dark {
+  background: #0f172a;
+  border-color: #1e293b;
+  color: #e2e8f0;
+}
+.kbsp-editor.is-dark .kbsp-left,
+.kbsp-editor.is-dark .kbsp-right,
+.kbsp-editor.is-dark .kbsp-shot-card,
+.kbsp-editor.is-dark .kbsp-shot-sticky,
+.kbsp-editor.is-dark .kbsp-dialogue-card,
+.kbsp-editor.is-dark .kbsp-timeline {
+  background: #111827;
+  border-color: #334155;
+}
+.kbsp-editor.is-dark .kbsp-workspace,
+.kbsp-editor.is-dark .kbsp-workspace-head {
+  background: #0f172a;
+  border-color: #334155;
+}
+.kbsp-editor.is-dark .kbsp-workspace-head h1,
+.kbsp-editor.is-dark .kbsp-shot-title-input,
+.kbsp-editor.is-dark .kbsp-tree-shot,
+.kbsp-editor.is-dark .kbsp-asset-section-head strong,
+.kbsp-editor.is-dark .kbsp-asset-shot-head strong {
+  color: #e2e8f0;
+}
+.kbsp-editor.is-dark textarea,
+.kbsp-editor.is-dark input {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+}

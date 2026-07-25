@@ -1,0 +1,22 @@
+{
+  "matter_id": "MAT-ATLAS-01",
+  "scope_revision": "scope-r1",
+  "documents": [
+    {
+      "document_id": "DOC-001",
+      "name": "constitution.pdf",
+      "category": "corporate",
+      "page_count": 48
+    },
+    {
+      "document_id": "DOC-002",
+      "name": "material-contracts.pdf",
+      "category": "contracts",
+      "page_count": 132
+    }
+  ],
+  "missing_categories": [
+    "financial",
+    "tax"
+  ]
+}

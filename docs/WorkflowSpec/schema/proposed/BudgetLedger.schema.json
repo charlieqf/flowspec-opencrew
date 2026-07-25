@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/BudgetLedger.schema.json",
+  "title": "FlowSpec Budget Ledger (PROPOSED)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ledger_id", "run_id", "currency", "limit", "status", "transactions"],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "ledger_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "limit": { "$ref": "#/$defs/amount" },
+    "reserved": { "$ref": "#/$defs/amount" },
+    "settled": { "$ref": "#/$defs/amount" },
+    "available": { "$ref": "#/$defs/amount" },
+    "status": { "enum": ["open", "within_budget", "exhausted", "closed"] },
+    "transactions": { "type": "array", "items": { "$ref": "#/$defs/transaction" } }
+  },
+  "$defs": {
+    "amount": { "type": "string", "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$" },
+    "transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transaction_id", "kind", "operation_id", "amount", "at"],
+      "properties": {
+        "transaction_id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["reserve", "settle", "release", "adjust"] },
+        "direction": {
+          "description": "Required only for adjust: debit consumes additional budget; credit restores available budget.",
+          "enum": ["debit", "credit"]
+        },
+        "operation_id": { "type": "string", "minLength": 1 },
+        "model_invocation_id": { "type": ["string", "null"] },
+        "amount": { "$ref": "#/$defs/amount" },
+        "at": { "type": "string", "format": "date-time" },
+        "reason": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "required": ["kind"], "properties": { "kind": { "const": "adjust" } } },
+          "then": { "required": ["direction"] },
+          "else": { "not": { "required": ["direction"] } }
+        }
+      ]
+    }
+  }
+}

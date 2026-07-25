@@ -1,0 +1,22 @@
+{
+  "document_id": "DOC-004",
+  "category": "tax",
+  "facts": [
+    {
+      "fact_id": "DOC-004-F1",
+      "statement": "Controlled mock fact extracted from tax-returns.pdf",
+      "evidence_span": {
+        "document_id": "DOC-004",
+        "page": 3,
+        "bbox": [
+          0.12,
+          0.18,
+          0.84,
+          0.29
+        ]
+      }
+    }
+  ],
+  "page_count": 74,
+  "mock_model_output": true
+}

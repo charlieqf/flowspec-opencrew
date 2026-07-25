@@ -1,0 +1,313 @@
+.analysis-v1-run-progress-backdrop {
+  z-index: 170 !important;
+}
+
+.verify-dialog.analysis-v1-run-progress-dialog {
+  --analysis-v1-run-dialog-content-width: 560px;
+  position: fixed;
+  top: 6vh;
+  left: 50%;
+  z-index: 180;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: min(calc(var(--analysis-v1-run-dialog-content-width) + 28px), calc(100vw - 24px));
+  min-width: 0;
+  max-width: calc(100vw - 24px);
+  max-height: 88vh;
+  overflow: hidden;
+  border: 1px solid #dbe3ee;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  transform: translateX(-50%);
+}
+
+.analysis-v1-run-progress-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 14px;
+  border-bottom: 1px solid #dbe3ee;
+  cursor: move;
+  user-select: none;
+}
+
+.analysis-v1-run-progress-head button,
+.analysis-v1-run-progress-head input,
+.analysis-v1-run-progress-head select,
+.analysis-v1-run-progress-head textarea {
+  cursor: default;
+}
+
+.analysis-v1-run-commandbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.analysis-v1-run-commandbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.analysis-v1-run-commandbar svg {
+  width: 14px;
+  height: 14px;
+}
+
+.analysis-v1-run-commandbar .icon-action {
+  justify-content: center;
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+
+.analysis-v1-run-progress-dialog .analysis-v1-run-start {
+  border-color: #1d4ed8;
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+.analysis-v1-run-progress-dialog .analysis-v1-run-start:hover:not(:disabled) {
+  border-color: #1e40af;
+  background: #1d4ed8;
+}
+
+.analysis-v1-run-progress-dialog .analysis-v1-run-start:disabled {
+  border-color: #94a3b8;
+  background: #94a3b8;
+  color: #fff;
+  box-shadow: none;
+}
+
+.analysis-v1-run-context-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.analysis-v1-run-context-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid #dbe4f0;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.analysis-v1-run-progress-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 14px;
+  background: #f8fafc;
+}
+
+.analysis-v1-run-step-list {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.analysis-v1-run-indicator-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  min-height: 0;
+}
+
+.analysis-v1-run-step {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto 62px;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.analysis-v1-run-step.is-running {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+
+.analysis-v1-run-step.is-ready {
+  border-color: #a7f3d0;
+  background: #f6fef9;
+}
+
+.analysis-v1-run-step.is-failed {
+  border-color: #fecaca;
+  background: #fff1f2;
+}
+
+.analysis-v1-run-step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: #eef2f7;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.analysis-v1-run-step-main {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.analysis-v1-run-step-main strong {
+  overflow: hidden;
+  color: #172033;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.analysis-v1-run-step-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  min-width: 54px;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.analysis-v1-run-step-status.tag-ready {
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.analysis-v1-run-step-status.tag-available {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.analysis-v1-run-step-status.tag-failed {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.analysis-v1-run-step-status.tag-idle {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.analysis-v1-run-step-duration {
+  color: #334155;
+  font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  text-align: right;
+}
+
+.analysis-v1-run-step small {
+  grid-column: 2 / -1;
+  padding-top: 2px;
+  color: #64748b;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.analysis-v1-run-progress-message {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #dbe3ee;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #334155;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.analysis-v1-run-progress-message.is-failed {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+}
+
+.analysis-v1-run-total-duration {
+  justify-self: end;
+  align-self: end;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.analysis-v1-empty {
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.shared-run-progress-extra {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 860px) {
+  .verify-dialog.analysis-v1-run-progress-dialog {
+    --analysis-v1-run-dialog-content-width: calc(100vw - 48px);
+  }
+
+  .analysis-v1-run-progress-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .analysis-v1-run-commandbar {
+    justify-content: flex-start;
+  }
+
+  .analysis-v1-run-step {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .analysis-v1-run-step-status,
+  .analysis-v1-run-step-duration {
+    justify-self: start;
+  }
+}

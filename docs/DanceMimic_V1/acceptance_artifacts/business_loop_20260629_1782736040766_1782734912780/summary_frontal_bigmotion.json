@@ -1,0 +1,2108 @@
+{
+  "ok": true,
+  "run_id": "1782734912780",
+  "frontend_url": "http://127.0.0.1:18080",
+  "work_dir": "/private/tmp/opencrew-dm-business-loop-1782734912780",
+  "screenshot_dir": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots",
+  "target_identity_image": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/target_digital_mannequin.png",
+  "fixtures": [
+    {
+      "key": "frontal",
+      "role": "干净正脸基线(动作小)",
+      "source_video": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_frontal_studio.mp4",
+      "target_identity_image": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/target_digital_mannequin.png",
+      "screenshots": {
+        "listBeforeCreate": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-01-task-list-before-create.png",
+        "createModalFilled": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-02-create-modal-filled-real-detector-target-image.png",
+        "runPageStarted": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-03-run-page-started.png",
+        "storyboardOpened": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-05-storyboard-opened-target-image-reference-visible.png",
+        "videoPlanGenerated": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-06-video-plan-generated-openrouter-reference-target.png",
+        "beforeExecute": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-07-before-execute-video-plan.png",
+        "executionQueued": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-08-execution-queued-running.png",
+        "executionCompleted": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-09-execution-completed-modal.png",
+        "storyboardFinalVisible": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-10-storyboard-final-video-visible.png",
+        "danceMimicFinalArtifacts": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/frontal-11-dance-mimic-final-artifacts.png"
+      },
+      "reference_privacy_mode": "provider_safe_outline",
+      "task_id": 165,
+      "dance_mimic_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 5371296
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 184350
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 3855
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 6645
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 2148
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 1767
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      },
+      "video_plan_hash": "4ff935d261e47e94713717649359bc4b32fa8fc86d73ba25901f1521da6cdfa9",
+      "video_plan_summary": {
+        "shot_count": 1,
+        "scene_count": 1,
+        "dialogue_count": 1,
+        "segment_count": 1,
+        "blocked_segment_count": 0,
+        "skipped_scene_count": 0,
+        "blocked_scene_count": 0,
+        "need_audio_count": 0,
+        "need_image_prompt_count": 0,
+        "need_image_count": 0,
+        "need_video_prompt_count": 1,
+        "need_video_count": 1,
+        "segment_audio_count": 1,
+        "need_lipsync_count": 0,
+        "need_audio_video_sync_count": 1,
+        "need_sync_count": 1,
+        "dance_mimic_reference_video_segments": 1
+      },
+      "segment_count": 1,
+      "execution_state": {
+        "schema_version": "koubo_video_plan_execution_state_0.1",
+        "job_id": "vp_exec_1782734926167_5b127e5d",
+        "source_plan_hash": "4ff935d261e47e94713717649359bc4b32fa8fc86d73ba25901f1521da6cdfa9",
+        "source_plan_path": "SessionOutput/storyboard/video_generation_plan.json",
+        "status": "completed",
+        "started_at": "2026-06-29T12:08:46Z",
+        "updated_at": "2026-06-29T12:15:05Z",
+        "current_segment_id": "",
+        "current_step": "",
+        "segments": {
+          "shot_001_scene_001_segment_001": {
+            "segment_id": "shot_001_scene_001_segment_001",
+            "asset_key": "dak_0001",
+            "dialogue_asset_keys": [
+              "dak_0001"
+            ],
+            "dialogue_ids": [
+              "dak_0001"
+            ],
+            "status": "completed",
+            "steps": {
+              "audio": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:08:46Z",
+                "outputs": {
+                  "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav"
+                }
+              },
+              "video": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:15:05Z",
+                "outputs": {
+                  "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4"
+                }
+              },
+              "sync": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:15:05Z",
+                "outputs": {
+                  "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4"
+                }
+              },
+              "tail": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:15:05Z",
+                "outputs": {
+                  "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+                }
+              }
+            },
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "storyboard_video_bound_to_dialogue": "dak_0001"
+            },
+            "error": ""
+          }
+        },
+        "summary": {
+          "segment_count": 1,
+          "completed_count": 1,
+          "failed_count": 0,
+          "failed_timeout_count": 0,
+          "lipsync_completed_count": 0,
+          "audio_video_sync_completed_count": 1,
+          "bound_video_completed_count": 0,
+          "segment_audio_count": 1
+        },
+        "error": ""
+      },
+      "execution_result": {
+        "tool": "05_02_VideoPlanExecutor",
+        "tool_version": "0.1.0",
+        "status": "completed",
+        "workspace_dir": "/Users/macmini-4/.opencrew/sessions/224/workspace",
+        "requires_database": true,
+        "requires_model_calls": true,
+        "reads_session_context": [
+          "SessionContext/Variables.json"
+        ],
+        "writes_session_context": [],
+        "settings": {
+          "max_segments": 0,
+          "execute_audio": true,
+          "execute_image": true,
+          "execute_video": true,
+          "execute_lipsync": true,
+          "execute_audio_video_sync": true
+        },
+        "created_files": [
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_00_Variables.json",
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_StoryBoard_srt_storyboard.json",
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_05_01_video_generation_plan.json",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_SegmentAudio_Final.wav",
+          "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_VideoPrompt.json",
+          "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+          "S9_05_02_VideoPlanExecutor/Working/dak_0001_DanceMimicReference.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Raw.mp4",
+          "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Final.mp4",
+          "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+          "SessionOutput/storyboard/srt_storyboard.json",
+          "SessionOutput/storyboard/koubo_storyboard_edit.json",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_TailFrame.png",
+          "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+        ],
+        "cleanup_actions": [],
+        "backups": [
+          {
+            "from": "SessionOutput/storyboard/srt_storyboard.json",
+            "to": "SessionOutput/storyboard/assets/history/batch_1782735305314_05_02_overwrite_backup/srt_storyboard.json",
+            "history_path": "SessionOutput/storyboard/assets/history/batch_1782735305314_05_02_overwrite_backup/srt_storyboard.json"
+          },
+          {
+            "from": "SessionOutput/storyboard/koubo_storyboard_edit.json",
+            "to": "SessionOutput/storyboard/assets/history/batch_1782735305315_05_02_overwrite_backup/koubo_storyboard_edit.json",
+            "history_path": "SessionOutput/storyboard/assets/history/batch_1782735305315_05_02_overwrite_backup/koubo_storyboard_edit.json"
+          }
+        ],
+        "segments": [
+          {
+            "segment_id": "shot_001_scene_001_segment_001",
+            "asset_key": "dak_0001",
+            "dialogue_asset_keys": [
+              "dak_0001"
+            ],
+            "dialogue_ids": [
+              "dak_0001"
+            ],
+            "status": "completed",
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "storyboard_video_bound_to_dialogue": "dak_0001",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+            },
+            "model_calls": {
+              "video": {
+                "config": {
+                  "kind": "video",
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "secret_length": 73,
+                  "api_key_ref": "video_openrouter_key",
+                  "has_api_key": true,
+                  "source": "database_active_model_fallback",
+                  "extra": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "extra_json": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "base_url": "https://openrouter.ai/api/v1",
+                  "default_aspect_ratio": "9:16",
+                  "default_resolution": "720p",
+                  "send_frame_images": true,
+                  "public_asset_provider": "r2",
+                  "public_asset_ttl_seconds": 3600,
+                  "r2_access_key_ref": "public_assets_r2_access_key_id",
+                  "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                  "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                  "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                  "r2_bucket": "opencrew-public-assets",
+                  "r2_region": "auto",
+                  "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                  "requested_model": "bytedance/seedance-2.0",
+                  "model_alias": "MaxSR2",
+                  "reference_mode": "input_references",
+                  "prompt_template": "Video_SDR2V_DanceMimic.md",
+                  "video_generation_mode": "dance_mimic_reference_video",
+                  "dance_mimic_reference_video": true
+                },
+                "response": {
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "provider_profile": "video_openrouter",
+                  "provider_task_id": "TkG1MPxk6IvdP7bWr7H7",
+                  "task_id": "TkG1MPxk6IvdP7bWr7H7",
+                  "requested_duration": 7.207,
+                  "duration": 7,
+                  "aspect_ratio": "9:16",
+                  "resolution": "720p",
+                  "send_frame_images": false,
+                  "send_input_references": true,
+                  "input_reference_count": 2,
+                  "output_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                  "video_url": "https://openrouter.ai/api/v1/videos/TkG1MPxk6IvdP7bWr7H7/content",
+                  "elapsed_seconds": 378.63
+                }
+              }
+            },
+            "warnings": [],
+            "audio": {
+              "source": "dance_mimic_silent_segment_audio",
+              "duration_seconds": 7.207,
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav"
+            },
+            "sync": {
+              "source": "ffmpeg_audio_replace_retime",
+              "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+              "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav",
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+              "video_duration_seconds": 7.059,
+              "audio_duration_seconds": 7.207,
+              "setpts_multiplier": 1.020986,
+              "speed_factor": 0.979446
+            },
+            "tail_frame": {
+              "source": "ffmpeg_tail_frame_exact_reverse",
+              "video_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+              "output_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_TailFrame.png",
+              "seek_window_seconds": 1
+            }
+          }
+        ],
+        "summary": {
+          "segment_count": 1,
+          "completed_count": 1,
+          "failed_count": 0,
+          "failed_timeout_count": 0,
+          "lipsync_completed_count": 0,
+          "audio_video_sync_completed_count": 1,
+          "bound_video_completed_count": 0,
+          "segment_audio_count": 1
+        },
+        "warnings": [],
+        "blocked_reasons": [],
+        "updated_at": "2026-06-29T12:08:46Z",
+        "source_plan_hash": "4ff935d261e47e94713717649359bc4b32fa8fc86d73ba25901f1521da6cdfa9",
+        "execution_job_id": "vp_exec_1782734926167_5b127e5d",
+        "sync_actions": [
+          {
+            "code": "edit_storyboard_incremental_synced",
+            "message": "Generated image/video outputs were incrementally synced to koubo_storyboard_edit.json for manual page refresh."
+          }
+        ]
+      },
+      "execution_artifact_status": {
+        "segments": {
+          "shot_001_scene_001_segment_001": {
+            "audio_files": [],
+            "segment_audio": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_ImagePrompt.json",
+              "exists": false,
+              "in_working": true,
+              "in_working_exists": false
+            },
+            "image": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "video_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "final_video": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "tail": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "audio_in_working": true,
+            "audio_copy_pending": false,
+            "audio_generate_pending": false,
+            "image_in_working": true,
+            "image_copy_pending": false,
+            "image_source_type": "generated_image",
+            "image_input_kind": "new_image",
+            "image_generate_pending": false,
+            "video_in_working": true,
+            "video_copy_pending": false,
+            "video_generate_pending": false,
+            "final_bound": true,
+            "sync_in_working": true,
+            "sync_generate_pending": false,
+            "slot_states": {
+              "audio": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "音频已存在"
+              },
+              "image_prompt": {
+                "color": "gray",
+                "tone": "disabled",
+                "ui_tone": "disabled",
+                "color_zh": "灰",
+                "reason": "skipped_consumed_by_downstream",
+                "file_exists": false,
+                "binding_consistency": "not_applicable",
+                "title": "新图或下游产物已存在，Image Prompt 无需执行"
+              },
+              "image": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "新图已存在"
+              },
+              "video_prompt": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "prompt_file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Video Prompt 已存在"
+              },
+              "raw_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Raw Video 已存在"
+              },
+              "final_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Final Video 已存在"
+              }
+            }
+          }
+        },
+        "execution_result": {
+          "tool": "05_02_VideoPlanExecutor",
+          "tool_version": "0.1.0",
+          "status": "completed",
+          "workspace_dir": "/Users/macmini-4/.opencrew/sessions/224/workspace",
+          "requires_database": true,
+          "requires_model_calls": true,
+          "reads_session_context": [
+            "SessionContext/Variables.json"
+          ],
+          "writes_session_context": [],
+          "settings": {
+            "max_segments": 0,
+            "execute_audio": true,
+            "execute_image": true,
+            "execute_video": true,
+            "execute_lipsync": true,
+            "execute_audio_video_sync": true
+          },
+          "created_files": [
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_00_Variables.json",
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_StoryBoard_srt_storyboard.json",
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_05_01_video_generation_plan.json",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_SegmentAudio_Final.wav",
+            "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_VideoPrompt.json",
+            "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+            "S9_05_02_VideoPlanExecutor/Working/dak_0001_DanceMimicReference.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Raw.mp4",
+            "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Final.mp4",
+            "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+            "SessionOutput/storyboard/srt_storyboard.json",
+            "SessionOutput/storyboard/koubo_storyboard_edit.json",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_TailFrame.png",
+            "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+          ],
+          "cleanup_actions": [],
+          "backups": [
+            {
+              "from": "SessionOutput/storyboard/srt_storyboard.json",
+              "to": "SessionOutput/storyboard/assets/history/batch_1782735305314_05_02_overwrite_backup/srt_storyboard.json",
+              "history_path": "SessionOutput/storyboard/assets/history/batch_1782735305314_05_02_overwrite_backup/srt_storyboard.json"
+            },
+            {
+              "from": "SessionOutput/storyboard/koubo_storyboard_edit.json",
+              "to": "SessionOutput/storyboard/assets/history/batch_1782735305315_05_02_overwrite_backup/koubo_storyboard_edit.json",
+              "history_path": "SessionOutput/storyboard/assets/history/batch_1782735305315_05_02_overwrite_backup/koubo_storyboard_edit.json"
+            }
+          ],
+          "segments": [
+            {
+              "segment_id": "shot_001_scene_001_segment_001",
+              "asset_key": "dak_0001",
+              "dialogue_asset_keys": [
+                "dak_0001"
+              ],
+              "dialogue_ids": [
+                "dak_0001"
+              ],
+              "status": "completed",
+              "outputs": {
+                "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+                "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+                "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+                "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+                "storyboard_video_bound_to_dialogue": "dak_0001",
+                "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+              },
+              "model_calls": {
+                "video": {
+                  "config": {
+                    "kind": "video",
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "secret_length": 73,
+                    "api_key_ref": "video_openrouter_key",
+                    "has_api_key": true,
+                    "source": "database_active_model_fallback",
+                    "extra": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "extra_json": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                    "requested_model": "bytedance/seedance-2.0",
+                    "model_alias": "MaxSR2",
+                    "reference_mode": "input_references",
+                    "prompt_template": "Video_SDR2V_DanceMimic.md",
+                    "video_generation_mode": "dance_mimic_reference_video",
+                    "dance_mimic_reference_video": true
+                  },
+                  "response": {
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "provider_profile": "video_openrouter",
+                    "provider_task_id": "TkG1MPxk6IvdP7bWr7H7",
+                    "task_id": "TkG1MPxk6IvdP7bWr7H7",
+                    "requested_duration": 7.207,
+                    "duration": 7,
+                    "aspect_ratio": "9:16",
+                    "resolution": "720p",
+                    "send_frame_images": false,
+                    "send_input_references": true,
+                    "input_reference_count": 2,
+                    "output_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                    "video_url": "https://openrouter.ai/api/v1/videos/TkG1MPxk6IvdP7bWr7H7/content",
+                    "elapsed_seconds": 378.63
+                  }
+                }
+              },
+              "warnings": [],
+              "audio": {
+                "source": "dance_mimic_silent_segment_audio",
+                "duration_seconds": 7.207,
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav"
+              },
+              "sync": {
+                "source": "ffmpeg_audio_replace_retime",
+                "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav",
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+                "video_duration_seconds": 7.059,
+                "audio_duration_seconds": 7.207,
+                "setpts_multiplier": 1.020986,
+                "speed_factor": 0.979446
+              },
+              "tail_frame": {
+                "source": "ffmpeg_tail_frame_exact_reverse",
+                "video_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+                "output_path": "/Users/macmini-4/.opencrew/sessions/224/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_TailFrame.png",
+                "seek_window_seconds": 1
+              }
+            }
+          ],
+          "summary": {
+            "segment_count": 1,
+            "completed_count": 1,
+            "failed_count": 0,
+            "failed_timeout_count": 0,
+            "lipsync_completed_count": 0,
+            "audio_video_sync_completed_count": 1,
+            "bound_video_completed_count": 0,
+            "segment_audio_count": 1
+          },
+          "warnings": [],
+          "blocked_reasons": [],
+          "updated_at": "2026-06-29T12:08:46Z",
+          "source_plan_hash": "4ff935d261e47e94713717649359bc4b32fa8fc86d73ba25901f1521da6cdfa9",
+          "execution_job_id": "vp_exec_1782734926167_5b127e5d",
+          "sync_actions": [
+            {
+              "code": "edit_storyboard_incremental_synced",
+              "message": "Generated image/video outputs were incrementally synced to koubo_storyboard_edit.json for manual page refresh."
+            }
+          ]
+        },
+        "execution_result_path": "SessionOutput/storyboard/video_plan_execution_result.json"
+      },
+      "storyboard_url": "http://127.0.0.1:18080/#/koubo-storyboard/tasks/165",
+      "dance_mimic_url": "http://127.0.0.1:18080/#/dance-mimic/tasks/165",
+      "final_video_paths": [
+        "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4"
+      ],
+      "final_detail_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 5371296
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 184350
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 3855
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 6645
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 3471
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 1767
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      }
+    },
+    {
+      "key": "bigmotion",
+      "role": "纯白影棚,大动作压力",
+      "source_video": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_bigmotion_studio.mp4",
+      "target_identity_image": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/target_digital_mannequin.png",
+      "screenshots": {
+        "listBeforeCreate": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-01-task-list-before-create.png",
+        "createModalFilled": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-02-create-modal-filled-real-detector-target-image.png",
+        "runPageStarted": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-03-run-page-started.png",
+        "storyboardOpened": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-05-storyboard-opened-target-image-reference-visible.png",
+        "videoPlanGenerated": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-06-video-plan-generated-openrouter-reference-target.png",
+        "beforeExecute": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-07-before-execute-video-plan.png",
+        "executionQueued": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-08-execution-queued-running.png",
+        "executionCompleted": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-09-execution-completed-modal.png",
+        "storyboardFinalVisible": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-10-storyboard-final-video-visible.png",
+        "danceMimicFinalArtifacts": "/private/tmp/opencrew-dm-business-loop-1782734912780/screenshots/bigmotion-11-dance-mimic-final-artifacts.png"
+      },
+      "reference_privacy_mode": "provider_safe_outline",
+      "task_id": 166,
+      "dance_mimic_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 3170157
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 184350
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 4063
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 10135
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 3626
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 2750
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      },
+      "video_plan_hash": "1ead370c2737df2861a663cec04581b6b2ee6524dcf12a24f57d8edfcd9c2af7",
+      "video_plan_summary": {
+        "shot_count": 1,
+        "scene_count": 1,
+        "dialogue_count": 2,
+        "segment_count": 2,
+        "blocked_segment_count": 0,
+        "skipped_scene_count": 0,
+        "blocked_scene_count": 0,
+        "need_audio_count": 0,
+        "need_image_prompt_count": 0,
+        "need_image_count": 0,
+        "need_video_prompt_count": 2,
+        "need_video_count": 2,
+        "segment_audio_count": 2,
+        "need_lipsync_count": 0,
+        "need_audio_video_sync_count": 2,
+        "need_sync_count": 2,
+        "dance_mimic_reference_video_segments": 2
+      },
+      "segment_count": 2,
+      "execution_state": {
+        "schema_version": "koubo_video_plan_execution_state_0.1",
+        "job_id": "vp_exec_1782735328758_f0584fe0",
+        "source_plan_hash": "1ead370c2737df2861a663cec04581b6b2ee6524dcf12a24f57d8edfcd9c2af7",
+        "source_plan_path": "SessionOutput/storyboard/video_generation_plan.json",
+        "status": "completed",
+        "started_at": "2026-06-29T12:15:28Z",
+        "updated_at": "2026-06-29T12:24:56Z",
+        "current_segment_id": "",
+        "current_step": "",
+        "segments": {
+          "shot_001_scene_001_segment_001": {
+            "segment_id": "shot_001_scene_001_segment_001",
+            "asset_key": "dak_0001",
+            "dialogue_asset_keys": [
+              "dak_0001"
+            ],
+            "dialogue_ids": [
+              "dak_0001"
+            ],
+            "status": "completed",
+            "steps": {
+              "audio": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:15:28Z",
+                "outputs": {
+                  "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav"
+                }
+              },
+              "video": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:19:40Z",
+                "outputs": {
+                  "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4"
+                }
+              },
+              "sync": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:19:41Z",
+                "outputs": {
+                  "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4"
+                }
+              },
+              "tail": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:19:41Z",
+                "outputs": {
+                  "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+                }
+              }
+            },
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "storyboard_video_bound_to_dialogue": "dak_0001"
+            },
+            "error": ""
+          },
+          "shot_001_scene_001_segment_002": {
+            "segment_id": "shot_001_scene_001_segment_002",
+            "asset_key": "dak_0002",
+            "dialogue_asset_keys": [
+              "dak_0002"
+            ],
+            "dialogue_ids": [
+              "dak_0002"
+            ],
+            "status": "completed",
+            "steps": {
+              "audio": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:19:41Z",
+                "outputs": {
+                  "segment_audio_path": "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav"
+                }
+              },
+              "video": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:24:55Z",
+                "outputs": {
+                  "raw_video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4"
+                }
+              },
+              "sync": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:24:56Z",
+                "outputs": {
+                  "video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+                }
+              },
+              "tail": {
+                "status": "completed_working",
+                "updated_at": "2026-06-29T12:24:56Z",
+                "outputs": {
+                  "tail_frame_path": "SessionOutput/storyboard/Working/dak_0002_TailFrame.png"
+                }
+              }
+            },
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0002_TailFrame.png",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+              "storyboard_video_bound_to_dialogue": "dak_0002"
+            },
+            "error": ""
+          }
+        },
+        "summary": {
+          "segment_count": 2,
+          "completed_count": 2,
+          "failed_count": 0,
+          "failed_timeout_count": 0,
+          "lipsync_completed_count": 0,
+          "audio_video_sync_completed_count": 2,
+          "bound_video_completed_count": 0,
+          "segment_audio_count": 2
+        },
+        "error": ""
+      },
+      "execution_result": {
+        "tool": "05_02_VideoPlanExecutor",
+        "tool_version": "0.1.0",
+        "status": "completed",
+        "workspace_dir": "/Users/macmini-4/.opencrew/sessions/225/workspace",
+        "requires_database": true,
+        "requires_model_calls": true,
+        "reads_session_context": [
+          "SessionContext/Variables.json"
+        ],
+        "writes_session_context": [],
+        "settings": {
+          "max_segments": 0,
+          "execute_audio": true,
+          "execute_image": true,
+          "execute_video": true,
+          "execute_lipsync": true,
+          "execute_audio_video_sync": true
+        },
+        "created_files": [
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_00_Variables.json",
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_StoryBoard_srt_storyboard.json",
+          "S9_05_02_VideoPlanExecutor/Working/InputFrom_05_01_video_generation_plan.json",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_SegmentAudio_Final.wav",
+          "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_VideoPrompt.json",
+          "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+          "S9_05_02_VideoPlanExecutor/Working/dak_0001_DanceMimicReference.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Raw.mp4",
+          "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Final.mp4",
+          "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+          "SessionOutput/storyboard/srt_storyboard.json",
+          "SessionOutput/storyboard/koubo_storyboard_edit.json",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0001_TailFrame.png",
+          "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0002_SegmentAudio_Final.wav",
+          "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0002_VideoPrompt.json",
+          "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+          "S9_05_02_VideoPlanExecutor/Working/dak_0002_DanceMimicReference.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0002_Video_Raw.mp4",
+          "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0002_Video_Final.mp4",
+          "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+          "S9_05_02_VideoPlanExecutor/Output/dak_0002_TailFrame.png",
+          "SessionOutput/storyboard/Working/dak_0002_TailFrame.png"
+        ],
+        "cleanup_actions": [],
+        "backups": [
+          {
+            "from": "SessionOutput/storyboard/srt_storyboard.json",
+            "to": "SessionOutput/storyboard/assets/history/batch_1782735581126_05_02_overwrite_backup/srt_storyboard.json",
+            "history_path": "SessionOutput/storyboard/assets/history/batch_1782735581126_05_02_overwrite_backup/srt_storyboard.json"
+          },
+          {
+            "from": "SessionOutput/storyboard/koubo_storyboard_edit.json",
+            "to": "SessionOutput/storyboard/assets/history/batch_1782735581127_05_02_overwrite_backup/koubo_storyboard_edit.json",
+            "history_path": "SessionOutput/storyboard/assets/history/batch_1782735581127_05_02_overwrite_backup/koubo_storyboard_edit.json"
+          }
+        ],
+        "segments": [
+          {
+            "segment_id": "shot_001_scene_001_segment_001",
+            "asset_key": "dak_0001",
+            "dialogue_asset_keys": [
+              "dak_0001"
+            ],
+            "dialogue_ids": [
+              "dak_0001"
+            ],
+            "status": "completed",
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "storyboard_video_bound_to_dialogue": "dak_0001",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+            },
+            "model_calls": {
+              "video": {
+                "config": {
+                  "kind": "video",
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "secret_length": 73,
+                  "api_key_ref": "video_openrouter_key",
+                  "has_api_key": true,
+                  "source": "database_active_model_fallback",
+                  "extra": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "extra_json": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "base_url": "https://openrouter.ai/api/v1",
+                  "default_aspect_ratio": "9:16",
+                  "default_resolution": "720p",
+                  "send_frame_images": true,
+                  "public_asset_provider": "r2",
+                  "public_asset_ttl_seconds": 3600,
+                  "r2_access_key_ref": "public_assets_r2_access_key_id",
+                  "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                  "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                  "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                  "r2_bucket": "opencrew-public-assets",
+                  "r2_region": "auto",
+                  "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                  "requested_model": "bytedance/seedance-2.0",
+                  "model_alias": "MaxSR2",
+                  "reference_mode": "input_references",
+                  "prompt_template": "Video_SDR2V_DanceMimic.md",
+                  "video_generation_mode": "dance_mimic_reference_video",
+                  "dance_mimic_reference_video": true
+                },
+                "response": {
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "provider_profile": "video_openrouter",
+                  "provider_task_id": "AUEHMWpekziUTnjjGbOH",
+                  "task_id": "AUEHMWpekziUTnjjGbOH",
+                  "requested_duration": 6.006,
+                  "duration": 6,
+                  "aspect_ratio": "9:16",
+                  "resolution": "720p",
+                  "send_frame_images": false,
+                  "send_input_references": true,
+                  "input_reference_count": 2,
+                  "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                  "video_url": "https://openrouter.ai/api/v1/videos/AUEHMWpekziUTnjjGbOH/content",
+                  "elapsed_seconds": 251.854
+                }
+              }
+            },
+            "warnings": [],
+            "audio": {
+              "source": "dance_mimic_silent_segment_audio",
+              "duration_seconds": 6.006,
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav"
+            },
+            "sync": {
+              "source": "ffmpeg_audio_replace_retime",
+              "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+              "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav",
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+              "video_duration_seconds": 6.06,
+              "audio_duration_seconds": 6.006,
+              "setpts_multiplier": 0.991089,
+              "speed_factor": 1.008991
+            },
+            "tail_frame": {
+              "source": "ffmpeg_tail_frame_exact_reverse",
+              "video_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+              "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_TailFrame.png",
+              "seek_window_seconds": 1
+            }
+          },
+          {
+            "segment_id": "shot_001_scene_001_segment_002",
+            "asset_key": "dak_0002",
+            "dialogue_asset_keys": [
+              "dak_0002"
+            ],
+            "dialogue_ids": [
+              "dak_0002"
+            ],
+            "status": "completed",
+            "outputs": {
+              "segment_audio_path": "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+              "video_prompt_path": "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+              "raw_video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+              "video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+              "storyboard_video_bound_to_dialogue": "dak_0002",
+              "tail_frame_path": "SessionOutput/storyboard/Working/dak_0002_TailFrame.png"
+            },
+            "model_calls": {
+              "video": {
+                "config": {
+                  "kind": "video",
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "secret_length": 73,
+                  "api_key_ref": "video_openrouter_key",
+                  "has_api_key": true,
+                  "source": "database_active_model_fallback",
+                  "extra": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "extra_json": {
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                  },
+                  "base_url": "https://openrouter.ai/api/v1",
+                  "default_aspect_ratio": "9:16",
+                  "default_resolution": "720p",
+                  "send_frame_images": true,
+                  "public_asset_provider": "r2",
+                  "public_asset_ttl_seconds": 3600,
+                  "r2_access_key_ref": "public_assets_r2_access_key_id",
+                  "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                  "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                  "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                  "r2_bucket": "opencrew-public-assets",
+                  "r2_region": "auto",
+                  "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                  "requested_model": "bytedance/seedance-2.0",
+                  "model_alias": "MaxSR2",
+                  "reference_mode": "input_references",
+                  "prompt_template": "Video_SDR2V_DanceMimic.md",
+                  "video_generation_mode": "dance_mimic_reference_video",
+                  "dance_mimic_reference_video": true
+                },
+                "response": {
+                  "provider": "openrouter",
+                  "model": "bytedance/seedance-2.0",
+                  "provider_profile": "video_openrouter",
+                  "provider_task_id": "AJa219XV7bK23wmMpSZg",
+                  "task_id": "AJa219XV7bK23wmMpSZg",
+                  "requested_duration": 5.964,
+                  "duration": 6,
+                  "aspect_ratio": "9:16",
+                  "resolution": "720p",
+                  "send_frame_images": false,
+                  "send_input_references": true,
+                  "input_reference_count": 2,
+                  "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_Raw.mp4",
+                  "video_url": "https://openrouter.ai/api/v1/videos/AJa219XV7bK23wmMpSZg/content",
+                  "elapsed_seconds": 314.503
+                }
+              }
+            },
+            "warnings": [],
+            "audio": {
+              "source": "dance_mimic_silent_segment_audio",
+              "duration_seconds": 5.964,
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_SegmentAudio_Final.wav"
+            },
+            "sync": {
+              "source": "ffmpeg_audio_replace_retime",
+              "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_Raw.mp4",
+              "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_SegmentAudio_Final.wav",
+              "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_AudioSynced.mp4",
+              "video_duration_seconds": 6.083,
+              "audio_duration_seconds": 5.964,
+              "setpts_multiplier": 0.980438,
+              "speed_factor": 1.019952
+            },
+            "tail_frame": {
+              "source": "ffmpeg_tail_frame_exact_reverse",
+              "video_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_AudioSynced.mp4",
+              "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_TailFrame.png",
+              "seek_window_seconds": 1
+            }
+          }
+        ],
+        "summary": {
+          "segment_count": 2,
+          "completed_count": 2,
+          "failed_count": 0,
+          "failed_timeout_count": 0,
+          "lipsync_completed_count": 0,
+          "audio_video_sync_completed_count": 2,
+          "bound_video_completed_count": 0,
+          "segment_audio_count": 2
+        },
+        "warnings": [],
+        "blocked_reasons": [],
+        "updated_at": "2026-06-29T12:15:28Z",
+        "source_plan_hash": "1ead370c2737df2861a663cec04581b6b2ee6524dcf12a24f57d8edfcd9c2af7",
+        "execution_job_id": "vp_exec_1782735328758_f0584fe0",
+        "sync_actions": [
+          {
+            "code": "edit_storyboard_incremental_synced",
+            "message": "Generated image/video outputs were incrementally synced to koubo_storyboard_edit.json for manual page refresh."
+          }
+        ]
+      },
+      "execution_artifact_status": {
+        "segments": {
+          "shot_001_scene_001_segment_001": {
+            "audio_files": [],
+            "segment_audio": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_ImagePrompt.json",
+              "exists": false,
+              "in_working": true,
+              "in_working_exists": false
+            },
+            "image": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "video_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "final_video": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "tail": {
+              "path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "audio_in_working": true,
+            "audio_copy_pending": false,
+            "audio_generate_pending": false,
+            "image_in_working": true,
+            "image_copy_pending": false,
+            "image_source_type": "generated_image",
+            "image_input_kind": "new_image",
+            "image_generate_pending": false,
+            "video_in_working": true,
+            "video_copy_pending": false,
+            "video_generate_pending": false,
+            "final_bound": true,
+            "sync_in_working": true,
+            "sync_generate_pending": false,
+            "slot_states": {
+              "audio": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "音频已存在"
+              },
+              "image_prompt": {
+                "color": "gray",
+                "tone": "disabled",
+                "ui_tone": "disabled",
+                "color_zh": "灰",
+                "reason": "skipped_consumed_by_downstream",
+                "file_exists": false,
+                "binding_consistency": "not_applicable",
+                "title": "新图或下游产物已存在，Image Prompt 无需执行"
+              },
+              "image": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "新图已存在"
+              },
+              "video_prompt": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "prompt_file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Video Prompt 已存在"
+              },
+              "raw_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Raw Video 已存在"
+              },
+              "final_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Final Video 已存在"
+              }
+            }
+          },
+          "shot_001_scene_001_segment_002": {
+            "audio_files": [],
+            "segment_audio": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_ImagePrompt.json",
+              "exists": false,
+              "in_working": true,
+              "in_working_exists": false
+            },
+            "image": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "image_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "video_prompt": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "final_video": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_source": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_Image_New.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "video_copy_target": {
+              "path": "",
+              "exists": false,
+              "in_working": false,
+              "in_working_exists": false
+            },
+            "tail": {
+              "path": "SessionOutput/storyboard/Working/dak_0002_TailFrame.png",
+              "exists": true,
+              "in_working": true,
+              "in_working_exists": true
+            },
+            "audio_in_working": true,
+            "audio_copy_pending": false,
+            "audio_generate_pending": false,
+            "image_in_working": true,
+            "image_copy_pending": false,
+            "image_source_type": "generated_image",
+            "image_input_kind": "new_image",
+            "image_generate_pending": false,
+            "video_in_working": true,
+            "video_copy_pending": false,
+            "video_generate_pending": false,
+            "final_bound": true,
+            "sync_in_working": true,
+            "sync_generate_pending": false,
+            "slot_states": {
+              "audio": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "音频已存在"
+              },
+              "image_prompt": {
+                "color": "gray",
+                "tone": "disabled",
+                "ui_tone": "disabled",
+                "color_zh": "灰",
+                "reason": "skipped_consumed_by_downstream",
+                "file_exists": false,
+                "binding_consistency": "not_applicable",
+                "title": "新图或下游产物已存在，Image Prompt 无需执行"
+              },
+              "image": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "新图已存在"
+              },
+              "video_prompt": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "prompt_file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Video Prompt 已存在"
+              },
+              "raw_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Raw Video 已存在"
+              },
+              "final_video": {
+                "color": "green",
+                "tone": "done",
+                "ui_tone": "done",
+                "color_zh": "绿",
+                "reason": "file_exists",
+                "file_exists": true,
+                "binding_consistency": "consistent",
+                "title": "Final Video 已存在"
+              }
+            }
+          }
+        },
+        "execution_result": {
+          "tool": "05_02_VideoPlanExecutor",
+          "tool_version": "0.1.0",
+          "status": "completed",
+          "workspace_dir": "/Users/macmini-4/.opencrew/sessions/225/workspace",
+          "requires_database": true,
+          "requires_model_calls": true,
+          "reads_session_context": [
+            "SessionContext/Variables.json"
+          ],
+          "writes_session_context": [],
+          "settings": {
+            "max_segments": 0,
+            "execute_audio": true,
+            "execute_image": true,
+            "execute_video": true,
+            "execute_lipsync": true,
+            "execute_audio_video_sync": true
+          },
+          "created_files": [
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_00_Variables.json",
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_StoryBoard_srt_storyboard.json",
+            "S9_05_02_VideoPlanExecutor/Working/InputFrom_05_01_video_generation_plan.json",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_SegmentAudio_Final.wav",
+            "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_VideoPrompt.json",
+            "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+            "S9_05_02_VideoPlanExecutor/Working/dak_0001_DanceMimicReference.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Raw.mp4",
+            "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_Video_Final.mp4",
+            "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+            "SessionOutput/storyboard/srt_storyboard.json",
+            "SessionOutput/storyboard/koubo_storyboard_edit.json",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0001_TailFrame.png",
+            "SessionOutput/storyboard/Working/dak_0001_TailFrame.png",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0002_SegmentAudio_Final.wav",
+            "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0002_VideoPrompt.json",
+            "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+            "S9_05_02_VideoPlanExecutor/Working/dak_0002_DanceMimicReference.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0002_Video_Raw.mp4",
+            "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0002_Video_Final.mp4",
+            "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+            "S9_05_02_VideoPlanExecutor/Output/dak_0002_TailFrame.png",
+            "SessionOutput/storyboard/Working/dak_0002_TailFrame.png"
+          ],
+          "cleanup_actions": [],
+          "backups": [
+            {
+              "from": "SessionOutput/storyboard/srt_storyboard.json",
+              "to": "SessionOutput/storyboard/assets/history/batch_1782735581126_05_02_overwrite_backup/srt_storyboard.json",
+              "history_path": "SessionOutput/storyboard/assets/history/batch_1782735581126_05_02_overwrite_backup/srt_storyboard.json"
+            },
+            {
+              "from": "SessionOutput/storyboard/koubo_storyboard_edit.json",
+              "to": "SessionOutput/storyboard/assets/history/batch_1782735581127_05_02_overwrite_backup/koubo_storyboard_edit.json",
+              "history_path": "SessionOutput/storyboard/assets/history/batch_1782735581127_05_02_overwrite_backup/koubo_storyboard_edit.json"
+            }
+          ],
+          "segments": [
+            {
+              "segment_id": "shot_001_scene_001_segment_001",
+              "asset_key": "dak_0001",
+              "dialogue_asset_keys": [
+                "dak_0001"
+              ],
+              "dialogue_ids": [
+                "dak_0001"
+              ],
+              "status": "completed",
+              "outputs": {
+                "segment_audio_path": "SessionOutput/storyboard/Working/dak_0001_SegmentAudio_Final.wav",
+                "video_prompt_path": "SessionOutput/storyboard/Working/dak_0001_VideoPrompt.json",
+                "raw_video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Raw.mp4",
+                "video_path": "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+                "storyboard_video_bound_to_dialogue": "dak_0001",
+                "tail_frame_path": "SessionOutput/storyboard/Working/dak_0001_TailFrame.png"
+              },
+              "model_calls": {
+                "video": {
+                  "config": {
+                    "kind": "video",
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "secret_length": 73,
+                    "api_key_ref": "video_openrouter_key",
+                    "has_api_key": true,
+                    "source": "database_active_model_fallback",
+                    "extra": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "extra_json": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                    "requested_model": "bytedance/seedance-2.0",
+                    "model_alias": "MaxSR2",
+                    "reference_mode": "input_references",
+                    "prompt_template": "Video_SDR2V_DanceMimic.md",
+                    "video_generation_mode": "dance_mimic_reference_video",
+                    "dance_mimic_reference_video": true
+                  },
+                  "response": {
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "provider_profile": "video_openrouter",
+                    "provider_task_id": "AUEHMWpekziUTnjjGbOH",
+                    "task_id": "AUEHMWpekziUTnjjGbOH",
+                    "requested_duration": 6.006,
+                    "duration": 6,
+                    "aspect_ratio": "9:16",
+                    "resolution": "720p",
+                    "send_frame_images": false,
+                    "send_input_references": true,
+                    "input_reference_count": 2,
+                    "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                    "video_url": "https://openrouter.ai/api/v1/videos/AUEHMWpekziUTnjjGbOH/content",
+                    "elapsed_seconds": 251.854
+                  }
+                }
+              },
+              "warnings": [],
+              "audio": {
+                "source": "dance_mimic_silent_segment_audio",
+                "duration_seconds": 6.006,
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav"
+              },
+              "sync": {
+                "source": "ffmpeg_audio_replace_retime",
+                "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_Raw.mp4",
+                "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_SegmentAudio_Final.wav",
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+                "video_duration_seconds": 6.06,
+                "audio_duration_seconds": 6.006,
+                "setpts_multiplier": 0.991089,
+                "speed_factor": 1.008991
+              },
+              "tail_frame": {
+                "source": "ffmpeg_tail_frame_exact_reverse",
+                "video_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_Video_AudioSynced.mp4",
+                "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0001_TailFrame.png",
+                "seek_window_seconds": 1
+              }
+            },
+            {
+              "segment_id": "shot_001_scene_001_segment_002",
+              "asset_key": "dak_0002",
+              "dialogue_asset_keys": [
+                "dak_0002"
+              ],
+              "dialogue_ids": [
+                "dak_0002"
+              ],
+              "status": "completed",
+              "outputs": {
+                "segment_audio_path": "SessionOutput/storyboard/Working/dak_0002_SegmentAudio_Final.wav",
+                "video_prompt_path": "SessionOutput/storyboard/Working/dak_0002_VideoPrompt.json",
+                "raw_video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Raw.mp4",
+                "video_path": "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+                "storyboard_video_bound_to_dialogue": "dak_0002",
+                "tail_frame_path": "SessionOutput/storyboard/Working/dak_0002_TailFrame.png"
+              },
+              "model_calls": {
+                "video": {
+                  "config": {
+                    "kind": "video",
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "secret_length": 73,
+                    "api_key_ref": "video_openrouter_key",
+                    "has_api_key": true,
+                    "source": "database_active_model_fallback",
+                    "extra": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "extra_json": {
+                      "base_url": "https://openrouter.ai/api/v1",
+                      "default_aspect_ratio": "9:16",
+                      "default_resolution": "720p",
+                      "send_frame_images": true,
+                      "public_asset_provider": "r2",
+                      "public_asset_ttl_seconds": 3600,
+                      "r2_access_key_ref": "public_assets_r2_access_key_id",
+                      "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                      "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                      "r2_bucket": "opencrew-public-assets",
+                      "r2_region": "auto",
+                      "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+                    },
+                    "base_url": "https://openrouter.ai/api/v1",
+                    "default_aspect_ratio": "9:16",
+                    "default_resolution": "720p",
+                    "send_frame_images": true,
+                    "public_asset_provider": "r2",
+                    "public_asset_ttl_seconds": 3600,
+                    "r2_access_key_ref": "public_assets_r2_access_key_id",
+                    "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+                    "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+                    "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+                    "r2_bucket": "opencrew-public-assets",
+                    "r2_region": "auto",
+                    "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com",
+                    "requested_model": "bytedance/seedance-2.0",
+                    "model_alias": "MaxSR2",
+                    "reference_mode": "input_references",
+                    "prompt_template": "Video_SDR2V_DanceMimic.md",
+                    "video_generation_mode": "dance_mimic_reference_video",
+                    "dance_mimic_reference_video": true
+                  },
+                  "response": {
+                    "provider": "openrouter",
+                    "model": "bytedance/seedance-2.0",
+                    "provider_profile": "video_openrouter",
+                    "provider_task_id": "AJa219XV7bK23wmMpSZg",
+                    "task_id": "AJa219XV7bK23wmMpSZg",
+                    "requested_duration": 5.964,
+                    "duration": 6,
+                    "aspect_ratio": "9:16",
+                    "resolution": "720p",
+                    "send_frame_images": false,
+                    "send_input_references": true,
+                    "input_reference_count": 2,
+                    "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_Raw.mp4",
+                    "video_url": "https://openrouter.ai/api/v1/videos/AJa219XV7bK23wmMpSZg/content",
+                    "elapsed_seconds": 314.503
+                  }
+                }
+              },
+              "warnings": [],
+              "audio": {
+                "source": "dance_mimic_silent_segment_audio",
+                "duration_seconds": 5.964,
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_SegmentAudio_Final.wav"
+              },
+              "sync": {
+                "source": "ffmpeg_audio_replace_retime",
+                "video_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_Raw.mp4",
+                "audio_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_SegmentAudio_Final.wav",
+                "output_path": "S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_AudioSynced.mp4",
+                "video_duration_seconds": 6.083,
+                "audio_duration_seconds": 5.964,
+                "setpts_multiplier": 0.980438,
+                "speed_factor": 1.019952
+              },
+              "tail_frame": {
+                "source": "ffmpeg_tail_frame_exact_reverse",
+                "video_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_Video_AudioSynced.mp4",
+                "output_path": "/Users/macmini-4/.opencrew/sessions/225/workspace/S9_05_02_VideoPlanExecutor/Working/dak_0002_TailFrame.png",
+                "seek_window_seconds": 1
+              }
+            }
+          ],
+          "summary": {
+            "segment_count": 2,
+            "completed_count": 2,
+            "failed_count": 0,
+            "failed_timeout_count": 0,
+            "lipsync_completed_count": 0,
+            "audio_video_sync_completed_count": 2,
+            "bound_video_completed_count": 0,
+            "segment_audio_count": 2
+          },
+          "warnings": [],
+          "blocked_reasons": [],
+          "updated_at": "2026-06-29T12:15:28Z",
+          "source_plan_hash": "1ead370c2737df2861a663cec04581b6b2ee6524dcf12a24f57d8edfcd9c2af7",
+          "execution_job_id": "vp_exec_1782735328758_f0584fe0",
+          "sync_actions": [
+            {
+              "code": "edit_storyboard_incremental_synced",
+              "message": "Generated image/video outputs were incrementally synced to koubo_storyboard_edit.json for manual page refresh."
+            }
+          ]
+        },
+        "execution_result_path": "SessionOutput/storyboard/video_plan_execution_result.json"
+      },
+      "storyboard_url": "http://127.0.0.1:18080/#/koubo-storyboard/tasks/166",
+      "dance_mimic_url": "http://127.0.0.1:18080/#/dance-mimic/tasks/166",
+      "final_video_paths": [
+        "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+        "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+      ],
+      "final_detail_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 3170157
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 184350
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 4063
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 10135
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 5107
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 2750
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      }
+    }
+  ],
+  "video_provider_config": {
+    "status": 200,
+    "openrouter": {
+      "provider": "openrouter",
+      "provider_label": "OpenRouter",
+      "description": "OpenRouter normalized video API, including ByteDance Seedance models. Uses OpenRouter credits and API keys.",
+      "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+      "default_extra_json": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "default_aspect_ratio": "9:16",
+        "default_resolution": "720p",
+        "send_frame_images": true,
+        "public_asset_provider": "",
+        "public_asset_ttl_seconds": 3600,
+        "r2_access_key_ref": "public_assets_r2_access_key_id",
+        "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+        "note": "OpenCrew sends legacy image-to-video as OpenRouter frame_images[first_frame]. Max SR2 / reference_mode=input_references sends image/audio/video URLs through OpenRouter input_references. If R2 endpoint/bucket are configured, it sends presigned HTTPS URLs; otherwise it falls back to data URLs for small files."
+      },
+      "models": [
+        {
+          "model": "bytedance/seedance-2.0-fast",
+          "label": "ByteDance Seedance 2.0 Fast",
+          "price_summary": "OpenRouter Seedance 2.0 Fast; from about $0.0538/s, check current OpenRouter pricing",
+          "description": "Fast and lower-cost Seedance 2.0 route via OpenRouter; supports text-to-video and first-frame image-to-video.",
+          "input_modes": [
+            "text",
+            "first_frame"
+          ],
+          "duration": {
+            "adjustable": true,
+            "min": 4,
+            "max": 15,
+            "allowed": [],
+            "note": "OpenRouter video generation is paid; default 5s, 720p, 9:16."
+          },
+          "reference_images": {
+            "supported": true,
+            "min": 1,
+            "max": 1,
+            "mode": "first_frame",
+            "note": "OpenCrew only sends the first selected/generated image as first_frame; last-frame is intentionally not used in this workflow."
+          }
+        },
+        {
+          "model": "bytedance/seedance-2.0",
+          "label": "ByteDance Seedance 2.0",
+          "price_summary": "OpenRouter Seedance 2.0; from about $0.06726/s, check current OpenRouter pricing",
+          "description": "Higher-quality Seedance 2.0 route via OpenRouter; supports text-to-video, first-frame image-to-video, and SR2 multimodal reference-to-video.",
+          "input_modes": [
+            "text",
+            "first_frame",
+            "multi_reference",
+            "audio_reference",
+            "video_reference"
+          ],
+          "duration": {
+            "adjustable": true,
+            "min": 4,
+            "max": 15,
+            "allowed": [],
+            "note": "OpenRouter video generation is paid; check current model capabilities before production routing."
+          },
+          "reference_images": {
+            "supported": true,
+            "min": 0,
+            "max": 8,
+            "mode": "input_references",
+            "note": "Max SR2 sends selected images through OpenRouter input_references for reference-to-video; non-SR2 legacy calls may still use first_frame."
+          },
+          "reference_audios": {
+            "supported": true,
+            "min": 0,
+            "max": 4,
+            "mode": "input_references",
+            "note": "OpenRouter documents audio/video input references as currently honored by BytePlus Seedance 2.0."
+          },
+          "reference_videos": {
+            "supported": true,
+            "min": 0,
+            "max": 4,
+            "mode": "input_references",
+            "note": "Use for motion, pacing, gesture, or temporal style references through OpenRouter input_references."
+          },
+          "audio_input": {
+            "supported": true,
+            "recommended": true,
+            "mode": "provider_audio_or_reference_audio",
+            "note": "OpenCrew requests provider audio for SR2 when input references are used; reference audio can guide cadence or sound style."
+          }
+        },
+        {
+          "model": "bytedance/seedance-1-5-pro",
+          "label": "ByteDance Seedance 1.5 Pro",
+          "price_summary": "OpenRouter Seedance 1.5 Pro; from about $0.02306/s, check current OpenRouter pricing",
+          "description": "Seedance 1.5 Pro route via OpenRouter; supports clips up to 1080p and first-frame image-to-video on OpenRouter.",
+          "input_modes": [
+            "text",
+            "first_frame"
+          ],
+          "duration": {
+            "adjustable": true,
+            "min": 4,
+            "max": 12,
+            "allowed": [],
+            "note": "OpenRouter video generation is paid; check current model capabilities before production routing."
+          },
+          "reference_images": {
+            "supported": true,
+            "min": 1,
+            "max": 1,
+            "mode": "first_frame",
+            "note": "OpenCrew only sends the first selected/generated image as first_frame; last-frame is intentionally not used in this workflow."
+          }
+        }
+      ],
+      "kind": "video",
+      "model": "bytedance/seedance-2.0-fast",
+      "enabled": true,
+      "active": false,
+      "has_api_key": true,
+      "api_key_ref": "video_openrouter_key",
+      "updated_at": 1781508474049,
+      "extra_json": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "default_aspect_ratio": "9:16",
+        "default_resolution": "720p",
+        "send_frame_images": true,
+        "public_asset_provider": "r2",
+        "public_asset_ttl_seconds": 3600,
+        "r2_access_key_ref": "public_assets_r2_access_key_id",
+        "r2_secret_access_key_ref": "public_assets_r2_secret_access_key",
+        "note": "OpenRouter frame_images require a stable public HTTPS image URL; local workspace first frames are not sent by default.",
+        "docs_url": "https://openrouter.ai/docs/cookbook/video-generation/choose-video-model",
+        "r2_bucket": "opencrew-public-assets",
+        "r2_region": "auto",
+        "r2_endpoint": "https://2df00bb6f61532c69846abb0ec6cf49a.r2.cloudflarestorage.com"
+      },
+      "selected_voice_by_model": {}
+    }
+  }
+}

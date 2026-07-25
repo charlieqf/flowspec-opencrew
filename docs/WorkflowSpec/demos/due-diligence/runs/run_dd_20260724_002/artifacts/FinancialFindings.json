@@ -1,0 +1,18 @@
+{
+  "discipline": "financial",
+  "candidates": [
+    {
+      "finding_id": "FIN-01",
+      "title": "Working-capital normalization",
+      "severity": "medium",
+      "evidence_refs": [
+        "DOC-003-F1"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "evidence_refs": [
+    "DOC-003-F1"
+  ],
+  "mock_model_output": true
+}

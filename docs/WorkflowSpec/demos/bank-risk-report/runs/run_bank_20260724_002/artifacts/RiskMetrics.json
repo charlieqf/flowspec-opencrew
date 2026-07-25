@@ -1,0 +1,13 @@
+{
+  "metric_version": "risk-metrics-4.7",
+  "metrics": {
+    "payment_coverage": 0.999852,
+    "mock_var_99": 18400000,
+    "stage_3_ratio": 0.038
+  },
+  "definition_refs": {
+    "payment_coverage": "metric://payment_coverage/v1",
+    "mock_var_99": "metric://mock_var_99/v1",
+    "stage_3_ratio": "metric://stage_3_ratio/v1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "project_id": "VID-LUMEN-01",
+  "creative_revision": "creative-r1",
+  "brand": "Lumen Labs",
+  "product": "Hydra Daily",
+  "audience": "Australian wellness shoppers 25-40",
+  "channel": "instagram_reels",
+  "constraints": [
+    "no medical claims",
+    "product identity must remain bound",
+    "human publish approval required"
+  ],
+  "mock_model_output": true
+}

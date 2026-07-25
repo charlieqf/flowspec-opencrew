@@ -1,0 +1,67 @@
+{
+  "schema_version": "media_library_silent_visual_search_r2_browser_e2e_v1",
+  "timestamp": "20260722-142253",
+  "base_url": "http://127.0.0.1:18080",
+  "artifact_dir": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-142253",
+  "asset_id": "mla_1784601908573_70c828790521",
+  "clip_id": "mlc_1784605289217_6a71573ce61e",
+  "editor_source_asset_id": "mla_1784615441629_44c90c6be2af",
+  "clip_name": "化橘红倒入玻璃碗中的深色液体 20260722-142253",
+  "clip_tags": [
+    "化橘红",
+    "玻璃碗",
+    "深色液体",
+    "绿色包装",
+    "R2复用20260722-142253"
+  ],
+  "screenshots": [
+    "r2-clip-join-metadata.png",
+    "r2-clip-global-search-enabled.png",
+    "r2-storyboard-derived-clip-result.png",
+    "r2-storyboard-clip-exact-preview.png",
+    "r2-storyboard-clip-imported.png",
+    "r2-asset-pool-import-retained.png",
+    "r2-agent-derived-clip-result.png",
+    "r2-agent-clip-imported.png",
+    "r2-editor-derived-clip-result.png",
+    "r2-editor-clip-imported.png",
+    "r2-storyboard-derived-clip-mobile.png",
+    "r2-clip-global-search-mobile.png",
+    "r2-clip-global-search-removed.png",
+    "r2-removed-clip-zero-result.png",
+    "r2-import-retained-after-removal.png"
+  ],
+  "search_ids": [
+    "mls_1784695597604_bd44529a47c9",
+    "search_1784695598368_13f530",
+    "mls_1784695605506_dce100408098",
+    "mls_1784695606081_079cc3cb0065",
+    "mls_1784695607659_17f0ca896d3d"
+  ],
+  "import_ids": [
+    "mli_1784695597805_5a1310d67e27",
+    "mli_1784695605786_0b056e3ec568",
+    "mli_1784695606188_b7a1240c83b1"
+  ],
+  "imported_paths": [
+    "SessionOutput/storyboard/assets/videos/化橘红倒入玻璃碗中的深色液体 20260722-142253_5a1310d67e27.mp4",
+    "SessionOutput/storyboard/assets/videos/R2复用20260722-142253_0b056e3ec568.mp4",
+    "SessionOutput/storyboard/assets/videos/化橘红倒入玻璃碗中的深色液体 20260722-142253_b7a1240c83b1.mp4"
+  ],
+  "clip_content_sha256": "070a6723e368f9e4856fba2a8a8e0488f18cffd89ab589dd999f806d832fada5",
+  "resumed_from_prior_eligible_state": true,
+  "search_enabled_at": 1784695596870,
+  "task_id": 311,
+  "session_id": 398,
+  "dialogue_asset_key": "dialogue_001",
+  "dialogue_text": "人穷衣服破，说啥都是错，有钱就是会员，走哪都有特权，你光善良没有用，你得优秀得有钱，因为钱能治愈一切自卑",
+  "storyboard_search_id": "mls_1784695597604_bd44529a47c9",
+  "agent_search_id": "search_1784695598368_13f530",
+  "agent_media_library_search_id": "mls_1784695605506_dce100408098",
+  "editor_search_id": "mls_1784695606081_079cc3cb0065",
+  "replay_removed_ineligible_clip": true,
+  "removal_search_id": "mls_1784695607659_17f0ca896d3d",
+  "import_retained_after_removal": true,
+  "ok": true,
+  "completed_at": "2026-07-22T04:46:47.916Z"
+}

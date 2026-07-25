@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "OutputFileEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "kind": {
+          "default": "artifact",
+          "title": "Kind",
+          "type": "string"
+        },
+        "schema_name": {
+          "default": "",
+          "title": "Schema Name",
+          "type": "string"
+        },
+        "sha256": {
+          "default": "",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size": {
+          "default": 0,
+          "title": "Size",
+          "type": "integer"
+        },
+        "visibility": {
+          "default": "internal",
+          "title": "Visibility",
+          "type": "string"
+        },
+        "sensitivity": {
+          "default": "normal",
+          "title": "Sensitivity",
+          "type": "string"
+        },
+        "downloadable": {
+          "default": 0,
+          "title": "Downloadable",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "OutputFileEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "tool_id": {
+      "title": "Tool Id",
+      "type": "string"
+    },
+    "status": {
+      "default": "completed",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/OutputFileEntry"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "tool_use_session_id",
+    "step_id",
+    "tool_id"
+  ],
+  "title": "OutputManifest",
+  "type": "object"
+}

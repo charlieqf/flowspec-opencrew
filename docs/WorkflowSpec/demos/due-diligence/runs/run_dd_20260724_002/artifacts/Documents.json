@@ -1,0 +1,31 @@
+{
+  "matter_id": "MAT-ATLAS-01",
+  "scope_revision": "scope-r2",
+  "documents": [
+    {
+      "document_id": "DOC-001",
+      "name": "constitution.pdf",
+      "category": "corporate",
+      "page_count": 48
+    },
+    {
+      "document_id": "DOC-002",
+      "name": "material-contracts.pdf",
+      "category": "contracts",
+      "page_count": 132
+    },
+    {
+      "document_id": "DOC-003",
+      "name": "audited-financials.pdf",
+      "category": "financial",
+      "page_count": 96
+    },
+    {
+      "document_id": "DOC-004",
+      "name": "tax-returns.pdf",
+      "category": "tax",
+      "page_count": 74
+    }
+  ],
+  "missing_categories": []
+}

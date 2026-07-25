@@ -1,0 +1,10 @@
+{
+  "proposed_decision": "rejected",
+  "review_required": false,
+  "approved_amount": 0,
+  "reasons": [
+    "score_band",
+    "serviceability",
+    "fraud_policy"
+  ]
+}

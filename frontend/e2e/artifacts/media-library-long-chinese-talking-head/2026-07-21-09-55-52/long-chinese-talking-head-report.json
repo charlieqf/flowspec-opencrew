@@ -1,0 +1,160 @@
+{
+  "schema_version": "media_library_long_chinese_talking_head_v1",
+  "started_at": "2026-07-21T00:21:57.251Z",
+  "base_url": "http://127.0.0.1:18080",
+  "source_path": "/Users/macmini-4/.opencrew/sessions/334/workspace/inbox/video(26).mp4",
+  "source_evidence": {
+    "source_session_id": 334,
+    "language": "zh-CN",
+    "duration_ms": 199552,
+    "dimensions": "1200x2670",
+    "audio": "AAC 44100Hz stereo",
+    "known_shot_count": 12,
+    "known_scene_count": 24,
+    "transcript_cues": 96
+  },
+  "screenshots": [
+    {
+      "name": "01-media-library-before-upload.png",
+      "label": "素材库上传入口与已有真实素材",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/01-media-library-before-upload.png",
+      "url": "http://127.0.0.1:18080/#/media-library",
+      "metrics": {
+        "hash": "#/media-library",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    },
+    {
+      "name": "03-real-chinese-video-in-library.png",
+      "label": "199 秒中文真人口播已真实上传并留存在素材库",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/03-real-chinese-video-in-library.png",
+      "url": "http://127.0.0.1:18080/#/media-library",
+      "metrics": {
+        "hash": "#/media-library",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    },
+    {
+      "name": "08-dialogue-analysis-ready.png",
+      "label": "中文对白分析完成：真实转录被切分为可播放片段",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/08-dialogue-analysis-ready.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    },
+    {
+      "name": "09-visual-structure-ready.png",
+      "label": "画面结构完成：Scene Detect 与中点 Keyframe 已发布",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/09-visual-structure-ready.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    },
+    {
+      "name": "11-visual-semantic-ready.png",
+      "label": "多场景视觉语义分析完成并显示模型与证据",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/11-visual-semantic-ready.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    },
+    {
+      "name": "13-composite-analysis-ready.png",
+      "label": "综合分析完成：中文对白与多场景画面被融合为检索/剪辑片段",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-long-chinese-talking-head/2026-07-21-09-55-52/13-composite-analysis-ready.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100
+      }
+    }
+  ],
+  "api_failures": [],
+  "console_errors": [],
+  "page_errors": [],
+  "runs": {
+    "dialogue": {
+      "status": "ready",
+      "run_id": "mlar_dialogue_1784591756626_9d60e1c5b8d5",
+      "fragment_count": 123
+    },
+    "visual_structure": {
+      "status": "ready",
+      "run_id": "mlar_visual_structure_1784592530028_cb54453afd9a",
+      "fragment_count": 22
+    },
+    "visual_semantic": {
+      "status": "ready",
+      "run_id": "mlar_visual_semantic_1784592556244_7d854cadc77c",
+      "fragment_count": 22
+    },
+    "composite": {
+      "status": "ready",
+      "run_id": "mlar_composite_1784593125701_f3cc1e96929e",
+      "fragment_count": 11
+    }
+  },
+  "capabilities": {
+    "schema_version": "media_library_capabilities_v1",
+    "features": {
+      "analysis_runs": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "library_search": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "visual_semantic": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "composite": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "editor": {
+        "enabled": true,
+        "configuration_valid": true
+      }
+    }
+  },
+  "asset_id": "mla_1784591754592_d1c20d9832d6",
+  "uploaded_item": null,
+  "retained": {
+    "asset_id": "mla_1784591754592_d1c20d9832d6",
+    "task_id": 14,
+    "session_id": 381,
+    "display_name": "video(26)",
+    "duration_ms": 199552,
+    "dialogue_fragments": 123,
+    "visual_fragments": 22,
+    "composite_fragments": 11
+  },
+  "ok": true,
+  "finished_at": "2026-07-21T00:22:01.794Z"
+}

@@ -1,0 +1,358 @@
+{
+  "schema_version": "1.0",
+  "registry_id": "bank_risk_report_mock_tools",
+  "version": "1.2.0",
+  "description": "Deterministic mock tools for the monthly bank-risk-report demo.",
+  "tools": [
+    {
+      "tool_id": "freeze_transactions",
+      "version": "1.0.0",
+      "entrypoint": "tools:freeze_transactions",
+      "type": "service",
+      "description": "Freeze transactions.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "transaction_count_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "TransactionsSnapshot.json"
+      ],
+      "writes": [
+        "transaction_count"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "freeze_payments",
+      "version": "1.0.0",
+      "entrypoint": "tools:freeze_payments",
+      "type": "service",
+      "description": "Freeze payments.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "payment_count_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "PaymentsSnapshot.json"
+      ],
+      "writes": [
+        "payment_count"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "freeze_gl_controls",
+      "version": "1.0.0",
+      "entrypoint": "tools:freeze_gl_controls",
+      "type": "service",
+      "description": "Freeze GL totals.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "gl_total_fixture"
+      ],
+      "consumes": [],
+      "produces": [
+        "GLControlTotals.json"
+      ],
+      "writes": [
+        "gl_total"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "reconcile_quality",
+      "version": "1.0.0",
+      "entrypoint": "tools:reconcile_quality",
+      "type": "script",
+      "description": "Reconcile and score DQ.",
+      "side_effect_class": "pure",
+      "reads": [
+        "transaction_count",
+        "payment_count",
+        "gl_total",
+        "discrepancy_rate_fixture"
+      ],
+      "consumes": [
+        "TransactionsSnapshot.json",
+        "PaymentsSnapshot.json",
+        "GLControlTotals.json"
+      ],
+      "produces": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "writes": [
+        "dq_passed",
+        "waiver_required"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "review_dq_waiver",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_dq_waiver",
+      "type": "confirm",
+      "description": "Review DQ waiver.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period"
+      ],
+      "consumes": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "DQWaiverDecision.json"
+      ],
+      "writes": [
+        "waiver_decision"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "finalize_quality_decision",
+      "version": "1.0.0",
+      "entrypoint": "tools:finalize_quality_decision",
+      "type": "script",
+      "description": "Finalize data eligibility.",
+      "side_effect_class": "pure",
+      "reads": [
+        "dq_passed",
+        "waiver_required",
+        "waiver_decision"
+      ],
+      "consumes": [
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "QualityDecision.json"
+      ],
+      "writes": [
+        "dq_accepted"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "prepare_clean_dataset",
+      "version": "1.0.0",
+      "entrypoint": "tools:prepare_clean_dataset",
+      "type": "script",
+      "description": "Prepare clean dataset.",
+      "side_effect_class": "pure",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "dq_accepted"
+      ],
+      "consumes": [
+        "TransactionsSnapshot.json",
+        "PaymentsSnapshot.json",
+        "QualityDecision.json"
+      ],
+      "produces": [
+        "CleanDataset.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "calculate_risk_metrics",
+      "version": "1.0.0",
+      "entrypoint": "tools:calculate_risk_metrics",
+      "type": "script",
+      "description": "Calculate metrics.",
+      "side_effect_class": "pure",
+      "reads": [
+        "entity_id",
+        "period",
+        "transaction_count",
+        "payment_count"
+      ],
+      "consumes": [
+        "CleanDataset.json"
+      ],
+      "produces": [
+        "RiskMetrics.json"
+      ],
+      "writes": [
+        "metric_version"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "draft_grounded_narrative",
+      "version": "1.0.0",
+      "entrypoint": "tools:draft_grounded_narrative",
+      "type": "model",
+      "description": "Mock grounded narrative.",
+      "side_effect_class": "pure",
+      "reads": [
+        "entity_id",
+        "period",
+        "metric_version"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "RiskNarrative.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "build_compliance_appendix",
+      "version": "1.0.0",
+      "entrypoint": "tools:build_compliance_appendix",
+      "type": "script",
+      "description": "Build appendix.",
+      "side_effect_class": "pure",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "DQReport.json",
+        "Reconciliation.json"
+      ],
+      "produces": [
+        "ComplianceAppendix.pdf"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "assemble_risk_report",
+      "version": "1.0.0",
+      "entrypoint": "tools:assemble_risk_report",
+      "type": "script",
+      "description": "Assemble report.",
+      "side_effect_class": "pure",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id"
+      ],
+      "consumes": [
+        "RiskMetrics.json",
+        "RiskNarrative.json",
+        "ComplianceAppendix.pdf"
+      ],
+      "produces": [
+        "RiskReport.pdf"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "review_report_signoff",
+      "version": "1.0.0",
+      "entrypoint": "tools:review_report_signoff",
+      "type": "confirm",
+      "description": "Review report sign-off.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period"
+      ],
+      "consumes": [
+        "RiskReport.pdf"
+      ],
+      "produces": [
+        "ReportApproval.json"
+      ],
+      "writes": [
+        "publish_decision"
+      ],
+      "mock": true
+    },
+    {
+      "tool_id": "distribute_report",
+      "version": "1.0.0",
+      "entrypoint": "tools:distribute_report",
+      "type": "service",
+      "description": "Distribute report.",
+      "side_effect_class": "reconcilable",
+      "reads": [
+        "entity_id",
+        "period",
+        "publish_decision"
+      ],
+      "consumes": [
+        "RiskReport.pdf",
+        "ReportApproval.json"
+      ],
+      "produces": [
+        "DistributionReceipt.json"
+      ],
+      "writes": [
+        "distributed_at"
+      ],
+      "mock": true,
+      "supports_reconciliation": true
+    },
+    {
+      "tool_id": "request_data_remediation",
+      "version": "1.0.0",
+      "entrypoint": "tools:request_data_remediation",
+      "type": "service",
+      "description": "Request remediation.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period",
+        "dq_accepted"
+      ],
+      "consumes": [
+        "QualityDecision.json",
+        "DQReport.json"
+      ],
+      "produces": [
+        "DataRemediationRequest.json"
+      ],
+      "writes": [],
+      "mock": true
+    },
+    {
+      "tool_id": "request_report_revision",
+      "version": "1.0.0",
+      "entrypoint": "tools:request_report_revision",
+      "type": "service",
+      "description": "Request a signed report revision.",
+      "side_effect_class": "idempotent",
+      "reads": [
+        "entity_id",
+        "period",
+        "data_cut_id",
+        "publish_decision"
+      ],
+      "consumes": [
+        "RiskReport.pdf",
+        "ReportApproval.json"
+      ],
+      "produces": [
+        "ReportRevisionRequest.json"
+      ],
+      "writes": [],
+      "mock": true
+    }
+  ]
+}

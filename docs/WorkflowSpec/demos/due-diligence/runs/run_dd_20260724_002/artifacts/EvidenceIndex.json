@@ -1,0 +1,35 @@
+{
+  "matter_id": "MAT-ATLAS-01",
+  "scope_revision": "scope-r2",
+  "documents": [
+    {
+      "document_id": "DOC-001",
+      "category": "corporate",
+      "fact_ids": [
+        "DOC-001-F1"
+      ]
+    },
+    {
+      "document_id": "DOC-002",
+      "category": "contracts",
+      "fact_ids": [
+        "DOC-002-F1"
+      ]
+    },
+    {
+      "document_id": "DOC-003",
+      "category": "financial",
+      "fact_ids": [
+        "DOC-003-F1"
+      ]
+    },
+    {
+      "document_id": "DOC-004",
+      "category": "tax",
+      "fact_ids": [
+        "DOC-004-F1"
+      ]
+    }
+  ],
+  "evidence_count": 4
+}

@@ -1,0 +1,18 @@
+{
+  "discipline": "legal",
+  "candidates": [
+    {
+      "finding_id": "LEGAL-01",
+      "title": "Change-of-control consent",
+      "severity": "medium",
+      "evidence_refs": [
+        "DOC-002-F1"
+      ],
+      "status": "candidate"
+    }
+  ],
+  "evidence_refs": [
+    "DOC-002-F1"
+  ],
+  "mock_model_output": true
+}

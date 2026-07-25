@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["application_id", "applicant_name", "loan_amount", "stated_income", "document_revision", "credit_score_fixture", "fraud_score_fixture", "verified_income_fixture", "review_decision"],
+  "properties": {
+    "application_id": { "type": "string" },
+    "applicant_name": { "type": "string" },
+    "loan_amount": { "type": "number", "exclusiveMinimum": 0 },
+    "stated_income": { "type": "number", "exclusiveMinimum": 0 },
+    "document_revision": { "type": "string" },
+    "credit_score_fixture": { "type": "integer" },
+    "fraud_score_fixture": { "type": "number" },
+    "verified_income_fixture": { "type": "number" },
+    "review_decision": { "type": ["string", "null"] },
+    "application_valid": { "type": "boolean" },
+    "credit_score": { "type": "integer" },
+    "fraud_flag": { "type": "boolean" },
+    "verified_income": { "type": "number" },
+    "risk_score": { "type": "number" },
+    "proposed_decision": { "enum": ["approved", "rejected"] },
+    "review_required": { "type": "boolean" },
+    "decision": { "enum": ["approved", "rejected", "revision_requested"] },
+    "offer_accepted_at": { "type": "string" },
+    "disbursed_at": { "type": "string" }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "bank_grounded_risk_narrative",
+  "version": "1.0.0",
+  "description": "Restricted-data narrative profile: mock local model, no external transfer, evidence required.",
+  "kind": "model",
+  "model": {
+    "provider": "mock-provider",
+    "model_id": "mock-grounded-writer",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "runtime": "flowspec-mock",
+    "modality": "text",
+    "selection_source": "explicit",
+    "fallback_policy": "deny"
+  },
+  "budget": {
+    "max_wall_seconds": 60,
+    "max_input_tokens": 24000,
+    "max_output_tokens": 3000,
+    "max_cost": "0.20",
+    "currency": "USD"
+  },
+  "data_policy": {
+    "sensitivity": "restricted",
+    "external_transfer": "denied",
+    "redaction_required": true,
+    "residency": [
+      "local"
+    ],
+    "provider_retention": "denied",
+    "provider_training": "denied",
+    "purpose": "grounded monthly risk narrative",
+    "deletion_policy_ref": "policy://reg-report-retention/v1"
+  },
+  "output": {
+    "schema_ref": "schemas/artifacts.schema.json#/$defs/narrative",
+    "validation": "strict",
+    "max_repair_attempts": 1,
+    "safety_policy_ref": "policy://bank-report-ai/v1",
+    "moderation_required": false,
+    "grounding_required": true,
+    "evidence_required": true
+  },
+  "streaming": {
+    "enabled": false,
+    "partial_output_authoritative": false
+  }
+}

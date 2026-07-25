@@ -1,0 +1,65 @@
+{
+  "case": {
+    "suite": "video",
+    "number": 17,
+    "title": "Case 17：Task 范围，计划尾帧跨 Shot 连续",
+    "target_type": "task",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 2,
+      "scene_count": 4,
+      "dialogue_count": 12,
+      "segment_count": 8,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 12,
+      "need_image_prompt_count": 1,
+      "need_image_count": 1,
+      "need_video_prompt_count": 8,
+      "need_video_count": 8,
+      "segment_audio_count": 8,
+      "need_lipsync_count": 8,
+      "need_audio_video_sync_count": 0,
+      "need_sync_count": 8
+    },
+    "expected_count": 8
+  },
+  "actual": {
+    "actualCount": 8,
+    "dpr": 1,
+    "rect": {
+      "height": 770.9375,
+      "left": 650,
+      "top": 68.03125,
+      "width": 620
+    },
+    "scroll": {
+      "client": 700,
+      "height": 810,
+      "top": 110
+    },
+    "segmentRows": [
+      "S1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 2\nScene 4\nSegment 8",
+    "text": "生成计划\nShot 2\nScene 4\nSegment 8\n0/8\n0/8\n0/8\n0/8\nShot_001\nScene_001\nS1\n4.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_002\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  }
+}

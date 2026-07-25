@@ -1,0 +1,13 @@
+{
+  "mock": true,
+  "logical_name": "ComplianceAppendix.pdf",
+  "payload": {
+    "document_type": "compliance_appendix",
+    "version": "1",
+    "included_refs": [
+      "cut-20260724-b",
+      "dq-rules-2026.06",
+      "risk-metrics-4.7"
+    ]
+  }
+}

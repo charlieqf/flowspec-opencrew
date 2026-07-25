@@ -1,0 +1,118 @@
+{
+  "schema_version": "media_library_silent_visual_search_browser_validation_v1",
+  "generated_at": "2026-07-22T17:18:34+10:00",
+  "status": "passed",
+  "base_url": "http://127.0.0.1:18080",
+  "runtime": {
+    "host": "macmini-4.local",
+    "frontend_mode": "production_preview",
+    "backend_health": "passed",
+    "frontend_proxy_health": "passed",
+    "visual_search_environment_variable_present": false,
+    "clip_search_environment_variable_present": false,
+    "default_r1_r2_enabled_verified_by_browser": true
+  },
+  "r1": {
+    "status": "passed",
+    "report": "r1-browser-e2e-report.json",
+    "screenshot_count": 11,
+    "asset_id": "mla_1784601908573_70c828790521",
+    "task_id": 311,
+    "session_id": 398,
+    "storyboard_search_id": "mls_1784704444169_d2f8ab2e3a66",
+    "agent_search_id": "search_1784704459497_b0d4ec",
+    "agent_media_library_search_id": "mls_1784704466658_62b3a6f51304",
+    "editor_search_id": "mls_1784704473241_b765e6935bce",
+    "created_clip_id": "mlc_1784704449256_bc36d1c14ae7",
+    "import_id": "mli_1784704458719_28b5616d36ae",
+    "matched_fragment": {
+      "analysis_scheme": "visual_semantic",
+      "fragment_id": "scene_0001",
+      "start_ms": 0,
+      "end_ms": 13000,
+      "keyframe_count": 4
+    }
+  },
+  "r2": {
+    "status": "passed",
+    "report": "r2-browser-e2e-report.json",
+    "screenshot_count": 15,
+    "asset_id": "mla_1784601908573_70c828790521",
+    "clip_id": "mlc_1784605289217_6a71573ce61e",
+    "task_id": 311,
+    "session_id": 398,
+    "search_ids": [
+      "mls_1784704554716_7c48b8c4732e",
+      "search_1784704560028_525469",
+      "mls_1784704567204_5bd59e8310cb",
+      "mls_1784704571010_84e4055a98e0",
+      "mls_1784704572584_06a3a0b5f4da"
+    ],
+    "import_ids": [
+      "mli_1784704559402_20cdbd89b052",
+      "mli_1784704570701_b3d5dfefa28b",
+      "mli_1784704571100_57e8ad783f3f"
+    ],
+    "final_search_eligible": false,
+    "removal_zero_result_verified": true,
+    "imports_retained_after_removal": true
+  },
+  "manual_validation": {
+    "status": "passed",
+    "report": "manual-validation/manual-validation-report.json",
+    "webkit_desktop": "passed",
+    "chromium_mobile": "passed",
+    "embedded_image_count": 57,
+    "failed_image_count": 0,
+    "console_error_count": 0,
+    "page_error_count": 0,
+    "horizontal_overflow_count": 0
+  },
+  "surface_sweep": {
+    "status": "passed",
+    "browser_profiles": [
+      "chromium-desktop",
+      "chromium-mobile"
+    ],
+    "surfaces": [
+      "asset-list",
+      "four-frame-detail",
+      "editor",
+      "storyboard",
+      "agent"
+    ],
+    "check_count": 10,
+    "console_error_count": 0,
+    "page_error_count": 0,
+    "http_5xx_count": 0,
+    "horizontal_overflow_count": 0
+  },
+  "visual_review": {
+    "status": "passed",
+    "reviewed_screenshots": [
+      "r1-four-frame-detail-desktop.png",
+      "r1-storyboard-visual-hit.png",
+      "r2-storyboard-derived-clip-result.png",
+      "r2-clip-global-search-mobile.png"
+    ]
+  },
+  "retention": {
+    "artifact_file_count": 33,
+    "artifact_size": "6.6M",
+    "r1_created_clip_retained": true,
+    "r1_imported_file_retained": true,
+    "r2_imported_file_count": 3,
+    "r2_imported_files_retained": true,
+    "failed_attempt_report": "r2-browser-e2e-report-attempt1.json"
+  },
+  "test_infrastructure_corrections": [
+    {
+      "issue": "R1 StoryBoard test used the obsolete field label 补充要求（可选）",
+      "resolution": "Updated the selector to the current UI label 补充画面或关键词（可选）"
+    },
+    {
+      "issue": "A newly created subtitle-only Task did not contain a StoryBoard dialogue",
+      "resolution": "Ran the supported R2 path against authoritative stable Task 311 / dialogue_001"
+    }
+  ]
+}

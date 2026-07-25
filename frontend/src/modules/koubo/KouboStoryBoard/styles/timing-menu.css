@@ -1,0 +1,137 @@
+.kbsp-timing-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.kbsp-timing-grid div {
+  min-width: 0;
+}
+.kbsp-timing-grid span {
+  color: #94a3b8;
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+.kbsp-timing-grid b {
+  color: #0f172a;
+  display: block;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kbsp-menu-panel.timing p {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+}
+.kbsp-menu-panel.timing .kbsp-audio-form-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 100%;
+}
+.kbsp-menu-panel.timing .kbsp-audio-form-grid label,
+.kbsp-menu-panel.timing .kbsp-audio-prompt-field {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.kbsp-menu-panel.timing .kbsp-audio-form-grid span,
+.kbsp-menu-panel.timing .kbsp-audio-prompt-field span,
+.kbsp-menu-panel.timing .kbsp-audio-recommendations > span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.kbsp-menu-panel.timing input,
+.kbsp-menu-panel.timing select,
+.kbsp-menu-panel.timing textarea {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  box-sizing: border-box;
+  border-radius: 6px;
+  color: #0f172a;
+  font: inherit;
+  min-height: 30px;
+  min-width: 0;
+  padding: 6px 8px;
+  width: 100%;
+}
+.kbsp-menu-panel.timing textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+.kbsp-menu-panel.timing .kbsp-audio-recommendations {
+  display: grid;
+  gap: 6px;
+}
+.kbsp-menu-panel.timing .kbsp-audio-recommendations div {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.kbsp-menu-panel.timing .kbsp-audio-recommendations button,
+.kbsp-menu-panel.timing .kbsp-audio-popover-actions button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  min-height: 26px;
+  padding: 0 10px;
+}
+.kbsp-menu-panel.timing .kbsp-audio-recommendations button.is-active {
+  background: #eef2ff;
+  border-color: #6366f1;
+  color: #3730a3;
+  box-shadow: inset 0 0 0 1px #6366f1;
+}
+.kbsp-menu-panel.timing .kbsp-recommended-tempo {
+  align-items: center;
+  display: inline-flex;
+  gap: 6px;
+  min-width: 150px;
+}
+.kbsp-menu-panel.timing .kbsp-recommended-tempo span {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.kbsp-menu-panel.timing .kbsp-recommended-tempo input {
+  height: 28px;
+  min-height: 28px;
+  width: 84px;
+}
+.kbsp-menu-panel.timing .kbsp-audio-popover-actions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.kbsp-menu-panel.timing .kbsp-audio-popover-actions button:last-child {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+}
+@media (max-width: 720px) {
+  .kbsp-menu-panel.timing .kbsp-audio-form-grid,
+  .kbsp-timing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

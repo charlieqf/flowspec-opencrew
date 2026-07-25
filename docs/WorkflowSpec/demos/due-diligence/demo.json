@@ -1,0 +1,107 @@
+{
+  "slug": "due-diligence",
+  "eyebrow": "Scenario 03 · Evidence at scale",
+  "title": "交易尽调 · 万份材料到可追溯结论",
+  "subtitle": "展示补件修订、稳定 item key fanout、逐项用量、法律/财务并行复核、证据引用和专业人员定稿。",
+  "stage_labels": {
+    "scope": "范围确认",
+    "extract": "文档抽取",
+    "review": "专项复核",
+    "findings": "发现汇总",
+    "approval": "专业审批",
+    "report": "报告与修订"
+  },
+  "step_labels": {
+    "S1_inventory": {
+      "title": "清点并冻结资料室",
+      "description": "在模型读取内容前固定文档身份、尽调范围和输入版本。"
+    },
+    "S2_request_supplement": {
+      "title": "请求补充缺失材料",
+      "description": "资料不完整时形成补件结果；新材料到达后通过新 Run 继续。"
+    },
+    "S3_extract_documents": {
+      "title": "按文档并行抽取证据",
+      "description": "按不可变 document_id 为每份文件建立子执行，并分别记录模型用量。"
+    },
+    "S4_index_evidence": {
+      "title": "建立证据索引",
+      "description": "按稳定文档键汇合抽取结果，并保留每条事实的页码和原文位置。"
+    },
+    "S5_legal_review": {
+      "title": "开展法律复核",
+      "description": "有界 Agent 可检索证据并提出候选发现，但不能直接写最终交易结论。"
+    },
+    "S6_financial_review": {
+      "title": "开展财务复核",
+      "description": "财务专业链基于同一证据索引独立复核，避免与法律判断相互覆盖。"
+    },
+    "S7_synthesize_findings": {
+      "title": "汇总风险发现",
+      "description": "汇合法律与财务候选发现，同时保留每项结论对应的证据 ID。"
+    },
+    "S8_professional_review": {
+      "title": "专业人员审定",
+      "description": "由具名专业人员基于冻结输入处置候选发现并说明理由。"
+    },
+    "S9_issue_report": {
+      "title": "出具尽调报告",
+      "description": "发布经过专业审定、带证据和范围血缘的 Mock PDF 报告。"
+    },
+    "S10_request_findings_revision": {
+      "title": "请求修订风险发现",
+      "description": "将专业人员的修改要求明确收口，避免报告步骤永久等待。"
+    }
+  },
+  "outcome_labels": {
+    "supplement_requested": "已请求补充缺失材料",
+    "report_issued": "已出具专业审定的尽调报告",
+    "findings_revision_requested": "已请求修订风险发现"
+  },
+  "executive_tldr": {
+    "result": "缺件先形成补件请求，材料齐备后形成证据可追溯的专业报告。",
+    "control": "每份文档、模型调用、finding、范围版本和人工审批都绑定同一 matter 与证据。",
+    "boundary": "这是小规模确定性 Mock；不证明海量分布式 fanout、租约与崩溃恢复已经解决。"
+  },
+  "run_control_examples": {
+    "full": "冻结本次 matter/scope 的材料清单，逐文档抽取并汇合证据，完成法律与财务复核、专业审批和报告签发。",
+    "through": "运行到 S4 EvidenceIndex：先完成 Inventory 和全部 document_id fanout，再按稳定 key 汇合；到边界暂停，不能声称专业尽调已完成。",
+    "from": "补件改变清单后从 S3 抽取重跑：新 Run 使旧 EvidenceIndex 与法律/财务结论 stale；S1 只有 scope 与清单哈希仍一致才可复用。",
+    "single": "隔离运行 S5 法律 Agent 检查提示词与证据引用；diagnostic finding 不进入正式报告，也不能绕过专业人员审批。"
+  },
+  "accent": "#6f52b5",
+  "accent_secondary": "#087c8c",
+  "surface_tint": "#efebf8",
+  "business_owner": "交易咨询与法务",
+  "hero_metric_label": "集合执行",
+  "hero_metric_value": "按文档并行分发",
+  "scenario_explainer": {
+    "title": "海量材料处理的难点是身份、证据与范围",
+    "challenge": "尽调材料会持续补充，单个文件可并行处理，但结论必须限定在同一 matter 和 scope revision 内；法律与财务判断既要共享证据索引，又必须保持独立复核，最终由专业人员承担结论责任。",
+    "points": [
+      {
+        "feature": "材料不齐时先补件而非空跑模型",
+        "support": "Inventory Step 先冻结文档清单；缺失材料以 supplement_requested outcome 结束，补件后在同一业务实例创建新 Run 并更新 input revision hash。",
+        "constraint": "旧 Run 的 Artifact 不因文件仍在就自动复用；scope 或清单变化会使旧产物 stale，禁止在原 DAG 内循环等待未知材料。"
+      },
+      {
+        "feature": "按文档稳定身份进行大规模 fanout",
+        "support": "fanout 使用 document_id 作为 item_key，声明并发上限、失败阈值和确定性 reduce 顺序；每个子项各自产生 Extract Artifact、UsageRecord 和 item 状态。",
+        "constraint": "子项 key 必须唯一，输出模板和 Artifact binding 必须携带该 key；不能按数组位置归并，也不能把失败项静默丢掉后宣称父 Step 完成。"
+      },
+      {
+        "feature": "Agent 研究与专业结论分层",
+        "support": "法律 Agent 与财务模型在同一 EvidenceIndex 上并行工作，finding 保留页码/段落引用，再由 Human Task 审阅并发布报告。",
+        "constraint": "Agent 工具和网络默认 deny/allowlist，不能直接改权威状态；无 evidence 的 finding 不得 finalize，专业审批必须记录 actor、reason 与 revision。"
+      }
+    ],
+    "effect": "FlowSpec 把规模化抽取变成按稳定业务键可追踪、可计费、可局部定位的集合执行，同时用 scope、evidence 和人工责任约束 Agent，避免“处理了很多文件”被误当成“得出了可信结论”。",
+    "glossary": [
+      { "term": "Fanout（拆分并行处理）", "meaning": "把数据室清单按 document_id 拆成许多独立抽取任务；某份文件的状态、用量和错误不会与其他文件混在一起。" },
+      { "term": "Fan-in（按规则汇合）", "meaning": "所有文档抽取按稳定 key 收拢成 EvidenceIndex，再供法律与财务复核；不是简单把输出按完成先后拼起来。" },
+      { "term": "Item key（子项稳定身份）", "meaning": "document_id 是文档在重试、并行和汇总中的永久名字；数组第几个不是身份，因为清单补件后顺序会变。" },
+      { "term": "Evidence binding（证据绑定）", "meaning": "每个 finding 要能追到具体文档、页码或段落、matter 和 scope revision，避免跨项目或跨版本引用。" },
+      { "term": "Run（一次范围版本）", "meaning": "材料不齐的 Run 以补件请求结束；文件补齐后用同一 matter 的新 Run 重做，旧结论不会悄悄混入。" }
+    ]
+  }
+}

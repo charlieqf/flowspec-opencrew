@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenCrew 隐私网格模式使用手册</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #596579;
+      --line: #d8deea;
+      --surface: #f7f9fc;
+      --blue: #175cd3;
+      --blue-soft: #eff6ff;
+      --green: #067647;
+      --green-soft: #ecfdf3;
+      --amber: #9a4d08;
+      --amber-soft: #fffaeb;
+      --red: #b42318;
+      --red-soft: #fff1f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(1040px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 72px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 10px; font-size: 34px; line-height: 1.25; }
+    h2 { margin: 40px 0 14px; font-size: 24px; line-height: 1.35; }
+    h3 { margin: 26px 0 8px; font-size: 18px; line-height: 1.45; }
+    p, ul, ol { margin-bottom: 14px; }
+    ul, ol { padding-left: 24px; }
+    li + li { margin-top: 6px; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary {
+      margin-top: 22px;
+      border-left: 4px solid var(--blue);
+      padding: 14px 18px;
+      background: var(--blue-soft);
+    }
+
+    .notice {
+      margin: 18px 0;
+      border: 1px solid #fedf89;
+      border-radius: 8px;
+      padding: 13px 16px;
+      background: var(--amber-soft);
+      color: #713b12;
+    }
+
+    .notice strong { color: var(--amber); }
+
+    .step {
+      padding: 2px 0 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #ffffff;
+      font-size: 14px;
+      vertical-align: 2px;
+    }
+
+    figure {
+      margin: 18px 0 8px;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    code {
+      border-radius: 4px;
+      padding: 2px 5px;
+      background: #eef1f6;
+      color: #344054;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.92em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 15px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--surface); }
+    .ok { color: var(--green); font-weight: 700; }
+    .warn { color: var(--red); font-weight: 700; }
+
+    footer {
+      margin-top: 42px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 680px) {
+      main { width: min(100% - 24px, 1040px); padding-top: 24px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 21px; }
+      table { font-size: 13px; }
+      th, td { padding: 8px; }
+    }
+
+    @media print {
+      main { width: 100%; padding: 0; }
+      .step, figure, table { break-inside: avoid; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>OpenCrew 隐私网格模式使用手册</h1>
+      <div class="meta">
+        <span>适用模块：任务列表（口播）→ 动作模拟</span>
+        <span>文档日期：2026-07-13</span>
+        <span>界面验证：生产预览构建</span>
+      </div>
+      <div class="summary">
+        隐私网格模式会在人脸活动范围上覆盖固定红色细线网格，并将处理后的参考视频和目标人物图发送给生成模型。任务运行后，页面会显示一张参考视频代表帧和目标人物图，供用户确认网格效果。
+      </div>
+    </header>
+
+    <section>
+      <h2>使用前确认</h2>
+      <ul>
+        <li>准备一个参考舞蹈视频，以及一张目标人物图片。</li>
+        <li>真人素材通常保持两个“应用隐私网格”复选框为勾选状态。</li>
+        <li>如果某个输入不是真人，或明确不希望添加网格，可取消对应输入区域的复选框。</li>
+        <li>保留“无人脸时阻断”可避免真人素材在未检测到人脸时继续提交。</li>
+      </ul>
+      <div class="notice">
+        <strong>隐私说明：</strong>界面名称明确标注“身份可见”。红色网格不是匿名化或身份去除方案，人物仍可能被识别；它用于按当前工作流提供固定视觉引导。
+      </div>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">1</span>打开动作模拟创建弹窗</h2>
+      <p>进入“任务列表（口播）”，点击页面右上方的“动作模拟”。</p>
+      <figure>
+        <img src="images/01-action-mimic-entry.png" alt="任务列表中的动作模拟入口">
+        <figcaption>图 1：动作模拟入口。</figcaption>
+      </figure>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">2</span>选择隐私网格和应用范围</h2>
+      <ol>
+        <li>在“参考隐私模式”中选择“隐私网格（身份可见）”。</li>
+        <li>参考舞蹈视频和目标人物图片区域会分别出现“应用隐私网格”。两个选项默认勾选。</li>
+        <li>上传素材，或在编辑已有任务时通过“路径”“素材库”选择素材。</li>
+        <li>按素材情况设置目标分段秒数和最小分段秒数。</li>
+      </ol>
+      <figure>
+        <img src="images/02-privacy-grid-settings.png" alt="动作模拟创建弹窗中的隐私网格设置">
+        <figcaption>图 2：隐私网格模式下，参考视频和目标人物图各有独立复选框。</figcaption>
+      </figure>
+      <p>取消某一个复选框时，只有该输入不添加网格。两个复选框都取消时，界面会提示两个输入都将按原始视觉发送给模型。</p>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">3</span>保存或创建并运行</h2>
+      <ul>
+        <li>点击标题栏的保存图标，只创建任务。</li>
+        <li>点击标题栏的播放图标，创建任务并立即运行。</li>
+        <li>也可以勾选“创建后运行”，再保存任务。</li>
+      </ul>
+      <p>运行时，步骤 02 会检测参考视频中的人脸活动范围，生成固定网格视频、参考代表帧，并按所选范围处理目标人物图。多段任务使用上一段尾帧续接时，系统会对尾帧重新检测人脸并添加网格，再将其作为下一段的新图和模型输入；上一段已经生成的视频不会被重新加网格。</p>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">4</span>检查网格预览</h2>
+      <p>步骤 02 完成后，任务页面顶部会显示“隐私网格预览”：</p>
+      <ul>
+        <li><strong>参考视频代表帧：</strong>显示从参考视频中选取的一张代表画面，不播放预览视频。</li>
+        <li><strong>目标人物图：</strong>显示实际发送给模型的网格处理图。</li>
+        <li><strong>已生成：</strong>两张所需预览均存在，并与当前配置一致。</li>
+      </ul>
+      <figure>
+        <img src="images/03-run-and-grid-preview.png" alt="动作模拟任务中的隐私网格预览">
+        <figcaption>图 3：真实 UI 测试结果。参考视频使用代表帧，目标人物图显示实际网格效果。</figcaption>
+      </figure>
+      <p>确认网格覆盖区域符合预期后，可继续进入故事板或点击“一键成片”。</p>
+    </section>
+
+    <section>
+      <h2>状态与处理</h2>
+      <table>
+        <thead>
+          <tr><th>页面状态</th><th>含义</th><th>处理方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>等待生成</td><td>步骤 02 尚未完成，或旧任务没有预览文件。</td><td>等待运行结束；旧任务需要重新运行。</td></tr>
+          <tr><td>需重新生成</td><td>隐私模式或应用范围在产物生成后发生变化。</td><td>点击“重新运行”或“强制重建”。</td></tr>
+          <tr><td>生成失败</td><td>步骤 02 被阻断或处理失败。</td><td>查看运行弹窗中的具体错误；真人素材可检查人脸是否清晰。</td></tr>
+          <tr><td>未应用隐私网格</td><td>对应输入的复选框已取消。</td><td>这是预期状态；需要网格时重新勾选并运行。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>UI 验证记录</h2>
+      <table>
+        <tbody>
+          <tr><th>创建弹窗</th><td class="ok">通过：隐私模式可选择，两个复选框默认勾选。</td></tr>
+          <tr><th>桌面预览</th><td class="ok">通过：两张图片完成解码，无控制台错误，无横向溢出。</td></tr>
+          <tr><th>移动布局</th><td class="ok">通过：两张预览按单列排列，可滚动查看。</td></tr>
+          <tr><th>预览访问</th><td class="ok">通过：使用任务范围内的受保护接口，不暴露任意文件路径。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      本手册截图由 Playwright 在 OpenCrew 本机生产预览构建上采集。参考视频预览按产品要求使用单张代表帧，不生成预览视频片段。
+    </footer>
+  </main>
+</body>
+</html>

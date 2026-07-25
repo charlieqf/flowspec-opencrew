@@ -1,0 +1,22 @@
+{
+  "document_id": "DOC-002",
+  "category": "contracts",
+  "facts": [
+    {
+      "fact_id": "DOC-002-F1",
+      "statement": "Controlled mock fact extracted from material-contracts.pdf",
+      "evidence_span": {
+        "document_id": "DOC-002",
+        "page": 3,
+        "bbox": [
+          0.12,
+          0.18,
+          0.84,
+          0.29
+        ]
+      }
+    }
+  ],
+  "page_count": 132,
+  "mock_model_output": true
+}

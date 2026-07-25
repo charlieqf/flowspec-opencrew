@@ -1,0 +1,9 @@
+{
+  "project_id": "VID-LUMEN-01",
+  "creative_revision": "creative-r1",
+  "scope": [
+    "dlg-002"
+  ],
+  "reason": "Multimodal QA failed product-identity binding.",
+  "status": "open"
+}

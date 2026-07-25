@@ -1,0 +1,13 @@
+{
+  "mock": true,
+  "logical_name": "RiskReport.pdf",
+  "payload": {
+    "document_type": "monthly_risk_report",
+    "version": "2026-06-cut-20260724-b",
+    "included_refs": [
+      "RiskMetrics.json",
+      "RiskNarrative.json",
+      "ComplianceAppendix.pdf"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "suite": "image",
+  "number": 11,
+  "title": "Case 11：跨 Shot 下游 Raw/Final 已存在，Image Plan 不补图",
+  "target_type": "task",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 4,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "total_tasks": 8,
+    "planned_prompt_tasks": 2,
+    "planned_image_tasks": 2,
+    "ready_existing_images": 1,
+    "existing_prompts": 0,
+    "stale_prompts": 0,
+    "blocked_tasks": 0
+  },
+  "expected_count": 8,
+  "actual": {
+    "actualCount": 8,
+    "dpr": 1,
+    "rect": {
+      "height": 770.9375,
+      "left": 741,
+      "top": 68.03125,
+      "width": 438
+    },
+    "segmentRows": [
+      "S1\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S1\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图",
+      "S2\n提示词\n→\n新图"
+    ],
+    "summaryLine": "Task 8\nPrompt 2\nImage 2",
+    "text": "图像计划\nTask 8\nPrompt 2\nImage 2\n0/3\n1/3\nShot_001\n提示词\n新图\n提示词+新图\nScene_001\nS1\n提示词\n→\n新图\nS2\n提示词\n→\n新图\nScene_002\nS1\n提示词\n→\n新图\nS2\n提示词\n→\n新图\nShot_002\nScene_003\nS1\n提示词\n→\n新图\nS2\n提示词\n→\n新图\nScene_004\nS1\n提示词\n→\n新图\nS2\n提示词\n→\n新图",
+    "title": "图像计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "image_case_11.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [729, 56, 1191, 850]}"
+}

@@ -1,0 +1,46 @@
+{
+  "process_id": "loan_approval_v1",
+  "version": "1.0.0",
+  "title": "个人消费贷审批",
+  "resource_pools": { "credit_bureau_api": { "type": "semaphore", "limit": 4 } },
+  "defaults": { "retry": { "policy": "fail_fast" } },
+  "stages": ["intake", "risk", "decision", "disburse"],
+  "steps": [
+    { "id": "S1_intake_validate", "tool": "form_validator", "stage": "intake",
+      "reads": ["applicant_id"], "side_effect_class": "pure",
+      "produces": ["ValidatedApplication.json"], "writes": ["applicant_valid"] },
+
+    { "id": "S2_credit_pull", "tool": "credit_bureau_pull", "stage": "risk",
+      "depends_on": [{ "step_id": "S1_intake_validate", "statuses": ["completed"] }],
+      "resources": [{ "kind": "semaphore", "pool": "credit_bureau_api", "amount": 1 }],
+      "cost_level": "medium", "external_quota": "credit_bureau_api",
+      "side_effect_class": "idempotent",
+      "retry": { "policy": "on_transient", "max_attempts": 3, "backoff_seconds": 5 },
+      "produces": ["CreditReport.json"], "writes": ["credit_score"] },
+
+    { "id": "S2b_manual_credit", "tool": "human_confirm", "type": "confirm", "stage": "risk",
+      "depends_on": [{ "step_id": "S2_credit_pull", "statuses": ["blocked", "failed"] }],
+      "side_effect_class": "pure",
+      "human_gate": { "type": "confirm", "form": "manual_credit", "roles": ["credit_officer"] } },
+
+    { "id": "S4_risk_score", "tool": "risk_score", "stage": "risk",
+      "depends_on": [{ "any_of": [
+          { "step_id": "S2_credit_pull", "statuses": ["completed"] },
+          { "step_id": "S2b_manual_credit", "statuses": ["completed"] } ] }],
+      "reads": ["credit_score"], "uses_llm": true, "cost_level": "high",
+      "side_effect_class": "pure",
+      "produces": ["RiskAssessment.pdf"], "writes": ["risk_score"] },
+
+    { "id": "S7_disburse", "tool": "disbursement", "stage": "disburse",
+      "depends_on": [{ "step_id": "S4_risk_score", "statuses": ["completed"] }],
+      "when": { "variable": "decision", "equals": "approved" },
+      "resources": [{ "kind": "mutex", "name": "ledger:loan_00123", "mode": "exclusive" }],
+      "side_effect_class": "reconcilable",
+      "produces": ["DisbursementReceipt.json"], "writes": ["disbursed_at"] }
+  ],
+  "sla": [
+    { "service": "审批时效48h", "complete_in_seconds": 172800, "priority": 1,
+      "critical_path_override": ["S1_intake_validate", "S2_credit_pull", "S4_risk_score", "S7_disburse"],
+      "on_breach": [{ "when": "predicted_breach", "do": "notify", "target": "risk_manager" }] }
+  ]
+}

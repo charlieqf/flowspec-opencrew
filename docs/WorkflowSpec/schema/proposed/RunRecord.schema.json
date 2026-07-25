@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew/flowspec/proposed/RunRecord.schema.json",
+  "title": "FlowSpec Run Record (PROPOSED executable demo binding)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "session_id", "task_id", "run_sequence",
+    "process_snapshot", "definition_snapshot_ref", "storage_index_ref", "input_revision_hash", "status",
+    "outcome", "started_at", "finished_at", "context", "steps", "artifacts",
+    "usage_records", "human_tasks", "events", "budget_summary"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "run_sequence": { "type": "integer", "minimum": 1 },
+    "supersedes_run_id": { "type": ["string", "null"] },
+    "process_snapshot": { "$ref": "#/$defs/processSnapshot" },
+    "definition_snapshot_ref": { "type": "string", "minLength": 1 },
+    "storage_index_ref": { "type": "string", "minLength": 1 },
+    "input_revision_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "status": { "enum": ["waiting", "running", "completed", "failed", "blocked", "cancelled"] },
+    "outcome": { "type": ["string", "null"] },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": ["string", "null"], "format": "date-time" },
+    "context": { "type": "object" },
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stepRecord" } },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifactRecord" } },
+    "usage_records": { "type": "array", "items": { "type": "object" } },
+    "human_tasks": { "type": "array", "items": { "$ref": "#/$defs/humanTask" } },
+    "events": { "type": "array", "items": { "$ref": "#/$defs/event" } },
+    "budget_summary": { "$ref": "#/$defs/budgetSummary" },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "processSnapshot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["process_id", "version", "digest", "tool_registry_id", "tool_registry_version", "tool_registry_digest", "profiles"],
+      "properties": {
+        "process_id": { "type": "string" },
+        "version": { "type": "string" },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "tool_registry_id": { "type": "string" },
+        "tool_registry_version": { "type": "string" },
+        "tool_registry_digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "profiles": {
+          "type": "array", "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["profile_id", "version", "digest"],
+            "properties": {
+              "profile_id": { "type": "string" }, "version": { "type": "string" },
+              "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "stepRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["step_id", "tool_id", "tool_version", "status", "attempts", "fanout_items"],
+      "properties": {
+        "step_id": { "type": "string" },
+        "tool_id": { "type": "string" },
+        "tool_version": { "type": "string" },
+        "status": { "enum": ["not_started", "waiting", "running", "completed", "failed", "blocked", "skipped", "cancelled", "stale_running", "orphaned"] },
+        "skip_reason": { "type": ["object", "null"] },
+        "attempts": { "type": "array", "items": { "$ref": "#/$defs/attempt" } },
+        "fanout_items": { "type": "array", "items": { "$ref": "#/$defs/fanoutItem" } },
+        "artifact_ids": { "type": "array", "items": { "type": "string" } },
+        "usage_record_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "attempt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_id", "attempt_no", "status", "operation_idempotency_key", "input_snapshot_hash", "started_at", "finished_at"],
+      "properties": {
+        "attempt_id": { "type": "string" },
+        "attempt_no": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["waiting", "running", "completed", "failed", "blocked", "cancelled", "stale_running", "orphaned"] },
+        "operation_idempotency_key": { "type": "string" },
+        "input_snapshot_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "finished_at": { "type": ["string", "null"], "format": "date-time" },
+        "metrics": { "type": "object" },
+        "error": { "type": ["object", "null"] }
+      }
+    },
+    "fanoutItem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["item_key", "status", "attempt_id", "attempt_no", "input_snapshot_hash", "artifact_ids", "usage_record_ids"],
+      "properties": {
+        "item_key": { "type": "string" },
+        "status": { "enum": ["completed", "failed", "skipped"] },
+        "attempt_id": { "type": "string" },
+        "attempt_no": { "type": "integer", "minimum": 1 },
+        "input_snapshot_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "artifact_ids": { "type": "array", "items": { "type": "string" } },
+        "usage_record_ids": { "type": "array", "items": { "type": "string" } },
+        "error": { "type": ["object", "null"] }
+      }
+    },
+    "artifactRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifact_id", "name", "path_base", "path", "media_type", "classification", "sha256", "size", "producer", "validity", "binding", "created_at", "mock"],
+      "properties": {
+        "artifact_id": { "type": "string" },
+        "name": { "type": "string" },
+        "path_base": { "enum": ["workspace", "run", "step", "step_attempt", "external"] },
+        "path": { "type": "string" },
+        "media_type": { "type": "string" },
+        "schema_ref": { "type": ["string", "null"] },
+        "classification": { "enum": ["public", "internal", "sensitive", "restricted"] },
+        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "size": { "type": "integer", "minimum": 0 },
+        "producer": {
+          "type": "object", "additionalProperties": false,
+          "required": ["step_id", "attempt_id", "tool_id", "tool_version"],
+          "properties": {
+            "step_id": { "type": "string" }, "attempt_id": { "type": "string" },
+            "tool_id": { "type": "string" }, "tool_version": { "type": "string" }
+          }
+        },
+        "validity": { "enum": ["missing", "valid", "stale", "unbound", "corrupt"] },
+        "binding": { "type": "object" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "mock": { "const": true }
+      }
+    },
+    "humanTask": {
+      "type": "object", "additionalProperties": false,
+      "required": ["work_item_id", "step_id", "status", "revision", "form", "roles", "input_snapshot_hash", "created_at", "completed_at", "decision", "decision_id", "actor", "reason", "expected_revision"],
+      "properties": {
+        "work_item_id": { "type": "string" }, "step_id": { "type": "string" },
+        "status": { "enum": ["open", "completed", "cancelled", "expired"] },
+        "revision": { "type": "integer", "minimum": 0 },
+        "form": { "type": "string", "minLength": 1 },
+        "roles": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "input_snapshot_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "completed_at": { "type": ["string", "null"], "format": "date-time" },
+        "decision": { "type": ["string", "null"] },
+        "decision_id": { "type": ["string", "null"] },
+        "actor": { "type": ["object", "null"] }, "reason": { "type": ["string", "null"] },
+        "expected_revision": { "type": "integer", "minimum": 0 }
+      },
+      "allOf": [
+        {
+          "if": { "required": ["status"], "properties": { "status": { "const": "completed" } } },
+          "then": {
+            "properties": {
+              "completed_at": { "type": "string", "format": "date-time" },
+              "decision": { "type": "string", "minLength": 1 },
+              "decision_id": { "type": "string", "minLength": 1 },
+              "actor": { "type": "object" },
+              "reason": { "type": "string", "minLength": 1 },
+              "revision": { "type": "integer", "minimum": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "event_id", "cursor", "kind", "session_id", "task_id", "run_id", "step_id", "tool_id", "step_attempt_id", "step_attempt_no", "correlation_id", "actor", "payload", "at"],
+      "properties": {
+        "schema_version": { "const": "1.1" },
+        "event_id": { "type": "string" }, "cursor": { "type": "integer", "minimum": 1 },
+        "kind": { "type": "string" }, "session_id": { "type": "string" },
+        "task_id": { "type": "string" }, "run_id": { "type": "string" },
+        "step_id": { "type": ["string", "null"] },
+        "tool_id": { "type": ["string", "null"] },
+        "step_attempt_id": { "type": ["string", "null"] },
+        "step_attempt_no": { "type": ["integer", "null"], "minimum": 1 },
+        "correlation_id": { "type": "string" }, "actor": { "type": "object" },
+        "payload": { "type": "object" }, "at": { "type": "string", "format": "date-time" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "step_attempt_id": { "type": "null" } } },
+          "then": { "properties": { "step_attempt_no": { "type": "null" } } },
+          "else": { "properties": { "step_attempt_no": { "type": "integer", "minimum": 1 } } }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["step.waiting", "step.blocked"] } } },
+          "then": {
+            "properties": {
+              "payload": {
+                "required": ["wait_reason"],
+                "properties": {
+                  "wait_reason": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["kind", "detail"],
+                    "properties": {
+                      "kind": { "enum": ["step", "variable", "artifact", "resource", "condition", "user", "host", "external_callback"] },
+                      "detail": { "type": "string", "minLength": 1 }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "budgetSummary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["currency", "limit", "reserved", "settled", "available", "status", "ledger_ref"],
+      "properties": {
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "limit": { "$ref": "#/$defs/amount" }, "reserved": { "$ref": "#/$defs/amount" },
+        "settled": { "$ref": "#/$defs/amount" }, "available": { "$ref": "#/$defs/amount" },
+        "status": { "enum": ["within_budget", "exhausted"] }, "ledger_ref": { "type": "string" }
+      }
+    },
+    "amount": { "type": "string", "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$" }
+  }
+}

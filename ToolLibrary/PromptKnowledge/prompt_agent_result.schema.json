@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew.local/schemas/koubo_prompt_agent_result.schema.json",
+  "title": "Koubo Prompt Agent Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "summary",
+    "issues",
+    "revised_prompt",
+    "negative_prompt",
+    "changes",
+    "model_notes",
+    "used_sources"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["critique", "optimize", "rewrite", "adapt"]
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "issues": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "span", "problem", "why_it_matters", "suggestion"],
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "span": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "problem": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "why_it_matters": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "suggestion": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      }
+    },
+    "revised_prompt": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "negative_prompt": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "changes": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "model_notes": {
+      "type": "array",
+      "maxItems": 40,
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    },
+    "used_sources": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["doc_id", "title", "trust_level", "reason"],
+        "properties": {
+          "doc_id": {
+            "type": "string",
+            "maxLength": 240
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "trust_level": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      }
+    }
+  }
+}

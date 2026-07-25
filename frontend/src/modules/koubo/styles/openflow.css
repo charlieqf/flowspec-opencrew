@@ -1,0 +1,440 @@
+.openclip-flow-page .openflow-summary-body {
+  gap: 12px;
+}
+.openclip-flow-page .openflow-summary-fields {
+  gap: 12px;
+}
+.openclip-flow-page .openflow-summary-item {
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+.openclip-flow-page .openflow-summary-label {
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+.openclip-flow-page .openflow-summary-value {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.openclip-flow-page .openflow-main-scheme-caption {
+  padding: 12px 12px 14px;
+  gap: 6px;
+}
+.openclip-flow-page .openflow-main-scheme-caption strong {
+  font-size: 12px;
+  line-height: 1.35;
+}
+.openclip-flow-page .openflow-main-scheme-caption span {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--muted);
+}
+.openclip-flow-page .openflow-main-scheme-caption p {
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 1px;
+}
+.openflow-prompt-drawer {
+  --oc-bg-body: #f8fafc;
+  --oc-surface: #ffffff;
+  --oc-input: #f1f5f9;
+  --oc-input-hover: #e2e8f0;
+  --oc-prompt: #fcfcfd;
+  --oc-border: #e2e8f0;
+  --oc-focus: #6366f1;
+  --oc-text: #0f172a;
+  --oc-secondary: #475569;
+  --oc-muted: #94a3b8;
+  --oc-primary: #4f46e5;
+  --oc-primary-light: #e0e7ff;
+  --oc-radius-sm: 6px;
+  --oc-radius-md: 12px;
+  --oc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --oc-shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+  width: min(1120px, 100vw);
+  background: var(--oc-bg-body);
+  color: var(--oc-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.openflow-prompt-drawer .skill-drawer-head {
+  min-height: 40px;
+  align-items: center;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.openflow-prompt-drawer .skill-drawer-head h3 {
+  color: var(--oc-text);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.openflow-prompt-drawer .skill-drawer-head p {
+  max-width: 680px;
+  margin: 4px 0 0;
+  color: var(--oc-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.openflow-prompt-drawer .openflow-config-drawer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-top: 8px;
+}
+.openflow-prompt-drawer .openflow-icon-action {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--oc-radius-sm);
+  border-color: var(--oc-border);
+  background: var(--oc-surface);
+  color: var(--oc-secondary);
+  box-shadow: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.openflow-prompt-drawer .openflow-icon-action:hover:not(:disabled) {
+  transform: none;
+  border-color: #cbd5e1;
+  background: var(--oc-input);
+  color: var(--oc-text);
+}
+.openflow-prompt-drawer .openflow-icon-action.primary {
+  color: var(--oc-primary);
+  border-color: #c7d2fe;
+  background: var(--oc-primary-light);
+}
+.openflow-prompt-drawer .openflow-icon-action.success {
+  color: #059669;
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+}
+.openflow-prompt-drawer .openclip-final-prompt-icon {
+  color: #2563eb;
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+.openflow-prompt-drawer .openflow-builder-card {
+  position: relative;
+  padding: 14px 16px;
+  border: 1px solid var(--oc-border);
+  border-radius: var(--oc-radius-md);
+  background: var(--oc-surface);
+  box-shadow: var(--oc-shadow-sm);
+}
+.openflow-prompt-drawer .openflow-source-card {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 360px;
+  flex-direction: column;
+  padding-top: 12px;
+}
+.openflow-prompt-drawer .openflow-source-card > .openflow-field {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+.openflow-prompt-drawer .openclip-parameter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.openflow-prompt-drawer .openclip-parameter-card .openflow-video-path-field {
+  width: 100%;
+}
+.openflow-prompt-drawer .openflow-card-head {
+  margin-bottom: 20px;
+}
+.openflow-prompt-drawer .openflow-card-head h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--oc-text);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.openflow-prompt-drawer .openflow-card-head h4::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--oc-primary), #8b5cf6);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+}
+.openflow-prompt-drawer .openflow-version-card .openflow-card-head h4::before {
+  background: linear-gradient(135deg, #64748b, #94a3b8);
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.18);
+}
+.openflow-prompt-drawer .openclip-final-prompt-card .openflow-card-head h4::before {
+  background: linear-gradient(135deg, var(--oc-primary), #3b82f6);
+}
+.openflow-prompt-drawer .openflow-field {
+  gap: 4px;
+}
+.openflow-prompt-drawer .openflow-field span {
+  color: var(--oc-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.openflow-prompt-drawer .openflow-field small {
+  color: var(--oc-muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+.openflow-prompt-drawer .openflow-field input,
+.openflow-prompt-drawer .openflow-field select,
+.openflow-prompt-drawer .openflow-field textarea {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: var(--oc-radius-sm);
+  background: var(--oc-input);
+  color: var(--oc-text);
+  font-size: 13px;
+  line-height: 1.38;
+  padding: 8px 12px;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.openflow-prompt-drawer .openflow-field input::placeholder,
+.openflow-prompt-drawer .openflow-field textarea::placeholder {
+  color: var(--oc-muted);
+}
+.openflow-prompt-drawer .openflow-field input:hover,
+.openflow-prompt-drawer .openflow-field select:hover,
+.openflow-prompt-drawer .openflow-field textarea:hover {
+  background: var(--oc-input-hover);
+}
+.openflow-prompt-drawer .openflow-field input:focus,
+.openflow-prompt-drawer .openflow-field select:focus,
+.openflow-prompt-drawer .openflow-field textarea:focus {
+  border-color: var(--oc-focus);
+  background: var(--oc-surface);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.openflow-prompt-drawer .openflow-field select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 42px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(50% + 1px),
+    calc(100% - 15px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.openflow-prompt-drawer .openflow-field select:hover {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #334155 50%),
+    linear-gradient(135deg, #334155 50%, transparent 50%);
+}
+.openflow-prompt-drawer .openflow-field select:focus {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--oc-primary) 50%),
+    linear-gradient(135deg, var(--oc-primary) 50%, transparent 50%);
+}
+.openflow-prompt-drawer .openflow-builder-parameter-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+.openflow-prompt-drawer .openflow-builder-parameter-grid > .openflow-field:not(.openclip-product-field):not(.openclip-constraints-field) {
+  grid-column: span 2;
+}
+.openflow-prompt-drawer .openclip-product-field {
+  grid-column: 1 / span 3;
+}
+.openflow-prompt-drawer .openclip-constraints-field {
+  grid-column: 4 / span 3;
+}
+.openflow-prompt-drawer .openflow-builder-parameter-grid .openflow-field textarea {
+  min-height: 44px;
+}
+.openflow-prompt-drawer .openflow-field textarea.openflow-modal-prompt {
+  flex: 1;
+  min-height: 320px;
+  height: 100%;
+}
+.openflow-prompt-drawer .openclip-prompt-card-head {
+  align-items: center;
+  margin-bottom: 8px;
+}
+.openflow-prompt-drawer .openflow-input-with-actions {
+  position: relative;
+  display: block;
+}
+.openflow-prompt-drawer .openflow-input-with-actions input {
+  padding-right: 88px;
+}
+.openflow-prompt-drawer .openflow-input-with-actions .openflow-inline-icon {
+  position: absolute;
+  top: 4px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--oc-radius-sm);
+  background: transparent;
+  color: var(--oc-muted);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.openflow-prompt-drawer .openflow-input-with-actions .openflow-inline-icon:nth-of-type(1) {
+  right: 38px;
+}
+.openflow-prompt-drawer .openflow-input-with-actions .openflow-inline-icon:nth-of-type(2) {
+  right: 6px;
+}
+.openflow-prompt-drawer .openflow-input-with-actions .openflow-inline-icon:hover {
+  background: var(--oc-input-hover);
+  color: var(--oc-text);
+}
+.openflow-prompt-drawer .openflow-field-counter {
+  color: var(--oc-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+.openflow-prompt-drawer .openflow-version-switcher {
+  min-width: 0;
+  flex: 1;
+  margin-top: 0;
+  gap: 8px;
+}
+.openflow-prompt-drawer .openflow-field textarea.openclip-simple-prompt-editor,
+.openflow-prompt-drawer textarea.openclip-simple-prompt-editor {
+  min-height: 520px;
+  height: 58vh;
+  max-height: none;
+}
+.openflow-prompt-drawer .openclip-simple-prompt-card {
+  min-height: 520px;
+}
+.openflow-prompt-drawer .openclip-version-notes-field {
+  max-width: 520px;
+  margin-bottom: 16px;
+}
+.openflow-prompt-drawer .openflow-version-chip {
+  min-width: 112px;
+  min-height: 34px;
+  border-color: var(--oc-border);
+  border-radius: var(--oc-radius-sm);
+  background: var(--oc-input);
+  color: var(--oc-text);
+  box-shadow: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.openflow-prompt-drawer .openflow-version-chip strong {
+  font-size: 11px;
+  line-height: 1.1;
+}
+.openflow-prompt-drawer .openflow-version-chip span {
+  max-width: 112px;
+  font-size: 10px;
+  line-height: 1.1;
+}
+.openflow-prompt-drawer .openflow-version-chip:hover {
+  border-color: #cbd5e1;
+  background: var(--oc-input-hover);
+}
+.openflow-prompt-drawer .openflow-version-chip.is-active {
+  border-color: var(--oc-primary);
+  background: var(--oc-primary-light);
+  color: var(--oc-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+.openflow-prompt-drawer .openflow-version-chip.is-active span {
+  color: var(--oc-primary);
+  opacity: 0.78;
+}
+.openflow-prompt-drawer .openflow-version-chip.is-modified {
+  border-style: dashed;
+}
+.openflow-prompt-drawer .openflow-empty-version {
+  border-color: var(--oc-border);
+  border-radius: var(--oc-radius-sm);
+  background: var(--oc-prompt);
+  color: var(--oc-secondary);
+  font-size: 13px;
+}
+.openflow-prompt-drawer .openflow-version-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+}
+.openflow-prompt-drawer .openclip-version-notes-input {
+  width: min(360px, 42%);
+  flex: 0 0 min(360px, 42%);
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: var(--oc-radius-sm);
+  background: var(--oc-input);
+  color: var(--oc-text);
+  font-size: 13px;
+  line-height: 1.38;
+  padding: 8px 12px;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.openflow-prompt-drawer .openclip-version-notes-input::placeholder {
+  color: var(--oc-muted);
+}
+.openflow-prompt-drawer .openclip-version-notes-input:hover {
+  background: var(--oc-input-hover);
+}
+.openflow-prompt-drawer .openclip-version-notes-input:focus {
+  border-color: var(--oc-focus);
+  background: var(--oc-surface);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+.openflow-prompt-drawer .openclip-final-prompt-card {
+  overflow: hidden;
+  border-color: var(--oc-primary);
+  box-shadow: var(--oc-shadow-card), 0 0 0 1px rgba(79, 70, 229, 0.1);
+}
+.openflow-prompt-drawer .openclip-final-prompt-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--oc-primary), #8b5cf6, #3b82f6);
+}
+.openflow-prompt-drawer .openflow-final-prompt {
+  min-height: 72vh;
+  border-color: var(--oc-border);
+  background: var(--oc-prompt);
+  font-size: 13px;
+  line-height: 1.65;
+  padding: 16px;
+}
+.openclip-skill-drawer .openflow-icon-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.openflow-prompt-drawer .openclip-skill-version-notes-input {
+  width: min(360px, 42%);
+  flex: 0 0 min(360px, 42%);
+  margin-bottom: 0;
+}
+.openclip-skill-editor-card .openflow-skill-builder-editor {
+  min-height: 70vh;
+  border: 1px solid var(--oc-border);
+  border-radius: var(--oc-radius-sm);
+  background: var(--oc-prompt);
+  color: var(--oc-text);
+  font-size: 13px;
+  line-height: 1.65;
+  padding: 16px;
+  outline: none;
+}
+.openclip-skill-editor-card .openflow-skill-builder-editor:focus {
+  border-color: var(--oc-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}

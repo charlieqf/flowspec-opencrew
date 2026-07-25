@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "InputFileEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "source_kind": {
+          "default": "workspace_file",
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "source_ref": {
+          "default": "",
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size": {
+          "title": "Size",
+          "type": "integer"
+        },
+        "visibility": {
+          "default": "internal",
+          "title": "Visibility",
+          "type": "string"
+        },
+        "sensitivity": {
+          "default": "normal",
+          "title": "Sensitivity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size"
+      ],
+      "title": "InputFileEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attempt Id"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/InputFileEntry"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "tool_use_session_id"
+  ],
+  "title": "InputManifest",
+  "type": "object"
+}

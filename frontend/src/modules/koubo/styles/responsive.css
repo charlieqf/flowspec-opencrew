@@ -1,0 +1,242 @@
+@media (max-width: 1240px) {
+  .ocsb-left {
+    width: 220px;
+  }
+
+  .ocsb-right {
+    width: 240px;
+  }
+
+  .ocsb-frame-strip {
+    flex-basis: 210px;
+  }
+}
+@media (max-width: 980px) {
+  .ocsb-editor {
+    height: auto;
+  }
+
+  .ocsb-main-row {
+    flex-direction: column;
+  }
+
+  .ocsb-left,
+  .ocsb-right {
+    border: 0;
+    max-height: none;
+    width: auto;
+  }
+
+  .ocsb-workspace {
+    padding: 0 16px 24px;
+  }
+
+  .ocsb-workspace-head,
+  .ocsb-dialogue-card,
+  .ocsb-shot-sticky,
+  .ocsb-shot-notes {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ocsb-shot-notes {
+    display: flex;
+  }
+
+  .ocsb-frame-strip {
+    flex-basis: auto;
+  }
+}
+@media (max-width: 1180px) {
+  .ocstoryboard-workbench {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .ocstoryboard-asset-pool {
+    grid-column: 1 / -1;
+  }
+
+  .ocstoryboard-assets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    max-height: none;
+  }
+}
+@media (max-width: 760px) {
+  .ocstoryboard-workbench,
+  .ocstoryboard-shot-fields,
+  .ocstoryboard-scene-form {
+    grid-template-columns: 1fr;
+  }
+
+  .ocstoryboard-frame-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ocstoryboard-toolbar,
+  .ocstoryboard-shot-editor-head,
+  .ocstoryboard-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 720px) {
+  .ocrebuild-shot-r2v-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 980px) {
+  .ocrebuild-compare-grid,
+  .ocrebuild-compare-mode {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .ocrebuild-video-dialog .ocrebuild-compare-grid,
+  .ocrebuild-video-dialog .ocrebuild-compare-mode {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .ocrebuild-shot-plan-head,
+  .ocrebuild-shot-plan-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .ocrebuild-shot-global-mode {
+    width: auto;
+    align-self: flex-end;
+  }
+  .ocrebuild-shot-workspace,
+  .ocrebuild-shot-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 960px) {
+  .openclip-slot-summary-row {
+    grid-template-columns: 1fr;
+  }
+
+  .openclip-scheme-toolbar {
+    align-items: stretch;
+  }
+
+  .openclip-preview-controls {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .openclip-scheme-list-item {
+    grid-template-columns: 1fr;
+  }
+
+  .openclip-scheme-list-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .openclip-segment-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .openclip-segment-preview-dialog {
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    border-radius: 18px;
+  }
+
+  .openclip-segment-preview-head {
+    padding: 18px;
+  }
+
+  .openclip-retake-table,
+  .openclip-retake-table tbody,
+  .openclip-retake-table tr,
+  .openclip-retake-table th,
+  .openclip-retake-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .openclip-retake-table th {
+    padding-bottom: 4px;
+    border-bottom: 0;
+  }
+
+  .openclip-retake-table td {
+    padding-top: 4px;
+  }
+}
+@media (max-width: 680px) {
+  .openclip-model-dialog-body {
+    grid-template-columns: 1fr;
+  }
+
+  .ocrebuild-srt-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .ocrebuild-shot-prompt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ocrebuild-shot-prompt-structured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ocrebuild-voice-guide-dialog .tts-guide-controls {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1080px) {
+  .ocrebuild-srt-titlebar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ocrebuild-srt-header-filters {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(110px, 1fr) minmax(130px, 1fr) minmax(200px, 2fr);
+  }
+}
+@media (max-width: 920px) {
+  .openflow-prompt-drawer .openflow-builder-parameter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .openflow-prompt-drawer .ocrebuild-select-grid,
+  .openflow-prompt-drawer .ocrebuild-text-grid,
+  .openflow-prompt-drawer .ocrebuild-checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .openflow-prompt-drawer .ocrebuild-textarea-field {
+    grid-column: auto;
+  }
+
+  .openflow-prompt-drawer .openflow-field-wide {
+    grid-column: auto;
+  }
+
+  .openflow-prompt-drawer .openflow-version-card {
+    flex-direction: column;
+  }
+
+  .openflow-prompt-drawer .openclip-version-notes-input {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .openclip-skill-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .host-product-builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

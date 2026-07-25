@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.1",
+  "ledger_id": "budget_run_loan_20260724_001",
+  "run_id": "run_loan_20260724_001",
+  "currency": "USD",
+  "limit": "2",
+  "reserved": "0",
+  "settled": "0.009",
+  "available": "1.991",
+  "status": "within_budget",
+  "transactions": [
+    {
+      "transaction_id": "btx_9b721694bc89185a",
+      "kind": "reserve",
+      "operation_id": "op_84ea9376be4f75cf",
+      "model_invocation_id": "mi_14f6a136a7b1aa44",
+      "amount": "0.012",
+      "at": "2026-07-24T00:10:11Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_52bd3b33b7fe8b52",
+      "kind": "settle",
+      "operation_id": "op_84ea9376be4f75cf",
+      "model_invocation_id": "mi_14f6a136a7b1aa44",
+      "amount": "0.009",
+      "at": "2026-07-24T00:10:19Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_4b0b03b27222d286",
+      "kind": "release",
+      "operation_id": "op_84ea9376be4f75cf",
+      "model_invocation_id": "mi_14f6a136a7b1aa44",
+      "amount": "0.003",
+      "at": "2026-07-24T00:10:20Z",
+      "reason": "unused reservation"
+    }
+  ]
+}

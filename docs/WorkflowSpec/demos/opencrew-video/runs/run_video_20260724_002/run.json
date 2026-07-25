@@ -1,0 +1,5757 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run_video_20260724_002",
+  "session_id": "video_LUMEN_LAUNCH",
+  "task_id": "video_LUMEN_LAUNCH_t",
+  "run_sequence": 2,
+  "supersedes_run_id": "run_video_20260724_001",
+  "process_snapshot": {
+    "process_id": "opencrew_ai_video_creation",
+    "version": "1.1.0",
+    "digest": "sha256:e337f64906011e8c0dfe258a28da102d19562a0156e6298b96fd9ec19814ec80",
+    "tool_registry_id": "opencrew_video_mock_tools",
+    "tool_registry_version": "1.1.0",
+    "tool_registry_digest": "sha256:e10018c6fb7a1978d48d38b2b9b75a7af933da70a6826be95fb7d14a99c4008d",
+    "profiles": [
+      {
+        "profile_id": "video_creative_agent",
+        "version": "1.0.0",
+        "digest": "sha256:917c52e142384afa3b2d4f4b4fecbfc3aa91e46f77fcee38d8a34041695cc867"
+      },
+      {
+        "profile_id": "video_image_model",
+        "version": "1.0.0",
+        "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+      },
+      {
+        "profile_id": "video_planning_model",
+        "version": "1.0.0",
+        "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+      },
+      {
+        "profile_id": "video_multimodal_qa",
+        "version": "1.0.0",
+        "digest": "sha256:33a6de06a049036d13d3577f25c8c7594252aae531aa3e5c19083727d2702c28"
+      },
+      {
+        "profile_id": "video_tts_model",
+        "version": "1.0.0",
+        "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+      },
+      {
+        "profile_id": "video_generation_model",
+        "version": "1.0.0",
+        "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+      }
+    ]
+  },
+  "definition_snapshot_ref": "definition/process.snapshot.json",
+  "storage_index_ref": "storage-index.json",
+  "input_revision_hash": "sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+  "status": "completed",
+  "outcome": "delivered",
+  "started_at": "2026-07-24T12:00:00Z",
+  "finished_at": "2026-07-24T12:05:17Z",
+  "context": {
+    "project_id": "VID-LUMEN-01",
+    "creative_revision": "creative-r2",
+    "brand": "Lumen Labs",
+    "product": "Hydra Daily",
+    "audience": "Australian wellness shoppers 25-40",
+    "channel": "instagram_reels",
+    "duration_seconds": 24,
+    "storyboard_fixture": [
+      {
+        "asset_key": "dlg-001",
+        "text": "Three o'clock slump? Start with hydration.",
+        "duration_seconds": 7,
+        "visual": "host at desk"
+      },
+      {
+        "asset_key": "dlg-002",
+        "text": "Hydra Daily keeps the ritual simple.",
+        "duration_seconds": 8,
+        "visual": "corrected product close-up"
+      },
+      {
+        "asset_key": "dlg-003",
+        "text": "Mix, sip, and get back to your day.",
+        "duration_seconds": 9,
+        "visual": "host payoff"
+      }
+    ],
+    "qa_pass_fixture": true,
+    "storyboard_decision": "approved",
+    "publish_decision": "approved",
+    "brief_hash": "mock:VID-LUMEN-01:creative-r2",
+    "dialogue_count": 3,
+    "qa_passed": true,
+    "delivered_at": "2026-07-24T12:40:00Z"
+  },
+  "steps": [
+    {
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_0c83d750086a3acc",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S1_creative_brief:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:e0837c76e627fd2260a2dc5edc1aea18baff25d2ed1b63f537aedf03bd5c83cf",
+          "started_at": "2026-07-24T12:00:01Z",
+          "finished_at": "2026-07-24T12:00:27Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 2,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_1f9187f684ff90cc"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0001",
+        "usage_run_video_20260724_002_0002"
+      ]
+    },
+    {
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_e6643cac045ffa88",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S2_storyboard_plan:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:adaf9c820ca03fc0ef059204d62d762a40fa6162b6692070240c644065a688e2",
+          "started_at": "2026-07-24T12:00:29Z",
+          "finished_at": "2026-07-24T12:00:44Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 1,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_77d56df9e78f5168"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0003"
+      ]
+    },
+    {
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_d6c49b26b0b57ef6",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S3_storyboard_confirm:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:1dcafff49cbd2bbd766b6e0c213dd74cf36da299240c34e13676b6ed21780c76",
+          "started_at": "2026-07-24T12:00:46Z",
+          "finished_at": "2026-07-24T12:00:55Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_02dd8d1d548475b7"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S3b_storyboard_revision",
+      "tool_id": "request_storyboard_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('approved')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_1c45ebb44d3972f8",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S4_consistency_references:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:aa3f92ebfececd209208a84cf9326fea77693246629425f7b76d4d85a30c36b0",
+          "started_at": "2026-07-24T12:00:58Z",
+          "finished_at": "2026-07-24T12:01:13Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 1,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_ba5db62862c912f3"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0004"
+      ]
+    },
+    {
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_00eb5f885022ea28",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:f0163debf9ec226e2d0670bf0eeb638a6a9a864673142f535894913621f7936d",
+          "started_at": "2026-07-24T12:01:15Z",
+          "finished_at": "2026-07-24T12:01:59Z",
+          "metrics": {
+            "artifact_count": 3,
+            "usage_record_count": 3,
+            "fanout_item_count": 3
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [
+        {
+          "item_key": "dlg-001",
+          "status": "completed",
+          "attempt_id": "sa_00eb5f885022ea28:dlg-001",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:a95f3432ce7c4b9c892f6386c31640cee0e4185a7b0b0dc4fd751d675e284e2d",
+          "artifact_ids": [
+            "art_da6740f60b5c1d42"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0005"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-002",
+          "status": "completed",
+          "attempt_id": "sa_00eb5f885022ea28:dlg-002",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:99d9411712890eb7f54a052834dfba02f93db726da666437df308eb871460cf7",
+          "artifact_ids": [
+            "art_5a98193aefc3d23f"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0006"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-003",
+          "status": "completed",
+          "attempt_id": "sa_00eb5f885022ea28:dlg-003",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:cb5395e79a9325f476c4e66cb71c55817b40f6302c7636e33768516802ac4389",
+          "artifact_ids": [
+            "art_b03e7299227f6e60"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0007"
+          ],
+          "error": null
+        }
+      ],
+      "artifact_ids": [
+        "art_da6740f60b5c1d42",
+        "art_5a98193aefc3d23f",
+        "art_b03e7299227f6e60"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0005",
+        "usage_run_video_20260724_002_0006",
+        "usage_run_video_20260724_002_0007"
+      ]
+    },
+    {
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_86967ee671f24daf",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:9d6af733a8ec61998ffd024cee40e145ecc03af46f4c6e134250431b9de83983",
+          "started_at": "2026-07-24T12:02:01Z",
+          "finished_at": "2026-07-24T12:02:45Z",
+          "metrics": {
+            "artifact_count": 3,
+            "usage_record_count": 3,
+            "fanout_item_count": 3
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [
+        {
+          "item_key": "dlg-001",
+          "status": "completed",
+          "attempt_id": "sa_86967ee671f24daf:dlg-001",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:26e6b88b2e5f33b6d3abde385c8d6e40a73a362f1ad5cbcd9fe374f798920565",
+          "artifact_ids": [
+            "art_60f2f606bd2a52c4"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0008"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-002",
+          "status": "completed",
+          "attempt_id": "sa_86967ee671f24daf:dlg-002",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:7495700005f6d75e1759e2633fb8130527705ebedaaf811a83b7004c8f1cc4ef",
+          "artifact_ids": [
+            "art_94bd8fadfbed732a"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0009"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-003",
+          "status": "completed",
+          "attempt_id": "sa_86967ee671f24daf:dlg-003",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:62c3ce1515b78297b7358a00519e91dd1a02700705ff63413d2b653216c5a903",
+          "artifact_ids": [
+            "art_620b4ad06201b61d"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0010"
+          ],
+          "error": null
+        }
+      ],
+      "artifact_ids": [
+        "art_60f2f606bd2a52c4",
+        "art_94bd8fadfbed732a",
+        "art_620b4ad06201b61d"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0008",
+        "usage_run_video_20260724_002_0009",
+        "usage_run_video_20260724_002_0010"
+      ]
+    },
+    {
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_8ef0bef21d5f6a77",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:b40bd55873dd00da8d93936fcf0f1f1ad8a1ab9ee0c6c92a7c441e784b997ff5",
+          "started_at": "2026-07-24T12:02:47Z",
+          "finished_at": "2026-07-24T12:03:31Z",
+          "metrics": {
+            "artifact_count": 3,
+            "usage_record_count": 3,
+            "fanout_item_count": 3
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [
+        {
+          "item_key": "dlg-001",
+          "status": "completed",
+          "attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:ce1833283b46595c1df27cced4259c454dc53d61d8d9dae96857540d70876af3",
+          "artifact_ids": [
+            "art_d76759f7a08558c8"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0011"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-002",
+          "status": "completed",
+          "attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:7e50ad3bbfc4db81def6ca2226e48db6abd4e4ba9b106a8eb6520917f62a6806",
+          "artifact_ids": [
+            "art_5391c8369ee7de48"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0012"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-003",
+          "status": "completed",
+          "attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:d05db2454792a1a9927d3cbac86754fd1f1699d180690871b3b50092f367e710",
+          "artifact_ids": [
+            "art_668a068527c3d915"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0013"
+          ],
+          "error": null
+        }
+      ],
+      "artifact_ids": [
+        "art_d76759f7a08558c8",
+        "art_5391c8369ee7de48",
+        "art_668a068527c3d915"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0011",
+        "usage_run_video_20260724_002_0012",
+        "usage_run_video_20260724_002_0013"
+      ]
+    },
+    {
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_1a36bdcf705aec71",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:db1d3fb5ce78675b09026359c03eb530122fd4c67529c7b21749de233cccdadd",
+          "started_at": "2026-07-24T12:03:33Z",
+          "finished_at": "2026-07-24T12:04:17Z",
+          "metrics": {
+            "artifact_count": 3,
+            "usage_record_count": 3,
+            "fanout_item_count": 3
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [
+        {
+          "item_key": "dlg-001",
+          "status": "completed",
+          "attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:ff9ce304cd0b4ed400b2bcd03e9740cc00e51b02903c7ffb7cdcd0738e7d09d2",
+          "artifact_ids": [
+            "art_d6ef54c1a6501365"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0014"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-002",
+          "status": "completed",
+          "attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:65ced766abc1bb5df70cb567036b6a819993d32b8c5087a79581112fa161f610",
+          "artifact_ids": [
+            "art_60354b0f0d3f4f1b"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0015"
+          ],
+          "error": null
+        },
+        {
+          "item_key": "dlg-003",
+          "status": "completed",
+          "attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:4f70f71416b4cf123e832dcb89c708602aa59e5f490d3b05d39c20e496498d15",
+          "artifact_ids": [
+            "art_ed0edcc9327f1156"
+          ],
+          "usage_record_ids": [
+            "usage_run_video_20260724_002_0016"
+          ],
+          "error": null
+        }
+      ],
+      "artifact_ids": [
+        "art_d6ef54c1a6501365",
+        "art_60354b0f0d3f4f1b",
+        "art_ed0edcc9327f1156"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0014",
+        "usage_run_video_20260724_002_0015",
+        "usage_run_video_20260724_002_0016"
+      ]
+    },
+    {
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_69fc6d1cc9b270e6",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S9_bind_segments:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:b1126c2b0a3a8f2ecccf4f2ce11b5f0fc15a6cf9ed4b87cd12b75f2bddb5bb73",
+          "started_at": "2026-07-24T12:04:19Z",
+          "finished_at": "2026-07-24T12:04:30Z",
+          "metrics": {
+            "artifact_count": 3,
+            "usage_record_count": 0,
+            "fanout_item_count": 3
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [
+        {
+          "item_key": "dlg-001",
+          "status": "completed",
+          "attempt_id": "sa_69fc6d1cc9b270e6:dlg-001",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:ad441e82e0c48bc9d4ea34a2aed3887e91a817db56404bf3bdc7b3a482844822",
+          "artifact_ids": [
+            "art_8abdf11ce92b4e8b"
+          ],
+          "usage_record_ids": [],
+          "error": null
+        },
+        {
+          "item_key": "dlg-002",
+          "status": "completed",
+          "attempt_id": "sa_69fc6d1cc9b270e6:dlg-002",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:abd59cf3eabcd5e049954680ce16973ff9ba63020b4836753973e7e8807e5b73",
+          "artifact_ids": [
+            "art_3bdf49881ab2d012"
+          ],
+          "usage_record_ids": [],
+          "error": null
+        },
+        {
+          "item_key": "dlg-003",
+          "status": "completed",
+          "attempt_id": "sa_69fc6d1cc9b270e6:dlg-003",
+          "attempt_no": 1,
+          "input_snapshot_hash": "sha256:0499fd43303f0e18dcfcc076660e88aa44dc75244e6c0f47df8589ce000ce3dd",
+          "artifact_ids": [
+            "art_80f1585c69ff28ff"
+          ],
+          "usage_record_ids": [],
+          "error": null
+        }
+      ],
+      "artifact_ids": [
+        "art_8abdf11ce92b4e8b",
+        "art_3bdf49881ab2d012",
+        "art_80f1585c69ff28ff"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S10_master_compose",
+      "tool_id": "compose_master_video",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_39d90412c952f4c8",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S10_master_compose:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:ee69a5557d58c87e31a0a9ed2d6f6a75b26ae164c2bf28c1830a45a50b76a469",
+          "started_at": "2026-07-24T12:04:32Z",
+          "finished_at": "2026-07-24T12:04:38Z",
+          "metrics": {
+            "artifact_count": 2,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_809fae390fc3f6be",
+        "art_3809c38560539c5d"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_472b91a72e097570",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S11_multimodal_qa:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:7d5712d3db55b628d628eeaf39993b45b01ddfb319339c166aad647495e844a9",
+          "started_at": "2026-07-24T12:04:40Z",
+          "finished_at": "2026-07-24T12:04:55Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 1,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_3c09256909752964"
+      ],
+      "usage_record_ids": [
+        "usage_run_video_20260724_002_0017"
+      ]
+    },
+    {
+      "step_id": "S12_qa_revision",
+      "tool_id": "request_qa_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (True)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_f91777e39f450d5d",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S13_publish_confirm:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:d80775835c319ae966dc5844d59e6a1c296c5f7f3757c42cb940edce8fcfbc7b",
+          "started_at": "2026-07-24T12:04:58Z",
+          "finished_at": "2026-07-24T12:05:07Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_21ca4b9636792a66"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S14_deliver",
+      "tool_id": "deliver_channel_asset",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_ff9ebbde4c38e2f1",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_video_20260724_002:S14_deliver:sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7",
+          "input_snapshot_hash": "sha256:3a00109841c0b7f4cdf1d91f526ee873a4b7242016208c4f8ae315e0ea223833",
+          "started_at": "2026-07-24T12:05:09Z",
+          "finished_at": "2026-07-24T12:05:13Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_2a35b1c9318a6727"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S15_publish_revision",
+      "tool_id": "request_publish_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('approved')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "art_1f9187f684ff90cc",
+      "name": "CreativeBrief.json",
+      "path_base": "run",
+      "path": "artifacts/CreativeBrief.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/brief",
+      "classification": "internal",
+      "sha256": "sha256:aea3cbe869669d6e72d506c6760a09739939db4bbe4adf338141d3263bac55c2",
+      "size": 368,
+      "producer": {
+        "step_id": "S1_creative_brief",
+        "attempt_id": "sa_0c83d750086a3acc",
+        "tool_id": "build_creative_brief",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:00:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_77d56df9e78f5168",
+      "name": "StoryboardPlan.json",
+      "path_base": "run",
+      "path": "artifacts/StoryboardPlan.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/storyboard",
+      "classification": "internal",
+      "sha256": "sha256:c02ed937915219a758d5a011b92ca9d08b4ee84801a2c56521b4a0563d45b89f",
+      "size": 612,
+      "producer": {
+        "step_id": "S2_storyboard_plan",
+        "attempt_id": "sa_e6643cac045ffa88",
+        "tool_id": "plan_storyboard",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:00:31Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_02dd8d1d548475b7",
+      "name": "StoryboardApproval.json",
+      "path_base": "run",
+      "path": "artifacts/StoryboardApproval.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approval",
+      "classification": "internal",
+      "sha256": "sha256:fffc6d606c246bc7ec1ae9c62d6bcf2cd118a763b9b43ef9b0dbe5610c3aae21",
+      "size": 236,
+      "producer": {
+        "step_id": "S3_storyboard_confirm",
+        "attempt_id": "sa_d6c49b26b0b57ef6",
+        "tool_id": "review_storyboard",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:00:53Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_ba5db62862c912f3",
+      "name": "ConsistencyReferences.json",
+      "path_base": "run",
+      "path": "artifacts/ConsistencyReferences.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/references",
+      "classification": "internal",
+      "sha256": "sha256:e6c53a21fa381f5f16ba1725f323dc8420c49e9544497d959521787848cd0a40",
+      "size": 143,
+      "producer": {
+        "step_id": "S4_consistency_references",
+        "attempt_id": "sa_1c45ebb44d3972f8",
+        "tool_id": "generate_consistency_references",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:01:00Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_da6740f60b5c1d42",
+      "name": "Audio_dlg-001.wav",
+      "path_base": "run",
+      "path": "artifacts/Audio_dlg-001.wav.mock.json",
+      "media_type": "audio/wav",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:90f140f9fae1f7f9f4c231a978bad25b2868a833b66417e07a51069cf0c83c2f",
+      "size": 274,
+      "producer": {
+        "step_id": "S5_audio_fanout",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-001",
+        "tool_id": "generate_dialogue_audio",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-001"
+      },
+      "created_at": "2026-07-24T12:01:17Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_5a98193aefc3d23f",
+      "name": "Audio_dlg-002.wav",
+      "path_base": "run",
+      "path": "artifacts/Audio_dlg-002.wav.mock.json",
+      "media_type": "audio/wav",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:7c32f886e3de33f69e6b7b0de3ed80b4da744920f6afaf0413a33a6c9d4bd2b3",
+      "size": 274,
+      "producer": {
+        "step_id": "S5_audio_fanout",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-002",
+        "tool_id": "generate_dialogue_audio",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-002"
+      },
+      "created_at": "2026-07-24T12:01:31Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_b03e7299227f6e60",
+      "name": "Audio_dlg-003.wav",
+      "path_base": "run",
+      "path": "artifacts/Audio_dlg-003.wav.mock.json",
+      "media_type": "audio/wav",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:e3f835634bfe2a8e02566d0f7fd52900cfdb3e9267b01b6e0dac85572f09b3d6",
+      "size": 274,
+      "producer": {
+        "step_id": "S5_audio_fanout",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-003",
+        "tool_id": "generate_dialogue_audio",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-003"
+      },
+      "created_at": "2026-07-24T12:01:45Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_60f2f606bd2a52c4",
+      "name": "VisualPrompt_dlg-001.json",
+      "path_base": "run",
+      "path": "artifacts/VisualPrompt_dlg-001.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/visualPrompt",
+      "classification": "internal",
+      "sha256": "sha256:4fe84844728869888af97660262f34a828c51d2d14bfca772b3c17c0e0fd9b6b",
+      "size": 246,
+      "producer": {
+        "step_id": "S6_visual_prompt_fanout",
+        "attempt_id": "sa_86967ee671f24daf:dlg-001",
+        "tool_id": "create_visual_prompt",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-001"
+      },
+      "created_at": "2026-07-24T12:02:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_94bd8fadfbed732a",
+      "name": "VisualPrompt_dlg-002.json",
+      "path_base": "run",
+      "path": "artifacts/VisualPrompt_dlg-002.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/visualPrompt",
+      "classification": "internal",
+      "sha256": "sha256:6110ad2c9a28d187f8aa5f7856bbd6230e3359b3724c52f344ed93985d96b3d4",
+      "size": 260,
+      "producer": {
+        "step_id": "S6_visual_prompt_fanout",
+        "attempt_id": "sa_86967ee671f24daf:dlg-002",
+        "tool_id": "create_visual_prompt",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-002"
+      },
+      "created_at": "2026-07-24T12:02:17Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_620b4ad06201b61d",
+      "name": "VisualPrompt_dlg-003.json",
+      "path_base": "run",
+      "path": "artifacts/VisualPrompt_dlg-003.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/visualPrompt",
+      "classification": "internal",
+      "sha256": "sha256:e0841e12cff65ada1516509146b9fde303ec1b95f6bab6f41626d37b1696325a",
+      "size": 245,
+      "producer": {
+        "step_id": "S6_visual_prompt_fanout",
+        "attempt_id": "sa_86967ee671f24daf:dlg-003",
+        "tool_id": "create_visual_prompt",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-003"
+      },
+      "created_at": "2026-07-24T12:02:31Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_d76759f7a08558c8",
+      "name": "Image_dlg-001.png",
+      "path_base": "run",
+      "path": "artifacts/Image_dlg-001.png.mock.json",
+      "media_type": "image/png",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:8f34ede9b29b7de6895b65f060fbff6d048f251f399179d7c05a15fc6251075e",
+      "size": 270,
+      "producer": {
+        "step_id": "S7_image_fanout",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+        "tool_id": "generate_dialogue_image",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-001"
+      },
+      "created_at": "2026-07-24T12:02:49Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_5391c8369ee7de48",
+      "name": "Image_dlg-002.png",
+      "path_base": "run",
+      "path": "artifacts/Image_dlg-002.png.mock.json",
+      "media_type": "image/png",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:b3efa389ac4f75aca1d84342a9e9b0d2ec4a63c176fbe74e96188eb95b3b027d",
+      "size": 270,
+      "producer": {
+        "step_id": "S7_image_fanout",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+        "tool_id": "generate_dialogue_image",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-002"
+      },
+      "created_at": "2026-07-24T12:03:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_668a068527c3d915",
+      "name": "Image_dlg-003.png",
+      "path_base": "run",
+      "path": "artifacts/Image_dlg-003.png.mock.json",
+      "media_type": "image/png",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:3978aafabed47e7c1a307880a23bafb85e6f65985978f12cfd382e37057d83ac",
+      "size": 270,
+      "producer": {
+        "step_id": "S7_image_fanout",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+        "tool_id": "generate_dialogue_image",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-003"
+      },
+      "created_at": "2026-07-24T12:03:17Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_d6ef54c1a6501365",
+      "name": "RawVideo_dlg-001.mp4",
+      "path_base": "run",
+      "path": "artifacts/RawVideo_dlg-001.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:08f5be39838d292d1fa53cd894310e900f3d34d09a4ff0b546661046ae74729b",
+      "size": 288,
+      "producer": {
+        "step_id": "S8_video_fanout",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+        "tool_id": "generate_dialogue_video",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-001"
+      },
+      "created_at": "2026-07-24T12:03:35Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_60354b0f0d3f4f1b",
+      "name": "RawVideo_dlg-002.mp4",
+      "path_base": "run",
+      "path": "artifacts/RawVideo_dlg-002.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:9ee105e93eefe0a00d0f41d92bfb1e2762458e4a738ef91004077e18cf107092",
+      "size": 288,
+      "producer": {
+        "step_id": "S8_video_fanout",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+        "tool_id": "generate_dialogue_video",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-002"
+      },
+      "created_at": "2026-07-24T12:03:49Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_ed0edcc9327f1156",
+      "name": "RawVideo_dlg-003.mp4",
+      "path_base": "run",
+      "path": "artifacts/RawVideo_dlg-003.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:9fe6719fe355515746cff2663588d84cf73ad292bbccdc4cd1d9a3afc3358441",
+      "size": 288,
+      "producer": {
+        "step_id": "S8_video_fanout",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+        "tool_id": "generate_dialogue_video",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-003"
+      },
+      "created_at": "2026-07-24T12:04:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_8abdf11ce92b4e8b",
+      "name": "FinalSegment_dlg-001.mp4",
+      "path_base": "run",
+      "path": "artifacts/FinalSegment_dlg-001.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:e7ecf8059881c3c21a7763bfb6e3f6a6c8a3112e4bb018ced231e35d19c6363a",
+      "size": 380,
+      "producer": {
+        "step_id": "S9_bind_segments",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-001",
+        "tool_id": "bind_final_segment",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-001"
+      },
+      "created_at": "2026-07-24T12:04:21Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_3bdf49881ab2d012",
+      "name": "FinalSegment_dlg-002.mp4",
+      "path_base": "run",
+      "path": "artifacts/FinalSegment_dlg-002.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:74133b592c7f417d1d4b10b7c08d3f1d6bf05aaaa58434b1b4d44a1adcedfbfd",
+      "size": 380,
+      "producer": {
+        "step_id": "S9_bind_segments",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-002",
+        "tool_id": "bind_final_segment",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-002"
+      },
+      "created_at": "2026-07-24T12:04:24Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_80f1585c69ff28ff",
+      "name": "FinalSegment_dlg-003.mp4",
+      "path_base": "run",
+      "path": "artifacts/FinalSegment_dlg-003.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:466979aeb30402dff27ed4a1d2f7146903decc0b75a1734eaaef1777b0c3c203",
+      "size": 380,
+      "producer": {
+        "step_id": "S9_bind_segments",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-003",
+        "tool_id": "bind_final_segment",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2",
+        "asset_key": "dlg-003"
+      },
+      "created_at": "2026-07-24T12:04:27Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_809fae390fc3f6be",
+      "name": "MasterVideo.mp4",
+      "path_base": "run",
+      "path": "artifacts/MasterVideo.mp4.mock.json",
+      "media_type": "video/mp4",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+      "classification": "internal",
+      "sha256": "sha256:38293dc8644ead1408a34a9bb623837cacf256ebd7a1f6ff05a1f7b7e26a01b4",
+      "size": 327,
+      "producer": {
+        "step_id": "S10_master_compose",
+        "attempt_id": "sa_39d90412c952f4c8",
+        "tool_id": "compose_master_video",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:04:34Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_3809c38560539c5d",
+      "name": "DeliveryManifest.json",
+      "path_base": "run",
+      "path": "artifacts/DeliveryManifest.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/deliveryManifest",
+      "classification": "internal",
+      "sha256": "sha256:bcbe78428a17b4d6b6d77e8f2b9de7a1131774f38a171f2303f06dc0ea41a500",
+      "size": 167,
+      "producer": {
+        "step_id": "S10_master_compose",
+        "attempt_id": "sa_39d90412c952f4c8",
+        "tool_id": "compose_master_video",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:04:36Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_3c09256909752964",
+      "name": "QAReport.json",
+      "path_base": "run",
+      "path": "artifacts/QAReport.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/qa",
+      "classification": "internal",
+      "sha256": "sha256:c41b88a45ace4b3f19f369caf44cd2e0cd0ae365dd626df4f2421af7b9cbdb02",
+      "size": 358,
+      "producer": {
+        "step_id": "S11_multimodal_qa",
+        "attempt_id": "sa_472b91a72e097570",
+        "tool_id": "run_multimodal_qa",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:04:42Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_21ca4b9636792a66",
+      "name": "PublishApproval.json",
+      "path_base": "run",
+      "path": "artifacts/PublishApproval.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approval",
+      "classification": "internal",
+      "sha256": "sha256:dcee558f5108f80d0d6bb148b473e6a195daf74ca661f44b7dd547418b62bd29",
+      "size": 250,
+      "producer": {
+        "step_id": "S13_publish_confirm",
+        "attempt_id": "sa_f91777e39f450d5d",
+        "tool_id": "review_publish",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:05:05Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_2a35b1c9318a6727",
+      "name": "DeliveryReceipt.json",
+      "path_base": "run",
+      "path": "artifacts/DeliveryReceipt.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/deliveryReceipt",
+      "classification": "internal",
+      "sha256": "sha256:d6de687b74832f020abb293da7a6c5404c8dbb25ee61bc65c18b9aabd16eda42",
+      "size": 210,
+      "producer": {
+        "step_id": "S14_deliver",
+        "attempt_id": "sa_ff9ebbde4c38e2f1",
+        "tool_id": "deliver_channel_asset",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "project_id": "VID-LUMEN-01",
+        "creative_revision": "creative-r2"
+      },
+      "created_at": "2026-07-24T12:05:11Z",
+      "mock": true
+    }
+  ],
+  "usage_records": [
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0001",
+      "operation_id": "op_ca86f0f21daa4f09",
+      "operation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:1",
+      "observation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:1:observation:1",
+      "model_invocation_id": "mi_a9948dc5f5f00f81",
+      "agent_execution_id": "agent_run_video_20260724_002_creative",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_creative_agent",
+        "version": "1.0.0",
+        "digest": "sha256:917c52e142384afa3b2d4f4b4fecbfc3aa91e46f77fcee38d8a34041695cc867"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-creative-agent",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_4d9b88bda8e920a2",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 900,
+        "output_tokens": 180,
+        "reasoning_tokens": 100,
+        "total_tokens": 1080,
+        "provider_units": {
+          "agent_turn": 1,
+          "tool_calls": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.008",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:00:07Z",
+      "finished_at": "2026-07-24T12:00:09Z",
+      "recorded_at": "2026-07-24T12:00:11Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0002",
+      "operation_id": "op_24d21494a10f3fce",
+      "operation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:2",
+      "observation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:2:observation:1",
+      "model_invocation_id": "mi_7796b8a6c7a8f6fa",
+      "agent_execution_id": "agent_run_video_20260724_002_creative",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_creative_agent",
+        "version": "1.0.0",
+        "digest": "sha256:917c52e142384afa3b2d4f4b4fecbfc3aa91e46f77fcee38d8a34041695cc867"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-creative-agent",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_81e5838f48c5dc69",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 900,
+        "output_tokens": 240,
+        "reasoning_tokens": 160,
+        "total_tokens": 1140,
+        "provider_units": {
+          "agent_turn": 2,
+          "tool_calls": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.012",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:00:18Z",
+      "finished_at": "2026-07-24T12:00:20Z",
+      "recorded_at": "2026-07-24T12:00:22Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0003",
+      "operation_id": "op_8eca7628d5f15ae4",
+      "operation_idempotency_key": "run_video_20260724_002:S2_storyboard_plan:single:1",
+      "observation_idempotency_key": "run_video_20260724_002:S2_storyboard_plan:single:1:observation:1",
+      "model_invocation_id": "mi_2195ec32545b58c2",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_planning_model",
+        "version": "1.0.0",
+        "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-planning-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_c250648b9eb4bf2e",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 2100,
+        "output_tokens": 760,
+        "total_tokens": 2860
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.018",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:00:35Z",
+      "finished_at": "2026-07-24T12:00:37Z",
+      "recorded_at": "2026-07-24T12:00:39Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0004",
+      "operation_id": "op_58dd88e395c1d7dc",
+      "operation_idempotency_key": "run_video_20260724_002:S4_consistency_references:single:1",
+      "observation_idempotency_key": "run_video_20260724_002:S4_consistency_references:single:1:observation:1",
+      "model_invocation_id": "mi_bafc3e4cdce57018",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_image_model",
+        "version": "1.0.0",
+        "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-image-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "vision",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_74b371758a97851a",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "image_count": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.06",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:01:04Z",
+      "finished_at": "2026-07-24T12:01:06Z",
+      "recorded_at": "2026-07-24T12:01:08Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0005",
+      "operation_id": "op_610514a793f3b116",
+      "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-001:1",
+      "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-001:1:observation:1",
+      "model_invocation_id": "mi_b800114981c072c9",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_tts_model",
+        "version": "1.0.0",
+        "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-tts-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "audio",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_ad68603b07ebc332",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 18,
+        "provider_units": {
+          "audio_seconds": 7.0,
+          "character_count": 42
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.012",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:01:21Z",
+      "finished_at": "2026-07-24T12:01:23Z",
+      "recorded_at": "2026-07-24T12:01:25Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0006",
+      "operation_id": "op_b795ca350407980c",
+      "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-002:1",
+      "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-002:1:observation:1",
+      "model_invocation_id": "mi_85e5fd85dd14485e",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_tts_model",
+        "version": "1.0.0",
+        "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-tts-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "audio",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_a7628098505bca75",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 18,
+        "provider_units": {
+          "audio_seconds": 8.0,
+          "character_count": 36
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.012",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:01:35Z",
+      "finished_at": "2026-07-24T12:01:37Z",
+      "recorded_at": "2026-07-24T12:01:39Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0007",
+      "operation_id": "op_7966ce9865a105a9",
+      "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-003:1",
+      "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-003:1:observation:1",
+      "model_invocation_id": "mi_7028f1bf6d837b05",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_tts_model",
+        "version": "1.0.0",
+        "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-tts-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "audio",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_7b1d568050728b9d",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 24,
+        "provider_units": {
+          "audio_seconds": 9.0,
+          "character_count": 35
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.012",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:01:49Z",
+      "finished_at": "2026-07-24T12:01:51Z",
+      "recorded_at": "2026-07-24T12:01:53Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0008",
+      "operation_id": "op_956bcf75aed3f6d8",
+      "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-001:1",
+      "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-001:1:observation:1",
+      "model_invocation_id": "mi_7da3361b7f8fbff9",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_planning_model",
+        "version": "1.0.0",
+        "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-planning-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_aef73198396c4bbe",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 620,
+        "output_tokens": 130,
+        "total_tokens": 750
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.006",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:02:07Z",
+      "finished_at": "2026-07-24T12:02:09Z",
+      "recorded_at": "2026-07-24T12:02:11Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0009",
+      "operation_id": "op_fdc596b64d56d3d4",
+      "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-002:1",
+      "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-002:1:observation:1",
+      "model_invocation_id": "mi_ab6bc38b073bf200",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_planning_model",
+        "version": "1.0.0",
+        "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-planning-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_9320cbb3ffdd13f3",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 620,
+        "output_tokens": 130,
+        "total_tokens": 750
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.006",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:02:21Z",
+      "finished_at": "2026-07-24T12:02:23Z",
+      "recorded_at": "2026-07-24T12:02:25Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0010",
+      "operation_id": "op_ff04e01541cf70fd",
+      "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-003:1",
+      "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-003:1:observation:1",
+      "model_invocation_id": "mi_4493fd82e0be674e",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_planning_model",
+        "version": "1.0.0",
+        "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-planning-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_9727969ea418db87",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 620,
+        "output_tokens": 130,
+        "total_tokens": 750
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.006",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:02:35Z",
+      "finished_at": "2026-07-24T12:02:37Z",
+      "recorded_at": "2026-07-24T12:02:39Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0011",
+      "operation_id": "op_651dd5f0f325101d",
+      "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-001:1",
+      "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-001:1:observation:1",
+      "model_invocation_id": "mi_eb8b31a592c6fc21",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_image_model",
+        "version": "1.0.0",
+        "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-image-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "vision",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_1d9df197372f8a17",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "image_count": 1,
+          "reference_count": 2
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.04",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:02:53Z",
+      "finished_at": "2026-07-24T12:02:55Z",
+      "recorded_at": "2026-07-24T12:02:57Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0012",
+      "operation_id": "op_9ea8b0bf16988195",
+      "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-002:1",
+      "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-002:1:observation:1",
+      "model_invocation_id": "mi_ab4f636281b69088",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_image_model",
+        "version": "1.0.0",
+        "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-image-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "vision",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_926c171d59040113",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "image_count": 1,
+          "reference_count": 2
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.04",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:03:07Z",
+      "finished_at": "2026-07-24T12:03:09Z",
+      "recorded_at": "2026-07-24T12:03:11Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0013",
+      "operation_id": "op_2c7ee072b444490a",
+      "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-003:1",
+      "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-003:1:observation:1",
+      "model_invocation_id": "mi_eb43f2de2bd425a0",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_image_model",
+        "version": "1.0.0",
+        "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-image-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "vision",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_b4940ec963228389",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "image_count": 1,
+          "reference_count": 2
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.04",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:03:21Z",
+      "finished_at": "2026-07-24T12:03:23Z",
+      "recorded_at": "2026-07-24T12:03:25Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0014",
+      "operation_id": "op_1c22e99c4f69563d",
+      "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-001:1",
+      "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-001:1:observation:1",
+      "model_invocation_id": "mi_6486b1440150fffc",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_generation_model",
+        "version": "1.0.0",
+        "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-video-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "video",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_c921a3a11d2b008a",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "video_seconds": 7.0,
+          "input_image_count": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.45",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:03:39Z",
+      "finished_at": "2026-07-24T12:03:41Z",
+      "recorded_at": "2026-07-24T12:03:43Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0015",
+      "operation_id": "op_a7d2c2ac0e38c6fe",
+      "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-002:1",
+      "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-002:1:observation:1",
+      "model_invocation_id": "mi_4126faa28baa721e",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_generation_model",
+        "version": "1.0.0",
+        "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-video-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "video",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_bf9733a5485f4e7d",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "video_seconds": 8.0,
+          "input_image_count": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.45",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:03:53Z",
+      "finished_at": "2026-07-24T12:03:55Z",
+      "recorded_at": "2026-07-24T12:03:57Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0016",
+      "operation_id": "op_42f9c4f1d3ac982c",
+      "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-003:1",
+      "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-003:1:observation:1",
+      "model_invocation_id": "mi_7261ef66a33ef27e",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_generation_model",
+        "version": "1.0.0",
+        "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-video-model",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "video",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_364613ea1175516c",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "provider_units": {
+          "video_seconds": 9.0,
+          "input_image_count": 1
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.45",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:04:07Z",
+      "finished_at": "2026-07-24T12:04:09Z",
+      "recorded_at": "2026-07-24T12:04:11Z",
+      "supersedes_usage_record_id": null
+    },
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_video_20260724_002_0017",
+      "operation_id": "op_871baf0336c2a5d9",
+      "operation_idempotency_key": "run_video_20260724_002:S11_multimodal_qa:single:1",
+      "observation_idempotency_key": "run_video_20260724_002:S11_multimodal_qa:single:1:observation:1",
+      "model_invocation_id": "mi_2e3a7d9b6a58de6a",
+      "agent_execution_id": null,
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "video_multimodal_qa",
+        "version": "1.0.0",
+        "digest": "sha256:33a6de06a049036d13d3577f25c8c7594252aae531aa3e5c19083727d2702c28"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-multimodal-qa",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "multimodal",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_5c4736369b70448c",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 1200,
+        "output_tokens": 240,
+        "total_tokens": 1440,
+        "provider_units": {
+          "video_seconds": 24.0
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.015",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T12:04:46Z",
+      "finished_at": "2026-07-24T12:04:48Z",
+      "recorded_at": "2026-07-24T12:04:50Z",
+      "supersedes_usage_record_id": null
+    }
+  ],
+  "human_tasks": [
+    {
+      "work_item_id": "human_b55a36447def895b",
+      "step_id": "S3_storyboard_confirm",
+      "status": "completed",
+      "revision": 1,
+      "form": "storyboard_review",
+      "roles": [
+        "creator",
+        "editor"
+      ],
+      "input_snapshot_hash": "sha256:1dcafff49cbd2bbd766b6e0c213dd74cf36da299240c34e13676b6ed21780c76",
+      "created_at": "2026-07-24T12:00:48Z",
+      "completed_at": "2026-07-24T12:00:51Z",
+      "decision": "approved",
+      "decision_id": "decision_688bee5ae9859ee6",
+      "actor": {
+        "type": "user",
+        "id": "editor_12",
+        "roles": [
+          "editor"
+        ]
+      },
+      "reason": "Scoped QA correction retained the approved script and dialogue keys.",
+      "expected_revision": 0
+    },
+    {
+      "work_item_id": "human_c462a5183fe4e574",
+      "step_id": "S13_publish_confirm",
+      "status": "completed",
+      "revision": 1,
+      "form": "final_publish_review",
+      "roles": [
+        "creator",
+        "brand_reviewer"
+      ],
+      "input_snapshot_hash": "sha256:d80775835c319ae966dc5844d59e6a1c296c5f7f3757c42cb940edce8fcfbc7b",
+      "created_at": "2026-07-24T12:05:00Z",
+      "completed_at": "2026-07-24T12:05:03Z",
+      "decision": "approved",
+      "decision_id": "decision_998aa07d8bf52063",
+      "actor": {
+        "type": "user",
+        "id": "brand_reviewer_3",
+        "roles": [
+          "brand_reviewer"
+        ]
+      },
+      "reason": "Brand, product binding, captions, and channel-safe master reviewed.",
+      "expected_revision": 0
+    }
+  ],
+  "events": [
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0001",
+      "cursor": 1,
+      "kind": "run.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "process_id": "opencrew_ai_video_creation",
+        "version": "1.1.0",
+        "input_revision_hash": "sha256:7890aa06c58009ad7ddd91123a2ad46643c1d192e0420f31d1650a8b2f56eab7"
+      },
+      "at": "2026-07-24T12:00:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0002",
+      "cursor": 2,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_0c83d750086a3acc",
+        "tool_id": "build_creative_brief",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:00:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0003",
+      "cursor": 3,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_1f9187f684ff90cc",
+        "name": "CreativeBrief.json",
+        "sha256": "sha256:aea3cbe869669d6e72d506c6760a09739939db4bbe4adf338141d3263bac55c2"
+      },
+      "at": "2026-07-24T12:00:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0004",
+      "cursor": 4,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_ca86f0f21daa4f09",
+        "amount": "0.012",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:00:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0005",
+      "cursor": 5,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_a9948dc5f5f00f81",
+        "profile_id": "video_creative_agent",
+        "item_key": null,
+        "agent_execution_id": "agent_run_video_20260724_002_creative",
+        "agent_turn": 1
+      },
+      "at": "2026-07-24T12:00:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0006",
+      "cursor": 6,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_a9948dc5f5f00f81",
+        "usage_record_id": "usage_run_video_20260724_002_0001",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.008",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        },
+        "agent_execution_id": "agent_run_video_20260724_002_creative",
+        "agent_turn": 1
+      },
+      "at": "2026-07-24T12:00:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0007",
+      "cursor": 7,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_ca86f0f21daa4f09",
+        "settled": "0.008",
+        "released": "0.004"
+      },
+      "at": "2026-07-24T12:00:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0008",
+      "cursor": 8,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_24d21494a10f3fce",
+        "amount": "0.016",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:00:17Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0009",
+      "cursor": 9,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7796b8a6c7a8f6fa",
+        "profile_id": "video_creative_agent",
+        "item_key": null,
+        "agent_execution_id": "agent_run_video_20260724_002_creative",
+        "agent_turn": 2
+      },
+      "at": "2026-07-24T12:00:19Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0010",
+      "cursor": 10,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7796b8a6c7a8f6fa",
+        "usage_record_id": "usage_run_video_20260724_002_0002",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.012",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        },
+        "agent_execution_id": "agent_run_video_20260724_002_creative",
+        "agent_turn": 2
+      },
+      "at": "2026-07-24T12:00:23Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0011",
+      "cursor": 11,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_24d21494a10f3fce",
+        "settled": "0.012",
+        "released": "0.004"
+      },
+      "at": "2026-07-24T12:00:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0012",
+      "cursor": 12,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S1_creative_brief",
+      "tool_id": "build_creative_brief",
+      "step_attempt_id": "sa_0c83d750086a3acc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_0c83d750086a3acc",
+        "artifact_count": 1,
+        "usage_record_count": 2,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:00:28Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0013",
+      "cursor": 13,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e6643cac045ffa88",
+        "tool_id": "plan_storyboard",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:00:30Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0014",
+      "cursor": 14,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_77d56df9e78f5168",
+        "name": "StoryboardPlan.json",
+        "sha256": "sha256:c02ed937915219a758d5a011b92ca9d08b4ee84801a2c56521b4a0563d45b89f"
+      },
+      "at": "2026-07-24T12:00:32Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0015",
+      "cursor": 15,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_8eca7628d5f15ae4",
+        "amount": "0.026",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:00:34Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0016",
+      "cursor": 16,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_2195ec32545b58c2",
+        "profile_id": "video_planning_model",
+        "item_key": null
+      },
+      "at": "2026-07-24T12:00:36Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0017",
+      "cursor": 17,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_2195ec32545b58c2",
+        "usage_record_id": "usage_run_video_20260724_002_0003",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.018",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:00:40Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0018",
+      "cursor": 18,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_8eca7628d5f15ae4",
+        "settled": "0.018",
+        "released": "0.008"
+      },
+      "at": "2026-07-24T12:00:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0019",
+      "cursor": 19,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S2_storyboard_plan",
+      "tool_id": "plan_storyboard",
+      "step_attempt_id": "sa_e6643cac045ffa88",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e6643cac045ffa88",
+        "artifact_count": 1,
+        "usage_record_count": 1,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:00:45Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0020",
+      "cursor": 20,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_d6c49b26b0b57ef6",
+        "tool_id": "review_storyboard",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:00:47Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0021",
+      "cursor": 21,
+      "kind": "human_task.created",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "work_item_id": "human_b55a36447def895b",
+        "roles": [
+          "creator",
+          "editor"
+        ],
+        "input_snapshot_hash": "sha256:1dcafff49cbd2bbd766b6e0c213dd74cf36da299240c34e13676b6ed21780c76"
+      },
+      "at": "2026-07-24T12:00:49Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0022",
+      "cursor": 22,
+      "kind": "step.waiting",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "wait_reason": {
+          "kind": "user",
+          "detail": "human_b55a36447def895b"
+        }
+      },
+      "at": "2026-07-24T12:00:50Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0023",
+      "cursor": 23,
+      "kind": "human_task.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "user",
+        "id": "editor_12",
+        "roles": [
+          "editor"
+        ]
+      },
+      "payload": {
+        "work_item_id": "human_b55a36447def895b",
+        "decision_id": "decision_688bee5ae9859ee6",
+        "decision": "approved",
+        "reason": "Scoped QA correction retained the approved script and dialogue keys.",
+        "expected_revision": 0,
+        "revision": 1
+      },
+      "at": "2026-07-24T12:00:52Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0024",
+      "cursor": 24,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_02dd8d1d548475b7",
+        "name": "StoryboardApproval.json",
+        "sha256": "sha256:fffc6d606c246bc7ec1ae9c62d6bcf2cd118a763b9b43ef9b0dbe5610c3aae21"
+      },
+      "at": "2026-07-24T12:00:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0025",
+      "cursor": 25,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3_storyboard_confirm",
+      "tool_id": "review_storyboard",
+      "step_attempt_id": "sa_d6c49b26b0b57ef6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_d6c49b26b0b57ef6",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:00:56Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0026",
+      "cursor": 26,
+      "kind": "step.skipped",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S3b_storyboard_revision",
+      "tool_id": "request_storyboard_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('approved')"
+        }
+      },
+      "at": "2026-07-24T12:00:57Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0027",
+      "cursor": 27,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_1c45ebb44d3972f8",
+        "tool_id": "generate_consistency_references",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:00:59Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0028",
+      "cursor": 28,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_ba5db62862c912f3",
+        "name": "ConsistencyReferences.json",
+        "sha256": "sha256:e6c53a21fa381f5f16ba1725f323dc8420c49e9544497d959521787848cd0a40"
+      },
+      "at": "2026-07-24T12:01:01Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0029",
+      "cursor": 29,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_58dd88e395c1d7dc",
+        "amount": "0.08",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:01:03Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0030",
+      "cursor": 30,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_bafc3e4cdce57018",
+        "profile_id": "video_image_model",
+        "item_key": null
+      },
+      "at": "2026-07-24T12:01:05Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0031",
+      "cursor": 31,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_bafc3e4cdce57018",
+        "usage_record_id": "usage_run_video_20260724_002_0004",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.06",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:01:09Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0032",
+      "cursor": 32,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_58dd88e395c1d7dc",
+        "settled": "0.06",
+        "released": "0.02"
+      },
+      "at": "2026-07-24T12:01:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0033",
+      "cursor": 33,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S4_consistency_references",
+      "tool_id": "generate_consistency_references",
+      "step_attempt_id": "sa_1c45ebb44d3972f8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_1c45ebb44d3972f8",
+        "artifact_count": 1,
+        "usage_record_count": 1,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:01:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0034",
+      "cursor": 34,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_00eb5f885022ea28",
+        "tool_id": "generate_dialogue_audio",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:01:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0035",
+      "cursor": 35,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_da6740f60b5c1d42",
+        "name": "Audio_dlg-001.wav",
+        "sha256": "sha256:90f140f9fae1f7f9f4c231a978bad25b2868a833b66417e07a51069cf0c83c2f"
+      },
+      "at": "2026-07-24T12:01:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0036",
+      "cursor": 36,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_610514a793f3b116",
+        "amount": "0.016",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:01:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0037",
+      "cursor": 37,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_b800114981c072c9",
+        "profile_id": "video_tts_model",
+        "item_key": "dlg-001"
+      },
+      "at": "2026-07-24T12:01:22Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0038",
+      "cursor": 38,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_b800114981c072c9",
+        "usage_record_id": "usage_run_video_20260724_002_0005",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.012",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:01:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0039",
+      "cursor": 39,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_610514a793f3b116",
+        "settled": "0.012",
+        "released": "0.004"
+      },
+      "at": "2026-07-24T12:01:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0040",
+      "cursor": 40,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-001",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-001"
+      },
+      "at": "2026-07-24T12:01:30Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0041",
+      "cursor": 41,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_5a98193aefc3d23f",
+        "name": "Audio_dlg-002.wav",
+        "sha256": "sha256:7c32f886e3de33f69e6b7b0de3ed80b4da744920f6afaf0413a33a6c9d4bd2b3"
+      },
+      "at": "2026-07-24T12:01:32Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0042",
+      "cursor": 42,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_b795ca350407980c",
+        "amount": "0.016",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:01:34Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0043",
+      "cursor": 43,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_85e5fd85dd14485e",
+        "profile_id": "video_tts_model",
+        "item_key": "dlg-002"
+      },
+      "at": "2026-07-24T12:01:36Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0044",
+      "cursor": 44,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_85e5fd85dd14485e",
+        "usage_record_id": "usage_run_video_20260724_002_0006",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.012",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:01:40Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0045",
+      "cursor": 45,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_b795ca350407980c",
+        "settled": "0.012",
+        "released": "0.004"
+      },
+      "at": "2026-07-24T12:01:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0046",
+      "cursor": 46,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-002",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-002"
+      },
+      "at": "2026-07-24T12:01:44Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0047",
+      "cursor": 47,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_b03e7299227f6e60",
+        "name": "Audio_dlg-003.wav",
+        "sha256": "sha256:e3f835634bfe2a8e02566d0f7fd52900cfdb3e9267b01b6e0dac85572f09b3d6"
+      },
+      "at": "2026-07-24T12:01:46Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0048",
+      "cursor": 48,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_7966ce9865a105a9",
+        "amount": "0.016",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:01:48Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0049",
+      "cursor": 49,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7028f1bf6d837b05",
+        "profile_id": "video_tts_model",
+        "item_key": "dlg-003"
+      },
+      "at": "2026-07-24T12:01:50Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0050",
+      "cursor": 50,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7028f1bf6d837b05",
+        "usage_record_id": "usage_run_video_20260724_002_0007",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.012",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:01:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0051",
+      "cursor": 51,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_7966ce9865a105a9",
+        "settled": "0.012",
+        "released": "0.004"
+      },
+      "at": "2026-07-24T12:01:57Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0052",
+      "cursor": 52,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-003",
+        "attempt_id": "sa_00eb5f885022ea28:dlg-003"
+      },
+      "at": "2026-07-24T12:01:58Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0053",
+      "cursor": 53,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S5_audio_fanout",
+      "tool_id": "generate_dialogue_audio",
+      "step_attempt_id": "sa_00eb5f885022ea28",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_00eb5f885022ea28",
+        "artifact_count": 3,
+        "usage_record_count": 3,
+        "fanout_item_count": 3
+      },
+      "at": "2026-07-24T12:02:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0054",
+      "cursor": 54,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_86967ee671f24daf",
+        "tool_id": "create_visual_prompt",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:02:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0055",
+      "cursor": 55,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_60f2f606bd2a52c4",
+        "name": "VisualPrompt_dlg-001.json",
+        "sha256": "sha256:4fe84844728869888af97660262f34a828c51d2d14bfca772b3c17c0e0fd9b6b"
+      },
+      "at": "2026-07-24T12:02:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0056",
+      "cursor": 56,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_956bcf75aed3f6d8",
+        "amount": "0.009",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:02:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0057",
+      "cursor": 57,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7da3361b7f8fbff9",
+        "profile_id": "video_planning_model",
+        "item_key": "dlg-001"
+      },
+      "at": "2026-07-24T12:02:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0058",
+      "cursor": 58,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7da3361b7f8fbff9",
+        "usage_record_id": "usage_run_video_20260724_002_0008",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.006",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:02:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0059",
+      "cursor": 59,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_956bcf75aed3f6d8",
+        "settled": "0.006",
+        "released": "0.003"
+      },
+      "at": "2026-07-24T12:02:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0060",
+      "cursor": 60,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-001",
+        "attempt_id": "sa_86967ee671f24daf:dlg-001"
+      },
+      "at": "2026-07-24T12:02:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0061",
+      "cursor": 61,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_94bd8fadfbed732a",
+        "name": "VisualPrompt_dlg-002.json",
+        "sha256": "sha256:6110ad2c9a28d187f8aa5f7856bbd6230e3359b3724c52f344ed93985d96b3d4"
+      },
+      "at": "2026-07-24T12:02:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0062",
+      "cursor": 62,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_fdc596b64d56d3d4",
+        "amount": "0.009",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:02:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0063",
+      "cursor": 63,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_ab6bc38b073bf200",
+        "profile_id": "video_planning_model",
+        "item_key": "dlg-002"
+      },
+      "at": "2026-07-24T12:02:22Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0064",
+      "cursor": 64,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_ab6bc38b073bf200",
+        "usage_record_id": "usage_run_video_20260724_002_0009",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.006",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:02:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0065",
+      "cursor": 65,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_fdc596b64d56d3d4",
+        "settled": "0.006",
+        "released": "0.003"
+      },
+      "at": "2026-07-24T12:02:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0066",
+      "cursor": 66,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-002",
+        "attempt_id": "sa_86967ee671f24daf:dlg-002"
+      },
+      "at": "2026-07-24T12:02:30Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0067",
+      "cursor": 67,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_620b4ad06201b61d",
+        "name": "VisualPrompt_dlg-003.json",
+        "sha256": "sha256:e0841e12cff65ada1516509146b9fde303ec1b95f6bab6f41626d37b1696325a"
+      },
+      "at": "2026-07-24T12:02:32Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0068",
+      "cursor": 68,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_ff04e01541cf70fd",
+        "amount": "0.009",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:02:34Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0069",
+      "cursor": 69,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_4493fd82e0be674e",
+        "profile_id": "video_planning_model",
+        "item_key": "dlg-003"
+      },
+      "at": "2026-07-24T12:02:36Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0070",
+      "cursor": 70,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_4493fd82e0be674e",
+        "usage_record_id": "usage_run_video_20260724_002_0010",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.006",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:02:40Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0071",
+      "cursor": 71,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_ff04e01541cf70fd",
+        "settled": "0.006",
+        "released": "0.003"
+      },
+      "at": "2026-07-24T12:02:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0072",
+      "cursor": 72,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-003",
+        "attempt_id": "sa_86967ee671f24daf:dlg-003"
+      },
+      "at": "2026-07-24T12:02:44Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0073",
+      "cursor": 73,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S6_visual_prompt_fanout",
+      "tool_id": "create_visual_prompt",
+      "step_attempt_id": "sa_86967ee671f24daf",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_86967ee671f24daf",
+        "artifact_count": 3,
+        "usage_record_count": 3,
+        "fanout_item_count": 3
+      },
+      "at": "2026-07-24T12:02:46Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0074",
+      "cursor": 74,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_8ef0bef21d5f6a77",
+        "tool_id": "generate_dialogue_image",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:02:48Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0075",
+      "cursor": 75,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_d76759f7a08558c8",
+        "name": "Image_dlg-001.png",
+        "sha256": "sha256:8f34ede9b29b7de6895b65f060fbff6d048f251f399179d7c05a15fc6251075e"
+      },
+      "at": "2026-07-24T12:02:50Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0076",
+      "cursor": 76,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_651dd5f0f325101d",
+        "amount": "0.055",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:02:52Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0077",
+      "cursor": 77,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_eb8b31a592c6fc21",
+        "profile_id": "video_image_model",
+        "item_key": "dlg-001"
+      },
+      "at": "2026-07-24T12:02:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0078",
+      "cursor": 78,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_eb8b31a592c6fc21",
+        "usage_record_id": "usage_run_video_20260724_002_0011",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.04",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:02:58Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0079",
+      "cursor": 79,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_651dd5f0f325101d",
+        "settled": "0.04",
+        "released": "0.015"
+      },
+      "at": "2026-07-24T12:03:01Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0080",
+      "cursor": 80,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-001",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-001"
+      },
+      "at": "2026-07-24T12:03:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0081",
+      "cursor": 81,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_5391c8369ee7de48",
+        "name": "Image_dlg-002.png",
+        "sha256": "sha256:b3efa389ac4f75aca1d84342a9e9b0d2ec4a63c176fbe74e96188eb95b3b027d"
+      },
+      "at": "2026-07-24T12:03:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0082",
+      "cursor": 82,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_9ea8b0bf16988195",
+        "amount": "0.055",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:03:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0083",
+      "cursor": 83,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_ab4f636281b69088",
+        "profile_id": "video_image_model",
+        "item_key": "dlg-002"
+      },
+      "at": "2026-07-24T12:03:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0084",
+      "cursor": 84,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_ab4f636281b69088",
+        "usage_record_id": "usage_run_video_20260724_002_0012",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.04",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:03:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0085",
+      "cursor": 85,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_9ea8b0bf16988195",
+        "settled": "0.04",
+        "released": "0.015"
+      },
+      "at": "2026-07-24T12:03:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0086",
+      "cursor": 86,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-002",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-002"
+      },
+      "at": "2026-07-24T12:03:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0087",
+      "cursor": 87,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_668a068527c3d915",
+        "name": "Image_dlg-003.png",
+        "sha256": "sha256:3978aafabed47e7c1a307880a23bafb85e6f65985978f12cfd382e37057d83ac"
+      },
+      "at": "2026-07-24T12:03:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0088",
+      "cursor": 88,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_2c7ee072b444490a",
+        "amount": "0.055",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:03:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0089",
+      "cursor": 89,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_eb43f2de2bd425a0",
+        "profile_id": "video_image_model",
+        "item_key": "dlg-003"
+      },
+      "at": "2026-07-24T12:03:22Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0090",
+      "cursor": 90,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_eb43f2de2bd425a0",
+        "usage_record_id": "usage_run_video_20260724_002_0013",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.04",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:03:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0091",
+      "cursor": 91,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_2c7ee072b444490a",
+        "settled": "0.04",
+        "released": "0.015"
+      },
+      "at": "2026-07-24T12:03:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0092",
+      "cursor": 92,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-003",
+        "attempt_id": "sa_8ef0bef21d5f6a77:dlg-003"
+      },
+      "at": "2026-07-24T12:03:30Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0093",
+      "cursor": 93,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S7_image_fanout",
+      "tool_id": "generate_dialogue_image",
+      "step_attempt_id": "sa_8ef0bef21d5f6a77",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_8ef0bef21d5f6a77",
+        "artifact_count": 3,
+        "usage_record_count": 3,
+        "fanout_item_count": 3
+      },
+      "at": "2026-07-24T12:03:32Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0094",
+      "cursor": 94,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_1a36bdcf705aec71",
+        "tool_id": "generate_dialogue_video",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:03:34Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0095",
+      "cursor": 95,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_d6ef54c1a6501365",
+        "name": "RawVideo_dlg-001.mp4",
+        "sha256": "sha256:08f5be39838d292d1fa53cd894310e900f3d34d09a4ff0b546661046ae74729b"
+      },
+      "at": "2026-07-24T12:03:36Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0096",
+      "cursor": 96,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_1c22e99c4f69563d",
+        "amount": "0.6",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:03:38Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0097",
+      "cursor": 97,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_6486b1440150fffc",
+        "profile_id": "video_generation_model",
+        "item_key": "dlg-001"
+      },
+      "at": "2026-07-24T12:03:40Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0098",
+      "cursor": 98,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_6486b1440150fffc",
+        "usage_record_id": "usage_run_video_20260724_002_0014",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.45",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:03:44Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0099",
+      "cursor": 99,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_1c22e99c4f69563d",
+        "settled": "0.45",
+        "released": "0.15"
+      },
+      "at": "2026-07-24T12:03:47Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0100",
+      "cursor": 100,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-001",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-001"
+      },
+      "at": "2026-07-24T12:03:48Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0101",
+      "cursor": 101,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_60354b0f0d3f4f1b",
+        "name": "RawVideo_dlg-002.mp4",
+        "sha256": "sha256:9ee105e93eefe0a00d0f41d92bfb1e2762458e4a738ef91004077e18cf107092"
+      },
+      "at": "2026-07-24T12:03:50Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0102",
+      "cursor": 102,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_a7d2c2ac0e38c6fe",
+        "amount": "0.6",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:03:52Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0103",
+      "cursor": 103,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_4126faa28baa721e",
+        "profile_id": "video_generation_model",
+        "item_key": "dlg-002"
+      },
+      "at": "2026-07-24T12:03:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0104",
+      "cursor": 104,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_4126faa28baa721e",
+        "usage_record_id": "usage_run_video_20260724_002_0015",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.45",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:03:58Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0105",
+      "cursor": 105,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_a7d2c2ac0e38c6fe",
+        "settled": "0.45",
+        "released": "0.15"
+      },
+      "at": "2026-07-24T12:04:01Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0106",
+      "cursor": 106,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-002",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-002"
+      },
+      "at": "2026-07-24T12:04:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0107",
+      "cursor": 107,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_ed0edcc9327f1156",
+        "name": "RawVideo_dlg-003.mp4",
+        "sha256": "sha256:9fe6719fe355515746cff2663588d84cf73ad292bbccdc4cd1d9a3afc3358441"
+      },
+      "at": "2026-07-24T12:04:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0108",
+      "cursor": 108,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_42f9c4f1d3ac982c",
+        "amount": "0.6",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:04:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0109",
+      "cursor": 109,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7261ef66a33ef27e",
+        "profile_id": "video_generation_model",
+        "item_key": "dlg-003"
+      },
+      "at": "2026-07-24T12:04:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0110",
+      "cursor": 110,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_7261ef66a33ef27e",
+        "usage_record_id": "usage_run_video_20260724_002_0016",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.45",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:04:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0111",
+      "cursor": 111,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_42f9c4f1d3ac982c",
+        "settled": "0.45",
+        "released": "0.15"
+      },
+      "at": "2026-07-24T12:04:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0112",
+      "cursor": 112,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-003",
+        "attempt_id": "sa_1a36bdcf705aec71:dlg-003"
+      },
+      "at": "2026-07-24T12:04:16Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0113",
+      "cursor": 113,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S8_video_fanout",
+      "tool_id": "generate_dialogue_video",
+      "step_attempt_id": "sa_1a36bdcf705aec71",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_1a36bdcf705aec71",
+        "artifact_count": 3,
+        "usage_record_count": 3,
+        "fanout_item_count": 3
+      },
+      "at": "2026-07-24T12:04:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0114",
+      "cursor": 114,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_69fc6d1cc9b270e6",
+        "tool_id": "bind_final_segment",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:04:20Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0115",
+      "cursor": 115,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_8abdf11ce92b4e8b",
+        "name": "FinalSegment_dlg-001.mp4",
+        "sha256": "sha256:e7ecf8059881c3c21a7763bfb6e3f6a6c8a3112e4bb018ced231e35d19c6363a"
+      },
+      "at": "2026-07-24T12:04:22Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0116",
+      "cursor": 116,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-001",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-001",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-001"
+      },
+      "at": "2026-07-24T12:04:23Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0117",
+      "cursor": 117,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_3bdf49881ab2d012",
+        "name": "FinalSegment_dlg-002.mp4",
+        "sha256": "sha256:74133b592c7f417d1d4b10b7c08d3f1d6bf05aaaa58434b1b4d44a1adcedfbfd"
+      },
+      "at": "2026-07-24T12:04:25Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0118",
+      "cursor": 118,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-002",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-002",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-002"
+      },
+      "at": "2026-07-24T12:04:26Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0119",
+      "cursor": 119,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_80f1585c69ff28ff",
+        "name": "FinalSegment_dlg-003.mp4",
+        "sha256": "sha256:466979aeb30402dff27ed4a1d2f7146903decc0b75a1734eaaef1777b0c3c203"
+      },
+      "at": "2026-07-24T12:04:28Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0120",
+      "cursor": 120,
+      "kind": "fanout.item.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6:dlg-003",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "item_key": "dlg-003",
+        "attempt_id": "sa_69fc6d1cc9b270e6:dlg-003"
+      },
+      "at": "2026-07-24T12:04:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0121",
+      "cursor": 121,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S9_bind_segments",
+      "tool_id": "bind_final_segment",
+      "step_attempt_id": "sa_69fc6d1cc9b270e6",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_69fc6d1cc9b270e6",
+        "artifact_count": 3,
+        "usage_record_count": 0,
+        "fanout_item_count": 3
+      },
+      "at": "2026-07-24T12:04:31Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0122",
+      "cursor": 122,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S10_master_compose",
+      "tool_id": "compose_master_video",
+      "step_attempt_id": "sa_39d90412c952f4c8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_39d90412c952f4c8",
+        "tool_id": "compose_master_video",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:04:33Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0123",
+      "cursor": 123,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S10_master_compose",
+      "tool_id": "compose_master_video",
+      "step_attempt_id": "sa_39d90412c952f4c8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_809fae390fc3f6be",
+        "name": "MasterVideo.mp4",
+        "sha256": "sha256:38293dc8644ead1408a34a9bb623837cacf256ebd7a1f6ff05a1f7b7e26a01b4"
+      },
+      "at": "2026-07-24T12:04:35Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0124",
+      "cursor": 124,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S10_master_compose",
+      "tool_id": "compose_master_video",
+      "step_attempt_id": "sa_39d90412c952f4c8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_3809c38560539c5d",
+        "name": "DeliveryManifest.json",
+        "sha256": "sha256:bcbe78428a17b4d6b6d77e8f2b9de7a1131774f38a171f2303f06dc0ea41a500"
+      },
+      "at": "2026-07-24T12:04:37Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0125",
+      "cursor": 125,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S10_master_compose",
+      "tool_id": "compose_master_video",
+      "step_attempt_id": "sa_39d90412c952f4c8",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_39d90412c952f4c8",
+        "artifact_count": 2,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:04:39Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0126",
+      "cursor": 126,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_472b91a72e097570",
+        "tool_id": "run_multimodal_qa",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:04:41Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0127",
+      "cursor": 127,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_3c09256909752964",
+        "name": "QAReport.json",
+        "sha256": "sha256:c41b88a45ace4b3f19f369caf44cd2e0cd0ae365dd626df4f2421af7b9cbdb02"
+      },
+      "at": "2026-07-24T12:04:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0128",
+      "cursor": 128,
+      "kind": "budget.reserved",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_871baf0336c2a5d9",
+        "amount": "0.022",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T12:04:45Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0129",
+      "cursor": 129,
+      "kind": "model.invocation.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_2e3a7d9b6a58de6a",
+        "profile_id": "video_multimodal_qa",
+        "item_key": null
+      },
+      "at": "2026-07-24T12:04:47Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0130",
+      "cursor": 130,
+      "kind": "model.invocation.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_2e3a7d9b6a58de6a",
+        "usage_record_id": "usage_run_video_20260724_002_0017",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.015",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T12:04:51Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0131",
+      "cursor": 131,
+      "kind": "budget.settled",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_871baf0336c2a5d9",
+        "settled": "0.015",
+        "released": "0.007"
+      },
+      "at": "2026-07-24T12:04:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0132",
+      "cursor": 132,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S11_multimodal_qa",
+      "tool_id": "run_multimodal_qa",
+      "step_attempt_id": "sa_472b91a72e097570",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_472b91a72e097570",
+        "artifact_count": 1,
+        "usage_record_count": 1,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:04:56Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0133",
+      "cursor": 133,
+      "kind": "step.skipped",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S12_qa_revision",
+      "tool_id": "request_qa_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (True)"
+        }
+      },
+      "at": "2026-07-24T12:04:57Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0134",
+      "cursor": 134,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_f91777e39f450d5d",
+        "tool_id": "review_publish",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:04:59Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0135",
+      "cursor": 135,
+      "kind": "human_task.created",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "work_item_id": "human_c462a5183fe4e574",
+        "roles": [
+          "creator",
+          "brand_reviewer"
+        ],
+        "input_snapshot_hash": "sha256:d80775835c319ae966dc5844d59e6a1c296c5f7f3757c42cb940edce8fcfbc7b"
+      },
+      "at": "2026-07-24T12:05:01Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0136",
+      "cursor": 136,
+      "kind": "step.waiting",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "wait_reason": {
+          "kind": "user",
+          "detail": "human_c462a5183fe4e574"
+        }
+      },
+      "at": "2026-07-24T12:05:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0137",
+      "cursor": 137,
+      "kind": "human_task.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "user",
+        "id": "brand_reviewer_3",
+        "roles": [
+          "brand_reviewer"
+        ]
+      },
+      "payload": {
+        "work_item_id": "human_c462a5183fe4e574",
+        "decision_id": "decision_998aa07d8bf52063",
+        "decision": "approved",
+        "reason": "Brand, product binding, captions, and channel-safe master reviewed.",
+        "expected_revision": 0,
+        "revision": 1
+      },
+      "at": "2026-07-24T12:05:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0138",
+      "cursor": 138,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_21ca4b9636792a66",
+        "name": "PublishApproval.json",
+        "sha256": "sha256:dcee558f5108f80d0d6bb148b473e6a195daf74ca661f44b7dd547418b62bd29"
+      },
+      "at": "2026-07-24T12:05:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0139",
+      "cursor": 139,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S13_publish_confirm",
+      "tool_id": "review_publish",
+      "step_attempt_id": "sa_f91777e39f450d5d",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_f91777e39f450d5d",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:05:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0140",
+      "cursor": 140,
+      "kind": "step.started",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S14_deliver",
+      "tool_id": "deliver_channel_asset",
+      "step_attempt_id": "sa_ff9ebbde4c38e2f1",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ff9ebbde4c38e2f1",
+        "tool_id": "deliver_channel_asset",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T12:05:10Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0141",
+      "cursor": 141,
+      "kind": "artifact.published",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S14_deliver",
+      "tool_id": "deliver_channel_asset",
+      "step_attempt_id": "sa_ff9ebbde4c38e2f1",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_2a35b1c9318a6727",
+        "name": "DeliveryReceipt.json",
+        "sha256": "sha256:d6de687b74832f020abb293da7a6c5404c8dbb25ee61bc65c18b9aabd16eda42"
+      },
+      "at": "2026-07-24T12:05:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0142",
+      "cursor": 142,
+      "kind": "step.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S14_deliver",
+      "tool_id": "deliver_channel_asset",
+      "step_attempt_id": "sa_ff9ebbde4c38e2f1",
+      "step_attempt_no": 1,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ff9ebbde4c38e2f1",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T12:05:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0143",
+      "cursor": 143,
+      "kind": "step.skipped",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": "S15_publish_revision",
+      "tool_id": "request_publish_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('approved')"
+        }
+      },
+      "at": "2026-07-24T12:05:15Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_video_20260724_002_0144",
+      "cursor": 144,
+      "kind": "run.completed",
+      "session_id": "video_LUMEN_LAUNCH",
+      "task_id": "video_LUMEN_LAUNCH_t",
+      "run_id": "run_video_20260724_002",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_video_20260724_002",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "outcome": "delivered"
+      },
+      "at": "2026-07-24T12:05:16Z"
+    }
+  ],
+  "budget_summary": {
+    "currency": "USD",
+    "limit": "50",
+    "reserved": "0",
+    "settled": "1.637",
+    "available": "48.363",
+    "status": "within_budget",
+    "ledger_ref": "budget-ledger.json"
+  },
+  "warnings": []
+}

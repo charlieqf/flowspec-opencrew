@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>素材库三种分析说明 · 对白 / 画面 / 综合</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --text:#1a1f2b; --muted:#5b6472;
+    --border:#e3e7ee; --shadow:0 1px 2px rgba(20,30,50,.06),0 6px 20px rgba(20,30,50,.05);
+    --dialogue:#2563eb; --dialogue-bg:#eaf1ff; --dialogue-bd:#bcd3ff;
+    --visual:#c07806;  --visual-bg:#fdf3e2;  --visual-bd:#f2dcae;
+    --composite:#7c3aed;--composite-bg:#f2ecff;--composite-bd:#ddceff;
+    --ok:#188a52; --warn:#b7791f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f131a; --surface:#171d27; --text:#e7ecf3; --muted:#9aa6b6;
+      --border:#28313f; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+      --dialogue:#7ea9ff; --dialogue-bg:#16233d; --dialogue-bd:#2c436e;
+      --visual:#e0b064;  --visual-bg:#2c2415;  --visual-bd:#54421f;
+      --composite:#b79cff;--composite-bg:#231a3b;--composite-bd:#41336b;
+      --ok:#4cc088; --warn:#e0b064;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.7; font-size:16px;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:40px 20px 80px}
+  header.hero{margin-bottom:36px}
+  .kicker{font-size:13px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin:0 0 8px}
+  h1{font-size:30px; line-height:1.3; margin:0 0 12px; letter-spacing:-.01em}
+  .lead{font-size:17px; color:var(--muted); margin:0}
+  section{margin-top:44px}
+  h2{font-size:22px; margin:0 0 16px; display:flex; align-items:center; gap:10px}
+  h3{font-size:16px; margin:22px 0 6px; color:var(--muted); letter-spacing:.02em}
+  p{margin:8px 0}
+  .muted{color:var(--muted)}
+  .tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:2px 9px; border-radius:999px; border:1px solid transparent}
+  .badge{width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:#fff; flex:none}
+  .b-d{background:var(--dialogue)} .b-v{background:var(--visual)} .b-c{background:var(--composite)}
+
+  /* flow diagram */
+  .flow{background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:22px; margin:8px 0 4px}
+  .flow-row{display:flex; align-items:stretch; gap:14px; flex-wrap:wrap}
+  .node{flex:1 1 200px; min-width:170px; border:1px solid var(--border); border-radius:12px; padding:14px 16px; background:var(--bg)}
+  .node .n-title{font-weight:700; display:flex; align-items:center; gap:8px; margin-bottom:4px}
+  .node .n-sub{font-size:13px; color:var(--muted)}
+  .node.d{border-color:var(--dialogue-bd); background:var(--dialogue-bg)}
+  .node.v{border-color:var(--visual-bd); background:var(--visual-bg)}
+  .node.c{border-color:var(--composite-bd); background:var(--composite-bg)}
+  .arrow{align-self:center; color:var(--muted); font-size:22px; flex:none}
+  .stack{display:flex; flex-direction:column; gap:10px; flex:1 1 200px; min-width:170px}
+  .stack .node{flex:none}
+  .flow-note{font-size:13px; color:var(--muted); margin-top:14px; padding-top:14px; border-top:1px dashed var(--border)}
+
+  /* analysis cards */
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:24px 26px; margin-top:16px; border-top:4px solid var(--border)}
+  .card.d{border-top-color:var(--dialogue)} .card.v{border-top-color:var(--visual)} .card.c{border-top-color:var(--composite)}
+  .card .head{display:flex; align-items:center; gap:12px; margin-bottom:6px}
+  .card .head h2{margin:0; font-size:21px}
+  .field{margin-top:16px}
+  .field .label{font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px}
+  ol,ul{margin:6px 0; padding-left:22px}
+  li{margin:4px 0}
+  .steps{counter-reset:step; list-style:none; padding-left:0}
+  .steps li{position:relative; padding-left:34px; margin:8px 0}
+  .steps li::before{counter-increment:step; content:counter(step); position:absolute; left:0; top:1px; width:22px; height:22px; border-radius:50%; background:var(--bg); border:1px solid var(--border); font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; color:var(--muted)}
+  code{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:1px 6px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .note{border-radius:10px; padding:12px 14px; font-size:14px; margin-top:14px; border:1px solid var(--border); background:var(--bg)}
+  .note.warn{border-color:var(--visual-bd); background:var(--visual-bg)}
+  .note b{color:var(--text)}
+  .version-note{border:1px solid var(--visual-bd); background:var(--visual-bg); border-radius:12px; padding:12px 14px; margin-top:16px; font-size:14px; color:var(--muted)}
+
+  /* table */
+  .table-scroll{overflow-x:auto; margin-top:8px; border:1px solid var(--border); border-radius:12px}
+  table{border-collapse:collapse; width:100%; min-width:640px; font-size:14px; background:var(--surface)}
+  th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--border); vertical-align:top}
+  th{background:var(--bg); font-size:12px; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; position:sticky; top:0}
+  td:first-child{font-weight:600; white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+
+  /* faq */
+  details{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:0 16px; margin-top:10px; box-shadow:var(--shadow)}
+  summary{cursor:pointer; font-weight:600; padding:14px 0; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+"; color:var(--muted); font-size:20px; font-weight:400; flex:none}
+  details[open] summary::after{content:"\2212"}
+  details[open] summary{border-bottom:1px solid var(--border)}
+  details .body{padding:12px 0 16px; color:var(--muted); font-size:15px}
+  footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">OpenCrew 素材库 · 用户说明</p>
+    <h1>对白分析、画面分析、综合分析<br>分别是做什么的？</h1>
+    <p class="lead">素材库对每条上传的原始视频提供三种分析。它们回答三个不同的问题：<b style="color:var(--dialogue)">说了什么</b>、<b style="color:var(--visual)">画面是什么</b>、以及把两者归纳成的<b style="color:var(--composite)">可用内容索引</b>。本页解释每种分析的目的、怎么操作、能得到什么，以及背后的简单原理。</p>
+    <div class="version-note"><b>适用版本：</b>M0–M4 对白优先、单中点画面首版（2026-07-22 文档整理）。本页所述“检索素材”仍以对白片段为召回门槛。待审核、尚未交付的 R1 将把每个画面片段升级为 12.5% / 37.5% / 62.5% / 87.5% 四张采样图，并在一次多图模型请求中生成语义后开放无声素材检索；R1 上线时本页必须同步改成已交付操作说明。</div>
+  </header>
+
+  <!-- overview flow -->
+  <section aria-label="关系总览">
+    <div class="flow">
+      <div class="flow-row">
+        <div class="stack">
+          <div class="node d">
+            <div class="n-title"><span class="badge b-d">白</span>对白分析</div>
+            <div class="n-sub">听声音 → 视频里“说了什么”</div>
+          </div>
+          <div class="node v">
+            <div class="n-title"><span class="badge b-v">画</span>画面分析</div>
+            <div class="n-sub">看画面 → “画面是什么”（结构 + 语义）</div>
+          </div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node c" style="flex:1 1 220px">
+          <div class="n-title"><span class="badge b-c">综</span>综合分析</div>
+          <div class="n-sub">融合对白与画面 → 带标题、用途和证据的“终极内容索引”</div>
+        </div>
+      </div>
+      <p class="flow-note">对白分析和画面分析<b>相互独立、可并行</b>；综合分析是它们的“上层”，<b>必须等两者都完成后</b>才能运行。三者结果都是指向原视频某段时间的“虚拟索引”，不会生成新的视频文件。</p>
+    </div>
+  </section>
+
+  <!-- Dialogue -->
+  <section>
+    <div class="card d">
+      <div class="head"><span class="badge b-d">白</span><h2>对白分析</h2><span class="tag" style="color:var(--dialogue);border-color:var(--dialogue-bd);background:var(--dialogue-bg)">听“说了什么”</span></div>
+
+      <div class="field">
+        <div class="label">目的</div>
+        <p>把视频里<b>说出来的话</b>变成一条条<b>带时间的可检索文字</b>。有了它，你才能按台词内容在素材库里搜到这条视频，也才能给故事板的某句口播找到合适的素材。</p>
+        <p class="muted" style="font-size:14.5px">这是三种分析里最基础的一种：<b>只有完成对白分析的素材，才能被“检索素材”召回。</b></p>
+      </div>
+
+      <div class="field">
+        <div class="label">操作方法</div>
+        <ol class="steps">
+          <li>进入某条素材的详情页，点击顶部的 <b>对白分析</b>。</li>
+          <li>如果使用云端语音识别，会要求你勾选 <b>“允许把音频发往云端识别”</b> 的授权；也可以选择本地识别、不外发音频。未授权时会明确提示原因，不会偷偷上传。</li>
+          <li>等待运行完成，状态会从 <code>运行中</code> 变为 <code>已完成</code>。</li>
+        </ol>
+      </div>
+
+      <div class="field">
+        <div class="label">预期效果</div>
+        <p>得到若干条<b>对白片段</b>，每条包含精确的起止时间和这段话的文字（例如某条长口播得到 <b>123 段</b>）。完成后：</p>
+        <ul>
+          <li>素材列表“内容结构”列的 <b>对白</b> 会显示片段数量；</li>
+          <li>这条素材进入全局检索的召回范围，可在故事板 / Agent 里被“检索素材”找到；</li>
+          <li>在视频剪辑页的“对白片段”轨道上，能看到每句话对应的时间块，点一下即可定位剪切。</li>
+        </ul>
+      </div>
+
+      <div class="field">
+        <div class="label">简单原理</div>
+        <p>用<b>语音识别（ASR）</b>把音轨转成带时间戳的字幕句，再做校准，按句切成一个个时间片段发布到中心索引。它<b>只理解声音里的话，不理解画面</b>——所以纯音乐、无人说话的素材，对白分析会正常完成但没有对白片段。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual -->
+  <section>
+    <div class="card v">
+      <div class="head"><span class="badge b-v">画</span><h2>画面分析</h2><span class="tag" style="color:var(--visual);border-color:var(--visual-bd);background:var(--visual-bg)">看“画面是什么”</span></div>
+
+      <div class="field">
+        <div class="label">目的</div>
+        <p>理解视频<b>画面上发生了什么</b>：把视频切成一个个镜头/场景，取代表画面，并用文字描述其中的<b>人物、场景、动作、物体</b>。它补上了对白听不到的那一半信息。</p>
+      </div>
+
+      <div class="field">
+        <div class="label">操作方法</div>
+        <ol class="steps">
+          <li>在素材详情页点击 <b>画面分析</b>。它内部分两步：先做<b>画面结构</b>（切场景 + 取关键帧），再做<b>视觉语义</b>（描述关键帧）。</li>
+          <li>视觉语义如果用云端视觉模型，会要求勾选 <b>“允许把画面截图发往云端”</b> 的授权；也可改用本地视觉模型。每次只发送当前场景的那一张关键帧，不发整段视频。</li>
+          <li>状态会分别显示 <code>结构 已完成</code> 和 <code>语义 已完成</code>；两步都完成才算画面分析就绪。</li>
+        </ol>
+      </div>
+
+      <div class="field">
+        <div class="label">预期效果</div>
+        <p>得到若干<b>画面片段</b>（例如 <b>22 段</b>），每段包含时间范围、一张代表画面，以及<b>简体中文</b>的视觉描述与标签。在剪辑页的“画面片段”轨道上，可以看到每个场景的中文摘要。</p>
+      </div>
+
+      <div class="field">
+        <div class="label">简单原理</div>
+        <p>先用<b>场景切分</b>找到镜头边界，并在每个场景中间抽一张<b>关键帧</b>；再把这张关键帧交给支持看图的模型，让它<b>只描述画面里看得见的东西</b>。</p>
+        <div class="note warn"><b>为什么“动作”有时是空的？</b> 当前首版每个场景只取一张静止关键帧，单帧无法证明一段连续动作，所以系统会如实留空。规划中的 R1 虽改为四张稀疏采样图，但仍不会把静帧状态差异猜成连续动作。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Composite -->
+  <section>
+    <div class="card c">
+      <div class="head"><span class="badge b-c">综</span><h2>综合分析</h2><span class="tag" style="color:var(--composite);border-color:var(--composite-bd);background:var(--composite-bg)">归纳成“可用内容索引”</span></div>
+
+      <div class="field">
+        <div class="label">目的</div>
+        <p>把“说了什么”和“画面是什么”<b>融合成一个更高层、可直接使用的内容索引</b>：给每一段配上<b>标题、摘要、关键词和推荐用途</b>，方便你快速判断“这段能用在哪里”，也让检索排序和剪辑推荐更准。</p>
+      </div>
+
+      <div class="field">
+        <div class="label">操作方法</div>
+        <ol class="steps">
+          <li>先确保 <b>对白分析</b> 与 <b>画面分析（结构 + 语义）</b> 都已完成——在此之前，<b>综合分析按钮是禁用的</b>，并会提示还缺哪一项。</li>
+          <li>点击 <b>综合分析</b> 运行。它不需要再次读取视频，很快完成。</li>
+          <li>完成后在“综合分析”标签下查看综合片段列表。</li>
+        </ol>
+      </div>
+
+      <div class="field">
+        <div class="label">预期效果</div>
+        <p>得到一组<b>综合片段</b>（例如 <b>9 段</b>），每段有一个<b>概括性标题</b>（如“介绍AI拓客能力”）、摘要、关键词，以及人物 / 场景 / 动作 / 物体标签，并标注它<b>由哪些对白句和哪些画面场景支撑</b>（可追溯的证据引用）。这是三种索引里最“好用”的一层。</p>
+      </div>
+
+      <div class="field">
+        <div class="label">简单原理</div>
+        <p>综合分析<b>不再读取视频或图片</b>，只消费对白分析和画面分析<b>已经发布的文字结果</b>，用大模型按时间把两边对齐、归纳、起标题、定用途。关键约束：<b>凡是视觉方面的结论都必须有画面分析的证据支撑</b>——不能只凭对白去“脑补”画面里没有的人或物。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- comparison -->
+  <section>
+    <h2>一张表看懂三者区别</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>对比项</th><th style="color:var(--dialogue)">对白分析</th><th style="color:var(--visual)">画面分析</th><th style="color:var(--composite)">综合分析</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>回答的问题</td><td>说了什么</td><td>画面是什么</td><td>这段内容能怎么用</td></tr>
+          <tr><td>依赖谁</td><td>无（可先做）</td><td>无（可并行）</td><td>对白 + 画面 都完成</td></tr>
+          <tr><td>输入</td><td>音频</td><td>场景关键帧（图片）</td><td>前两者的文字结果</td></tr>
+          <tr><td>可能的授权</td><td>音频外发（云端 ASR）</td><td>画面截图外发（云端视觉模型）</td><td>无需外发媒体</td></tr>
+          <tr><td>产出</td><td>带时间的对白片段</td><td>带描述的画面片段</td><td>带标题/用途/证据的综合片段</td></tr>
+          <tr><td>对检索的作用</td><td><b>召回门槛</b>（必须完成）</td><td>提升画面理解</td><td>提升排序与推荐（非硬门槛）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2>常见问题</h2>
+
+    <details>
+      <summary>三个一定要按顺序做吗？</summary>
+      <div class="body">对白和画面<b>互不依赖，可以并行</b>。综合分析是上层，<b>必须等对白与画面都完成</b>才能运行——所以它的按钮在前两者未完成时是灰的，并会提示缺哪一项。</div>
+    </details>
+
+    <details>
+      <summary>为什么运行分析时要我勾选“授权”？</summary>
+      <div class="body">如果分析使用<b>云端</b>模型，会把音频（对白）或画面截图（视觉语义）发到云端处理。系统不会在你未明确同意前外发数据，因此需要你先勾选授权；你也可以选择<b>本地</b>模型、完全不外发。这是隐私与合规的保护，不是多余步骤。</div>
+    </details>
+
+    <details>
+      <summary>只做了对白分析，能用检索找素材吗？</summary>
+      <div class="body">可以。<b>完成对白分析即可被“检索素材”召回。</b>画面分析和综合分析会让结果更准、更好用，但不是检索的必要条件。</div>
+    </details>
+
+    <details>
+      <summary>为什么有的视觉/综合片段“动作”是空的？</summary>
+      <div class="body">当前首版每个场景只用一张静止关键帧。规划中的 R1 会改为每片段四张稀疏采样图，提高人物、物体和场景覆盖，但四张静帧仍无法证明完整连续动作；动作证据不足时系统继续<b>如实留空</b>。</div>
+    </details>
+
+    <details>
+      <summary>分析会改变或替换我的原始视频吗？</summary>
+      <div class="body">不会。三种分析产出的都是指向原视频某段时间的<b>虚拟索引</b>，原始视频文件保持不变。只有你在剪辑页主动“剪切”后，才会生成新的片段文件。</div>
+    </details>
+
+    <details>
+      <summary>素材列表里的“质量”列是什么意思？</summary>
+      <div class="body">它按真实统计展示分析片段的质量分布，例如<b>可用</b>（可直接使用）与<b>待复核</b>（置信度较低、建议人工确认）的数量；尚未分析的素材会显示“暂无质量数据”。</div>
+    </details>
+  </section>
+
+  <footer>
+    OpenCrew 素材库 · 三种分析用户说明。本文档描述当前 M0–M4 单帧行为；R1 四帧视觉检索尚未交付，上线时必须更新本说明。
+  </footer>
+
+</div>
+</body>
+</html>

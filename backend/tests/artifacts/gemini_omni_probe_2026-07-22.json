@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "probe": "gemini_omni_live_probe",
+  "executed_at": "2026-07-22T10:05:00+10:00",
+  "capture": {
+    "kind": "mixed evidence bundle",
+    "model_discovery_capture": "direct sanitized probe projection",
+    "paid_interactions_capture": "same-day sanitized reconstruction from terminal output",
+    "paid_interactions_executed_at_precision": "minute",
+    "original_success_response_body_retained": false,
+    "future_captures_written_directly_by_probe": true
+  },
+  "environment": {
+    "role": "test",
+    "host": "macmini-4",
+    "production_host_executed": false,
+    "shared_production_secret_source_at_execution": true
+  },
+  "security": {
+    "api_key_included": false,
+    "raw_interaction_id_included": false,
+    "video_base64_included": false,
+    "customer_media_used": false
+  },
+  "sources": {
+    "omni": "https://ai.google.dev/gemini-api/docs/omni?hl=zh-cn",
+    "interactions": "https://ai.google.dev/gemini-api/docs/interactions-overview",
+    "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+    "retrieved_at": "2026-07-22"
+  },
+  "model_discovery": {
+    "revalidated_at": "2026-07-22T02:16:04.251807+00:00",
+    "evidence_scope": "model_metadata_only",
+    "interactions_endpoint_proven": false,
+    "interpretation": "The catalog response proves model metadata access only. Its advertised methods do not establish /v1beta/interactions compatibility.",
+    "request": {
+      "method": "GET",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-omni-flash-preview"
+    },
+    "response_projection": {
+      "http_status": 200,
+      "name": "models/gemini-omni-flash-preview",
+      "display_name": "Gemini Omni Flash Preview",
+      "version": "001",
+      "supported_generation_methods": [
+        "generateContent",
+        "countTokens"
+      ]
+    },
+    "status": "passed"
+  },
+  "observed_uri_store_invariant": {
+    "evidence_scope": "same_day_reconstructed_paid_interactions_observation",
+    "currently_online_reproducible_without_paid_gate": false,
+    "request_projection": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/interactions",
+      "response_format": {
+        "type": "video",
+        "delivery": "uri"
+      },
+      "store": false
+    },
+    "response_projection": {
+      "http_status": 400,
+      "error_status": "INVALID_ARGUMENT",
+      "error_message": "store=true is required when response format has video delivery set to URI."
+    },
+    "generation_completed": false,
+    "status": "passed"
+  },
+  "paid_generation": {
+    "evidence_scope": "same_day_reconstructed_paid_interactions_observation",
+    "currently_online_reproducible_without_paid_gate": false,
+    "request_projection": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/interactions",
+      "scenario": "one_second_blue_circle_no_customer_media",
+      "requested_seconds": 1,
+      "response_format": {
+        "type": "video",
+        "aspect_ratio": "16:9"
+      },
+      "store": false,
+      "background": false
+    },
+    "response_projection": {
+      "http_status": 200,
+      "status": "completed",
+      "model": "gemini-omni-flash-preview",
+      "interaction_id_present": false,
+      "video_part_count": 1,
+      "has_uri_video": false,
+      "inline_video_bytes": [
+        767294
+      ],
+      "inline_video_sha256": [
+        "cbcf2b498637aa20faa34ebb112cafa889642c68b34fc869be48fd80657cec87"
+      ]
+    },
+    "status": "passed"
+  },
+  "stateful_continuation": {
+    "executed": false,
+    "reason": "Deferred until the adapter, isolated test key, idempotency, cleanup, and paid budget gates are implemented."
+  },
+  "official_contract_snapshot": {
+    "model_status": "preview",
+    "endpoint": "/v1beta/interactions",
+    "tasks": [
+      "text_to_video",
+      "image_to_video",
+      "reference_to_video",
+      "edit"
+    ],
+    "stateful_parameter": "previous_interaction_id",
+    "store_false_prevents_stateful_continuation": true,
+    "interaction_scoped_parameters_must_be_resent": true,
+    "uploaded_video_uses_files_api": true,
+    "uploaded_video_wait_state": "ACTIVE",
+    "allowed_aspect_ratios": [
+      "16:9",
+      "9:16"
+    ],
+    "unsupported": {
+      "uploaded_audio_reference": true,
+      "multi_video_reference_or_reasoning": true,
+      "video_extension": true,
+      "video_interpolation": true,
+      "voice_editing": true
+    },
+    "uploaded_video_edit_region_restriction": [
+      "EEA",
+      "Switzerland",
+      "United Kingdom"
+    ],
+    "synthid_present_in_all_generated_videos": true,
+    "retention_days": {
+      "paid_default": 55,
+      "free_default": 1,
+      "paid_configurable": [
+        7,
+        14,
+        28,
+        55
+      ]
+    },
+    "pricing_snapshot_usd": {
+      "paid_tier_only": true,
+      "input_per_million_multimodal_tokens": 1.5,
+      "video_output_per_million_tokens": 17.5,
+      "approximate_720p_output_per_second": 0.1
+    }
+  }
+}

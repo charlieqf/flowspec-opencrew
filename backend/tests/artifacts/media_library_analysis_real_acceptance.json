@@ -1,0 +1,195 @@
+{
+  "schema_version": "media_library_analysis_real_acceptance_v1",
+  "observed_at": 1784534083000,
+  "environment": {
+    "host": "macmini-4.local",
+    "backend_url": "http://127.0.0.1:8011",
+    "postgresql_version": "16.14 (Homebrew)",
+    "opencode_health": "ready",
+    "managed_analysis_runtime": {
+      "python": "/Users/macmini-4/.opencrew/runtimes/analysis_v1_py312/bin/python",
+      "status": "ready",
+      "failures": [],
+      "warnings": []
+    }
+  },
+  "asset": {
+    "asset_id": "mla_1784500575045_607e5f061102",
+    "session_id": 364,
+    "duration_ms": 19200,
+    "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+    "source_path": "inbox/ShotPlan_Subtitled_Final (9).mp4"
+  },
+  "dialogue": {
+    "analysis_run_id": "mlar_dialogue_1784527464890_baa36a0e1b90",
+    "status": "ready",
+    "tool_use_session_id": "tus_1784527464893_63b48579752e",
+    "tool_session_status": "completed",
+    "schema_version": "media_library_dialogue_fragments_v1",
+    "result_hash": "6502edd8d76801489f04f45cb07399a51e3f3d1913ce47acd8de4cd4c6794595",
+    "canonical_hash_matches": true,
+    "authority_manifest_hash_matches": true,
+    "fragment_count": 8,
+    "active_index_fragment_count": 8,
+    "registered_output_file_count": 16,
+    "elapsed_ms": 26971,
+    "terminal_event_id": 106502,
+    "terminal_event_kind": "open_cut.dialogue.completed",
+    "tool_finalize_event_id": 106501
+  },
+  "visual_structure": {
+    "analysis_run_id": "mlar_visual_structure_1784527434282_f7eb026e03a3",
+    "status": "ready",
+    "tool_use_session_id": "tus_1784527435349_96cde94065e0",
+    "tool_session_status": "completed",
+    "schema_version": "media_library_visual_structure_v1",
+    "sampling_strategy": "scene_midpoint_v1",
+    "result_hash": "4a9a49acadcd492184f770a1d1160e19309c1a9eba9c6b110ce592a961f85e02",
+    "canonical_hash_matches": true,
+    "authority_manifest_hash_matches": true,
+    "fragment_count": 1,
+    "keyframe_count": 1,
+    "registered_output_file_count": 7,
+    "elapsed_ms": 3198,
+    "terminal_event_id": 106486,
+    "terminal_event_kind": "open_cut.visual.completed",
+    "tool_finalize_event_id": 106485
+  },
+  "visual_semantic": {
+    "analysis_run_id": "mlar_visual_semantic_1784533961546_0a728a40dbd6",
+    "status": "ready",
+    "is_current": true,
+    "tool_use_session_id": "tus_1784533961552_a0ff4ac94ea5",
+    "tool_session_status": "completed",
+    "schema_version": "media_library_visual_semantic_v1",
+    "result_hash": "6b5d8ac2e64269e398e99f8864dc202a73df79fb258ff7113705a0595a7aa683",
+    "canonical_hash_matches": true,
+    "authority_manifest_hash_matches": true,
+    "published_fragment_count": 1,
+    "keyframe_count": 1,
+    "registered_output_file_count": 3,
+    "cloud_visual_data_transfer_authorized": true,
+    "cache_hit_count": 1,
+    "model_call_count": 0,
+    "structured_repair_count": 0,
+    "quality_valid": true,
+    "elapsed_ms": 46,
+    "terminal_event_id": 106789,
+    "terminal_event_kind": "open_cut.visual_semantic.completed",
+    "tool_finalize_event_id": 106788,
+    "model_backed_provenance": {
+      "analysis_run_id": "mlar_visual_semantic_1784530612359_53a54e21a9f8",
+      "tool_use_session_id": "tus_1784530612365_b4988271bcc3",
+      "cloud_visual_data_transfer_authorized": true,
+      "model_call_count": 1,
+      "local_usage_id": "3743",
+      "quality_valid": true
+    },
+    "model_catalog": {
+      "connected_provider_aliases": [
+        "openai"
+      ],
+      "connected_model_count": 22,
+      "approved_model_alias": "Max",
+      "approved_model_id": "gpt-5.5",
+      "approved_model_input_modalities": [
+        "text",
+        "image",
+        "pdf"
+      ],
+      "approved_model_image_capability": true,
+      "image_capable_count": 22,
+      "catalog_shape": "capabilities.input",
+      "historical_blocked_run_cause": {
+        "classification": "catalog_adapter_compatibility_defect",
+        "detail": "The observed blocked run used code that read only legacy modalities.input while OpenCode returned capabilities.input boolean keys.",
+        "fixed": true,
+        "real_rerun_completed": true
+      }
+    }
+  },
+  "composite": {
+    "request_status": 200,
+    "business_run_created": true,
+    "analysis_run_id": "mlar_composite_1784533962479_9ea08d49b84c",
+    "status": "ready",
+    "is_current": true,
+    "tool_use_session_id": "tus_1784533962485_949ea593ceaa",
+    "tool_session_status": "completed",
+    "schema_version": "media_library_composite_v1",
+    "result_hash": "56e09c74e9a813a0940c5924ede8fbe15c24932ee851cdb42ef9843031ba530f",
+    "canonical_hash_matches": true,
+    "authority_manifest_hash_matches": true,
+    "published_fragment_count": 1,
+    "active_index_fragment_count": 1,
+    "registered_output_file_count": 5,
+    "model_call_count": 2,
+    "cache_hit_count": 0,
+    "structured_repair_count": 1,
+    "unsupported_visual_claim_count": 0,
+    "quality_valid": true,
+    "elapsed_ms": 23227,
+    "terminal_event_id": 106795,
+    "terminal_event_kind": "open_cut.composite.completed",
+    "tool_finalize_event_id": 106794,
+    "upstream_refs": {
+      "dialogue_run_id": "mlar_dialogue_1784527464890_baa36a0e1b90",
+      "dialogue_result_hash": "6502edd8d76801489f04f45cb07399a51e3f3d1913ce47acd8de4cd4c6794595",
+      "visual_structure_run_id": "mlar_visual_structure_1784527434282_f7eb026e03a3",
+      "visual_structure_result_hash": "4a9a49acadcd492184f770a1d1160e19309c1a9eba9c6b110ce592a961f85e02",
+      "visual_semantic_run_id": "mlar_visual_semantic_1784533961546_0a728a40dbd6",
+      "visual_semantic_result_hash": "6b5d8ac2e64269e398e99f8864dc202a73df79fb258ff7113705a0595a7aa683"
+    },
+    "release_blocker": null
+  },
+  "snapshot_identity": {
+    "inbox_direct_hardlink_to_run_snapshot": false,
+    "dialogue_run_snapshot_inode": 12958752,
+    "dialogue_run_snapshot_link_count": 2,
+    "visual_structure_run_snapshot_inode": 12958511,
+    "visual_structure_run_snapshot_link_count": 2,
+    "visual_semantic_input_manifest_inode": 13008066,
+    "composite_input_manifest_inode": 13008107,
+    "visual_semantic_and_composite_snapshots_are_distinct": true,
+    "run_snapshots_are_independent": true,
+    "same_run_legacy_snapshot_is_hardlinked": true
+  },
+  "concurrency_reproduction": {
+    "dialogue_analysis_run_id": "mlar_dialogue_1784527434264_4e270e82b2ba",
+    "tool_use_session_id": "tus_1784527434269_d50a4f977130",
+    "business_status": "failed",
+    "business_error_code": "analysis_execution_failed",
+    "tool_session_status": "failed",
+    "tool_result_index_registered": true,
+    "active_run_residue_count": 0,
+    "error_class": "psycopg.errors.DeadlockDetected",
+    "reproduction": "Concurrent dialogue and visual-structure starts for the same asset updated media_library_tasks and media_library_assets in opposite transaction order.",
+    "remediation": {
+      "status": "verified",
+      "lock_order": [
+        "media_library_assets",
+        "media_library_tasks"
+      ],
+      "postgresql_lock_order_test_count": 1,
+      "postgresql_cross_scheme_overlap_iterations": 12,
+      "postgresql_test_result": "2 tests passed",
+      "contract_test_result": "10 tests passed",
+      "analysis_regression_result": "28 tests passed",
+      "residual_acceptance_assets": 0,
+      "residual_acceptance_sessions": 0,
+      "active_analysis_run_residue_count": 0
+    }
+  },
+  "commands": [
+    "scripts/opencrew_local_stack.sh status",
+    "backend/.venv/bin/python scripts/check_analysis_v1_runtime.py",
+    "POST /api/media-library/{asset_id}/analyses/dialogue/run with force=true and allow_cloud_asr_data_transfer=true",
+    "POST /api/media-library/{asset_id}/analyses/visual/run with force_structure=true, force_semantic=true and allow_cloud_visual_data_transfer=true",
+    "GET /api/media-library/{asset_id}/analyses/{scheme}/runs/{run_id}",
+    "POST /api/media-library/{asset_id}/analyses/composite/run with force=true",
+    "MEDIA_LIBRARY_ANALYSIS_E2E_RUN_SEMANTIC=1 MEDIA_LIBRARY_ANALYSIS_E2E_ALLOW_CLOUD_VISUAL_DATA_TRANSFER=1 MEDIA_LIBRARY_ANALYSIS_E2E_RUN_COMPOSITE=1 MEDIA_LIBRARY_ANALYSIS_E2E_REQUIRE_READY=1 npm run test:e2e:media-library-analysis-runs",
+    "PostgreSQL queries against media_library_analysis_runs, media_library_fragment_index, session_files and session_events",
+    "Canonical result_hash recomputation from published authority JSON",
+    "Filesystem inode/link-count validation for inbox and per-run snapshots"
+  ]
+}

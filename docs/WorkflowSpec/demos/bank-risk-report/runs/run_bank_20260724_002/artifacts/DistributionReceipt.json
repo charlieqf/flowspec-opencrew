@@ -1,0 +1,9 @@
+{
+  "recipient_set": [
+    "board-risk-committee",
+    "regulatory-reporting"
+  ],
+  "operation_key": "distribute:BANK01:2026-06:run_bank_20260724_002",
+  "status": "mock-delivered",
+  "distributed_at": "2026-07-24T04:20:00Z"
+}

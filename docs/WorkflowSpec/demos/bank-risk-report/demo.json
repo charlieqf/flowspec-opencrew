@@ -1,0 +1,127 @@
+{
+  "slug": "bank-risk-report",
+  "eyebrow": "Scenario 02 · Controlled reporting",
+  "title": "银行风险报告 · 冻结数据到签署分发",
+  "subtitle": "展示多源汇合、DQ waiver、指标与叙述分离、签署审批、可对账分发，以及数据重述 Run。",
+  "stage_labels": {
+    "freeze": "数据冻结",
+    "quality": "质量控制",
+    "analytics": "风险计算",
+    "report": "报告编制",
+    "approval": "签署审批",
+    "distribution": "分发与修订"
+  },
+  "step_labels": {
+    "S1a_freeze_transactions": {
+      "title": "冻结交易数据",
+      "description": "按声明的 data cut 固化本期交易总体，防止报告过程中输入悄然变化。"
+    },
+    "S1b_freeze_payments": {
+      "title": "冻结支付数据",
+      "description": "独立冻结支付明细，并绑定到与交易数据相同的数据切片。"
+    },
+    "S1c_freeze_gl": {
+      "title": "冻结总账控制数",
+      "description": "记录权威总账控制合计，为后续三方对账提供基准。"
+    },
+    "S2_reconcile_quality": {
+      "title": "执行三方对账与质量检查",
+      "description": "汇合交易、支付和总账，生成明确的数据质量结果与差异证据。"
+    },
+    "S3_dq_waiver": {
+      "title": "审批数据质量豁免",
+      "description": "对质量例外创建隔离的人工作业；拒绝豁免不能被伪装成质量通过。"
+    },
+    "S4_finalize_quality": {
+      "title": "确认数据可用性",
+      "description": "合并质量检查和可选豁免决定，形成唯一权威的分析准入结论。"
+    },
+    "S5_prepare_dataset": {
+      "title": "准备受控分析数据集",
+      "description": "物化获准使用的数据切片，同时保留质量豁免及其来源。"
+    },
+    "S6_calculate_metrics": {
+      "title": "计算权威风险指标",
+      "description": "使用确定性计算生成监管指标，不让语言模型重算或覆盖数字。"
+    },
+    "S7_draft_narrative": {
+      "title": "生成有依据的风险叙述",
+      "description": "让 Mock 模型只引用已核验指标键生成说明，并保留逐调用成本。"
+    },
+    "S8_build_appendix": {
+      "title": "生成合规与血缘附件",
+      "description": "并行生成确定性的控制、口径和数据血缘附件。"
+    },
+    "S9_assemble_report": {
+      "title": "组装风险报告",
+      "description": "汇合权威指标、受约束叙述和合规附件，形成带版本的报告。"
+    },
+    "S10_report_signoff": {
+      "title": "签署报告",
+      "description": "把具名审批人的决定绑定到准确的报告版本和 data cut 哈希。"
+    },
+    "S11_distribute_report": {
+      "title": "分发已签署报告",
+      "description": "按稳定收件人集合分发报告，并保留可对账的分发回执。"
+    },
+    "S12_request_remediation": {
+      "title": "请求修复数据",
+      "description": "当数据切片不可接受时，以明确修复请求结束本次 Run。"
+    },
+    "S13_request_report_revision": {
+      "title": "请求修订报告",
+      "description": "当签署人拒绝或要求修改时，形成可审计的报告返工结果。"
+    }
+  },
+  "outcome_labels": {
+    "report_distributed": "报告已签署并完成分发",
+    "data_remediation_requested": "已请求修复数据切片",
+    "report_revision_requested": "已请求修订报告"
+  },
+  "executive_tldr": {
+    "result": "冻结数据经质量控制与签署后形成可分发风险报告，或明确转入数据修复/报告修订。",
+    "control": "data cut、指标血缘、质量例外、签署责任、分发回执和模型成本均可追踪。",
+    "boundary": "这是目标契约的确定性 Mock；不证明分布式调度、租约与崩溃恢复已经生产化。"
+  },
+  "run_control_examples": {
+    "full": "冻结交易、支付和总账三路 data cut，完成质量控制、指标、叙述、签署与分发，或以数据修复/报告修订请求正常收口。",
+    "through": "运行到 S2 质量对账：三份同一 data cut 的快照必须全部到齐；生成 DQ 结果后暂停，尚未形成监管报告 outcome。",
+    "from": "已核验指标不变、只需修订报告叙述时从 S7 重跑：新 Run 可验证复用 RiskMetrics，并重算叙述、组装、签署和分发后继。",
+    "single": "单独运行 S7 生成一份诊断叙述，供开发者检查 grounding；它不得覆盖已签署报告，也不触发正式分发。"
+  },
+  "accent": "#9a5b05",
+  "accent_secondary": "#b7435a",
+  "surface_tint": "#f6ede0",
+  "business_owner": "风险数据与监管报告",
+  "hero_metric_label": "数据控制",
+  "hero_metric_value": "三路数据汇合",
+  "scenario_explainer": {
+    "title": "报告可信度来自数据切片与控制链，而非文案",
+    "challenge": "银行风险报告必须证明交易、支付和总账来自同一冻结 data cut，质量例外经过授权，指标由确定性计算产生，LLM 叙述只引用这些权威数字，最后还要签署并留下可对账的分发事实。",
+    "points": [
+      {
+        "feature": "多源冻结后才能三路汇合",
+        "support": "三个根 Step 独立冻结交易、支付和总账，Reconciliation 与 DQReport 通过显式 AND-join 汇合；Artifact binding 固定 entity、period 和 data_cut_id。",
+        "constraint": "后续不得混用不同 data cut，也不能凭文件存在判定就绪；producer 输入摘要、内容 hash、Schema 或声明的 binding 任一不符都不能进入指标计算。"
+      },
+      {
+        "feature": "DQ waiver 是例外，不是伪装通过",
+        "support": "质量异常创建独立 Human Task，批准或拒绝结果写成 DQWaiverDecision；拒绝会完整结束为 remediation outcome，重述数据创建新 Run。",
+        "constraint": "waiver 必须绑定输入快照、角色、理由和 revision；它不能改写原 DQReport，也不能把未经解释的差异标成普通 pass。"
+      },
+      {
+        "feature": "指标、叙述、签署和分发四权分离",
+        "support": "确定性 Step 计算 RiskMetrics，受 grounding/evidence 约束的模型生成 narrative，再与合规附件组装；签署可批准分发，也可用独立修订请求正常收口。",
+        "constraint": "LLM 不能重算或覆盖监管数字；Profile 禁止静默 fallback，Usage 单独计费；分发是 reconcilable operation，必须保留 operation key 与 receipt。"
+      }
+    ],
+    "effect": "FlowSpec 让报告的每句话都能回到冻结数据、对账控制、指标版本和审批责任；即使数据质量不足，流程也以“请求修复”正常结束，而不是用一个 completed 状态掩盖控制失败。",
+    "glossary": [
+      { "term": "DAG（有向无环流程图）", "meaning": "本月报告从冻结数据向对账、指标、签署推进；发现数据问题后以修复请求结束，重述数据用下一次 Run 处理。" },
+      { "term": "AND-join（多路汇合）", "meaning": "交易、支付和总账三份快照都到齐且属于同一 data cut，质量对账步骤才允许启动。" },
+      { "term": "Data cut（冻结数据切片）", "meaning": "某个法人、期间、切片编号下不可悄悄变化的报告输入；重述必须产生新切片和新 Run。" },
+      { "term": "Outcome（业务完成结果）", "meaning": "签署分发和要求数据修复都是完整结果；系统明确记录是哪一种，而不只显示笼统的“流程完成”。" },
+      { "term": "Grounded AI（有依据的生成）", "meaning": "模型只能依据已核验指标和证据生成叙述，不能自行重算监管数字或把质量例外写成正常。" }
+    ]
+  }
+}

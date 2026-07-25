@@ -1,0 +1,12 @@
+{
+  "decision": "approved",
+  "actor": {
+    "type": "user",
+    "id": "brand_reviewer_3",
+    "roles": [
+      "brand_reviewer"
+    ]
+  },
+  "reason": "Brand, product binding, captions, and channel-safe master reviewed.",
+  "expected_revision": 0
+}

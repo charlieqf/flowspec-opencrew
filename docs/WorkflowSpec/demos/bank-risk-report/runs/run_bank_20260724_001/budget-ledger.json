@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.1",
+  "ledger_id": "budget_run_bank_20260724_001",
+  "run_id": "run_bank_20260724_001",
+  "currency": "USD",
+  "limit": "5",
+  "reserved": "0",
+  "settled": "0",
+  "available": "5",
+  "status": "within_budget",
+  "transactions": []
+}

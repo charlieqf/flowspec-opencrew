@@ -1,0 +1,11 @@
+-r ../../backend/requirements.txt
+rapidocr_onnxruntime==1.4.4
+scenedetect==0.6.7.1
+static-ffmpeg==3.0
+resemblyzer>=0.1.4
+speechbrain>=1.1.0
+huggingface_hub>=0.8.0,<1.0.0
+torchaudio>=2.11.0
+librosa>=0.11.0
+soundfile>=0.14.0
+webrtcvad-wheels>=2.0.14

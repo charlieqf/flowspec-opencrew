@@ -1,0 +1,9 @@
+{
+  "matter_id": "MAT-ATLAS-01",
+  "scope_revision": "scope-r1",
+  "requested_categories": [
+    "financial",
+    "tax"
+  ],
+  "status": "mock-sent"
+}

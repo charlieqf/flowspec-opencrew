@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "media_decode",
+      "passed": true
+    },
+    {
+      "name": "asset_binding",
+      "passed": true
+    },
+    {
+      "name": "product_identity",
+      "passed": true
+    },
+    {
+      "name": "brand_claims",
+      "passed": true
+    }
+  ],
+  "revision_asset_keys": [],
+  "mock_model_output": true
+}

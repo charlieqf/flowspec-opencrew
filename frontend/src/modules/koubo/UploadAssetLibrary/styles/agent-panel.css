@@ -1,0 +1,72 @@
+.ual-agent {
+  background: var(--ual-panel);
+  border-left: 1px solid var(--ual-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100dvh;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+.ual-agent.is-reference-dragging::after {
+  border: 2px solid var(--ual-accent);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 3px var(--ual-accent-soft);
+  content: "";
+  inset: 10px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 5;
+}
+.ual-agent-header {
+  align-items: center;
+  border-bottom: 1px solid var(--ual-border);
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  min-height: 68px;
+  padding: 0 24px 0 20px;
+}
+.ual-agent-title,
+.ual-agent-actions {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+.ual-agent-title strong {
+  color: var(--ual-text);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+.ual-agent-icon {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ual-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  height: 30px;
+  justify-content: center;
+  padding: 0;
+  width: 30px;
+}
+.ual-flow-icon {
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.ual-flow-icon.is-svg-mask {
+  background: currentColor;
+  flex: 0 0 auto;
+  mask: var(--ual-icon-url) center / contain no-repeat;
+  -webkit-mask: var(--ual-icon-url) center / contain no-repeat;
+}
+.ual-agent-icon:hover {
+  background: var(--ual-panel-soft);
+  color: var(--ual-text);
+}

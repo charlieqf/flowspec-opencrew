@@ -1,0 +1,16 @@
+{
+  "mock": true,
+  "logical_name": "MasterVideo.mp4",
+  "payload": {
+    "asset_key": "master",
+    "kind": "master_video",
+    "duration_seconds": 24.0,
+    "provider_operation_key": "local-compose:run_video_20260724_001",
+    "segment_keys": [
+      "dlg-001",
+      "dlg-002",
+      "dlg-003"
+    ],
+    "mock": true
+  }
+}

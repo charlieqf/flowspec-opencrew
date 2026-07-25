@@ -1,0 +1,1480 @@
+.koubo-task-list-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(15, 23, 42, 0.28);
+}
+
+.koubo-task-list-modal {
+  position: fixed;
+  z-index: 91;
+  top: 52px;
+  left: 50%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(980px, calc(100vw - 40px));
+  max-height: calc(100vh - 104px);
+  transform: translateX(-50%);
+  border: 1px solid #dbe2ee;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+}
+
+.koubo-task-list-video-modal {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.koubo-task-list-script-modal.is-talking-head {
+  width: min(1180px, calc(100vw - 40px));
+}
+
+.koubo-task-list-modal header,
+.koubo-task-list-modal footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+}
+
+.koubo-task-list-modal header {
+  border-bottom: 1px solid #edf1f6;
+}
+
+.koubo-task-list-draggable-header {
+  cursor: move;
+  user-select: none;
+}
+
+.koubo-task-list-draggable-header button {
+  cursor: pointer;
+}
+
+.koubo-task-list-modal footer {
+  border-top: 1px solid #edf1f6;
+}
+
+.koubo-task-list-modal footer.koubo-task-list-video-actions {
+  justify-content: flex-end;
+}
+
+.koubo-task-list-modal h3,
+.koubo-task-list-modal p {
+  margin: 0;
+}
+
+.koubo-task-list-modal p {
+  color: #647089;
+}
+
+.koubo-task-list-modal-title-row,
+.koubo-task-list-modal-title-tags {
+  align-items: center;
+  display: flex;
+}
+
+.koubo-task-list-modal-title-row {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.koubo-task-list-modal-title-tags {
+  gap: 6px;
+}
+
+.koubo-task-list-modal-title-tags span {
+  background: #eef4ff;
+  border: 1px solid #d7e4ff;
+  border-radius: 999px;
+  color: #3157a4;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 8px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-modal-title-tags span + span {
+  background: #f3f0ff;
+  border-color: #e2dafc;
+  color: #6550a6;
+}
+
+.koubo-task-list-modal button {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  color: #1f2b3d;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
+.koubo-task-list-modal button:hover:not(:disabled) {
+  border-color: #b9c6d9;
+  background: #f8fafc;
+}
+
+.koubo-task-list-modal button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.koubo-task-list-modal-head-actions {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.koubo-task-list-modal .koubo-task-list-icon-action {
+  width: 38px;
+  padding: 0;
+}
+
+.koubo-task-list-icon-action svg {
+  width: 17px;
+  height: 17px;
+}
+
+.koubo-task-list-modal .koubo-task-list-close-action {
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  padding: 0;
+}
+
+.koubo-task-list-close-action svg {
+  width: 18px;
+  height: 18px;
+}
+
+.koubo-task-list-modal-body {
+  display: grid;
+  gap: 12px;
+  overflow: auto;
+  padding: 16px;
+}
+
+.koubo-task-list-modal label {
+  display: grid;
+  gap: 6px;
+  color: #526178;
+  font-size: 13px;
+}
+
+.koubo-task-list-modal input:not([type="checkbox"]):not([type="radio"]),
+.koubo-task-list-modal select,
+.koubo-task-list-modal textarea {
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font: inherit;
+}
+
+.koubo-task-list-modal textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.koubo-task-list-script-field textarea {
+  min-height: 140px;
+}
+
+.koubo-task-list-script-field-label {
+  align-items: baseline;
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.koubo-task-list-script-field-label small {
+  color: #dc2626;
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.koubo-task-list-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.koubo-task-list-talking-head-storyboard-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.koubo-task-list-field-label-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.koubo-task-list-field-label-row em {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  color: #9a3412;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 3px 8px;
+}
+
+.koubo-task-list-dance-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.koubo-task-list-dance-title-row {
+  align-items: end;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.koubo-task-list-dance-title-toggles {
+  align-items: center;
+  align-self: end;
+  display: grid;
+  gap: 0;
+  grid-column: 4;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  min-height: 38px;
+  width: 100%;
+}
+
+.koubo-task-list-dance-title-field {
+  grid-column: 1 / 4;
+  min-width: 0;
+}
+
+.koubo-task-list-dance-title-toggles label {
+  align-items: center;
+  display: inline-flex;
+  gap: 0;
+  height: 38px;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.koubo-task-list-dance-param-field {
+  min-width: 0;
+}
+
+.koubo-task-list-dance-media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.koubo-task-list-modal label.koubo-task-list-upload-box {
+  align-items: center;
+  background: #eef5ff;
+  border: 2px dashed #3b82f6;
+  border-radius: 8px;
+  color: #647089;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  min-height: 92px;
+  padding: 14px;
+  text-align: center;
+}
+
+.koubo-task-list-upload-box input {
+  display: none;
+}
+
+.koubo-task-list-modal label.koubo-task-list-upload-box.is-dragging {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+  box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.16);
+}
+
+.koubo-task-list-modal label.koubo-task-list-upload-box.has-file strong {
+  color: #1f3f75;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-modal label.koubo-task-list-upload-box em {
+  color: #b91c1c;
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.koubo-task-list-upload-icon {
+  align-items: center;
+  color: #2563eb;
+  display: inline-flex;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.koubo-task-list-upload-icon svg {
+  display: block;
+  height: 22px;
+  width: 22px;
+}
+
+.koubo-task-list-upload-copy strong {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.koubo-task-list-wide-field {
+  grid-column: 1 / -1;
+}
+
+.koubo-task-list-target-picker {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #dfe6f2;
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.koubo-task-list-target-picker-head,
+.koubo-task-list-target-library-actions,
+.koubo-task-list-target-selected {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.koubo-task-list-target-picker-head > span {
+  color: #526178;
+  font-size: 13px;
+}
+
+.koubo-task-list-target-picker-head .koubo-task-list-checkbox-tight {
+  align-items: center;
+  column-gap: 6px;
+  display: grid;
+  grid-template-columns: 16px max-content;
+  white-space: nowrap;
+}
+
+.koubo-task-list-target-picker-head .koubo-task-list-checkbox-tight input {
+  height: 16px;
+  margin: 0;
+  width: 16px;
+}
+
+.koubo-task-list-target-picker-tabs {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.koubo-task-list-modal .koubo-task-list-target-picker-tabs button {
+  min-height: 32px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.koubo-task-list-target-picker-tabs button.is-active {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.koubo-task-list-target-picker-tabs button:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
+.koubo-task-list-target-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  grid-auto-rows: 178px;
+  gap: 10px;
+  max-height: 386px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+}
+
+.koubo-task-list-modal button.koubo-task-list-target-card {
+  display: grid;
+  grid-template-rows: 118px 18px 16px;
+  align-items: start;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  height: 178px;
+  min-height: 178px;
+  overflow: hidden;
+  padding: 8px;
+  text-align: left;
+}
+
+.koubo-task-list-reference-grid {
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  grid-auto-rows: 150px;
+  max-height: 320px;
+}
+
+.koubo-task-list-modal button.koubo-task-list-reference-card {
+  grid-template-rows: 90px 18px 16px;
+  height: 150px;
+  min-height: 150px;
+}
+
+.koubo-task-list-target-card.is-selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.koubo-task-list-target-card img,
+.koubo-task-list-target-card video {
+  width: 100%;
+  height: 118px;
+  min-height: 0;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #e5eaf2;
+}
+
+.koubo-task-list-reference-card video {
+  height: 90px;
+}
+
+.koubo-task-list-target-card span,
+.koubo-task-list-target-card small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-target-card span {
+  color: #263448;
+  font-size: 12px;
+}
+
+.koubo-task-list-target-card small {
+  color: #647089;
+  font-size: 11px;
+}
+
+.koubo-task-list-target-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.koubo-task-list-target-upload input {
+  display: none;
+}
+
+.koubo-task-list-target-selected {
+  justify-content: flex-start;
+  color: #526178;
+  font-size: 12px;
+}
+
+.koubo-task-list-target-selected img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.koubo-task-list-target-selected video {
+  width: 72px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #e5eaf2;
+}
+
+.koubo-task-list-target-selected span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-target-empty,
+.koubo-task-list-target-error {
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  color: #647089;
+  font-size: 13px;
+}
+
+.koubo-task-list-target-error {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.koubo-task-list-toggle-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.koubo-task-list-toggle-row label {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.koubo-task-list-toggle-row input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.koubo-task-list-toggle-row.koubo-task-list-dance-title-toggles label {
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.koubo-task-list-toggle-row.koubo-task-list-dance-title-toggles .koubo-task-list-checkbox-tight {
+  align-items: center;
+  column-gap: 6px;
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: 16px max-content;
+  height: 38px;
+  justify-content: start;
+  justify-items: start;
+  margin: 0;
+  padding: 0;
+  width: max-content;
+}
+
+.koubo-task-list-toggle-row.koubo-task-list-dance-title-toggles input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ffffff;
+  border: 1px solid #8a94a6;
+  border-radius: 2px;
+  flex: 0 0 auto;
+  height: 16px;
+  margin: 0;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  width: 16px;
+}
+
+.koubo-task-list-toggle-row.koubo-task-list-dance-title-toggles input[type="checkbox"]:checked {
+  background-color: #2563eb;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 8.1 6.6 10.7 12 5.3' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: #2563eb;
+}
+
+.koubo-task-list-toggle-row.koubo-task-list-dance-title-toggles span {
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.koubo-task-list-text-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.koubo-task-list-text-grid textarea {
+  min-height: 72px;
+}
+
+.koubo-task-list-prompt-workbench {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid #edf1f6;
+  padding-top: 12px;
+}
+
+.koubo-task-list-prompt-tabs {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.koubo-task-list-prompt-tabs button {
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  color: #526178;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.koubo-task-list-prompt-tabs button.is-active {
+  background: #eef2ff;
+  border-color: #aebeff;
+  color: #526178;
+}
+
+.koubo-task-list-prompt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.koubo-task-list-prompt-grid label {
+  min-width: 0;
+}
+
+.koubo-task-list-prompt-label-row,
+.koubo-task-list-prompt-field-actions {
+  align-items: center;
+  display: flex;
+}
+
+.koubo-task-list-prompt-label-row {
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.koubo-task-list-prompt-field-actions {
+  gap: 6px;
+}
+
+.koubo-task-list-modal .koubo-task-list-prompt-field-actions button {
+  border-radius: 6px;
+  color: #526178;
+  height: 28px;
+  min-height: 28px;
+  padding: 0;
+  width: 28px;
+}
+
+.koubo-task-list-modal .koubo-task-list-prompt-field-actions button:last-child {
+  background: #eef4ff;
+  border-color: #b9caff;
+  color: #3157d5;
+}
+
+.koubo-task-list-prompt-field-actions svg {
+  height: 15px;
+  width: 15px;
+}
+
+.koubo-task-list-prompt-grid textarea {
+  min-height: 150px;
+}
+
+.koubo-task-list-storyboard-prompt-grid textarea {
+  min-height: 390px;
+}
+
+.koubo-task-list-final-prompt {
+  min-height: 150px;
+}
+
+.koubo-task-list-wizard-body {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
+  gap: 16px;
+  min-height: 560px;
+}
+
+.koubo-task-list-wizard-nav {
+  align-content: start;
+  background: #f7f9fd;
+  border-right: 1px solid #edf1f6;
+  display: grid;
+  gap: 8px;
+  margin: -16px 0 -16px -16px;
+  padding: 16px 12px;
+}
+
+.koubo-task-list-wizard-nav button {
+  align-items: center;
+  border-color: transparent;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 2px;
+  justify-content: start;
+  min-height: 64px;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+}
+
+.koubo-task-list-wizard-nav button span {
+  align-items: center;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  color: #3157d5;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  grid-column: 1;
+  grid-row: 1;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.koubo-task-list-wizard-nav button strong {
+  color: #1f2b3d;
+  font-size: 14px;
+  grid-column: 2;
+  grid-row: 1;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-wizard-nav button small {
+  color: #647089;
+  font-size: 12px;
+  grid-column: 2;
+  grid-row: 2;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-wizard-nav button.is-active {
+  background: #ffffff;
+  border-color: #b9c6ff;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+}
+
+.koubo-task-list-wizard-content {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-width: 0;
+}
+
+.koubo-task-list-wizard-step {
+  align-content: start;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.koubo-task-list-script-step.is-user-script {
+  align-content: stretch;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+}
+
+.koubo-task-list-script-step.is-user-script .koubo-task-list-script-field {
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+}
+
+.koubo-task-list-script-step.is-user-script .koubo-task-list-script-field textarea {
+  height: 100%;
+  min-height: 0;
+  resize: none;
+}
+
+.koubo-task-list-script-step.is-rewrite-script {
+  align-content: stretch;
+  grid-template-rows: auto auto auto auto minmax(320px, 1fr);
+  min-height: 0;
+}
+
+.koubo-task-list-script-step.is-generate-script {
+  align-content: stretch;
+  grid-template-rows: auto auto auto minmax(320px, 1fr);
+  min-height: 0;
+}
+
+.koubo-task-list-script-step.is-rewrite-script .koubo-task-list-script-field textarea {
+  height: calc(3 * 1.4em + 20px);
+  min-height: 0;
+  overflow-y: auto;
+  resize: none;
+}
+
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-text-grid textarea {
+  height: calc(2 * 1.4em + 20px);
+  min-height: 0;
+  overflow-y: auto;
+  resize: none;
+}
+
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-prompt-grid,
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-prompt-grid label {
+  min-height: 0;
+}
+
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-prompt-grid label {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-prompt-grid textarea,
+.koubo-task-list-script-step:is(.is-generate-script, .is-rewrite-script) .koubo-task-list-prompt-grid .koubo-task-list-final-prompt {
+  height: 100%;
+  min-height: 320px;
+  resize: none;
+}
+
+.koubo-task-list-highlighted-textarea {
+  height: 100%;
+  min-height: 0;
+  position: relative;
+  width: 100%;
+}
+
+.koubo-task-list-highlighted-textarea pre,
+.koubo-task-list-highlighted-textarea textarea {
+  box-sizing: border-box;
+  font: inherit;
+  line-height: normal;
+  margin: 0;
+  overflow-wrap: break-word;
+  tab-size: 4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.koubo-task-list-highlighted-textarea pre {
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #1f2937;
+  inset: 0;
+  overflow: hidden;
+  padding: 9px 24px 9px 10px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.koubo-task-list-highlighted-textarea pre .is-linked {
+  color: #15803d;
+  font-weight: 500;
+}
+
+.koubo-task-list-modal .koubo-task-list-highlighted-textarea textarea {
+  background: transparent;
+  caret-color: #1f2937;
+  color: transparent;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  scrollbar-gutter: stable;
+  width: 100%;
+  -webkit-text-fill-color: transparent;
+}
+
+.koubo-task-list-modal .koubo-task-list-highlighted-textarea textarea::placeholder {
+  color: #94a3b8;
+  -webkit-text-fill-color: #94a3b8;
+}
+
+.koubo-task-list-script-mode {
+  background: #f5f7fb;
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 4px;
+}
+
+.koubo-task-list-modal .koubo-task-list-script-mode button {
+  align-items: flex-start;
+  border-color: transparent;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 3px 9px;
+  justify-items: start;
+  min-height: 58px;
+  padding: 9px 12px;
+  text-align: left;
+}
+
+.koubo-task-list-script-mode-icon {
+  align-items: center;
+  align-self: center;
+  color: #64748b;
+  display: inline-flex;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  justify-content: center;
+}
+
+.koubo-task-list-script-mode-icon svg {
+  height: 20px;
+  width: 20px;
+}
+
+.koubo-task-list-script-mode button strong {
+  color: #263448;
+  font-size: 14px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.koubo-task-list-script-mode button small {
+  color: #718096;
+  font-size: 12px;
+  grid-column: 2;
+  grid-row: 2;
+  line-height: 1.35;
+}
+
+.koubo-task-list-modal .koubo-task-list-script-mode button.is-active {
+  background: #ffffff;
+  border-color: #aebeff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+.koubo-task-list-script-mode button.is-active strong {
+  color: #3157d5;
+}
+
+.koubo-task-list-script-mode button.is-active .koubo-task-list-script-mode-icon {
+  color: #3157d5;
+}
+
+.koubo-task-list-talking-head-model-switch {
+  background: #f5f7fb;
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 4px;
+}
+
+.koubo-task-list-modal .koubo-task-list-talking-head-model-switch button {
+  align-content: center;
+  border-color: transparent;
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  min-height: 56px;
+  padding: 7px 6px;
+  text-align: center;
+}
+
+.koubo-task-list-talking-head-model-switch strong {
+  color: #263448;
+  font-size: 13px;
+}
+
+.koubo-task-list-talking-head-model-switch button > span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.koubo-task-list-talking-head-model-switch em {
+  background: #eef2f8;
+  border-radius: 999px;
+  color: #64748b;
+  font-size: 10px;
+  font-style: normal;
+  line-height: 18px;
+  padding: 0 6px;
+}
+
+.koubo-task-list-modal .koubo-task-list-talking-head-model-switch button.is-active {
+  background: #ffffff;
+  border-color: #aebeff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+.koubo-task-list-talking-head-model-switch button.is-active strong {
+  color: #3157d5;
+}
+
+.koubo-task-list-talking-head-model-switch button.is-active em {
+  background: #e9efff;
+  color: #3157d5;
+}
+
+.koubo-task-list-avatar-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.koubo-task-list-avatar-grid .koubo-task-list-upload-box {
+  grid-row: span 2;
+  min-height: 132px;
+}
+
+.koubo-task-list-avatar-settings-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 240px));
+  gap: 10px;
+}
+
+.koubo-task-list-video-duration-settings {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.koubo-task-list-video-duration-settings.has-reference-privacy {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) max-content;
+}
+
+.koubo-task-list-talking-head-privacy-checkboxes {
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: flex-end;
+  justify-self: end;
+  margin: 0;
+  min-height: 38px;
+  padding: 0;
+}
+
+.koubo-task-list-modal .koubo-task-list-talking-head-privacy-checkboxes > label {
+  align-items: center;
+  display: inline-flex;
+  gap: 5px;
+  line-height: 18px;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.koubo-task-list-modal .koubo-task-list-talking-head-privacy-checkboxes input[type="checkbox"] {
+  flex: 0 0 14px;
+  height: 14px;
+  margin: 0;
+  width: 14px;
+}
+
+.koubo-task-list-modal label.koubo-task-list-avatar-upload-row {
+  min-height: 132px;
+}
+
+.koubo-task-list-talking-head-upload-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.koubo-task-list-talking-head-upload-grid.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.koubo-task-list-reference-video-field {
+  position: relative;
+}
+
+.koubo-task-list-reference-video-field > .koubo-task-list-upload-box {
+  height: 100%;
+}
+
+.koubo-task-list-reference-video-field.is-disabled > .koubo-task-list-upload-box {
+  background: #f3f4f6;
+  border-color: #cbd2dc;
+  color: #8a94a5;
+  cursor: not-allowed;
+}
+
+.koubo-task-list-modal label.koubo-task-list-default-reference-toggle {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dfe6f2;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  gap: 6px;
+  left: 12px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 10px;
+  width: max-content;
+  z-index: 1;
+}
+
+.koubo-task-list-default-reference-toggle input {
+  height: 14px;
+  margin: 0;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  width: 14px;
+}
+
+.koubo-task-list-voice-clone-panel {
+  border: 1px solid #dfe6f2;
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.koubo-task-list-voice-clone-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.koubo-task-list-voice-clone-title-row {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+}
+
+.koubo-task-list-voice-clone-head strong {
+  color: #1f2b3d;
+  font-size: 13px;
+}
+
+.koubo-task-list-voice-clone-head span,
+.koubo-task-list-voice-clone-empty {
+  color: #647089;
+  font-size: 13px;
+}
+
+.koubo-task-list-voice-clone-head .koubo-task-list-voice-credit-warning {
+  background: #fff1f0;
+  border: 1px solid #ffc9c5;
+  border-radius: 999px;
+  color: #c5221f;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-voice-clone-head .koubo-task-list-voice-count-tag {
+  background: #eef4ff;
+  border: 1px solid #d6e4ff;
+  border-radius: 999px;
+  color: #3157d5;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-voice-clone-head button {
+  font-size: 13px;
+  min-height: 32px;
+  padding: 6px 12px;
+}
+
+.koubo-task-list-modal label.koubo-task-list-voice-tempo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+}
+
+.koubo-task-list-modal label.koubo-task-list-voice-tempo > span {
+  color: #526178;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-modal label.koubo-task-list-voice-tempo > input {
+  height: 30px;
+  min-height: 30px;
+  padding: 4px 8px;
+  width: 76px;
+}
+
+.koubo-task-list-voice-clone-list {
+  border: 1px solid #e6ebf3;
+  border-radius: 8px;
+  display: grid;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.koubo-task-list-voice-clone-row {
+  align-items: center;
+  border-bottom: 1px solid #edf1f6;
+  display: grid;
+  gap: 10px;
+  font-size: 13px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-height: 44px;
+  padding: 7px 10px;
+}
+
+.koubo-task-list-voice-clone-row:last-child {
+  border-bottom: 0;
+}
+
+.koubo-task-list-voice-clone-row.is-head {
+  background: #f8fafc;
+  color: #526178;
+  font-size: 13px;
+  font-weight: 700;
+  min-height: 34px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.koubo-task-list-voice-clone-row.is-selected {
+  background: #eff6ff;
+}
+
+.koubo-task-list-voice-clone-name {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.koubo-task-list-voice-clone-name strong,
+.koubo-task-list-voice-clone-name span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-voice-clone-name strong {
+  color: #263448;
+  font-size: 13px;
+}
+
+.koubo-task-list-voice-clone-name span {
+  color: #647089;
+  font-size: 13px;
+}
+
+.koubo-task-list-voice-clone-row code {
+  color: #526178;
+  font-size: 13px;
+  min-width: 0;
+  text-align: left;
+}
+
+.koubo-task-list-voice-clone-status {
+  background: #eef5ff;
+  border: 1px solid #d7e7ff;
+  border-radius: 999px;
+  color: #3157d5;
+  display: inline-flex;
+  font-size: 13px;
+  justify-content: center;
+  padding: 3px 8px;
+  width: max-content;
+}
+
+.koubo-task-list-voice-clone-row button {
+  font-size: 13px;
+  min-height: 32px;
+  padding: 6px 10px;
+}
+
+.koubo-task-list-voice-clone-row button.is-selected {
+  background: #eef2ff;
+  border-color: #aebeff;
+  color: #3157d5;
+}
+
+.koubo-task-list-voice-clone-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  min-width: 0;
+  width: 100%;
+}
+
+.koubo-task-list-voice-clone-actions > button {
+  min-width: 0;
+  padding: 6px;
+}
+
+.koubo-task-list-voice-clone-actions > button.is-icon {
+  align-items: center;
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  width: 34px;
+}
+
+.koubo-task-list-voice-clone-actions > button.is-icon svg {
+  height: 16px;
+  width: 16px;
+}
+
+.koubo-task-list-voice-clone-actions > button.is-delete {
+  color: #b42318;
+}
+
+.koubo-task-list-voice-clone-actions > button.is-delete-confirm {
+  background: #fff1f0;
+  border-color: #f3a6a0;
+  color: #b42318;
+}
+
+.koubo-task-list-modal label.koubo-task-list-voice-row-tempo {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+
+.koubo-task-list-modal label.koubo-task-list-voice-row-tempo > input {
+  height: 32px;
+  min-height: 32px;
+  padding: 5px 8px;
+  width: 29px;
+}
+
+.koubo-task-list-wizard-actions {
+  border-top: 1px solid #edf1f6;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.koubo-task-list-video-note {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #dfe6f2;
+  border-radius: 8px;
+  padding: 14px;
+  background: #f8fafc;
+}
+
+.koubo-task-list-prompt-model-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 92;
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.koubo-task-list-prompt-model-dialog {
+  position: fixed;
+  z-index: 93;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  gap: 16px;
+  width: min(560px, calc(100vw - 56px));
+  transform: translate(-50%, -50%);
+  border: 1px solid #dbe2ee;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  padding: 28px;
+}
+
+.koubo-task-list-prompt-model-body {
+  display: grid;
+  gap: 14px;
+}
+
+.koubo-task-list-prompt-model-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.koubo-task-list-prompt-model-actions button {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  color: #1f2b3d;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 16px;
+}
+
+.koubo-task-list-prompt-model-actions button:hover:not(:disabled) {
+  border-color: #b9c6d9;
+  background: #f8fafc;
+}
+
+.koubo-task-list-prompt-model-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (max-width: 900px) {
+  .koubo-task-list-form-grid,
+  .koubo-task-list-text-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .koubo-task-list-wizard-body {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .koubo-task-list-wizard-nav {
+    border-right: 0;
+    border-bottom: 1px solid #edf1f6;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: -16px -16px 0 -16px;
+  }
+
+  .koubo-task-list-prompt-tabs {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .koubo-task-list-prompt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .koubo-task-list-dance-title-row,
+  .koubo-task-list-dance-media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .koubo-task-list-dance-title-field,
+  .koubo-task-list-dance-title-toggles {
+    grid-column: 1;
+  }
+
+  .koubo-task-list-dance-title-toggles {
+    gap: 18px;
+    justify-content: start;
+    width: auto;
+  }
+
+  .koubo-task-list-target-picker-head {
+    flex-wrap: wrap;
+  }
+
+  .koubo-task-list-target-picker-tabs {
+    margin-left: auto;
+  }
+}

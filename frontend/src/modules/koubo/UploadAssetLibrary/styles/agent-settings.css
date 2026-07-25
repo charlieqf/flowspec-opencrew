@@ -1,0 +1,257 @@
+.ual-agent-settings-panel {
+  background: var(--ual-panel);
+  border-left: 1px solid var(--ual-border);
+  color: var(--ual-text);
+  display: flex;
+  flex-direction: column;
+  inset: 0;
+  position: absolute;
+  z-index: 20;
+}
+.ual-agent-settings-panel header {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 32px 1fr 32px;
+  min-height: 60px;
+  padding: 0 18px;
+}
+.ual-agent-settings-panel header.is-title-only {
+  grid-template-columns: 1fr;
+}
+.ual-agent-settings-panel header strong {
+  font-size: 16px;
+  font-weight: 850;
+}
+.ual-agent-settings-icon {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ual-muted);
+  cursor: pointer;
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  padding: 0;
+  width: 32px;
+}
+.ual-agent-settings-icon:hover {
+  background: var(--ual-panel-soft);
+  color: var(--ual-text);
+}
+.ual-agent-settings-body {
+  display: grid;
+  gap: 24px;
+  overflow: auto;
+  padding: 6px 18px 24px;
+}
+.ual-setting-group {
+  display: grid;
+  gap: 8px;
+}
+.ual-setting-label {
+  color: var(--ual-muted);
+  font-size: 13px;
+  font-weight: 750;
+}
+.ual-setting-radio {
+  align-items: center;
+  background: var(--ual-panel-soft);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  min-height: 42px;
+  padding: 6px 12px;
+}
+.ual-setting-radio input {
+  accent-color: var(--ual-text);
+  height: 17px;
+  margin: 0;
+  width: 17px;
+}
+.ual-setting-radio span {
+  display: grid;
+  gap: 1px;
+}
+.ual-setting-radio strong {
+  font-size: 13px;
+}
+.ual-setting-radio small {
+  color: var(--ual-muted);
+  font-size: 12px;
+}
+.ual-setting-segment {
+  background: var(--ual-panel-soft);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+}
+.ual-setting-segment.is-aspect {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.ual-setting-segment button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--ual-text);
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font: inherit;
+  font-size: 14px;
+  gap: 4px;
+  justify-content: center;
+  min-height: 46px;
+}
+.ual-setting-segment button.is-active {
+  background: rgba(15, 23, 42, 0.18);
+}
+.ual-theme-dark .ual-setting-segment button.is-active {
+  background: rgba(255, 255, 255, 0.22);
+}
+.ual-aspect-icon {
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  display: block;
+  height: 8px;
+  width: 14px;
+}
+.ual-aspect-icon.is-4-3 {
+  width: 12px;
+}
+.ual-aspect-icon.is-1-1 {
+  height: 10px;
+  width: 10px;
+}
+.ual-aspect-icon.is-3-4 {
+  height: 13px;
+  width: 8px;
+}
+.ual-aspect-icon.is-9-16 {
+  height: 15px;
+  width: 7px;
+}
+.ual-setting-select {
+  align-items: center;
+  background: var(--ual-panel-soft);
+  border-radius: 10px;
+  color: var(--ual-text);
+  display: grid;
+  grid-template-columns: auto 1fr 22px;
+  min-height: 40px;
+  padding: 0 10px 0 12px;
+}
+.ual-setting-select.is-empty {
+  color: var(--ual-muted);
+  display: flex;
+  font-size: 13px;
+}
+.ual-setting-select span {
+  font-size: 13px;
+  font-weight: 850;
+  margin-right: 8px;
+}
+.ual-setting-select select {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--ual-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  min-width: 0;
+  outline: none;
+}
+.ual-setting-select .ual-flow-icon {
+  color: var(--ual-muted);
+  height: 18px;
+  transform: rotate(90deg);
+  width: 18px;
+}
+.ual-setting-model-box {
+  background: var(--ual-panel-soft);
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  padding: 10px 12px;
+}
+.ual-setting-model-provider {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.ual-setting-model-provider span {
+  font-size: 13px;
+  font-weight: 900;
+}
+.ual-setting-model-provider small {
+  color: var(--ual-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+.ual-setting-model-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ual-setting-model-options button {
+  background: var(--ual-panel);
+  border: 1px solid var(--ual-border);
+  border-radius: 999px;
+  color: var(--ual-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  min-height: 30px;
+  padding: 0 12px;
+}
+.ual-setting-model-options button.is-active {
+  background: var(--ual-accent-soft);
+  border-color: var(--ual-accent);
+  color: var(--ual-accent);
+}
+.ual-theme-dark .ual-setting-model-options button.is-active {
+  color: #f3f6ff;
+}
+.ual-agent-settings-error {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: 10px;
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+  padding: 10px 12px;
+}
+.ual-theme-dark .ual-agent-settings-error {
+  background: rgba(248, 113, 113, 0.14);
+  border-color: rgba(248, 113, 113, 0.3);
+  color: #fecaca;
+}
+.ual-agent-settings-panel footer {
+  margin-top: auto;
+  padding: 18px;
+}
+.ual-agent-settings-panel footer button {
+  background: var(--ual-text);
+  border: 0;
+  border-radius: 999px;
+  color: var(--ual-panel);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  min-height: 42px;
+  width: 100%;
+}
+.ual-theme-dark .ual-agent-settings-panel footer button {
+  background: #fff;
+  color: #171717;
+}
+.ual-agent-settings-panel footer button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1920px;overflow:hidden;
+    background:linear-gradient(160deg,#23271f 0%,#14160f 100%);
+    font-family:"PingFang SC","Hiragino Sans GB",sans-serif;}
+  .title{position:absolute;top:160px;left:0;right:0;text-align:center;
+    color:#f3ead8;font-size:48px;font-weight:300;letter-spacing:4px;}
+  .title .line{display:inline-block;width:40px;height:1px;background:#c9a86a;vertical-align:middle;margin:0 20px;}
+  /* 卖点面板:夜色磨砂 + 细金边,逐条上浮 */
+  .points{position:absolute;left:90px;right:90px;bottom:300px;
+    background:rgba(20,22,15,.6);border:1px solid rgba(201,168,106,.45);border-radius:16px;padding:36px 40px;
+    display:flex;flex-direction:column;gap:30px;}
+  .pt{display:flex;align-items:center;gap:22px;color:#f3ead8;font-size:44px;font-weight:300;letter-spacing:1px;
+    opacity:0;transform:translateY(18px);}
+  .pt .ck{flex:0 0 auto;width:50px;height:50px;border-radius:50%;border:1px solid #c9a86a;color:#c9a86a;
+    display:flex;align-items:center;justify-content:center;font-size:30px;}
+  .pt .hl{color:#e8d9b5;font-weight:500;border-bottom:2px solid #c9a86a;padding-bottom:2px;}
+  .pt:nth-child(1){animation:in .5s ease-out .1s forwards;}
+  .pt:nth-child(2){animation:in .5s ease-out .5s forwards;}
+  .pt:nth-child(3){animation:in .5s ease-out .9s forwards;}
+  @keyframes in{to{opacity:1;transform:translateY(0);}}
+</style></head><body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="2" data-width="1080" data-height="1920">
+    <div class="title clip" data-start="0" data-duration="2" data-track-index="1"><span class="line"></span>三个理由<span class="line"></span></div>
+    <div class="points clip" data-start="0" data-duration="2" data-track-index="2">
+      <div class="pt"><span class="ck">✓</span><span><span class="hl">正品保障</span>　假一赔十</span></div>
+      <div class="pt"><span class="ck">✓</span><span>今日下单　<span class="hl">买一送一</span></span></div>
+      <div class="pt"><span class="ck">✓</span><span>顺丰包邮　7 天无理由</span></div>
+    </div>
+  </div>
+  <script>window.__timelines={main:{pause(){return this},play(){return this},seek(){return this},totalTime(){return this},time(){return 0},duration(){return 2}}};</script>
+</body></html>

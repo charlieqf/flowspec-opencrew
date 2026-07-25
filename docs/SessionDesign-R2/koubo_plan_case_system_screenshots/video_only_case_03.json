@@ -1,0 +1,47 @@
+{
+  "suite": "video_only",
+  "number": 3,
+  "title": "Case 3：新图 + Prompt 存在，可生成 Raw",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 15,
+  "min_seconds": 2,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "total_tasks": 1,
+    "planned_prompt_tasks": 1,
+    "planned_video_tasks": 1,
+    "raw_completed_count": 0,
+    "final_completed_count": 0,
+    "pending_confirm_final_count": 0,
+    "blocked_tasks": 0
+  },
+  "expected_count": 1,
+  "actual": {
+    "actualCount": 1,
+    "dpr": 1,
+    "rect": {
+      "height": 260.25,
+      "left": 580,
+      "top": 323.375,
+      "width": 760
+    },
+    "segmentRows": [
+      "S1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+      "S1"
+    ],
+    "summaryLine": "Task 1\nPrompt 1\nRaw 0/1",
+    "text": "视频计划\nTask 1\nPrompt 1\nRaw 0/1\n1/1\n0/1\n0/1\nshot_001\n提示词\n新视频\n提示词+新视频\nscene_001\nS1\n音频\n→\n新图\n→\n提示词\n→\n新视频\n→\n拷贝成终视频",
+    "title": "视频计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_only_case_03.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [568, 311, 1352, 595]}"
+}

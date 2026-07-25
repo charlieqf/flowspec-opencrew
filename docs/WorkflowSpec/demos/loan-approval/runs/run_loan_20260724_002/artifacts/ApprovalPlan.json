@@ -1,0 +1,10 @@
+{
+  "proposed_decision": "approved",
+  "review_required": true,
+  "approved_amount": 42000,
+  "reasons": [
+    "score_band",
+    "serviceability",
+    "fraud_policy"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "validated_at": "2026-07-21T00:46:36.409Z",
+  "manual_path": "/Users/macmini-4/work/code/OpenCrew/docs/SessionDesign-R2/OpenCrew_素材库综合分析_视频剪辑与跨页面语义检索_用户手册.html",
+  "manual_url": "file:///Users/macmini-4/work/code/OpenCrew/docs/SessionDesign-R2/OpenCrew_%E7%B4%A0%E6%9D%90%E5%BA%93%E7%BB%BC%E5%90%88%E5%88%86%E6%9E%90_%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91%E4%B8%8E%E8%B7%A8%E9%A1%B5%E9%9D%A2%E8%AF%AD%E4%B9%89%E6%A3%80%E7%B4%A2_%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.html",
+  "expected_embedded_screenshots": 28,
+  "results": [
+    {
+      "browser": "webkit-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "imageResult": {
+        "count": 28,
+        "embeddedCount": 28,
+        "failed": []
+      },
+      "layout": {
+        "viewportWidth": 1440,
+        "documentWidth": 1440,
+        "bodyWidth": 1440,
+        "overflowElements": []
+      },
+      "screenshot": "18-html-user-manual-desktop.png",
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "browser": "chromium-mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "imageResult": {
+        "count": 28,
+        "embeddedCount": 28,
+        "failed": []
+      },
+      "layout": {
+        "viewportWidth": 390,
+        "documentWidth": 390,
+        "bodyWidth": 390,
+        "overflowElements": []
+      },
+      "screenshot": "19-html-user-manual-mobile.png",
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ]
+}

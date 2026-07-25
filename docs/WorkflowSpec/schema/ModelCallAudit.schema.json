@@ -1,0 +1,160 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "step_index": {
+      "title": "Step Index",
+      "type": "integer"
+    },
+    "step_id": {
+      "default": "",
+      "title": "Step Id",
+      "type": "string"
+    },
+    "tool_name": {
+      "title": "Tool Name",
+      "type": "string"
+    },
+    "task_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Task Id"
+    },
+    "opencrew_session_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Opencrew Session Id"
+    },
+    "opencode_session_id": {
+      "default": "",
+      "title": "Opencode Session Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attempt Id"
+    },
+    "model_provider": {
+      "title": "Model Provider",
+      "type": "string"
+    },
+    "model_id": {
+      "title": "Model Id",
+      "type": "string"
+    },
+    "system_prompt_path": {
+      "default": "",
+      "title": "System Prompt Path",
+      "type": "string"
+    },
+    "user_prompt_path": {
+      "default": "",
+      "title": "User Prompt Path",
+      "type": "string"
+    },
+    "input_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Files",
+      "type": "array"
+    },
+    "output_summary": {
+      "default": "",
+      "title": "Output Summary",
+      "type": "string"
+    },
+    "error_summary": {
+      "default": "",
+      "title": "Error Summary",
+      "type": "string"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "local_usage_id": {
+      "default": "",
+      "title": "Local Usage Id",
+      "type": "string"
+    },
+    "gateway_request_id": {
+      "default": "",
+      "title": "Gateway Request Id",
+      "type": "string"
+    },
+    "provider_mode": {
+      "default": "local_box",
+      "title": "Provider Mode",
+      "type": "string"
+    },
+    "billing_mode": {
+      "default": "local_usage_only",
+      "title": "Billing Mode",
+      "type": "string"
+    },
+    "usage_summary": {
+      "title": "Usage Summary",
+      "type": "object"
+    },
+    "sensitivity": {
+      "default": "normal",
+      "title": "Sensitivity",
+      "type": "string"
+    },
+    "redaction_status": {
+      "default": "redacted",
+      "title": "Redaction Status",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tool_use_session_id",
+    "step_index",
+    "tool_name",
+    "model_provider",
+    "model_id",
+    "request_id",
+    "idempotency_key"
+  ],
+  "title": "ModelCallAudit",
+  "type": "object"
+}

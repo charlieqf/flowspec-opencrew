@@ -1,0 +1,1183 @@
+{
+  "schema_version": "media_library_visible_acceptance_v2",
+  "started_at": "2026-07-21T00:44:12.095Z",
+  "base_url": "http://127.0.0.1:18080",
+  "browser_engine": "webkit",
+  "artifact_dir": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12",
+  "task_id": 308,
+  "session_id": 380,
+  "analyzed_asset_id": "mla_1784591754592_d1c20d9832d6",
+  "internal_candidate_asset_id": "mla_1784500575045_607e5f061102",
+  "ten_minute_asset_id": "mla_1784525528366_d0ef81c77437",
+  "clip_name": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+  "screenshots": [
+    {
+      "name": "01-task-session-list.png",
+      "label": "专用验收 Task/Session 在任务列表中可见",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/01-task-session-list.png",
+      "url": "http://127.0.0.1:18080/#/koubo-tasks",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/koubo-tasks",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "INPUT"
+      }
+    },
+    {
+      "name": "02-media-library-real-assets.png",
+      "label": "素材库列表展示 199 秒中文真人口播与十分钟技术基线视频",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/02-media-library-real-assets.png",
+      "url": "http://127.0.0.1:18080/#/media-library",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "03-analysis-dialogue.png",
+      "label": "真实视频详情与对白分析片段",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/03-analysis-dialogue.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "04-analysis-visual-semantic.png",
+      "label": "画面结构与视觉语义发布状态",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/04-analysis-visual-semantic.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "05-analysis-composite.png",
+      "label": "对白、视觉语义与综合分析依赖和发布状态",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/05-analysis-composite.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "06b-editor-ten-minute-tail-technical-baseline.png",
+      "label": "十分钟靠近尾部非关键帧切点：仅作为 FFmpeg 与时间轴技术基线",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/06b-editor-ten-minute-tail-technical-baseline.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784525528366_d0ef81c77437/editor?start_ms=543217&end_ms=548217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784525528366_d0ef81c77437/editor?start_ms=543217&end_ms=548217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "07-editor-internal-semantic-search.png",
+      "label": "剪辑页跨页面检索命中全局素材库真实候选",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/07-editor-internal-semantic-search.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "06-editor-long-chinese-talking-head.png",
+      "label": "199 秒中文真人口播、多轨片段与真实场景切换选区",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/06-editor-long-chinese-talking-head.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "08-editor-original-imported.png",
+      "label": "全局素材库原视频已导入专用 StoryBoard Task",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/08-editor-original-imported.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "09-editor-external-semantic-search.png",
+      "label": "剪辑页展示真实外部 Provider、Creator 与 License 元数据",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/09-editor-external-semantic-search.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "10-editor-external-imported.png",
+      "label": "显式确认 License 后外部真实视频已导入专用 Task",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/10-editor-external-imported.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "11-editor-retained-clip-completed.png",
+      "label": "真实 FFmpeg 中文口播场景切换片段剪切完成且可预览下载",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/11-editor-retained-clip-completed.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "12-editor-retained-clip-imported.png",
+      "label": "派生片段已导入专用 StoryBoard Task 且仍留在剪辑页",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/12-editor-retained-clip-imported.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308&return_to=media_library_detail",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "13-storyboard-retained-assets.png",
+      "label": "StoryBoard Asset Pool 展示原视频、外部视频与派生剪切结果",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/13-storyboard-retained-assets.png",
+      "url": "http://127.0.0.1:18080/?assetPanelTab=upload#/koubo-storyboard/tasks/308",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/koubo-storyboard/tasks/308",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "14-task-session-with-retained-assets.png",
+      "label": "任务列表最终显示专用 Task/Session 与留存视频素材计数",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/14-task-session-with-retained-assets.png",
+      "url": "http://127.0.0.1:18080/#/koubo-tasks",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/koubo-tasks",
+        "body_width": 1600,
+        "viewport_width": 1600,
+        "body_height": 1100,
+        "viewport_height": 1100,
+        "active_element": "INPUT"
+      }
+    },
+    {
+      "name": "15-mobile-media-library.png",
+      "label": "移动端素材库列表与真实中文口播素材",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/15-mobile-media-library.png",
+      "url": "http://127.0.0.1:18080/#/media-library",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library",
+        "body_width": 390,
+        "viewport_width": 390,
+        "body_height": 844,
+        "viewport_height": 844,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "16-mobile-analysis-detail.png",
+      "label": "移动端素材详情与分析结果",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/16-mobile-analysis-detail.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6",
+        "body_width": 390,
+        "viewport_width": 390,
+        "body_height": 844,
+        "viewport_height": 844,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "17-mobile-editor.png",
+      "label": "移动端中文口播剪辑器与精确选区",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/17-mobile-editor.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+        "body_width": 390,
+        "viewport_width": 390,
+        "body_height": 844,
+        "viewport_height": 844,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "17a-mobile-editor-semantic-search.png",
+      "label": "移动端剪辑器语义检索面板可访问",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/17a-mobile-editor-semantic-search.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+        "body_width": 390,
+        "viewport_width": 390,
+        "body_height": 844,
+        "viewport_height": 844,
+        "active_element": "BODY"
+      }
+    },
+    {
+      "name": "17b-mobile-editor-timeline.png",
+      "label": "移动端剪辑器时间轴可访问",
+      "path": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-visible-acceptance/2026-07-21-10-44-12/17b-mobile-editor-timeline.png",
+      "url": "http://127.0.0.1:18080/#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+      "metrics": {
+        "title": "OpenCrew",
+        "hash": "#/media-library/mla_1784591754592_d1c20d9832d6/editor?start_ms=151217&end_ms=159217&target_task_id=308",
+        "body_width": 390,
+        "viewport_width": 390,
+        "body_height": 844,
+        "viewport_height": 844,
+        "active_element": "BODY"
+      }
+    }
+  ],
+  "api_failures": [],
+  "console_errors": [],
+  "page_errors": [],
+  "checks": {
+    "task_session_visible": true,
+    "real_assets_visible": true,
+    "detail_dialogue_visible": true,
+    "visual_semantic_visible": true,
+    "composite_visible": true,
+    "long_chinese_talking_head_editor": {
+      "duration_ms": 199552,
+      "fragment_count": 156,
+      "selection_start_ms": 151217,
+      "selection_end_ms": 159217,
+      "timeline_geometry": {
+        "scroll_left": 26971,
+        "scroll_width": 28219,
+        "client_width": 1246
+      },
+      "selection_scroll_left": 21326,
+      "decoded_frame": {
+        "current_time": 154.2488668753796,
+        "duration": 199.547,
+        "ready_state": 4,
+        "video_width": 1200,
+        "video_height": 2670
+      },
+      "screenshot_surface": "source thumbnail after verified HEVC frame decode"
+    },
+    "ten_minute_technical_baseline": {
+      "duration_ms": 600000,
+      "selection_start_ms": 543217,
+      "selection_end_ms": 548217,
+      "purpose": "timeline and near-tail non-keyframe technical baseline only"
+    },
+    "internal_semantic_search": {
+      "search_id": "mls_1784594660573_cf8501d6911f",
+      "result_count": 1,
+      "total_count": 1,
+      "planner_degraded": false
+    },
+    "external_semantic_search": {
+      "search_id": "mls_1784594665696_09f9934d6474",
+      "result_count": 26,
+      "total_count": 26,
+      "source_errors": {}
+    },
+    "storyboard_asset_pool": {
+      "card_count": 5,
+      "titles": [
+        "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+        "ShotPlan_Subtitled_Final (9)",
+        "UI验收留存-中文口播场景切换-2026-07-21-10-24-16",
+        "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+        "UI验收留存-尾部精确剪切-2026-07-20-21-53-23"
+      ],
+      "retained_clip_visible": true
+    },
+    "task_video_count": 5,
+    "mobile_layout": {
+      "list": {
+        "shell": {
+          "shell_width": 390,
+          "navigation_width": 70,
+          "content_width": 320,
+          "viewport_width": 390
+        },
+        "asset_link": {
+          "x": 121.875,
+          "y": 169.90625,
+          "width": 60.875,
+          "height": 17.546875
+        }
+      },
+      "detail": {
+        "shell": {
+          "shell_width": 390,
+          "navigation_width": 56,
+          "content_width": 334,
+          "viewport_width": 390
+        },
+        "title": {
+          "x": 110,
+          "y": 69,
+          "width": 77.375,
+          "height": 23.390625
+        },
+        "first_fragment": {
+          "x": 75,
+          "y": 421.015625,
+          "width": 296,
+          "height": 99.390625
+        }
+      },
+      "editor": {
+        "shell": {
+          "shell_width": 390,
+          "navigation_width": 56,
+          "content_width": 334,
+          "viewport_width": 390
+        },
+        "target": {
+          "x": 116,
+          "y": 100,
+          "width": 255,
+          "height": 19
+        },
+        "player": {
+          "x": 65,
+          "y": 139,
+          "width": 316,
+          "height": 360
+        },
+        "search_panel": {
+          "x": 65,
+          "y": 468.28125,
+          "width": 316,
+          "height": 375
+        },
+        "timeline": {
+          "x": 64,
+          "y": 525.28125,
+          "width": 318,
+          "height": 310.609375
+        }
+      }
+    },
+    "fresh_read_persistence": true
+  },
+  "retained": {
+    "task": {
+      "task_id": 308,
+      "session_id": 380,
+      "title": "素材库UI全面验收留存 2026-07-20-21-44-03",
+      "workspace_dir": "/Users/macmini-4/.opencrew/sessions/380/workspace"
+    },
+    "original_import": {
+      "ok": true,
+      "reused_from_previous_browser_attempt": true,
+      "source_asset_id": "mla_1784500575045_607e5f061102",
+      "target_task_id": 308,
+      "item": {
+        "id": "storyboard_asset_mli_1784548087937_3bc345a18beb",
+        "path": "SessionOutput/storyboard/assets/videos/ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+        "label": "ShotPlan_Subtitled_Final (9)",
+        "filename": "ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+        "asset_type": "Video",
+        "kind": "video",
+        "source": "media_library_original",
+        "created_at": 1784548087937,
+        "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+        "size_bytes": 6419103,
+        "duration_ms": 19200,
+        "width": 720,
+        "height": 1280,
+        "format": "mp4",
+        "provenance": {
+          "source": "media_library_original",
+          "source_asset_id": "mla_1784500575045_607e5f061102",
+          "source_session_id": 364,
+          "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+          "source_search_id": "mls_1784548087433_1882de6f8455",
+          "source_dialogue_asset_key": null,
+          "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+          "imported_at": 1784548087937
+        },
+        "origin": {
+          "tool": "media_library_import",
+          "source": "media_library_original",
+          "source_asset_id": "mla_1784500575045_607e5f061102",
+          "source_session_id": 364,
+          "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+          "source_search_id": "mls_1784548087433_1882de6f8455",
+          "source_dialogue_asset_key": null,
+          "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+          "imported_at": 1784548087937
+        }
+      }
+    },
+    "external_import": {
+      "ok": true,
+      "task": {
+        "id": 308,
+        "session_id": 380,
+        "status": "draft",
+        "workflow_mode": "script",
+        "reference_video_path": "",
+        "industry": "软件与视频创作",
+        "persona": "OpenCrew 验收测试",
+        "target_audience": "产品与研发团队",
+        "product_info": "OpenCrew 素材库综合分析、视频剪辑与跨页面语义检索",
+        "constraints": "使用真实视频；保存截图；保留验收数据",
+        "analysis_goal": "验证真实素材分析、检索、剪辑、StoryBoard 导入和跨页面可见性",
+        "video_formula": "验收脚本口播",
+        "simple_prompt": "保留原始验收脚本",
+        "final_prompt": "请基于用户给定脚本执行 SRT Rewrite。\n保持句子数量、顺序、srt_id、时间轴不变；每个输入句子只输出一个对应句子。\n如需优化表达，只围绕行业、人设、目标受众、产品信息和约束条件做轻量改写，不新增事实。\n输出必须使用简体中文。\n简单提示词：保留原始验收脚本\n完整脚本：\n养肾可以多垫脚尖。真实视频素材库综合分析、跨页面语义检索与尾部精确剪切，正在执行浏览器全面验收。测试产生的素材、剪切结果、Task 和 Session 将保留在页面中。",
+        "rewrite_simple_prompt": "保留原始验收脚本",
+        "rewrite_final_prompt": "请基于用户给定脚本执行 SRT Rewrite。\n保持句子数量、顺序、srt_id、时间轴不变；每个输入句子只输出一个对应句子。\n如需优化表达，只围绕行业、人设、目标受众、产品信息和约束条件做轻量改写，不新增事实。\n输出必须使用简体中文。\n简单提示词：保留原始验收脚本\n完整脚本：\n养肾可以多垫脚尖。真实视频素材库综合分析、跨页面语义检索与尾部精确剪切，正在执行浏览器全面验收。测试产生的素材、剪切结果、Task 和 Session 将保留在页面中。",
+        "storyboard_simple_prompt": "按句生成稳定 StoryBoard Dialogue",
+        "storyboard_final_prompt": "请把改写后的 SRT 组织为口播 StoryBoard。\n只做 Shot / Scene / formula_stage 结构化分组，不改写对白。\n每个 srt_id 必须出现且只出现一次，顺序不变，不能切断一句话。\n视频公式：验收脚本口播\n简单提示词：按句生成稳定 StoryBoard Dialogue\n完整脚本：\n养肾可以多垫脚尖。真实视频素材库综合分析、跨页面语义检索与尾部精确剪切，正在执行浏览器全面验收。测试产生的素材、剪切结果、Task 和 Session 将保留在页面中。",
+        "storyboard_quick_config_json": "{\"enabled\": true, \"language_boundary_mode\": \"balanced\", \"split_tolerance_seconds\": 2.0, \"target_scene_seconds\": 8.0, \"target_shot_seconds\": 16.0}",
+        "current_prompt_version_id": null,
+        "current_skill_version_id": null,
+        "latest_attempt_id": null,
+        "prompt_model_provider": "",
+        "prompt_model_id": "",
+        "generated_skill_content": null,
+        "skill_version_name": null,
+        "skill_version_notes": null,
+        "run_model_provider": "",
+        "run_model_id": "",
+        "created_at": 1784547843180,
+        "updated_at": 1784594233969,
+        "title": "素材库UI全面验收留存 2026-07-20-21-44-03",
+        "sender_name": "OpenClip",
+        "opencode_session_id": "ses_080a8e374ffeA1Q5sYUGQy9xso",
+        "workspace_dir": "/Users/macmini-4/.opencrew/sessions/380/workspace",
+        "session_status": "draft"
+      },
+      "meta": {
+        "title": "故事版（口播）",
+        "source_type": "analysis_v1_storyboard",
+        "workflow_mode": "script",
+        "analysis_task_id": 308,
+        "task_id": 308,
+        "analysis_session_id": 380,
+        "source_path": "SessionOutput/storyboard/srt_storyboard.json",
+        "edit_path": "SessionOutput/storyboard/koubo_storyboard_edit.json",
+        "source_exists": false,
+        "storyboard_ready": false,
+        "has_saved_edit": false,
+        "manual_assets": [
+          {
+            "id": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "path": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "label": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+            "filename": "1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "asset_search",
+            "created_at": 1784548115147,
+            "content_sha256": "878128a584036accebbb630d6e8248c92ce1f94d4bd8949452103a905a9c344b",
+            "origin": {
+              "tool": "asset_search_agent",
+              "search_id": "search_1784548095235_9019c5",
+              "candidate_id": "pexels_video_38630304",
+              "provider": "pexels",
+              "media_type": "video",
+              "provider_asset_id": "38630304",
+              "source_url": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+              "download_url": "https://videos.pexels.com/video-files/38630304/16406754_3840_2160_25fps.mp4",
+              "creator": {
+                "name": "Mihaela Claudia  Puscas",
+                "url": "https://www.pexels.com/@mihaela-claudia-puscas-836545137"
+              },
+              "license": {
+                "name": "Pexels License",
+                "url": "https://www.pexels.com/license/",
+                "requires_attribution": false,
+                "attribution_text": "Video by Mihaela Claudia  Puscas on Pexels",
+                "license_status": "confirmed"
+              },
+              "query": "two person interview conversation office landscape",
+              "score": 0.9141,
+              "storyboard_ref": {}
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784548087937_3bc345a18beb",
+            "path": "SessionOutput/storyboard/assets/videos/ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+            "label": "ShotPlan_Subtitled_Final (9)",
+            "filename": "ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_original",
+            "created_at": 1784548087937,
+            "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+            "size_bytes": 6419103,
+            "duration_ms": 19200,
+            "width": 720,
+            "height": 1280,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_original",
+              "source_asset_id": "mla_1784500575045_607e5f061102",
+              "source_session_id": 364,
+              "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "source_search_id": "mls_1784548087433_1882de6f8455",
+              "source_dialogue_asset_key": null,
+              "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "imported_at": 1784548087937
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_original",
+              "source_asset_id": "mla_1784500575045_607e5f061102",
+              "source_session_id": 364,
+              "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "source_search_id": "mls_1784548087433_1882de6f8455",
+              "source_dialogue_asset_key": null,
+              "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "imported_at": 1784548087937
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784593488817_b1cab3b0fdc0",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-中文口播场景切换-2026-07-21-10-24-16_b1cab3b0fdc0.mp4",
+            "label": "UI验收留存-中文口播场景切换-2026-07-21-10-24-16",
+            "filename": "UI验收留存-中文口播场景切换-2026-07-21-10-24-16_b1cab3b0fdc0.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784593488817,
+            "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+            "size_bytes": 4429459,
+            "duration_ms": 8000,
+            "width": 1200,
+            "height": 2670,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784593488817,
+              "source_clip_id": "mlc_1784593484769_8cb9427bf488",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784593488817,
+              "source_clip_id": "mlc_1784593484769_8cb9427bf488",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784594233959_88ed4d6c6488",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+            "label": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+            "filename": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784594233959,
+            "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+            "size_bytes": 4429459,
+            "duration_ms": 8000,
+            "width": 1200,
+            "height": 2670,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784594233959,
+              "source_clip_id": "mlc_1784594230033_42040d460917",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784594233959,
+              "source_clip_id": "mlc_1784594230033_42040d460917",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784548520004_2d4792a6e1ac",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-尾部精确剪切-2026-07-20-21-53-23_2d4792a6e1ac.mp4",
+            "label": "UI验收留存-尾部精确剪切-2026-07-20-21-53-23",
+            "filename": "UI验收留存-尾部精确剪切-2026-07-20-21-53-23_2d4792a6e1ac.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784548520004,
+            "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+            "size_bytes": 2326551,
+            "duration_ms": 5000,
+            "width": 1280,
+            "height": 720,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784525528366_d0ef81c77437",
+              "source_session_id": 368,
+              "source_version": "d6c54c0de0cad47e41f9f730e4b4e6cca8c8a76c923ac8f24e10f0c9d04aa96e",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+              "imported_at": 1784548520004,
+              "source_clip_id": "mlc_1784548427258_4ad2729845b6",
+              "source_start_ms": 543217,
+              "source_end_ms": 548217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784525528366_d0ef81c77437",
+              "source_session_id": 368,
+              "source_version": "d6c54c0de0cad47e41f9f730e4b4e6cca8c8a76c923ac8f24e10f0c9d04aa96e",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+              "imported_at": 1784548520004,
+              "source_clip_id": "mlc_1784548427258_4ad2729845b6",
+              "source_start_ms": 543217,
+              "source_end_ms": 548217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          }
+        ],
+        "uploaded_images": [],
+        "uploaded_audios": [],
+        "uploaded_videos": [
+          {
+            "id": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "path": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "label": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+            "filename": "1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "asset_search",
+            "created_at": 1784548115147,
+            "content_sha256": "878128a584036accebbb630d6e8248c92ce1f94d4bd8949452103a905a9c344b",
+            "origin": {
+              "tool": "asset_search_agent",
+              "search_id": "search_1784548095235_9019c5",
+              "candidate_id": "pexels_video_38630304",
+              "provider": "pexels",
+              "media_type": "video",
+              "provider_asset_id": "38630304",
+              "source_url": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+              "download_url": "https://videos.pexels.com/video-files/38630304/16406754_3840_2160_25fps.mp4",
+              "creator": {
+                "name": "Mihaela Claudia  Puscas",
+                "url": "https://www.pexels.com/@mihaela-claudia-puscas-836545137"
+              },
+              "license": {
+                "name": "Pexels License",
+                "url": "https://www.pexels.com/license/",
+                "requires_attribution": false,
+                "attribution_text": "Video by Mihaela Claudia  Puscas on Pexels",
+                "license_status": "confirmed"
+              },
+              "query": "two person interview conversation office landscape",
+              "score": 0.9141,
+              "storyboard_ref": {}
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784548087937_3bc345a18beb",
+            "path": "SessionOutput/storyboard/assets/videos/ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+            "label": "ShotPlan_Subtitled_Final (9)",
+            "filename": "ShotPlan_Subtitled_Final (9)_3bc345a18beb.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_original",
+            "created_at": 1784548087937,
+            "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+            "size_bytes": 6419103,
+            "duration_ms": 19200,
+            "width": 720,
+            "height": 1280,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_original",
+              "source_asset_id": "mla_1784500575045_607e5f061102",
+              "source_session_id": 364,
+              "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "source_search_id": "mls_1784548087433_1882de6f8455",
+              "source_dialogue_asset_key": null,
+              "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "imported_at": 1784548087937
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_original",
+              "source_asset_id": "mla_1784500575045_607e5f061102",
+              "source_session_id": 364,
+              "source_version": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "source_search_id": "mls_1784548087433_1882de6f8455",
+              "source_dialogue_asset_key": null,
+              "content_sha256": "985e5cf37438ea1a603aeb0384d6a5bdf128066a72fccfdfaccbc92078f2609b",
+              "imported_at": 1784548087937
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784593488817_b1cab3b0fdc0",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-中文口播场景切换-2026-07-21-10-24-16_b1cab3b0fdc0.mp4",
+            "label": "UI验收留存-中文口播场景切换-2026-07-21-10-24-16",
+            "filename": "UI验收留存-中文口播场景切换-2026-07-21-10-24-16_b1cab3b0fdc0.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784593488817,
+            "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+            "size_bytes": 4429459,
+            "duration_ms": 8000,
+            "width": 1200,
+            "height": 2670,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784593488817,
+              "source_clip_id": "mlc_1784593484769_8cb9427bf488",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784593488817,
+              "source_clip_id": "mlc_1784593484769_8cb9427bf488",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784594233959_88ed4d6c6488",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+            "label": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+            "filename": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784594233959,
+            "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+            "size_bytes": 4429459,
+            "duration_ms": 8000,
+            "width": 1200,
+            "height": 2670,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784594233959,
+              "source_clip_id": "mlc_1784594230033_42040d460917",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+              "source_session_id": 381,
+              "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+              "imported_at": 1784594233959,
+              "source_clip_id": "mlc_1784594230033_42040d460917",
+              "source_start_ms": 151217,
+              "source_end_ms": 159217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          },
+          {
+            "id": "storyboard_asset_mli_1784548520004_2d4792a6e1ac",
+            "path": "SessionOutput/storyboard/assets/videos/UI验收留存-尾部精确剪切-2026-07-20-21-53-23_2d4792a6e1ac.mp4",
+            "label": "UI验收留存-尾部精确剪切-2026-07-20-21-53-23",
+            "filename": "UI验收留存-尾部精确剪切-2026-07-20-21-53-23_2d4792a6e1ac.mp4",
+            "asset_type": "Video",
+            "kind": "video",
+            "source": "media_library_clip",
+            "created_at": 1784548520004,
+            "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+            "size_bytes": 2326551,
+            "duration_ms": 5000,
+            "width": 1280,
+            "height": 720,
+            "format": "mp4",
+            "provenance": {
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784525528366_d0ef81c77437",
+              "source_session_id": 368,
+              "source_version": "d6c54c0de0cad47e41f9f730e4b4e6cca8c8a76c923ac8f24e10f0c9d04aa96e",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+              "imported_at": 1784548520004,
+              "source_clip_id": "mlc_1784548427258_4ad2729845b6",
+              "source_start_ms": 543217,
+              "source_end_ms": 548217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            },
+            "origin": {
+              "tool": "media_library_import",
+              "source": "media_library_clip",
+              "source_asset_id": "mla_1784525528366_d0ef81c77437",
+              "source_session_id": 368,
+              "source_version": "d6c54c0de0cad47e41f9f730e4b4e6cca8c8a76c923ac8f24e10f0c9d04aa96e",
+              "source_search_id": null,
+              "source_dialogue_asset_key": null,
+              "content_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+              "imported_at": 1784548520004,
+              "source_clip_id": "mlc_1784548427258_4ad2729845b6",
+              "source_start_ms": 543217,
+              "source_end_ms": 548217,
+              "source_scheme": null,
+              "source_fragment_id": null
+            }
+          }
+        ],
+        "history_versions": []
+      },
+      "plan": {
+        "schema_version": "koubo_storyboard_edit_0.1",
+        "title": "故事版（口播）",
+        "source_type": "analysis_v1_storyboard",
+        "workflow_mode": "script",
+        "analysis_task_id": 308,
+        "analysis_session_id": 380,
+        "source_path": "SessionOutput/storyboard/srt_storyboard.json",
+        "shots": []
+      },
+      "imported": [
+        {
+          "id": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "path": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "label": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+          "filename": "1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "asset_type": "Video",
+          "kind": "video",
+          "source": "asset_search",
+          "created_at": 1784548115147,
+          "content_sha256": "878128a584036accebbb630d6e8248c92ce1f94d4bd8949452103a905a9c344b",
+          "origin": {
+            "tool": "asset_search_agent",
+            "search_id": "search_1784548095235_9019c5",
+            "candidate_id": "pexels_video_38630304",
+            "provider": "pexels",
+            "media_type": "video",
+            "provider_asset_id": "38630304",
+            "source_url": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+            "download_url": "https://videos.pexels.com/video-files/38630304/16406754_3840_2160_25fps.mp4",
+            "creator": {
+              "name": "Mihaela Claudia  Puscas",
+              "url": "https://www.pexels.com/@mihaela-claudia-puscas-836545137"
+            },
+            "license": {
+              "name": "Pexels License",
+              "url": "https://www.pexels.com/license/",
+              "requires_attribution": false,
+              "attribution_text": "Video by Mihaela Claudia  Puscas on Pexels",
+              "license_status": "confirmed"
+            },
+            "query": "two person interview conversation office landscape",
+            "score": 0.9141,
+            "storyboard_ref": {}
+          },
+          "skipped": true
+        }
+      ],
+      "failed": [],
+      "added": [
+        {
+          "id": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "path": "SessionOutput/storyboard/assets/videos/1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "label": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+          "filename": "1784548105902_001_pexels_38630304_https_www_pexels_com_video_dynamic_podcast_inter.mp4",
+          "asset_type": "Video",
+          "kind": "video",
+          "source": "asset_search",
+          "created_at": 1784548115147,
+          "content_sha256": "878128a584036accebbb630d6e8248c92ce1f94d4bd8949452103a905a9c344b",
+          "origin": {
+            "tool": "asset_search_agent",
+            "search_id": "search_1784548095235_9019c5",
+            "candidate_id": "pexels_video_38630304",
+            "provider": "pexels",
+            "media_type": "video",
+            "provider_asset_id": "38630304",
+            "source_url": "https://www.pexels.com/video/dynamic-podcast-interview-with-professional-setup-38630304/",
+            "download_url": "https://videos.pexels.com/video-files/38630304/16406754_3840_2160_25fps.mp4",
+            "creator": {
+              "name": "Mihaela Claudia  Puscas",
+              "url": "https://www.pexels.com/@mihaela-claudia-puscas-836545137"
+            },
+            "license": {
+              "name": "Pexels License",
+              "url": "https://www.pexels.com/license/",
+              "requires_attribution": false,
+              "attribution_text": "Video by Mihaela Claudia  Puscas on Pexels",
+              "license_status": "confirmed"
+            },
+            "query": "two person interview conversation office landscape",
+            "score": 0.9141,
+            "storyboard_ref": {}
+          },
+          "skipped": true
+        }
+      ]
+    },
+    "clip": {
+      "clip_id": "mlc_1784594230033_42040d460917",
+      "clip_job_id": "clipjob.1ba4bacd394546f5a6a838b1950db6b6.878ddd61c3964d519a0f935b14a4f7ec",
+      "display_name": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+      "start_ms": 151217,
+      "end_ms": 159217,
+      "duration_ms": 8000,
+      "job": {
+        "status": "completed",
+        "progress": 100,
+        "clip_id": "mlc_1784594230033_42040d460917",
+        "clip": {
+          "clip_id": "mlc_1784594230033_42040d460917",
+          "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+          "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+          "start_ms": 151217,
+          "end_ms": 159217,
+          "duration_ms": 8000,
+          "display_name": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+          "source_scheme": null,
+          "source_fragment_id": null,
+          "source_analysis_run_id": null,
+          "source_search_id": null,
+          "source_dialogue_asset_key": null,
+          "operation": "precise_reencode_v1",
+          "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+          "size_bytes": 4429459,
+          "created_at": 1784594230033,
+          "preview_url": "/api/session-tasks/381/raw/SessionOutput/clips/mlc_1784594230033_42040d460917/UI%E9%AA%8C%E6%94%B6%E7%95%99%E5%AD%98-%E4%B8%AD%E6%96%87%E5%8F%A3%E6%92%AD%E5%9C%BA%E6%99%AF%E5%88%87%E6%8D%A2-2026-07-21-10-36-36.mp4",
+          "download_url": "/api/session-tasks/381/raw/SessionOutput/clips/mlc_1784594230033_42040d460917/UI%E9%AA%8C%E6%94%B6%E7%95%99%E5%AD%98-%E4%B8%AD%E6%96%87%E5%8F%A3%E6%92%AD%E5%9C%BA%E6%99%AF%E5%88%87%E6%8D%A2-2026-07-21-10-36-36.mp4?download=1"
+        },
+        "resumed_after_browser_assertion": true
+      }
+    },
+    "clip_import": {
+      "ok": true,
+      "reused_from_previous_browser_attempt": true,
+      "source_clip_id": "mlc_1784594230033_42040d460917",
+      "target_task_id": 308,
+      "item": {
+        "id": "storyboard_asset_mli_1784594233959_88ed4d6c6488",
+        "path": "SessionOutput/storyboard/assets/videos/UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+        "label": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36",
+        "filename": "UI验收留存-中文口播场景切换-2026-07-21-10-36-36_88ed4d6c6488.mp4",
+        "asset_type": "Video",
+        "kind": "video",
+        "source": "media_library_clip",
+        "created_at": 1784594233959,
+        "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+        "size_bytes": 4429459,
+        "duration_ms": 8000,
+        "width": 1200,
+        "height": 2670,
+        "format": "mp4",
+        "provenance": {
+          "source": "media_library_clip",
+          "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+          "source_session_id": 381,
+          "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+          "source_search_id": null,
+          "source_dialogue_asset_key": null,
+          "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+          "imported_at": 1784594233959,
+          "source_clip_id": "mlc_1784594230033_42040d460917",
+          "source_start_ms": 151217,
+          "source_end_ms": 159217,
+          "source_scheme": null,
+          "source_fragment_id": null
+        },
+        "origin": {
+          "tool": "media_library_import",
+          "source": "media_library_clip",
+          "source_asset_id": "mla_1784591754592_d1c20d9832d6",
+          "source_session_id": 381,
+          "source_version": "dcf2ae0c28d26e455fd38bfcac59625871fda14217bcfff220260dae57372b94",
+          "source_search_id": null,
+          "source_dialogue_asset_key": null,
+          "content_sha256": "4d4c178ece160ed4fbbf27e7d163f93be6c2c2ee8e27a36080b22f1ffe8230a7",
+          "imported_at": 1784594233959,
+          "source_clip_id": "mlc_1784594230033_42040d460917",
+          "source_start_ms": 151217,
+          "source_end_ms": 159217,
+          "source_scheme": null,
+          "source_fragment_id": null
+        }
+      }
+    }
+  },
+  "capabilities": {
+    "schema_version": "media_library_capabilities_v1",
+    "features": {
+      "analysis_runs": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "library_search": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "visual_semantic": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "composite": {
+        "enabled": true,
+        "configuration_valid": true
+      },
+      "editor": {
+        "enabled": true,
+        "configuration_valid": true
+      }
+    }
+  },
+  "finished_at": "2026-07-21T00:44:41.625Z",
+  "ok": true
+}

@@ -1,0 +1,192 @@
+.ual-toolbar {
+  align-items: center;
+  border-bottom: 1px solid var(--ual-border);
+  display: flex;
+  gap: 12px;
+  min-height: 68px;
+  padding: 0 22px;
+}
+.ual-search {
+  align-items: center;
+  background: var(--ual-panel);
+  border: 1px solid var(--ual-border);
+  border-radius: 999px;
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 16px;
+}
+.ual-search > span {
+  color: var(--ual-muted);
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+.ual-search input {
+  background: transparent;
+  border: 0;
+  color: var(--ual-text);
+  flex: 1;
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+}
+.ual-toolbar-meta {
+  color: var(--ual-muted);
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+  white-space: nowrap;
+}
+.ual-toolbar-meta-item {
+  align-items: center;
+  display: inline-flex;
+  gap: 4px;
+}
+.ual-toolbar-meta-item .ual-flow-icon {
+  height: 14px;
+  width: 14px;
+}
+.ual-toolbar-meta-item.is-images .ual-flow-icon {
+  color: #4f7cff;
+}
+.ual-toolbar-meta-item.is-videos .ual-flow-icon {
+  color: #7c5cff;
+}
+.ual-toolbar-meta-item.is-audio .ual-flow-icon {
+  color: #16a3a3;
+}
+.ual-toolbar-meta-item.is-history .ual-flow-icon {
+  color: #f59e0b;
+}
+.ual-history-select-tools {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 6px;
+  min-width: 0;
+}
+.ual-history-select-tools button {
+  align-items: center;
+  background: var(--ual-panel);
+  border: 1px solid var(--ual-border);
+  border-radius: 999px;
+  color: var(--ual-text);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  gap: 6px;
+  height: 34px;
+  justify-content: center;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+.ual-history-select-tools button:hover {
+  border-color: color-mix(in srgb, var(--ual-accent) 46%, var(--ual-border));
+}
+.ual-history-select-tools button:disabled {
+  cursor: default;
+  opacity: 0.48;
+}
+.ual-history-select-tools.is-active .ual-toolbar-icon-button,
+.ual-history-select-tools button.is-danger {
+  background: var(--ual-accent);
+  border-color: var(--ual-accent);
+  color: #fff;
+}
+.ual-history-select-tools button.is-danger {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+.ual-history-select-tools button.is-danger:disabled {
+  background: var(--ual-panel);
+  border-color: var(--ual-border);
+  color: var(--ual-muted);
+}
+.ual-history-select-tools .ual-toolbar-icon-button {
+  padding: 0;
+  width: 34px;
+}
+.ual-history-select-tools .ual-flow-icon {
+  height: 18px;
+  width: 18px;
+}
+.ual-toolbar-icon-group {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 6px;
+  position: relative;
+}
+.ual-toolbar-circle-button {
+  align-items: center;
+  background: var(--ual-panel);
+  border: 1px solid var(--ual-border);
+  border-radius: 999px;
+  color: var(--ual-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 34px;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  width: 34px;
+}
+.ual-toolbar-circle-button:hover,
+.ual-toolbar-circle-button[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--ual-accent) 46%, var(--ual-border));
+  color: var(--ual-text);
+}
+.ual-toolbar-circle-button .ual-flow-icon {
+  height: 17px;
+  width: 17px;
+}
+.ual-column-picker {
+  position: relative;
+}
+.ual-column-menu {
+  background: var(--ual-panel);
+  border: 1px solid var(--ual-border);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.16);
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 40;
+}
+.ual-column-menu button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--ual-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  height: 28px;
+  min-width: 36px;
+  padding: 0 10px;
+}
+.ual-column-menu button:hover,
+.ual-column-menu button.is-active {
+  background: var(--ual-accent);
+  color: #fff;
+}
+@media (max-width: 1040px) {
+  .ual-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 76px;
+    padding: 10px 16px;
+  }
+  .ual-search {
+    flex-basis: 100%;
+    min-height: 36px;
+  }
+}

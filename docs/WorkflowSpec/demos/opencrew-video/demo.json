@@ -1,0 +1,133 @@
+{
+  "slug": "opencrew-video",
+  "eyebrow": "Scenario 04 · Multimodal production",
+  "title": "OpenCrew AI 视频 · 创意到受控发布",
+  "subtitle": "展示 Agent 内循环、分镜确认、音频/画面并行 fanout、按 asset key 汇合、多模态成本、QA 返工与发布批准。",
+  "stage_labels": {
+    "brief": "需求理解",
+    "plan": "分镜规划",
+    "generate": "并行素材生成",
+    "compose": "成片合成",
+    "approve": "质量与发布审批",
+    "deliver": "交付与修订"
+  },
+  "step_labels": {
+    "S1_creative_brief": {
+      "title": "形成创意简报",
+      "description": "有界创意 Agent 把业务需求整理为结构化候选方案，并逐轮记录成本。"
+    },
+    "S2_storyboard_plan": {
+      "title": "制定分镜计划",
+      "description": "生成类型化台词与镜头计划；流式文字不是可交付的权威分镜。"
+    },
+    "S3_storyboard_confirm": {
+      "title": "人工确认分镜",
+      "description": "创建绑定计划版本和输入快照的审核待办，由负责人批准或退回。"
+    },
+    "S3b_storyboard_revision": {
+      "title": "请求修订分镜",
+      "description": "分镜被拒绝时以明确返工结果结束本次 Run，而不是在 DAG 内回跳。"
+    },
+    "S4_consistency_references": {
+      "title": "生成一致性参考素材",
+      "description": "在逐镜生成前建立受控角色与视觉参考包，约束后续画面一致性。"
+    },
+    "S5_audio_fanout": {
+      "title": "按台词并行生成音频",
+      "description": "按稳定 asset_key 为每句台词调用一次 TTS，并逐项记录用量。"
+    },
+    "S6_visual_prompt_fanout": {
+      "title": "按台词并行生成画面提示词",
+      "description": "音频链运行的同时，为每句台词生成类型化画面提示词。"
+    },
+    "S7_image_fanout": {
+      "title": "按素材键并行生成图片",
+      "description": "按 asset_key 生成镜头图片，并受 provider 并发与预算上限约束。"
+    },
+    "S8_video_fanout": {
+      "title": "按素材键并行生成视频片段",
+      "description": "逐镜生成原始视频片段，并保留 provider 操作身份以便恢复和对账。"
+    },
+    "S9_bind_segments": {
+      "title": "按素材键绑定音画片段",
+      "description": "使用 asset_key 汇合音频和原始视频，禁止依赖数组位置碰巧一致。"
+    },
+    "S10_master_compose": {
+      "title": "合成主视频",
+      "description": "只合成已完整绑定的镜头，并输出明确的交付清单。"
+    },
+    "S11_multimodal_qa": {
+      "title": "执行多模态质量检查",
+      "description": "检查媒体和内容质量；模型评分只是候选事实，不是发布授权。"
+    },
+    "S12_qa_revision": {
+      "title": "请求修复质量问题",
+      "description": "质量不通过时记录受影响的 asset_key，并指示通过新 Run 返修。"
+    },
+    "S13_publish_confirm": {
+      "title": "人工确认发布",
+      "description": "仅在 QA 通过后创建最终发布审批，并记录具名责任人的决定。"
+    },
+    "S14_deliver": {
+      "title": "发布并交付成片",
+      "description": "使用稳定渠道操作键发布成片，并保留可对账的交付回执。"
+    },
+    "S15_publish_revision": {
+      "title": "请求修订发布版本",
+      "description": "品牌审核要求修改时形成正常返工结果，不将其误记为技术失败。"
+    }
+  },
+  "outcome_labels": {
+    "storyboard_revision_requested": "已请求修订分镜",
+    "qa_revision_required": "质量检查要求返修",
+    "publish_revision_requested": "品牌审核要求修订",
+    "delivered": "成片已获批准并完成交付"
+  },
+  "executive_tldr": {
+    "result": "创意返修与正式交付被明确区分，只有 QA 和品牌批准后才能发布。",
+    "control": "每轮 Agent/模型调用、资产键、逐笔成本、QA 结果和人工决定均可追踪。",
+    "boundary": "这是目标契约的确定性 Mock；不证明 provider 对账、资源租约与崩溃恢复已经生产化。"
+  },
+  "run_control_examples": {
+    "full": "从创意 brief 开始，经分镜确认、音频/视觉两路资产生成、按 asset_key 汇合、母版 QA、品牌批准到正式交付。",
+    "through": "运行到 S3 分镜确认：完成有界 Agent 规划与人工决定后暂停，尚未发生昂贵 TTS/图像/视频生成，也没有交付 outcome。",
+    "from": "视觉风格调整后从 S6 visual prompt 重跑：重算图像、视频、segment、母版、QA 与发布后继；音频分支仅在 Storyboard/asset_key 绑定不变时复用。",
+    "single": "隔离运行 S11 多模态 QA 评估某版母片；产生新的诊断 Usage/QA Artifact，但不得直接把品牌发布状态改成 approved。"
+  },
+  "accent": "#ad3656",
+  "accent_secondary": "#7445a8",
+  "surface_tint": "#f7e8ed",
+  "business_owner": "品牌内容制作",
+  "hero_metric_label": "高成本调用",
+  "hero_metric_value": "6 类 AI 配置",
+  "scenario_explainer": {
+    "title": "创意生产自由度高，但交付必须受控",
+    "challenge": "视频创作包含 Agent 规划、人工分镜确认、TTS/图像/视频多模态生成、按对白并行的资产链、昂贵外部调用、多模态 QA 与品牌发布审批。创意允许非确定性，资产身份、成本和发布责任不能含糊。",
+    "points": [
+      {
+        "feature": "Agent 可以迭代思考，Process 仍保持 DAG",
+        "support": "Creative Agent 的多轮推理留在单个有界 Step Attempt 内，StoryboardPlan 作为 typed Artifact 进入人工确认；业务修订创建新 Run。",
+        "constraint": "Profile 限制 turns、tool calls、workspace 和 network；Agent 不能直接发布 Manifest 或改 Context，流式 delta 也不是权威产物。"
+      },
+      {
+        "feature": "音频与画面分支按对白并行汇合",
+        "support": "所有 fanout 使用稳定 asset_key，音频、视觉 prompt、图像、视频与最终片段逐项绑定；fan-in 按 key 和确定顺序合成 MasterVideo。",
+        "constraint": "数组位置不能充当资产身份；缺失、重复、stale 或 unbound 的媒体不得进入合成。Mock 媒体明确保存为 envelope，不冒充真实 wav/png/mp4。"
+      },
+      {
+        "feature": "多模态调用昂贵且可能部分完成",
+        "support": "六个冻结 AI Profile 分别约束文本、音频、图像、视频和 QA；每个 provider invocation 先预算预留，再按 token 或 media units 结算。",
+        "constraint": "estimated cost 不冒充 invoice-final，禁止静默换模型或无限修复；QA 失败与发布退回都是显式 outcome，只有品牌批准后才能产生 DeliveryReceipt。"
+      }
+    ],
+    "effect": "FlowSpec 允许创意模型保持非确定性，却把每次调用、每个资产、每次人工选择和最终发布变成可追踪事实；团队能回答某个镜头来自哪个输入、花了多少钱、为何返工以及谁批准交付。",
+    "glossary": [
+      { "term": "Fanout（按对白并行生成）", "meaning": "每句对白分别生成音频、画面提示、图像和视频，可并行利用不同模型与资源，缩短整体制作时间。" },
+      { "term": "Fan-in（按资产键合成）", "meaning": "音频与视频必须按同一 asset_key 成对后才能组成片段，所有片段齐备后才合成母版。" },
+      { "term": "Asset key（镜头稳定身份）", "meaning": "例如 dlg-002 始终指同一句对白及其音频、图像和视频；即使重跑也不会靠易变的列表位置错配。" },
+      { "term": "AI Profile（调用前政策）", "meaning": "每种模型的版本、区域、数据边界、工具/网络权限、最大轮数和费用上限在 Run 开始时冻结。" },
+      { "term": "Usage / Budget（逐笔用量与预算）", "meaning": "每次文本、TTS、图像或视频调用单独记 token/媒体秒和估算成本；先预留预算，完成后结算或释放。" },
+      { "term": "Outcome（业务完成结果）", "meaning": "QA 返工、品牌退回和正式交付都被明确命名；只有批准分支能产生 DeliveryReceipt。" }
+    ]
+  }
+}

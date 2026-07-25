@@ -1,0 +1,203 @@
+.kbsp-shot-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 0 28px;
+  scroll-behavior: smooth;
+}
+.kbsp-shot-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kbsp-shot-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  min-width: 0;
+  overflow: visible;
+  padding: 0 20px 20px;
+}
+.kbsp-shot-sticky {
+  align-items: stretch;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-start;
+  margin: 0 -20px 14px;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 80;
+}
+.kbsp-shot-title {
+  gap: 12px;
+  min-width: 0;
+  width: 100%;
+}
+.kbsp-shot-title > span {
+  background: #6366f1;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  height: 32px;
+  width: 8px;
+}
+.kbsp-shot-title-input {
+  color: #0f172a;
+  flex: 1 1 auto;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.kbsp-shot-title p {
+  color: #64748b;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 0 auto;
+  min-width: 128px;
+  text-align: right;
+  white-space: nowrap;
+}
+.kbsp-merge-shot,
+.kbsp-merge-scene {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 0 !important;
+}
+.kbsp-merge-shot:hover,
+.kbsp-merge-scene:hover {
+  color: #4f46e5;
+}
+.kbsp-merge-shot {
+  left: 20px;
+  opacity: 0;
+  position: absolute;
+  top: 48px;
+  z-index: 90;
+}
+.kbsp-shot-sticky:hover .kbsp-merge-shot,
+.kbsp-shot-card:hover > .kbsp-shot-sticky .kbsp-merge-shot {
+  opacity: 1;
+}
+.kbsp-scenes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kbsp-scene-wrap {
+  border-left: 2px solid #cbd5e1;
+  margin-left: 16px;
+  padding: 2px 0 4px 20px;
+  position: relative;
+}
+.kbsp-scene-line {
+  align-items: center;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  left: -11px;
+  padding: 2px;
+  position: absolute;
+  top: 6px;
+  z-index: 10;
+}
+.kbsp-scene-line span {
+  align-items: center;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  border-radius: 999px;
+  color: #94a3b8;
+  display: flex;
+  font-size: 8px;
+  font-weight: 800;
+  height: 16px;
+  justify-content: center;
+  width: 16px;
+}
+.kbsp-scene-line em {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  font-style: normal;
+  padding: 1px 4px;
+}
+.kbsp-scene-line i {
+  color: #94a3b8;
+  font-size: 9px;
+  font-style: normal;
+  white-space: nowrap;
+}
+.kbsp-scene-tts-button {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  color: #334155;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  left: 28px;
+  line-height: 1;
+  padding: 6px 9px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+.kbsp-scene-tts-button:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+.kbsp-scene-tts-button.is-generating,
+.kbsp-scene-tts-button.is-playing {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+.kbsp-scene-tts-button.is-paused,
+.kbsp-scene-tts-button.is-ready {
+  background: #ecfdf5;
+  border-color: #86efac;
+  color: #047857;
+}
+.kbsp-scene-tts-button.is-error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.kbsp-scene-tts-button:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+.kbsp-merge-scene {
+  left: 20px;
+  opacity: 0;
+  position: absolute;
+  top: -4px;
+  z-index: 80;
+}
+.kbsp-scene-wrap:hover .kbsp-merge-scene {
+  opacity: 1;
+}

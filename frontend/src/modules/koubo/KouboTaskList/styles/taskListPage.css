@@ -1,0 +1,110 @@
+.koubo-task-list-page {
+  height: 100%;
+  overflow: auto;
+  padding: 22px;
+  background: #f7f8fb;
+  color: #172033;
+}
+
+.koubo-task-list-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.koubo-task-list-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.koubo-task-list-header p {
+  margin: 6px 0 0;
+  color: #647089;
+}
+
+.koubo-task-list-header-actions,
+.koubo-task-list-create-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.koubo-task-list-header-actions button,
+.koubo-task-list-create-actions button {
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  color: #172033;
+}
+
+.koubo-task-list-header-actions button:hover:not(:disabled),
+.koubo-task-list-create-actions button:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #c3ccdc;
+}
+
+.koubo-task-list-filters {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 140px 140px max-content;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.koubo-task-list-filters input:not([type="checkbox"]),
+.koubo-task-list-filters select {
+  height: 36px;
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: white;
+}
+
+.koubo-task-list-archived-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: end;
+  width: max-content;
+  color: #53627d;
+  font-size: 13px;
+}
+
+.koubo-task-list-archived-toggle input[type="checkbox"] {
+  flex: 0 0 16px;
+  width: 16px;
+  min-width: 0;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  accent-color: #2563eb;
+}
+
+.koubo-task-list-banner {
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+}
+
+.koubo-task-list-banner.good {
+  background: #ecfdf3;
+  color: #067647;
+}
+
+.koubo-task-list-banner.bad {
+  background: #fff1f0;
+  color: #b42318;
+}
+
+@media (max-width: 900px) {
+  .koubo-task-list-header,
+  .koubo-task-list-header-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .koubo-task-list-filters {
+    grid-template-columns: 1fr;
+  }
+}

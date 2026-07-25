@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.1",
+  "ledger_id": "budget_run_dd_20260724_002",
+  "run_id": "run_dd_20260724_002",
+  "currency": "USD",
+  "limit": "15",
+  "reserved": "0",
+  "settled": "0.111",
+  "available": "14.889",
+  "status": "within_budget",
+  "transactions": [
+    {
+      "transaction_id": "btx_9fefc9b191d5e3b1",
+      "kind": "reserve",
+      "operation_id": "op_eb677706d53546d5",
+      "model_invocation_id": "mi_c17b933828c945d5",
+      "amount": "0.018",
+      "at": "2026-07-24T07:00:12Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_a14f8f477664eabd",
+      "kind": "settle",
+      "operation_id": "op_eb677706d53546d5",
+      "model_invocation_id": "mi_c17b933828c945d5",
+      "amount": "0.014",
+      "at": "2026-07-24T07:00:20Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_1769dd50dda1826a",
+      "kind": "release",
+      "operation_id": "op_eb677706d53546d5",
+      "model_invocation_id": "mi_c17b933828c945d5",
+      "amount": "0.004",
+      "at": "2026-07-24T07:00:21Z",
+      "reason": "unused reservation"
+    },
+    {
+      "transaction_id": "btx_eb164841e1b5a588",
+      "kind": "reserve",
+      "operation_id": "op_744d5bd8bbc40702",
+      "model_invocation_id": "mi_eb72a32d7fb6f103",
+      "amount": "0.018",
+      "at": "2026-07-24T07:00:26Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_5eb67d18964c571b",
+      "kind": "settle",
+      "operation_id": "op_744d5bd8bbc40702",
+      "model_invocation_id": "mi_eb72a32d7fb6f103",
+      "amount": "0.014",
+      "at": "2026-07-24T07:00:34Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_c7767dfd1bf686b5",
+      "kind": "release",
+      "operation_id": "op_744d5bd8bbc40702",
+      "model_invocation_id": "mi_eb72a32d7fb6f103",
+      "amount": "0.004",
+      "at": "2026-07-24T07:00:35Z",
+      "reason": "unused reservation"
+    },
+    {
+      "transaction_id": "btx_586279871d89464f",
+      "kind": "reserve",
+      "operation_id": "op_8089e2b0fe9cb78b",
+      "model_invocation_id": "mi_138967198a08662f",
+      "amount": "0.018",
+      "at": "2026-07-24T07:00:40Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_78d2ad56705912e9",
+      "kind": "settle",
+      "operation_id": "op_8089e2b0fe9cb78b",
+      "model_invocation_id": "mi_138967198a08662f",
+      "amount": "0.014",
+      "at": "2026-07-24T07:00:48Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_d52b910189c0661c",
+      "kind": "release",
+      "operation_id": "op_8089e2b0fe9cb78b",
+      "model_invocation_id": "mi_138967198a08662f",
+      "amount": "0.004",
+      "at": "2026-07-24T07:00:49Z",
+      "reason": "unused reservation"
+    },
+    {
+      "transaction_id": "btx_dfdbf8bf8787808c",
+      "kind": "reserve",
+      "operation_id": "op_479395218d6e1cdd",
+      "model_invocation_id": "mi_d19b8a6e96bb3ad1",
+      "amount": "0.018",
+      "at": "2026-07-24T07:00:54Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_c6f3f469ee9b8698",
+      "kind": "settle",
+      "operation_id": "op_479395218d6e1cdd",
+      "model_invocation_id": "mi_d19b8a6e96bb3ad1",
+      "amount": "0.014",
+      "at": "2026-07-24T07:01:02Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_c467c5a66f1f6bb6",
+      "kind": "release",
+      "operation_id": "op_479395218d6e1cdd",
+      "model_invocation_id": "mi_d19b8a6e96bb3ad1",
+      "amount": "0.004",
+      "at": "2026-07-24T07:01:03Z",
+      "reason": "unused reservation"
+    },
+    {
+      "transaction_id": "btx_2d42cd6c481a5204",
+      "kind": "reserve",
+      "operation_id": "op_4f4bbd46d63b5fbd",
+      "model_invocation_id": "mi_06ecb5cd33839c91",
+      "amount": "0.04",
+      "at": "2026-07-24T07:01:18Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_b1a2fc56f9e506f2",
+      "kind": "settle",
+      "operation_id": "op_4f4bbd46d63b5fbd",
+      "model_invocation_id": "mi_06ecb5cd33839c91",
+      "amount": "0.031",
+      "at": "2026-07-24T07:01:26Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_64fcde4cb706eddd",
+      "kind": "release",
+      "operation_id": "op_4f4bbd46d63b5fbd",
+      "model_invocation_id": "mi_06ecb5cd33839c91",
+      "amount": "0.009",
+      "at": "2026-07-24T07:01:27Z",
+      "reason": "unused reservation"
+    },
+    {
+      "transaction_id": "btx_17d4e957e8e78f03",
+      "kind": "reserve",
+      "operation_id": "op_84f88b9302ab964a",
+      "model_invocation_id": "mi_c47f8344ab089575",
+      "amount": "0.032",
+      "at": "2026-07-24T07:01:35Z",
+      "reason": "pre-dispatch estimate"
+    },
+    {
+      "transaction_id": "btx_04cff8fd1a3561f7",
+      "kind": "settle",
+      "operation_id": "op_84f88b9302ab964a",
+      "model_invocation_id": "mi_c47f8344ab089575",
+      "amount": "0.024",
+      "at": "2026-07-24T07:01:43Z",
+      "reason": "mock invocation completed"
+    },
+    {
+      "transaction_id": "btx_7652eb39a087b2c5",
+      "kind": "release",
+      "operation_id": "op_84f88b9302ab964a",
+      "model_invocation_id": "mi_c47f8344ab089575",
+      "amount": "0.008",
+      "at": "2026-07-24T07:01:44Z",
+      "reason": "unused reservation"
+    }
+  ]
+}

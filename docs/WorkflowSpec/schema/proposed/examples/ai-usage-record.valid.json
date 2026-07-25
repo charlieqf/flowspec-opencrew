@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.2",
+  "usage_record_id": "usage_01",
+  "operation_id": "op_storyboard_run123_s2_01",
+  "operation_idempotency_key": "run123:S2:inputhash:modelhash",
+  "observation_idempotency_key": "run123:S2:inputhash:modelhash:observation:1",
+  "model_invocation_id": "mi_01",
+  "agent_execution_id": "ae_01",
+  "run_id": "run_123",
+  "step_id": "S2_storyboard_plan",
+  "step_attempt_id": "sa_run123_s2_01",
+  "step_attempt_no": 1,
+  "profile_snapshot": {
+    "profile_id": "storyboard_planning_agent",
+    "version": "2.0.0",
+    "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "provider": "openrouter",
+  "model_id": "approved-reasoning-model",
+  "model_revision": "2026-07-01",
+  "deployment_id": "regulated-au",
+  "region": "au-southeast",
+  "modality": "multimodal",
+  "invocation_status": "completed",
+  "provider_request_id": "provider_req_123",
+  "usage": {
+    "measurement_status": "provider_reported",
+    "input_tokens": 18420,
+    "output_tokens": 2180,
+    "cached_input_tokens": 4000,
+    "reasoning_tokens": 900,
+    "total_tokens": 20600
+  },
+  "cost": {
+    "status": "provisional",
+    "amount": "0.2841",
+    "currency": "USD",
+    "source": "provider_reported"
+  },
+  "charge": {
+    "status": "estimated",
+    "amount": "0.3500",
+    "currency": "USD",
+    "source": "tariff_snapshot_calculated",
+    "price_snapshot_ref": "tariff://ai-usage/2026-07-24"
+  },
+  "started_at": "2026-07-24T09:59:58Z",
+  "finished_at": "2026-07-24T10:00:00Z",
+  "recorded_at": "2026-07-24T10:00:01Z",
+  "supersedes_usage_record_id": null
+}

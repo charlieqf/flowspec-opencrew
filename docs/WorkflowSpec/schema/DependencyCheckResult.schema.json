@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "MissingDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "required_from": {
+          "default": "",
+          "title": "Required From",
+          "type": "string"
+        },
+        "required_path": {
+          "default": "",
+          "title": "Required Path",
+          "type": "string"
+        },
+        "suggested_action": {
+          "title": "Suggested Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "suggested_action"
+      ],
+      "title": "MissingDependency",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "blocked"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "missing_dependencies": {
+      "items": {
+        "$ref": "#/$defs/MissingDependency"
+      },
+      "title": "Missing Dependencies",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "DependencyCheckResult",
+  "type": "object"
+}

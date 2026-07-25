@@ -1,0 +1,64 @@
+{
+  "case": {
+    "suite": "video",
+    "number": 21,
+    "title": "Case 21：绑定终视频跨 Shot 作为上游尾帧来源",
+    "target_type": "task",
+    "shot_id": "shot_001",
+    "scene_id": "scene_001",
+    "max_seconds": 4,
+    "min_seconds": 2,
+    "tolerance": 0,
+    "tool_status": "completed",
+    "summary": {
+      "shot_count": 2,
+      "scene_count": 4,
+      "dialogue_count": 12,
+      "segment_count": 7,
+      "blocked_segment_count": 0,
+      "skipped_scene_count": 0,
+      "blocked_scene_count": 0,
+      "need_audio_count": 12,
+      "need_image_prompt_count": 0,
+      "need_image_count": 0,
+      "need_video_prompt_count": 6,
+      "need_video_count": 6,
+      "segment_audio_count": 7,
+      "need_lipsync_count": 6,
+      "need_audio_video_sync_count": 1,
+      "need_sync_count": 7
+    },
+    "expected_count": 7
+  },
+  "actual": {
+    "actualCount": 7,
+    "dpr": 1,
+    "rect": {
+      "height": 770.9375,
+      "left": 650,
+      "top": 68.03125,
+      "width": 620
+    },
+    "scroll": {
+      "client": 700,
+      "height": 752,
+      "top": 52
+    },
+    "segmentRows": [
+      "S1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+      "S2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 2\nScene 4\nSegment 7",
+    "text": "生成计划\nShot 2\nScene 4\nSegment 7\n0/7\n0/6\n0/6\n1/7\nShot_001\nScene_001\nS1\n6.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频\nScene_002\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nShot_002\nScene_003\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nScene_004\nS1\n4.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频\nS2\n2.00s\n音频\n→\n尾帧\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  }
+}

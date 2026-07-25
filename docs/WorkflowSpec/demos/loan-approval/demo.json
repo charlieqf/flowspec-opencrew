@@ -1,0 +1,113 @@
+{
+  "slug": "loan-approval",
+  "eyebrow": "Scenario 01 · Regulated decisioning",
+  "title": "消费贷审批 · 从证据到放款",
+  "subtitle": "展示并行核验、可解释决策、人审 work item、拒绝/退回修改/放款三种 outcome，以及跨 Run 修订链。",
+  "stage_labels": {
+    "intake": "申请受理",
+    "verification": "并行核验",
+    "decision": "风险决策",
+    "fulfilment": "结果执行"
+  },
+  "step_labels": {
+    "S1_validate_application": {
+      "title": "校验贷款申请",
+      "description": "检查必填字段和基础格式，不修改客户提交的原始事实。"
+    },
+    "S2_extract_evidence": {
+      "title": "抽取申请证据",
+      "description": "使用 Mock LLM 从材料中提取结构化证据，并保留原文位置和逐调用用量。"
+    },
+    "S3a_credit_bureau": {
+      "title": "查询征信报告",
+      "description": "以稳定查询键获取征信；响应不明时先对账，避免重复查询。"
+    },
+    "S3b_fraud_screen": {
+      "title": "执行反欺诈筛查",
+      "description": "用确定性规则识别欺诈信号，与 AI 材料抽取保持权威分离。"
+    },
+    "S3c_income_verify": {
+      "title": "核验申请人收入",
+      "description": "对照收入证明核实申报金额，形成可独立审计的核验结果。"
+    },
+    "S4_risk_decision": {
+      "title": "形成风险建议",
+      "description": "汇合征信、反欺诈和收入三路证据，计算可解释的拟议决定。"
+    },
+    "S5_human_review": {
+      "title": "人工复核临界案件",
+      "description": "仅对需要人工判断的案件创建带责任人和输入版本的审批待办。"
+    },
+    "S6_finalize_decision": {
+      "title": "确认最终授信决定",
+      "description": "合并系统建议和可选人工决定，写入唯一权威的审批结论。"
+    },
+    "S7_offer_acceptance": {
+      "title": "等待客户接受方案",
+      "description": "等待客户签署回调，并把接受结果绑定到当前授信决定版本。"
+    },
+    "S8_disburse": {
+      "title": "执行放款",
+      "description": "使用稳定业务操作键记账放款；响应不明时先对账再处理。"
+    },
+    "S9_rejection_notice": {
+      "title": "发送拒绝通知",
+      "description": "为拒绝案件生成包含明确原因的通知，完整结束拒绝结果。"
+    },
+    "S10_request_application_revision": {
+      "title": "请求修订申请资料",
+      "description": "把人工要求的资料更正记录为明确业务结果，后续通过新 Run 重审。"
+    }
+  },
+  "outcome_labels": {
+    "approved_and_disbursed": "已批准、已接受并完成放款",
+    "rejected_with_notice": "已拒绝并发送可追溯通知",
+    "application_revision_requested": "已请求修订申请资料"
+  },
+  "executive_tldr": {
+    "result": "资料修订后形成明确的拒绝、退回补充材料或批准放款结果。",
+    "control": "征信、收入证据、政策决定、人审和放款操作均可逐项追责，模型不能替代政策授权。",
+    "boundary": "这是目标契约的确定性 Mock；不证明分布式调度、租约与崩溃恢复已经生产化。"
+  },
+  "run_control_examples": {
+    "full": "从申请校验启动本次审批，激活征信、反欺诈和收入核验，最终只能收口为拒绝通知、退回补充材料或批准放款之一。",
+    "through": "运行到 S4 风险决定：编译器包含申请校验、证据抽取和三路核验；S4 完成后暂停，不能把尚未签约/放款的申请显示为业务完成。",
+    "from": "征信资料修订后从 S3a 重跑：创建新 Run，重算征信及其受影响的决定、人审、签约/拒绝分支；反欺诈与收入证据只有 producer 输入摘要、内容 hash、Schema 和按需 binding 均兼容才复用。",
+    "single": "隔离重跑 S3b 反欺诈用于诊断规则或 provider 输出；记录新 Attempt、Usage 和 diagnostic Artifact，但不改已经生效的授信结论。"
+  },
+  "accent": "#087f6d",
+  "accent_secondary": "#2867b2",
+  "surface_tint": "#e4f2ef",
+  "business_owner": "零售信贷风控",
+  "hero_metric_label": "审批路径",
+  "hero_metric_value": "3 种业务结果",
+  "scenario_explainer": {
+    "title": "受监管决策不是一条自动化直线",
+    "challenge": "这个场景同时包含可并行但可信度不同的外部证据、可解释的政策决策、临界案件的人工作业，以及不可盲目重放的签约与放款副作用。模型可以抽取事实，但不能成为授信政策或放款事实的权威。",
+    "points": [
+      {
+        "feature": "多源证据并行且可能冲突",
+        "support": "征信、欺诈和收入核验作为独立 Step 并行执行，以 typed Artifact 汇合到风险决策；每份正式证据都关联生产 Attempt 的输入摘要，并有 Runtime 内容 hash 与业务 binding。",
+        "constraint": "AI Profile 限定模型、数据传输和输出 Schema；模型只发布候选事实，政策 Step 必须消费可验证 Artifact，不能让摘要覆盖来源数字。"
+      },
+      {
+        "feature": "直通审批与人工责任并存",
+        "support": "最小 when guard 选择直通或 Human Task；确认步骤物化 work item，并把 actor、role、reason、decision、input hash 和 revision 写进 Run。",
+        "constraint": "人工决定必须匹配 allowed_decisions、授权角色和 expected revision；未激活分支递归关闭为 skipped，不能留下永远等待的伪 pending。"
+      },
+      {
+        "feature": "拒绝、退回修改和放款都是正常业务结果",
+        "support": "exactly_one_outcome 明确拒绝通知、补件请求与放款回执三种完成契约；补正资料后创建 superseding Run，而不在原 DAG 中画返工回边。",
+        "constraint": "放款标为 reconcilable 并使用稳定 operation key；响应不明时先对账，不能自动重发。每个 outcome 都必须有终点 Step 和可审计回执。"
+      }
+    ],
+    "effect": "FlowSpec 把“模型意见、政策结论、人工责任、客户接受和资金副作用”分成不同权威层，使一次审批既能自动化，又能解释为什么放行、为什么拒绝，以及修订后为什么必须产生新 Run。",
+    "glossary": [
+      { "term": "DAG（有向无环流程图）", "meaning": "这次审批只从材料向决定、签约和放款前进；需要补正征信时另开新 Run，不在原流程里倒着跳。" },
+      { "term": "Run（一次有边界执行）", "meaning": "同一笔贷款申请的一次审批版本。第二个 Run 代表资料修订后的重审，业务身份不变、输入哈希改变。" },
+      { "term": "Artifact（可追踪业务产物）", "meaning": "征信报告、风险结论或放款回执不只是文件：记录来源步骤、内容校验和与申请 binding，并通过 producer Attempt 关联输入版本。" },
+      { "term": "Human Task（人工责任节点）", "meaning": "系统真正创建给风控人员的待办；决定必须留下谁、以什么角色、基于哪版输入、为什么批准。" },
+      { "term": "Reconcilable（先对账再补做）", "meaning": "放款响应丢失时，先用业务操作键向账本查询是否已发生；不能因超时直接再放一次款。" }
+    ]
+  }
+}

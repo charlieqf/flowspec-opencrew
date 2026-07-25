@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "video_tts_model",
+  "version": "1.0.0",
+  "description": "Per-dialogue speech generation.",
+  "kind": "model",
+  "model": {
+    "provider": "mock-provider",
+    "model_id": "mock-tts-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "runtime": "flowspec-mock",
+    "modality": "audio",
+    "selection_source": "explicit",
+    "fallback_policy": "deny"
+  },
+  "budget": {
+    "max_wall_seconds": 90,
+    "max_input_tokens": 2000,
+    "max_media_units": {
+      "audio_seconds": 15
+    },
+    "max_cost": "0.25",
+    "currency": "USD"
+  },
+  "data_policy": {
+    "sensitivity": "sensitive",
+    "external_transfer": "denied",
+    "redaction_required": false,
+    "residency": [
+      "local"
+    ],
+    "provider_retention": "denied",
+    "provider_training": "denied",
+    "purpose": "dialogue audio generation",
+    "deletion_policy_ref": "policy://creative-retention/v1"
+  },
+  "output": {
+    "schema_ref": "schemas/artifacts.schema.json#/$defs/mediaMock",
+    "validation": "strict",
+    "max_repair_attempts": 0,
+    "safety_policy_ref": "policy://brand-safety/v2",
+    "moderation_required": true,
+    "grounding_required": true,
+    "evidence_required": false
+  },
+  "streaming": {
+    "enabled": false,
+    "partial_output_authoritative": false
+  }
+}

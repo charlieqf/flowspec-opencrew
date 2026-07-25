@@ -1,0 +1,415 @@
+[
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks",
+    "endpoint": "list_openclip_tasks"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/prompt-models",
+    "endpoint": "openclip_prompt_models"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks",
+    "endpoint": "create_openclip_task"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}",
+    "endpoint": "openclip_task_detail"
+  },
+  {
+    "methods": [
+      "DELETE"
+    ],
+    "path": "/api/openclip/tasks/{task_id}",
+    "endpoint": "delete_openclip_task"
+  },
+  {
+    "methods": [
+      "PUT"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/config",
+    "endpoint": "save_openclip_task_config"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/simple-prompt/rebuild",
+    "endpoint": "rebuild_openclip_simple_prompt"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/generate-prompt",
+    "endpoint": "generate_openclip_prompt"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/reference-audio",
+    "endpoint": "upload_analysis_v1_tts_reference_audio"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/reference-audio/chunk",
+    "endpoint": "upload_analysis_v1_tts_reference_audio_chunk"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/voice-catalog/{model}/audio/{audio_path:path}",
+    "endpoint": "analysis_v1_voice_catalog_audio"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/builder-g",
+    "endpoint": "run_analysis_v1_tts_builder_g"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/state",
+    "endpoint": "get_analysis_v1_tts_quick_adv_state"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/catalog-list",
+    "endpoint": "list_analysis_v1_tts_quick_adv_catalog"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/sample-reference",
+    "endpoint": "sample_analysis_v1_tts_quick_adv_reference"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/rank",
+    "endpoint": "rank_analysis_v1_tts_quick_adv"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/clone-voice",
+    "endpoint": "clone_analysis_v1_tts_quick_adv_voice"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/clone-list",
+    "endpoint": "list_analysis_v1_tts_quick_adv_clones"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/analysis-v1/tts/quick-adv/clone-list",
+    "endpoint": "list_analysis_v1_tts_quick_adv_clones_without_task"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/analysis-v1/tts/quick-adv/clone-delete",
+    "endpoint": "delete_analysis_v1_tts_quick_adv_clone_without_task"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/analysis-v1/tts/clone-preview",
+    "endpoint": "preview_analysis_v1_clone_tts_without_task"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/clone-import",
+    "endpoint": "import_analysis_v1_tts_quick_adv_clone"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/quick-adv/clone-delete",
+    "endpoint": "delete_analysis_v1_tts_quick_adv_clone"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/selection",
+    "endpoint": "save_analysis_v1_tts_selection"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/tts/preview",
+    "endpoint": "preview_analysis_v1_tts"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/plan",
+    "endpoint": "get_analysis_v1_run_to_storyboard_plan"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/koubo-storyboard/tasks/{task_id}/session-variables/refresh",
+    "endpoint": "refresh_koubo_storyboard_session_variables"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard",
+    "endpoint": "start_analysis_v1_run_to_storyboard"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/talking-head-v1/tasks/{task_id}/run-storyboard",
+    "endpoint": "start_talking_head_v1_run_storyboard"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/one-click-movie",
+    "endpoint": "start_analysis_v1_one_click_movie"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/talking-head-v1/tasks/{task_id}/one-click-movie",
+    "endpoint": "start_talking_head_v1_one_click_movie"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/one-click-movie",
+    "endpoint": "get_analysis_v1_one_click_movie_latest"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/one-click-movie/{run_id}",
+    "endpoint": "get_analysis_v1_one_click_movie_status"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/talking-head-v1/tasks/{task_id}/one-click-movie",
+    "endpoint": "get_talking_head_v1_one_click_movie_latest"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/talking-head-v1/tasks/{task_id}/one-click-movie/{run_id}",
+    "endpoint": "get_talking_head_v1_one_click_movie_status"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}",
+    "endpoint": "get_analysis_v1_run_to_storyboard_status"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/talking-head-v1/tasks/{task_id}/run-storyboard/{attempt_id}",
+    "endpoint": "get_talking_head_v1_run_storyboard_status"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/stop",
+    "endpoint": "stop_analysis_v1_run_to_storyboard"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/pause-before",
+    "endpoint": "pause_before_analysis_v1_run_to_storyboard"
+  },
+  {
+    "methods": [
+      "DELETE"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/pause-before",
+    "endpoint": "cancel_pause_before_analysis_v1_run_to_storyboard"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/resume",
+    "endpoint": "resume_analysis_v1_run_to_storyboard"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/steps/{step_id}/quick-watch",
+    "endpoint": "get_analysis_v1_step_quick_watch"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/run-to-storyboard/{attempt_id}/steps/{step_id}/logs",
+    "endpoint": "get_analysis_v1_step_logs"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/rewritten-srt",
+    "endpoint": "save_analysis_v1_rewritten_srt"
+  },
+  {
+    "methods": [
+      "PUT"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/analysis-v1/rewritten-srt",
+    "endpoint": "put_analysis_v1_rewritten_srt"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/prompt-versions",
+    "endpoint": "save_openclip_prompt_version"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/prompt-versions/load",
+    "endpoint": "load_openclip_prompt_version"
+  },
+  {
+    "methods": [
+      "PUT"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/prompt-versions/{version_id}",
+    "endpoint": "update_openclip_prompt_version"
+  },
+  {
+    "methods": [
+      "DELETE"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/prompt-versions/{version_id}",
+    "endpoint": "delete_openclip_prompt_version"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/generate-skill",
+    "endpoint": "generate_openclip_skill"
+  },
+  {
+    "methods": [
+      "PUT"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/skill-draft",
+    "endpoint": "save_openclip_skill_draft"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/skill-versions",
+    "endpoint": "save_openclip_skill_version"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/skill-versions/load",
+    "endpoint": "load_openclip_skill_version"
+  },
+  {
+    "methods": [
+      "DELETE"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/skill-versions/{version_id}",
+    "endpoint": "delete_openclip_skill_version"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/run",
+    "endpoint": "run_openclip_task"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/rerun",
+    "endpoint": "rerun_openclip_task"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/attempts",
+    "endpoint": "list_openclip_attempts"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/attempts/{attempt_id}",
+    "endpoint": "openclip_attempt_detail"
+  },
+  {
+    "methods": [
+      "GET"
+    ],
+    "path": "/api/openclip/tasks/{task_id}/session-events",
+    "endpoint": "openclip_task_events"
+  }
+]

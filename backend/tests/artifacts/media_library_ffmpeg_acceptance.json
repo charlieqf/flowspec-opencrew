@@ -1,0 +1,206 @@
+{
+  "acceptance": "media_library_precise_clip_ffmpeg_v1",
+  "executed_at": "2026-07-20T15:38:23+10:00",
+  "browser_revalidated_at": 1784534219000,
+  "platform": "darwin-arm64",
+  "status": "passed",
+  "binary_resolution_contract": [
+    "OPENCREW_FFMPEG_PATH/OPENCREW_FFPROBE_PATH",
+    "ToolLibrary/.bin",
+    "PATH"
+  ],
+  "baseline_runtime": {
+    "ffmpeg_path": "ToolLibrary/.bin/ffmpeg",
+    "ffprobe_path": "ToolLibrary/.bin/ffprobe",
+    "version": "7.0",
+    "libx264": true,
+    "aac": true
+  },
+  "compatibility_runtime": {
+    "ffmpeg_path": "/opt/homebrew/bin/ffmpeg",
+    "ffprobe_path": "/opt/homebrew/bin/ffprobe",
+    "version": "8.1.1",
+    "status": "passed"
+  },
+  "command_contract": {
+    "shell_invocation": false,
+    "seek_count": 1,
+    "seek_position": "before_input",
+    "accurate_seek_position": "before_input",
+    "duration_option": "-t",
+    "optional_audio_map": "0:a?",
+    "video_codec": "libx264",
+    "audio_codec": "aac",
+    "part_file_then_atomic_replace": true
+  },
+  "representative_gate": {
+    "source": {
+      "logical_name": "OpenCrew_代表视频_十分钟.mp4",
+      "duration_ms": 600000,
+      "width": 1280,
+      "height": 720,
+      "frame_rate": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "audio_sample_rate": 48000,
+      "size_bytes": 197994012,
+      "bit_rate": 2639920,
+      "gop_frames": 60,
+      "non_ascii_path": true
+    },
+    "request": {
+      "start_ms": 543217,
+      "end_ms": 548217,
+      "near_tail": true,
+      "non_keyframe_start": true
+    },
+    "output": {
+      "duration_ms": 5000,
+      "size_bytes": 2326551,
+      "video_frame_rate": "30/1",
+      "audio_codec": "aac",
+      "audio_sample_rate": 48000,
+      "elapsed_ms": 379,
+      "status": "passed"
+    },
+    "slow_reference_comparison": {
+      "reference_seek_position": "after_input",
+      "video_frame_sequence": "exact_match",
+      "audio_frame_sequence": "exact_match",
+      "reference_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76",
+      "input_side_sha256": "e9e142a3c6fee5eb96f049092a57518d2d8ed591e8d7e5c28ed6fddc810a2d76"
+    }
+  },
+  "minimum_duration_matrix": [
+    {
+      "frame_rate": "24/1",
+      "audio": false,
+      "portrait": false,
+      "requested_duration_ms": 250,
+      "actual_duration_ms": 250,
+      "dynamic_tolerance_ms": 42,
+      "status": "passed"
+    },
+    {
+      "frame_rate": "30/1",
+      "audio": false,
+      "portrait": true,
+      "requested_duration_ms": 250,
+      "actual_duration_ms": 267,
+      "absolute_delta_ms": 17,
+      "dynamic_tolerance_ms": 34,
+      "status": "passed"
+    },
+    {
+      "frame_rate": "60/1",
+      "audio": true,
+      "audio_sample_rate": 48000,
+      "portrait": false,
+      "requested_duration_ms": 250,
+      "actual_duration_ms": 250,
+      "dynamic_tolerance_ms": 22,
+      "status": "passed"
+    }
+  ],
+  "ffmpeg_8_compatibility_smoke": {
+    "source": "OpenCrew_代表视频_十分钟.mp4",
+    "start_ms": 543217,
+    "requested_duration_ms": 1000,
+    "actual_duration_ms": 1000,
+    "size_bytes": 489950,
+    "video_frame_rate": "30/1",
+    "audio_codec": "aac",
+    "status": "passed"
+  },
+  "nonblocking_pressure": {
+    "source": {
+      "logical_name": "OpenCrew_30分钟_synthetic_sparse.mp4",
+      "duration_ms": 1800000,
+      "width": 640,
+      "height": 360,
+      "frame_rate": "24/1",
+      "audio_codec": "aac",
+      "audio_sample_rate": 48000,
+      "size_bytes": 15988088,
+      "bit_rate": 71058
+    },
+    "request": {
+      "start_ms": 1700321,
+      "end_ms": 1702321,
+      "near_tail": true
+    },
+    "output": {
+      "actual_duration_ms": 2000,
+      "size_bytes": 39582,
+      "status": "passed"
+    },
+    "release_gate": false
+  },
+  "failure_and_lifecycle_contracts": {
+    "cancel_terminates_process_and_cleans_part": "test_media_library_clip_jobs_contract:passed",
+    "database_failure_cleans_final_file": "test_media_library_clip_storage_contract:passed",
+    "restart_returns_clip_job_lost": "test_media_library_clip_jobs_contract:passed",
+    "successful_derivative_survives_restart": "test_media_library_clip_jobs_contract:passed",
+    "orphan_cleanup_and_registered_missing_detection": "test_media_library_clip_storage_contract:passed"
+  },
+  "real_browser_restart_lifecycle": {
+    "command": "MEDIA_LIBRARY_CLIP_RESTART_E2E_ALLOW_RESTART=1 MEDIA_LIBRARY_CLIP_RESTART_E2E_ASSET_ID=mla_1784525528366_d0ef81c77437 npm run test:e2e:media-library-clip-restart",
+    "asset_id": "mla_1784525528366_d0ef81c77437",
+    "source_duration_ms": 600000,
+    "completed_clip_id": "mlc_1784534197378_4df1d83df4b7",
+    "interrupted_job_submitted_through_editor_ui": true,
+    "interrupted_range_ms": [
+      0,
+      600000
+    ],
+    "part_artifacts_before_restart": 1,
+    "stack_restarted_during_ffmpeg": true,
+    "browser_observed_error_code": "clip_job_lost",
+    "lost_job_http_status": 410,
+    "orphan_artifacts_after_restart": 0,
+    "completed_derivative_listed_after_restart": true,
+    "completed_derivative_get_after_restart": true,
+    "completed_derivative_rendered_after_restart": true,
+    "idempotent_replay_reused_clip": true,
+    "cleanup_completed": true,
+    "status": "passed"
+  },
+  "real_browser_editor_lifecycle": {
+    "command": "MEDIA_LIBRARY_EDITOR_ASSET_ID=mla_1784525528366_d0ef81c77437 npm run test:e2e:media-library-editor with internal-search/import/return, external-search/import, and cancellation variants",
+    "asset_id": "mla_1784525528366_d0ef81c77437",
+    "source_duration_ms": 600000,
+    "near_tail_selection_ms": [
+      599000,
+      600000
+    ],
+    "zoom_scroll_fit_preserved_selection": true,
+    "timeline_fragment_rendering_windowed": true,
+    "stale_fragment_read_only_conversion_checked": true,
+    "internal_search_open_editor_action_checked": true,
+    "external_candidate_license_confirmation_checked": true,
+    "external_candidate_editor_action_absent": true,
+    "external_whole_import_completed": true,
+    "completed_clip_id": "mlc_1784533855223_06e44193367d",
+    "completed_clip_import_id": "mli_1784533909477_f01ecbd3bfb3",
+    "completed_clip_import_status": "completed",
+    "completed_clip_search_eligible": false,
+    "full_duration_cancelled_in_browser": true,
+    "cancelled_job_part_cleanup_checked": true,
+    "storyboard_dialogue_return_checked": true,
+    "unsafe_dialogue_key_fallback_checked": true,
+    "status": "passed"
+  },
+  "real_database_publish_failure": {
+    "artifact": "media_library_ffmpeg_db_publish_failure.json",
+    "real_ffmpeg_version": "7.0",
+    "requested_duration_ms": 250,
+    "actual_duration_ms": 267,
+    "dynamic_tolerance_ms": 34,
+    "derivative_rows_after_failure": 0,
+    "session_file_rows_after_failure": 0,
+    "final_files_after_failure": 0,
+    "part_files_after_failure": 0,
+    "source_unchanged": true,
+    "status": "passed"
+  }
+}

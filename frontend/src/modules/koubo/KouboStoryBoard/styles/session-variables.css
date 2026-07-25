@@ -1,0 +1,63 @@
+.kbsp-vars-shell {
+  max-width: calc(100vw - 64px);
+  width: min(900px, calc(100vw - 64px));
+}
+
+.kbsp-vars-header {
+  grid-template-columns: 1fr auto auto;
+}
+
+.kbsp-vars-spacer {
+  min-width: 1px;
+}
+
+.kbsp-vars-body {
+  background: #f8fafc;
+  min-height: 240px;
+  padding: 16px;
+}
+
+.kbsp-vars-code {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  color: #dbeafe;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 0;
+  max-height: min(58vh, 560px);
+  overflow: auto;
+  padding: 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.kbsp-vars-loading {
+  align-items: center;
+  background: #fff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  color: #475569;
+  display: flex;
+  font-size: 13px;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 220px;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .kbsp-vars-shell {
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+  }
+
+  .kbsp-vars-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .kbsp-vars-spacer {
+    display: none;
+  }
+}

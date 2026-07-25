@@ -1,0 +1,1465 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run_loan_20260724_001",
+  "session_id": "loan_AU_00123",
+  "task_id": "loan_AU_00123_t",
+  "run_sequence": 1,
+  "supersedes_run_id": null,
+  "process_snapshot": {
+    "process_id": "loan_approval",
+    "version": "1.2.0",
+    "digest": "sha256:46045249a86ba1d7728639cb8839105baa179fd4d0e1f149ec3ddb0c33ea53cf",
+    "tool_registry_id": "loan_approval_mock_tools",
+    "tool_registry_version": "1.2.0",
+    "tool_registry_digest": "sha256:65578a3cde82bda034e2884bc02419e228c471bddfea0e1bf38a99da70f26206",
+    "profiles": [
+      {
+        "profile_id": "loan_document_extraction",
+        "version": "1.0.0",
+        "digest": "sha256:15fb9cf5c9aad85e02f96bf309faaade950732f2958c201359d984724fcb84c2"
+      }
+    ]
+  },
+  "definition_snapshot_ref": "definition/process.snapshot.json",
+  "storage_index_ref": "storage-index.json",
+  "input_revision_hash": "sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+  "status": "completed",
+  "outcome": "rejected_with_notice",
+  "started_at": "2026-07-24T00:10:00Z",
+  "finished_at": "2026-07-24T00:11:07Z",
+  "context": {
+    "application_id": "APP-00123",
+    "applicant_name": "Alex Chen",
+    "loan_amount": 42000,
+    "stated_income": 98000,
+    "document_revision": "docs-r1",
+    "credit_score_fixture": 582,
+    "fraud_score_fixture": 0.08,
+    "verified_income_fixture": 93000,
+    "review_decision": null,
+    "application_valid": true,
+    "credit_score": 582,
+    "fraud_flag": false,
+    "verified_income": 93000.0,
+    "risk_score": 0.3153,
+    "proposed_decision": "rejected",
+    "review_required": false,
+    "decision": "rejected"
+  },
+  "steps": [
+    {
+      "step_id": "S1_validate_application",
+      "tool_id": "validate_application",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_ce8afda8306a05da",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S1_validate_application:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:e7da145ec922a09e0458ea0434332010b2a1ced7e7457c0bc549bcfd12eafda3",
+          "started_at": "2026-07-24T00:10:01Z",
+          "finished_at": "2026-07-24T00:10:05Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_4c6fb51f90499062"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_5709f1aa8f2848fe",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S2_extract_evidence:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:43cdcb7f84c7a4acf5eea50570a447b70dbcb7fdca64967c245aa7c47cf571f0",
+          "started_at": "2026-07-24T00:10:07Z",
+          "finished_at": "2026-07-24T00:10:22Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 1,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_b60f3e116d5e190f"
+      ],
+      "usage_record_ids": [
+        "usage_run_loan_20260724_001_0001"
+      ]
+    },
+    {
+      "step_id": "S3a_credit_bureau",
+      "tool_id": "pull_credit_report",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_e950f25419ecaaad",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S3a_credit_bureau:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:c0c852458724fbf80cc3cef75fd9fa7b3ec6787f03454d278f0ea2d240764041",
+          "started_at": "2026-07-24T00:10:24Z",
+          "finished_at": "2026-07-24T00:10:28Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_6004d2749988c915"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S3b_fraud_screen",
+      "tool_id": "screen_fraud",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_5551eccd7a065a8b",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S3b_fraud_screen:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:94bcd848a004499b95e5aa523aa3c1645afc3e024deaf3e662dac2eff465d3a8",
+          "started_at": "2026-07-24T00:10:30Z",
+          "finished_at": "2026-07-24T00:10:34Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_d8ac96619c4ed65d"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S3c_income_verify",
+      "tool_id": "verify_income",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_cc6183d6c1bde010",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S3c_income_verify:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:3892904f74ab198f848cdd393549ae7a0ce228cb244cc033e1ae87142c348a6d",
+          "started_at": "2026-07-24T00:10:36Z",
+          "finished_at": "2026-07-24T00:10:40Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_c7b4b238ab254e4b"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S4_risk_decision",
+      "tool_id": "calculate_risk_decision",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_775e4831f378c9bc",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S4_risk_decision:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:2997ca60d4d3b3257117c58707854d21505abeb84ac21c8d8da8cbfdb83322f4",
+          "started_at": "2026-07-24T00:10:42Z",
+          "finished_at": "2026-07-24T00:10:48Z",
+          "metrics": {
+            "artifact_count": 2,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_74e438af4a3ab6d7",
+        "art_c98467dcbdbff415"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S5_human_review",
+      "tool_id": "review_credit_decision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false (False)"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S6_finalize_decision",
+      "tool_id": "finalize_credit_decision",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_457dffbd85d42143",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S6_finalize_decision:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:d14a765f2ee358bd7422eb3001f6e8e1680805f4ee47f9b81e9a74f26bd6fbe8",
+          "started_at": "2026-07-24T00:10:51Z",
+          "finished_at": "2026-07-24T00:10:55Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_df5a6eb4aac76720"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S7_offer_acceptance",
+      "tool_id": "capture_offer_acceptance",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('rejected')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S8_disburse",
+      "tool_id": "disburse_funds",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('rejected')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S9_rejection_notice",
+      "tool_id": "issue_rejection_notice",
+      "tool_version": "1.0.0",
+      "status": "completed",
+      "skip_reason": null,
+      "attempts": [
+        {
+          "attempt_id": "sa_e235e9f748e34852",
+          "attempt_no": 1,
+          "status": "completed",
+          "operation_idempotency_key": "run_loan_20260724_001:S9_rejection_notice:sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40",
+          "input_snapshot_hash": "sha256:32abfac4a5ce111c17fd9f03904367fc7c9df273f91a6a0cab8c9997f5c45d9a",
+          "started_at": "2026-07-24T00:10:59Z",
+          "finished_at": "2026-07-24T00:11:03Z",
+          "metrics": {
+            "artifact_count": 1,
+            "usage_record_count": 0,
+            "fanout_item_count": 0
+          },
+          "error": null
+        }
+      ],
+      "fanout_items": [],
+      "artifact_ids": [
+        "art_49d56abf8590a8a5"
+      ],
+      "usage_record_ids": []
+    },
+    {
+      "step_id": "S10_request_application_revision",
+      "tool_id": "request_application_revision",
+      "tool_version": "1.0.0",
+      "status": "skipped",
+      "skip_reason": {
+        "kind": "when_false",
+        "detail": "guard evaluated false ('rejected')"
+      },
+      "attempts": [],
+      "fanout_items": [],
+      "artifact_ids": [],
+      "usage_record_ids": []
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "art_4c6fb51f90499062",
+      "name": "ValidatedApplication.json",
+      "path_base": "run",
+      "path": "artifacts/ValidatedApplication.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/validatedApplication",
+      "classification": "restricted",
+      "sha256": "sha256:b7967b91c27129723048c3e474da2a35c9383a487528feb45372dabfcea9ca9e",
+      "size": 80,
+      "producer": {
+        "step_id": "S1_validate_application",
+        "attempt_id": "sa_ce8afda8306a05da",
+        "tool_id": "validate_application",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:03Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_b60f3e116d5e190f",
+      "name": "ApplicationEvidence.json",
+      "path_base": "run",
+      "path": "artifacts/ApplicationEvidence.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/applicationEvidence",
+      "classification": "restricted",
+      "sha256": "sha256:b86ae5b32d3c96686b45a062d16ad68cea5ea26c645bcaa96414315652bcf54a",
+      "size": 335,
+      "producer": {
+        "step_id": "S2_extract_evidence",
+        "attempt_id": "sa_5709f1aa8f2848fe",
+        "tool_id": "extract_application_evidence",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:09Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_6004d2749988c915",
+      "name": "CreditReport.json",
+      "path_base": "run",
+      "path": "artifacts/CreditReport.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/creditReport",
+      "classification": "restricted",
+      "sha256": "sha256:66a806546e13b05297bca0d9041d3410cc3b5c1375707da891259b5f757580b5",
+      "size": 150,
+      "producer": {
+        "step_id": "S3a_credit_bureau",
+        "attempt_id": "sa_e950f25419ecaaad",
+        "tool_id": "pull_credit_report",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:26Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_d8ac96619c4ed65d",
+      "name": "FraudSignals.json",
+      "path_base": "run",
+      "path": "artifacts/FraudSignals.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/fraudSignals",
+      "classification": "restricted",
+      "sha256": "sha256:2717cf62de7fe179e4844adf2653fc40485ad735cf1a90f3e0e522c92c009ab1",
+      "size": 108,
+      "producer": {
+        "step_id": "S3b_fraud_screen",
+        "attempt_id": "sa_5551eccd7a065a8b",
+        "tool_id": "screen_fraud",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:32Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_c7b4b238ab254e4b",
+      "name": "IncomeVerification.json",
+      "path_base": "run",
+      "path": "artifacts/IncomeVerification.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/incomeVerification",
+      "classification": "restricted",
+      "sha256": "sha256:1fd17e9575ab213d3559561cc0629e1025683c8f996b8b8034194503948eb3dc",
+      "size": 115,
+      "producer": {
+        "step_id": "S3c_income_verify",
+        "attempt_id": "sa_cc6183d6c1bde010",
+        "tool_id": "verify_income",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:38Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_74e438af4a3ab6d7",
+      "name": "RiskAssessment.json",
+      "path_base": "run",
+      "path": "artifacts/RiskAssessment.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/riskAssessment",
+      "classification": "restricted",
+      "sha256": "sha256:5d757b3797c63ee38a796df9a3268656c521a2689b7e0a2cd1c84ed802b66dfb",
+      "size": 153,
+      "producer": {
+        "step_id": "S4_risk_decision",
+        "attempt_id": "sa_775e4831f378c9bc",
+        "tool_id": "calculate_risk_decision",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:44Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_c98467dcbdbff415",
+      "name": "ApprovalPlan.json",
+      "path_base": "run",
+      "path": "artifacts/ApprovalPlan.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/approvalPlan",
+      "classification": "restricted",
+      "sha256": "sha256:d5aad8a776e714243632a002c1d684f568dcf1f890485cd760d686d18f1e8f26",
+      "size": 169,
+      "producer": {
+        "step_id": "S4_risk_decision",
+        "attempt_id": "sa_775e4831f378c9bc",
+        "tool_id": "calculate_risk_decision",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:46Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_df5a6eb4aac76720",
+      "name": "FinalDecision.json",
+      "path_base": "run",
+      "path": "artifacts/FinalDecision.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/finalDecision",
+      "classification": "restricted",
+      "sha256": "sha256:6219841ca52766aa40fe843b6a542ba462c4173ea138e659c5ddf87e92ac0ec0",
+      "size": 84,
+      "producer": {
+        "step_id": "S6_finalize_decision",
+        "attempt_id": "sa_457dffbd85d42143",
+        "tool_id": "finalize_credit_decision",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:10:53Z",
+      "mock": true
+    },
+    {
+      "artifact_id": "art_49d56abf8590a8a5",
+      "name": "RejectionNotice.json",
+      "path_base": "run",
+      "path": "artifacts/RejectionNotice.json",
+      "media_type": "application/json",
+      "schema_ref": "schemas/artifacts.schema.json#/$defs/rejection",
+      "classification": "restricted",
+      "sha256": "sha256:d313fdce16328cc67b6c2c17d3f9fe5b2428aba27880e50bee6b2035889e59ab",
+      "size": 198,
+      "producer": {
+        "step_id": "S9_rejection_notice",
+        "attempt_id": "sa_e235e9f748e34852",
+        "tool_id": "issue_rejection_notice",
+        "tool_version": "1.0.0"
+      },
+      "validity": "valid",
+      "binding": {
+        "application_id": "APP-00123"
+      },
+      "created_at": "2026-07-24T00:11:01Z",
+      "mock": true
+    }
+  ],
+  "usage_records": [
+    {
+      "schema_version": "1.2",
+      "usage_record_id": "usage_run_loan_20260724_001_0001",
+      "operation_id": "op_84ea9376be4f75cf",
+      "operation_idempotency_key": "run_loan_20260724_001:S2_extract_evidence:single:1",
+      "observation_idempotency_key": "run_loan_20260724_001:S2_extract_evidence:single:1:observation:1",
+      "model_invocation_id": "mi_14f6a136a7b1aa44",
+      "agent_execution_id": null,
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "profile_snapshot": {
+        "profile_id": "loan_document_extraction",
+        "version": "1.0.0",
+        "digest": "sha256:15fb9cf5c9aad85e02f96bf309faaade950732f2958c201359d984724fcb84c2"
+      },
+      "provider": "mock-provider",
+      "model_id": "mock-document-extractor",
+      "model_revision": "2026-07-24",
+      "deployment_id": "demo-local",
+      "region": "local",
+      "modality": "text",
+      "invocation_status": "completed",
+      "provider_request_id": "mock_req_310a77e2acc42fa6",
+      "usage": {
+        "measurement_status": "locally_measured",
+        "input_tokens": 1260,
+        "output_tokens": 188,
+        "total_tokens": 1448
+      },
+      "cost": {
+        "status": "estimated",
+        "amount": "0.009",
+        "currency": "USD",
+        "source": "price_snapshot_calculated",
+        "price_snapshot_ref": "mock-pricebook@2026-07-24"
+      },
+      "started_at": "2026-07-24T00:10:13Z",
+      "finished_at": "2026-07-24T00:10:15Z",
+      "recorded_at": "2026-07-24T00:10:17Z",
+      "supersedes_usage_record_id": null
+    }
+  ],
+  "human_tasks": [],
+  "events": [
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0001",
+      "cursor": 1,
+      "kind": "run.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "process_id": "loan_approval",
+        "version": "1.2.0",
+        "input_revision_hash": "sha256:39f184b7ff36c04ba8beb32e7cc64a4c586958712f125a2010bbd239d0923c40"
+      },
+      "at": "2026-07-24T00:10:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0002",
+      "cursor": 2,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S1_validate_application",
+      "tool_id": "validate_application",
+      "step_attempt_id": "sa_ce8afda8306a05da",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ce8afda8306a05da",
+        "tool_id": "validate_application",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0003",
+      "cursor": 3,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S1_validate_application",
+      "tool_id": "validate_application",
+      "step_attempt_id": "sa_ce8afda8306a05da",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_4c6fb51f90499062",
+        "name": "ValidatedApplication.json",
+        "sha256": "sha256:b7967b91c27129723048c3e474da2a35c9383a487528feb45372dabfcea9ca9e"
+      },
+      "at": "2026-07-24T00:10:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0004",
+      "cursor": 4,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S1_validate_application",
+      "tool_id": "validate_application",
+      "step_attempt_id": "sa_ce8afda8306a05da",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_ce8afda8306a05da",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:06Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0005",
+      "cursor": 5,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_5709f1aa8f2848fe",
+        "tool_id": "extract_application_evidence",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:08Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0006",
+      "cursor": 6,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_b60f3e116d5e190f",
+        "name": "ApplicationEvidence.json",
+        "sha256": "sha256:b86ae5b32d3c96686b45a062d16ad68cea5ea26c645bcaa96414315652bcf54a"
+      },
+      "at": "2026-07-24T00:10:10Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0007",
+      "cursor": 7,
+      "kind": "budget.reserved",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_84ea9376be4f75cf",
+        "amount": "0.012",
+        "currency": "USD"
+      },
+      "at": "2026-07-24T00:10:12Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0008",
+      "cursor": 8,
+      "kind": "model.invocation.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_14f6a136a7b1aa44",
+        "profile_id": "loan_document_extraction",
+        "item_key": null
+      },
+      "at": "2026-07-24T00:10:14Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0009",
+      "cursor": 9,
+      "kind": "model.invocation.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "model_invocation_id": "mi_14f6a136a7b1aa44",
+        "usage_record_id": "usage_run_loan_20260724_001_0001",
+        "cost": {
+          "status": "estimated",
+          "amount": "0.009",
+          "currency": "USD",
+          "source": "price_snapshot_calculated",
+          "price_snapshot_ref": "mock-pricebook@2026-07-24"
+        }
+      },
+      "at": "2026-07-24T00:10:18Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0010",
+      "cursor": 10,
+      "kind": "budget.settled",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "operation_id": "op_84ea9376be4f75cf",
+        "settled": "0.009",
+        "released": "0.003"
+      },
+      "at": "2026-07-24T00:10:21Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0011",
+      "cursor": 11,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S2_extract_evidence",
+      "tool_id": "extract_application_evidence",
+      "step_attempt_id": "sa_5709f1aa8f2848fe",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_5709f1aa8f2848fe",
+        "artifact_count": 1,
+        "usage_record_count": 1,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:23Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0012",
+      "cursor": 12,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3a_credit_bureau",
+      "tool_id": "pull_credit_report",
+      "step_attempt_id": "sa_e950f25419ecaaad",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e950f25419ecaaad",
+        "tool_id": "pull_credit_report",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:25Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0013",
+      "cursor": 13,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3a_credit_bureau",
+      "tool_id": "pull_credit_report",
+      "step_attempt_id": "sa_e950f25419ecaaad",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_6004d2749988c915",
+        "name": "CreditReport.json",
+        "sha256": "sha256:66a806546e13b05297bca0d9041d3410cc3b5c1375707da891259b5f757580b5"
+      },
+      "at": "2026-07-24T00:10:27Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0014",
+      "cursor": 14,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3a_credit_bureau",
+      "tool_id": "pull_credit_report",
+      "step_attempt_id": "sa_e950f25419ecaaad",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e950f25419ecaaad",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:29Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0015",
+      "cursor": 15,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3b_fraud_screen",
+      "tool_id": "screen_fraud",
+      "step_attempt_id": "sa_5551eccd7a065a8b",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_5551eccd7a065a8b",
+        "tool_id": "screen_fraud",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:31Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0016",
+      "cursor": 16,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3b_fraud_screen",
+      "tool_id": "screen_fraud",
+      "step_attempt_id": "sa_5551eccd7a065a8b",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_d8ac96619c4ed65d",
+        "name": "FraudSignals.json",
+        "sha256": "sha256:2717cf62de7fe179e4844adf2653fc40485ad735cf1a90f3e0e522c92c009ab1"
+      },
+      "at": "2026-07-24T00:10:33Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0017",
+      "cursor": 17,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3b_fraud_screen",
+      "tool_id": "screen_fraud",
+      "step_attempt_id": "sa_5551eccd7a065a8b",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_5551eccd7a065a8b",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:35Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0018",
+      "cursor": 18,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3c_income_verify",
+      "tool_id": "verify_income",
+      "step_attempt_id": "sa_cc6183d6c1bde010",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_cc6183d6c1bde010",
+        "tool_id": "verify_income",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:37Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0019",
+      "cursor": 19,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3c_income_verify",
+      "tool_id": "verify_income",
+      "step_attempt_id": "sa_cc6183d6c1bde010",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_c7b4b238ab254e4b",
+        "name": "IncomeVerification.json",
+        "sha256": "sha256:1fd17e9575ab213d3559561cc0629e1025683c8f996b8b8034194503948eb3dc"
+      },
+      "at": "2026-07-24T00:10:39Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0020",
+      "cursor": 20,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S3c_income_verify",
+      "tool_id": "verify_income",
+      "step_attempt_id": "sa_cc6183d6c1bde010",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_cc6183d6c1bde010",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:41Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0021",
+      "cursor": 21,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S4_risk_decision",
+      "tool_id": "calculate_risk_decision",
+      "step_attempt_id": "sa_775e4831f378c9bc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_775e4831f378c9bc",
+        "tool_id": "calculate_risk_decision",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:43Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0022",
+      "cursor": 22,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S4_risk_decision",
+      "tool_id": "calculate_risk_decision",
+      "step_attempt_id": "sa_775e4831f378c9bc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_74e438af4a3ab6d7",
+        "name": "RiskAssessment.json",
+        "sha256": "sha256:5d757b3797c63ee38a796df9a3268656c521a2689b7e0a2cd1c84ed802b66dfb"
+      },
+      "at": "2026-07-24T00:10:45Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0023",
+      "cursor": 23,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S4_risk_decision",
+      "tool_id": "calculate_risk_decision",
+      "step_attempt_id": "sa_775e4831f378c9bc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_c98467dcbdbff415",
+        "name": "ApprovalPlan.json",
+        "sha256": "sha256:d5aad8a776e714243632a002c1d684f568dcf1f890485cd760d686d18f1e8f26"
+      },
+      "at": "2026-07-24T00:10:47Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0024",
+      "cursor": 24,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S4_risk_decision",
+      "tool_id": "calculate_risk_decision",
+      "step_attempt_id": "sa_775e4831f378c9bc",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_775e4831f378c9bc",
+        "artifact_count": 2,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:49Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0025",
+      "cursor": 25,
+      "kind": "step.skipped",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S5_human_review",
+      "tool_id": "review_credit_decision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false (False)"
+        }
+      },
+      "at": "2026-07-24T00:10:50Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0026",
+      "cursor": 26,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S6_finalize_decision",
+      "tool_id": "finalize_credit_decision",
+      "step_attempt_id": "sa_457dffbd85d42143",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_457dffbd85d42143",
+        "tool_id": "finalize_credit_decision",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:10:52Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0027",
+      "cursor": 27,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S6_finalize_decision",
+      "tool_id": "finalize_credit_decision",
+      "step_attempt_id": "sa_457dffbd85d42143",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_df5a6eb4aac76720",
+        "name": "FinalDecision.json",
+        "sha256": "sha256:6219841ca52766aa40fe843b6a542ba462c4173ea138e659c5ddf87e92ac0ec0"
+      },
+      "at": "2026-07-24T00:10:54Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0028",
+      "cursor": 28,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S6_finalize_decision",
+      "tool_id": "finalize_credit_decision",
+      "step_attempt_id": "sa_457dffbd85d42143",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_457dffbd85d42143",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:10:56Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0029",
+      "cursor": 29,
+      "kind": "step.skipped",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S7_offer_acceptance",
+      "tool_id": "capture_offer_acceptance",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('rejected')"
+        }
+      },
+      "at": "2026-07-24T00:10:57Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0030",
+      "cursor": 30,
+      "kind": "step.skipped",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S8_disburse",
+      "tool_id": "disburse_funds",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('rejected')"
+        }
+      },
+      "at": "2026-07-24T00:10:58Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0031",
+      "cursor": 31,
+      "kind": "step.started",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S9_rejection_notice",
+      "tool_id": "issue_rejection_notice",
+      "step_attempt_id": "sa_e235e9f748e34852",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e235e9f748e34852",
+        "tool_id": "issue_rejection_notice",
+        "tool_version": "1.0.0"
+      },
+      "at": "2026-07-24T00:11:00Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0032",
+      "cursor": 32,
+      "kind": "artifact.published",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S9_rejection_notice",
+      "tool_id": "issue_rejection_notice",
+      "step_attempt_id": "sa_e235e9f748e34852",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "artifact_id": "art_49d56abf8590a8a5",
+        "name": "RejectionNotice.json",
+        "sha256": "sha256:d313fdce16328cc67b6c2c17d3f9fe5b2428aba27880e50bee6b2035889e59ab"
+      },
+      "at": "2026-07-24T00:11:02Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0033",
+      "cursor": 33,
+      "kind": "step.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S9_rejection_notice",
+      "tool_id": "issue_rejection_notice",
+      "step_attempt_id": "sa_e235e9f748e34852",
+      "step_attempt_no": 1,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "attempt_id": "sa_e235e9f748e34852",
+        "artifact_count": 1,
+        "usage_record_count": 0,
+        "fanout_item_count": 0
+      },
+      "at": "2026-07-24T00:11:04Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0034",
+      "cursor": 34,
+      "kind": "step.skipped",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": "S10_request_application_revision",
+      "tool_id": "request_application_revision",
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "reason": {
+          "kind": "when_false",
+          "detail": "guard evaluated false ('rejected')"
+        }
+      },
+      "at": "2026-07-24T00:11:05Z"
+    },
+    {
+      "schema_version": "1.1",
+      "event_id": "evt_run_loan_20260724_001_0035",
+      "cursor": 35,
+      "kind": "run.completed",
+      "session_id": "loan_AU_00123",
+      "task_id": "loan_AU_00123_t",
+      "run_id": "run_loan_20260724_001",
+      "step_id": null,
+      "tool_id": null,
+      "step_attempt_id": null,
+      "step_attempt_no": null,
+      "correlation_id": "run_loan_20260724_001",
+      "actor": {
+        "type": "system",
+        "id": "flowspec-demo-runner"
+      },
+      "payload": {
+        "outcome": "rejected_with_notice"
+      },
+      "at": "2026-07-24T00:11:06Z"
+    }
+  ],
+  "budget_summary": {
+    "currency": "USD",
+    "limit": "2",
+    "reserved": "0",
+    "settled": "0.009",
+    "available": "1.991",
+    "status": "within_budget",
+    "ledger_ref": "budget-ledger.json"
+  },
+  "warnings": []
+}

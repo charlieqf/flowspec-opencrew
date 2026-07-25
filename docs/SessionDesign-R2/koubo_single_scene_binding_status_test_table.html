@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Koubo 单 Scene 绑定状态测试记录表</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --line: #d9e1ee;
+      --text: #172033;
+      --muted: #65728a;
+      --blue: #4f46e5;
+      --green: #16a34a;
+      --red: #dc2626;
+      --amber: #d97706;
+      --gray: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 22px 28px 14px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    button, .file-label {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      border-radius: 7px;
+      height: 34px;
+      padding: 0 12px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    button.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    button.danger { color: var(--red); }
+    input[type="file"] { display: none; }
+    main { padding: 18px 28px 32px; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+    .stat b { display: block; font-size: 18px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 1180px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      vertical-align: top;
+      padding: 8px;
+    }
+    th {
+      background: #eef3fb;
+      z-index: 1;
+      font-size: 13px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: 0; }
+    th:last-child, td:last-child { border-right: 0; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 7px 8px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+    textarea { resize: vertical; min-height: 72px; }
+    .case-input { min-width: 150px; }
+    .image-input { margin-bottom: 7px; }
+    .preview {
+      width: 104px;
+      height: 78px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: var(--gray);
+      font-size: 12px;
+      overflow: hidden;
+      background: #f8fafc;
+      cursor: zoom-in;
+    }
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .status-pass { color: var(--green); }
+    .status-fail { color: var(--red); }
+    .status-blocked { color: var(--amber); }
+    .status-pending { color: var(--gray); }
+    .row-actions { width: 78px; }
+    .small { font-size: 12px; color: var(--muted); }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      z-index: 20;
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox-panel {
+      max-width: min(1180px, 96vw);
+      max-height: 92vh;
+      display: grid;
+      gap: 10px;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: calc(92vh - 52px);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      object-fit: contain;
+    }
+    .lightbox-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+      font-size: 13px;
+    }
+    .lightbox-path {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .lightbox-close {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    @media (max-width: 760px) {
+      header { padding: 18px 16px 12px; }
+      main { padding: 14px 16px 24px; }
+      .summary { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>单个 Scene 绑定状态测试记录表</h1>
+    <div class="meta">
+      <span>Task #4 / Session #5</span>
+      <span>Shot_001 / Scene_001</span>
+      <span>本地自动保存：<b id="saveState">未保存</b></span>
+      <span>JSON Key：koubo.singleScene.bindingStatus.v2</span>
+    </div>
+    <div class="toolbar">
+      <button class="primary" id="addRowBtn" type="button">添加案例</button>
+      <button id="exportBtn" type="button">导出 JSON</button>
+      <label class="file-label" for="importFile">导入 JSON</label>
+      <input id="importFile" type="file" accept="application/json,.json">
+      <button id="resetBtn" type="button">恢复模板</button>
+      <button class="danger" id="clearBtn" type="button">清空本地记录</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary" aria-label="测试统计">
+      <div class="stat"><b id="totalCount">0</b><span>案例总数</span></div>
+      <div class="stat"><b id="passCount">0</b><span>通过</span></div>
+      <div class="stat"><b id="failCount">0</b><span>失败</span></div>
+      <div class="stat"><b id="blockedCount">0</b><span>阻断</span></div>
+    </section>
+
+    <section class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>案例</th>
+            <th>操作</th>
+            <th>Should Be 图片</th>
+            <th>测试结果</th>
+            <th>是否通过</th>
+            <th>批注</th>
+            <th class="row-actions">操作</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+    <p class="small">说明：Should Be 图片可填写截图路径、相对路径或 URL；导出 JSON 会保存全部表格内容，导入后会覆盖当前页面记录。</p>
+  </main>
+
+  <div class="lightbox" id="imageLightbox" aria-hidden="true">
+    <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Should Be 图片预览">
+      <div class="lightbox-top">
+        <span class="lightbox-path" id="lightboxPath"></span>
+        <button class="lightbox-close" id="lightboxClose" type="button">关闭</button>
+      </div>
+      <img id="lightboxImage" alt="Should Be 图片放大预览">
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "koubo.singleScene.bindingStatus.v2";
+    const EXPORT_NAME = "koubo_single_scene_binding_status_test_records.json";
+    const TEST_TITLE = "Koubo 单个 Scene 绑定状态测试集";
+    const headers = ["案例", "操作", "Should Be 图片", "测试结果", "是否通过", "批注"];
+    const templateRows = [
+      {
+        caseName: "SC-01 清空目标 Scene 产出物",
+        operation: "在 StoryBoard 主画布中，对目标 Scene 的两个 Audio 槽位点击删除；对第一条 Dialogue 的新图、新视频、终视频槽位点击删除。然后分别打开底部工具条的图像计划、视频计划、生成计划确认状态。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_before_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Audio / 新图 / Raw / Final 均为空；不直接手工删除 Working 文件。"
+      },
+      {
+        caseName: "SC-02 先生成 Dialogue Audio",
+        operation: "在 StoryBoard 目标 Scene 左侧点击“生成TTS”，等待两条 Dialogue 的 Audio 控件都出现播放按钮，再打开生成计划确认 Audio 计数。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_full_chain_audio_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：两条 Dialogue Audio 已绑定；Segment Audio 在 Video Plan / Video Only Plan 中完成。"
+      },
+      {
+        caseName: "SC-03 Image Plan 覆盖新图",
+        operation: "点击底部工具条“图像计划”，在弹窗中点击“提示词+新图”或“新图”。完成后关闭弹窗，回到 StoryBoard 查看第一条 Dialogue 的新图缩略图。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_image_plan_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：StoryBoard 新图有缩略图；Image Plan 新图完成；Video Only Plan first_frame 完成。"
+      },
+      {
+        caseName: "SC-04 Video Only Plan 生成 Raw",
+        operation: "点击底部工具条“视频计划”，在 Video Only Plan 中点击“提示词+新视频”或“新视频”，等待“新视频”按钮变绿。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_video_only_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Raw / 新视频完成；Final 仍按自身槽位判断，不能被 Raw 自动点亮。"
+      },
+      {
+        caseName: "SC-05 Video Only Plan 确认 Final",
+        operation: "在 Video Only Plan 中点击“拷贝成终视频”，或在 StoryBoard 将历史终视频拖入“终视频”槽位；刷新后确认终视频缩略图出现。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_video_only_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Final 文件存在且 StoryBoard working_assets.video 绑定；Video Plan / Video Only Plan Final 完成。"
+      },
+      {
+        caseName: "SC-06 Video Plan 新图灰色不执行",
+        operation: "点击底部工具条“生成计划”，在 Video Plan 弹窗查看“音频 / 新图 / 新视频 / 终视频”的颜色和顶部计数。",
+        shouldImage: "koubo_binding_status_should_images/koubo_multishot_video_plan_ui_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Audio、Raw、Final 完成；当绑定视频已足够执行时，新图允许显示灰色“不执行”。"
+      },
+      {
+        caseName: "SC-07 清 srt_0001 Audio",
+        operation: "在 StoryBoard 第一条 Dialogue 的 Audio 控件右上角点击删除按钮；刷新后打开 Video Plan 和 Video Only Plan。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_before_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Segment Audio 未完成；新图、Raw、Final 不变。"
+      },
+      {
+        caseName: "SC-08 加回 srt_0001 Audio",
+        operation: "在右侧 Asset Pool 切到“历史素材”，找到 srt_0001_Audio_Final.wav，拖到第一条 Dialogue 的 Audio 槽位。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_full_chain_audio_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Segment Audio 恢复完成；其他槽位不变。"
+      },
+      {
+        caseName: "SC-09 清 srt_0004 Audio",
+        operation: "在 StoryBoard 第二条 Dialogue 的 Audio 控件右上角点击删除按钮；刷新后打开 Video Plan 和 Video Only Plan。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_before_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Segment Audio 未完成；新图、Raw、Final 不变。"
+      },
+      {
+        caseName: "SC-10 清新图再加回",
+        operation: "在 StoryBoard 第一条 Dialogue 的“新图”缩略图上点击删除；刷新确认新图为空。再从右侧“历史素材”拖回 srt_0001_Image_New.png 到“新图”槽位。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_after_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Image Plan / Video Only Plan 新图跟随有无变化；Raw / Final 不被级联清除。"
+      },
+      {
+        caseName: "SC-11 清 Raw，保留 Final",
+        operation: "在 StoryBoard 第一条 Dialogue 的“新视频”槽位点击删除按钮；刷新后打开 Video Only Plan 和 Video Plan 查看 Raw 状态。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_before_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Raw 未完成；Final 如果文件存在且绑定仍完成；Final 不能反向点亮 Raw。"
+      },
+      {
+        caseName: "SC-12 加回 Raw",
+        operation: "在右侧“历史素材”找到 srt_0001_Video_Raw.mp4，拖到 StoryBoard 第一条 Dialogue 的“新视频”槽位。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_video_only_done_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Raw 完成；Final 状态不变。"
+      },
+      {
+        caseName: "SC-13 清 Final，保留 Raw",
+        operation: "在 StoryBoard 第一条 Dialogue 的“终视频”槽位点击删除按钮；刷新后打开 Video Only Plan 和 Video Plan 查看 Final 状态。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_before_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Raw 保持完成；Final 未完成；下一步指向从 Raw 生成/确认 Final。"
+      },
+      {
+        caseName: "SC-14 加回 Final",
+        operation: "在右侧“历史素材”找到 srt_0001_Video_Final.mp4，拖到 StoryBoard 第一条 Dialogue 的“终视频”槽位。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_after_drag_restore_image_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：Final 完成；Raw 状态不被反向改变。"
+      },
+      {
+        caseName: "SC-15 随机中间状态恢复",
+        operation: "在 StoryBoard 上随机清 Audio + 新视频，或终视频 + 新图；每清一步都打开对应计划面板确认，再从右侧“历史素材”按相反顺序拖回。",
+        shouldImage: "koubo_binding_status_should_images/koubo_scene_regression_full_chain_after_drag_restore_20260617.png",
+        result: "",
+        passed: "pending",
+        note: "Should：每一步只改变目标槽位；最终三类计划面板回到一致。"
+      }
+    ];
+
+    let rows = [];
+
+    function emptyRow() {
+      return { caseName: "", operation: "", shouldImage: "", result: "", passed: "pending", note: "" };
+    }
+
+    function loadRows() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return structuredClone(templateRows);
+      try {
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed.rows) ? parsed.rows : Array.isArray(parsed) ? parsed : structuredClone(templateRows);
+      } catch {
+        return structuredClone(templateRows);
+      }
+    }
+
+    function saveRows() {
+      const payload = { title: TEST_TITLE, headers, updatedAt: new Date().toISOString(), rows };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload, null, 2));
+      document.getElementById("saveState").textContent = new Date().toLocaleString();
+      updateStats();
+    }
+
+    function statusLabel(value) {
+      const map = { pending: "未测", pass: "通过", fail: "失败", blocked: "阻断" };
+      return map[value] || "未测";
+    }
+
+    function render() {
+      const tbody = document.getElementById("rows");
+      tbody.innerHTML = "";
+      rows.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><input class="case-input" data-field="caseName" data-index="${index}" value="${escapeAttr(row.caseName)}"></td>
+          <td><textarea data-field="operation" data-index="${index}">${escapeText(row.operation)}</textarea></td>
+          <td>
+            <input class="image-input" data-field="shouldImage" data-index="${index}" value="${escapeAttr(row.shouldImage)}" placeholder="图片路径或 URL">
+            <div class="preview" data-preview="${escapeAttr(row.shouldImage)}">${row.shouldImage ? `<img alt="Should Be" src="${escapeAttr(row.shouldImage)}">` : "无图片"}</div>
+          </td>
+          <td><textarea data-field="result" data-index="${index}">${escapeText(row.result)}</textarea></td>
+          <td>
+            <select data-field="passed" data-index="${index}" class="status-${escapeAttr(row.passed || "pending")}">
+              ${["pending", "pass", "fail", "blocked"].map(value => `<option value="${value}" ${row.passed === value ? "selected" : ""}>${statusLabel(value)}</option>`).join("")}
+            </select>
+          </td>
+          <td><textarea data-field="note" data-index="${index}">${escapeText(row.note)}</textarea></td>
+          <td class="row-actions"><button class="danger" type="button" data-delete="${index}">删除</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll("input, textarea, select").forEach(el => {
+        el.addEventListener("input", updateFromInput);
+        el.addEventListener("change", updateFromInput);
+      });
+      tbody.querySelectorAll("[data-delete]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          rows.splice(Number(btn.dataset.delete), 1);
+          render();
+          saveRows();
+        });
+      });
+      tbody.querySelectorAll("[data-preview]").forEach(preview => {
+        preview.addEventListener("click", () => {
+          const src = preview.dataset.preview;
+          if (src) openLightbox(src);
+        });
+      });
+      updateStats();
+    }
+
+    function updateFromInput(event) {
+      const index = Number(event.target.dataset.index);
+      const field = event.target.dataset.field;
+      rows[index][field] = event.target.value;
+      if (field === "shouldImage" || field === "passed") render();
+      saveRows();
+    }
+
+    function updateStats() {
+      document.getElementById("totalCount").textContent = rows.length;
+      document.getElementById("passCount").textContent = rows.filter(r => r.passed === "pass").length;
+      document.getElementById("failCount").textContent = rows.filter(r => r.passed === "fail").length;
+      document.getElementById("blockedCount").textContent = rows.filter(r => r.passed === "blocked").length;
+    }
+
+    function exportJson() {
+      const payload = { title: TEST_TITLE, headers, exportedAt: new Date().toISOString(), rows };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = EXPORT_NAME;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importJson(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          const nextRows = Array.isArray(parsed.rows) ? parsed.rows : Array.isArray(parsed) ? parsed : null;
+          if (!nextRows) throw new Error("JSON 中没有 rows 数组");
+          rows = nextRows.map(row => ({ ...emptyRow(), ...row }));
+          render();
+          saveRows();
+        } catch (error) {
+          alert("导入失败：" + error.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function escapeAttr(value) {
+      return String(value || "").replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+    }
+
+    function escapeText(value) {
+      return String(value || "").replaceAll("&", "&amp;").replaceAll("<", "&lt;");
+    }
+
+    function openLightbox(src) {
+      document.getElementById("lightboxImage").src = src;
+      document.getElementById("lightboxPath").textContent = src;
+      document.getElementById("imageLightbox").classList.add("is-open");
+      document.getElementById("imageLightbox").setAttribute("aria-hidden", "false");
+    }
+
+    function closeLightbox() {
+      document.getElementById("imageLightbox").classList.remove("is-open");
+      document.getElementById("imageLightbox").setAttribute("aria-hidden", "true");
+      document.getElementById("lightboxImage").src = "";
+    }
+
+    document.getElementById("addRowBtn").addEventListener("click", () => {
+      rows.push(emptyRow());
+      render();
+      saveRows();
+    });
+    document.getElementById("exportBtn").addEventListener("click", exportJson);
+    document.getElementById("importFile").addEventListener("change", event => {
+      const file = event.target.files && event.target.files[0];
+      if (file) importJson(file);
+      event.target.value = "";
+    });
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (!confirm("恢复模板会覆盖当前表格，确定继续？")) return;
+      rows = structuredClone(templateRows);
+      render();
+      saveRows();
+    });
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      if (!confirm("清空本地记录？导出的 JSON 不会受影响。")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      rows = structuredClone(templateRows);
+      render();
+      document.getElementById("saveState").textContent = "未保存";
+      updateStats();
+    });
+    document.getElementById("imageLightbox").addEventListener("click", event => {
+      if (event.target.id === "imageLightbox") closeLightbox();
+    });
+    document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeLightbox();
+    });
+
+    rows = loadRows();
+    render();
+  </script>
+</body>
+</html>

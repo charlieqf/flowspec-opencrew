@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+source "$ROOT_DIR/.githooks/opencrew-g1d-files.sh"
+"$ROOT_DIR/scripts/check_koubo_frontend_cache_bump.sh" --staged
+
+if git diff --name-only --cached | grep -Eq "$OPENCREW_G1D_CONTRACT_PATH_REGEX"; then
+  if [[ ! -d "$ROOT_DIR/frontend/node_modules" ]]; then
+    echo "[opencrew] pre-commit FAIL: frontend/node_modules missing; run npm --prefix frontend ci"
+    exit 1
+  fi
+  npm --prefix "$ROOT_DIR/frontend" run test:g1d-controller-contract
+fi

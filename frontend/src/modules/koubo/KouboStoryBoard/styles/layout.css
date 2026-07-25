@@ -1,0 +1,41 @@
+.kbsp-editor {
+  background: #f8fafc;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 44px);
+  min-height: 620px;
+  overflow: hidden;
+}
+.kbsp-main-row {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+.kbsp-left,
+.kbsp-right {
+  background: rgba(255, 255, 255, 0.78);
+  flex-shrink: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.kbsp-left {
+  border-right: 1px solid #e2e8f0;
+  padding: 16px;
+  position: relative;
+  width: 256px;
+}
+.kbsp-right {
+  border-left: 1px solid #e2e8f0;
+  padding: 16px;
+  width: 288px;
+}
+.right > .kbsp-right {
+  background: transparent;
+  border-left: 0;
+  overflow: visible;
+  padding: 0;
+  width: 100%;
+}

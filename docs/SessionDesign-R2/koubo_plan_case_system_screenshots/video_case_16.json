@@ -1,0 +1,55 @@
+{
+  "suite": "video",
+  "number": 16,
+  "title": "Case 16：空镜首帧，终视频任务 = 替换音频",
+  "target_type": "scene",
+  "shot_id": "shot_001",
+  "scene_id": "scene_001",
+  "max_seconds": 15,
+  "min_seconds": 1,
+  "tolerance": 0,
+  "tool_status": "completed",
+  "summary": {
+    "shot_count": 1,
+    "scene_count": 1,
+    "dialogue_count": 5,
+    "segment_count": 1,
+    "blocked_segment_count": 0,
+    "skipped_scene_count": 0,
+    "blocked_scene_count": 0,
+    "need_audio_count": 5,
+    "need_image_prompt_count": 1,
+    "need_image_count": 1,
+    "need_video_prompt_count": 1,
+    "need_video_count": 1,
+    "segment_audio_count": 1,
+    "need_lipsync_count": 0,
+    "need_audio_video_sync_count": 1,
+    "need_sync_count": 1
+  },
+  "expected_count": 1,
+  "actual": {
+    "actualCount": 1,
+    "dpr": 1,
+    "rect": {
+      "height": 262.25,
+      "left": 650,
+      "top": 322.375,
+      "width": 620
+    },
+    "segmentRows": [
+      "S1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频"
+    ],
+    "summaryLine": "Shot 1\nScene 1\nSegment 1",
+    "text": "生成计划\nShot 1\nScene 1\nSegment 1\n0/1\n0/1\n0/1\n0/1\nShot_001\nScene_001\nS1\n5.00s\n音频\n→\n新图\n→\n新视频\n→\n终视频",
+    "title": "生成计划",
+    "viewport": {
+      "h": 907,
+      "w": 1920
+    }
+  },
+  "pass": true,
+  "reason": "PASS: 系统弹窗计数与测试计划一致",
+  "screenshot": "video_case_16.png",
+  "cropInfo": "{\"image_size\": [1920, 907], \"scale\": 1.0, \"box\": [638, 310, 1282, 596]}"
+}

@@ -1,0 +1,209 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "workflow_id": {
+      "default": "",
+      "title": "Workflow Id",
+      "type": "string"
+    },
+    "task_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Task Id"
+    },
+    "opencrew_session_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Opencrew Session Id"
+    },
+    "opencode_session_id": {
+      "default": "",
+      "title": "Opencode Session Id",
+      "type": "string"
+    },
+    "workspace_dir": {
+      "title": "Workspace Dir",
+      "type": "string"
+    },
+    "tool_session_root": {
+      "title": "Tool Session Root",
+      "type": "string"
+    },
+    "current_attempt_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Current Attempt Id"
+    },
+    "attempt_no": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attempt No"
+    },
+    "workflow_plan_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workflow Plan Id"
+    },
+    "workflow_plan_run_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workflow Plan Run Id"
+    },
+    "current_prompt_version_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Current Prompt Version Id"
+    },
+    "current_runtime_version_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Current Runtime Version Id"
+    },
+    "prompt_model_provider": {
+      "default": "",
+      "title": "Prompt Model Provider",
+      "type": "string"
+    },
+    "prompt_model_id": {
+      "default": "",
+      "title": "Prompt Model Id",
+      "type": "string"
+    },
+    "run_model_provider": {
+      "default": "",
+      "title": "Run Model Provider",
+      "type": "string"
+    },
+    "run_model_id": {
+      "default": "",
+      "title": "Run Model Id",
+      "type": "string"
+    },
+    "provider_mode": {
+      "default": "local_box",
+      "title": "Provider Mode",
+      "type": "string"
+    },
+    "billing_mode": {
+      "default": "local_usage_only",
+      "title": "Billing Mode",
+      "type": "string"
+    },
+    "source_video_path": {
+      "default": "",
+      "title": "Source Video Path",
+      "type": "string"
+    },
+    "clip_mode": {
+      "default": "",
+      "title": "Clip Mode",
+      "type": "string"
+    },
+    "selected_scheme": {
+      "default": "",
+      "title": "Selected Scheme",
+      "type": "string"
+    },
+    "cloud_asr_data_transfer_allowed": {
+      "default": false,
+      "title": "Cloud Asr Data Transfer Allowed",
+      "type": "boolean"
+    },
+    "cloud_asr_data_transfer_scope": {
+      "default": "",
+      "title": "Cloud Asr Data Transfer Scope",
+      "type": "string"
+    },
+    "cloud_asr_data_transfer_authorized_at": {
+      "default": "",
+      "title": "Cloud Asr Data Transfer Authorized At",
+      "type": "string"
+    },
+    "created_at": {
+      "default": "",
+      "title": "Created At",
+      "type": "string"
+    },
+    "updated_at": {
+      "default": "",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "tool_use_session_id",
+    "workspace_dir",
+    "tool_session_root"
+  ],
+  "title": "Variables",
+  "type": "object"
+}

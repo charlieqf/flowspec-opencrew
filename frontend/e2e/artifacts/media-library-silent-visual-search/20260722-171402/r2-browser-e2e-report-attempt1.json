@@ -1,0 +1,31 @@
+{
+  "schema_version": "media_library_silent_visual_search_r2_browser_e2e_v1",
+  "timestamp": "20260722-171402",
+  "base_url": "http://127.0.0.1:18080",
+  "artifact_dir": "/Users/macmini-4/work/code/OpenCrew/frontend/e2e/artifacts/media-library-silent-visual-search/20260722-171402",
+  "asset_id": "mla_1784601908573_70c828790521",
+  "clip_id": "mlc_1784605289217_6a71573ce61e",
+  "editor_source_asset_id": "mla_1784615441629_44c90c6be2af",
+  "clip_name": "化橘红倒入玻璃碗中的深色液体 20260722-171402",
+  "clip_tags": [
+    "化橘红",
+    "玻璃碗",
+    "深色液体",
+    "绿色包装",
+    "R2复用20260722-171402"
+  ],
+  "screenshots": [
+    "r2-clip-join-metadata.png",
+    "r2-clip-global-search-enabled.png"
+  ],
+  "search_ids": [],
+  "import_ids": [],
+  "imported_paths": [],
+  "clip_content_sha256": "070a6723e368f9e4856fba2a8a8e0488f18cffd89ab589dd999f806d832fada5",
+  "search_enabled_at": 1784704486133,
+  "task_id": 313,
+  "session_id": 406,
+  "ok": false,
+  "error": "Error: The requested real StoryBoard task/dialogue does not expose a safe dialogue_asset_key that remains stable across repeated task-detail reads.\n    at findStableStoryboardDialogue (file:///Users/macmini-4/work/code/OpenCrew/frontend/e2e/media-library-real-helpers.mjs:254:9)\n    at async file:///Users/macmini-4/work/code/OpenCrew/frontend/e2e/media-library-silent-visual-search-r2.mjs:258:22",
+  "failed_at": "2026-07-22T07:14:46.643Z"
+}

@@ -1,0 +1,28 @@
+name: Koubo Frontend Cache Guard
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  koubo-cache-bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Koubo frontend cache bumps
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_sha="${{ github.event.pull_request.base.sha }}"
+          if [[ -z "$base_sha" ]]; then
+            base_sha="${{ github.event.before }}"
+          fi
+          if [[ -z "$base_sha" || "$base_sha" =~ ^0+$ ]]; then
+            base_sha="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          scripts/check_koubo_frontend_cache_bump.sh --base "$base_sha"

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "test": "gemini_omni_paid_live_browser",
+  "target": "macmini-4 local only",
+  "task_id": "305",
+  "budget": {
+    "max_usd": 0.6,
+    "max_calls": 2,
+    "max_total_seconds": 6
+  },
+  "screenshots": [
+    "assets/20-omni-browser-paid-turn-1-confirm.png",
+    "assets/21-omni-browser-paid-turn-1-completed.png",
+    "assets/22-omni-browser-paid-turn-2-confirm.png",
+    "assets/23-omni-browser-paid-turn-2-completed.png"
+  ],
+  "turns": [
+    {
+      "provider_expiry_source": "unknown",
+      "output_path": "SessionOutput/storyboard/assets/videos/1784765236418_agent_generated_direct_video_generation_5b6dfc31.mp4",
+      "parent_turn_id": null,
+      "delete_status": "not_requested",
+      "output_asset_id": "SessionOutput/storyboard/assets/videos/1784765236418_agent_generated_direct_video_generation_5b6dfc31.mp4",
+      "client_action_id": "418da62a-f5de-413d-8f57-35c5acdc4e8e",
+      "provider_state_status": "available",
+      "updated_at": 1784765272888,
+      "status": "completed",
+      "provider_state_expires_at": null,
+      "operation": "generate",
+      "created_at": 1784765236418,
+      "video_thread_id": "b473e3ac-daa5-4b64-b6c9-f6bcaa1da56c",
+      "video_turn_id": "fc1c57ac-4100-47cb-82d8-99ecb557f7a2",
+      "can_continue": true
+    },
+    {
+      "provider_expiry_source": "unknown",
+      "output_path": "SessionOutput/storyboard/assets/videos/1784765274798_agent_generated_direct_video_generation_6b916199.mp4",
+      "parent_turn_id": "fc1c57ac-4100-47cb-82d8-99ecb557f7a2",
+      "delete_status": "not_requested",
+      "output_asset_id": "SessionOutput/storyboard/assets/videos/1784765274798_agent_generated_direct_video_generation_6b916199.mp4",
+      "client_action_id": "ffb77442-cd89-4be2-94be-1f012ea5ea09",
+      "provider_state_status": "available",
+      "updated_at": 1784765328719,
+      "status": "completed",
+      "provider_state_expires_at": null,
+      "operation": "continue",
+      "created_at": 1784765274798,
+      "video_thread_id": "b473e3ac-daa5-4b64-b6c9-f6bcaa1da56c",
+      "video_turn_id": "50b76fec-66ab-4c77-aaa7-794ad961ac5c",
+      "can_continue": true
+    }
+  ],
+  "cloud_cleanup": {
+    "ok": true,
+    "video_thread_id": "b473e3ac-daa5-4b64-b6c9-f6bcaa1da56c",
+    "status": "deleted",
+    "deleted_count": 2,
+    "failed_count": 0,
+    "turns": [
+      {
+        "provider_expiry_source": "unknown",
+        "output_path": "SessionOutput/storyboard/assets/videos/1784765236418_agent_generated_direct_video_generation_5b6dfc31.mp4",
+        "parent_turn_id": null,
+        "delete_status": "deleted",
+        "output_asset_id": "SessionOutput/storyboard/assets/videos/1784765236418_agent_generated_direct_video_generation_5b6dfc31.mp4",
+        "client_action_id": "418da62a-f5de-413d-8f57-35c5acdc4e8e",
+        "provider_state_status": "deleted",
+        "updated_at": 1784765330687,
+        "status": "completed",
+        "provider_state_expires_at": null,
+        "operation": "generate",
+        "created_at": 1784765236418,
+        "video_thread_id": "b473e3ac-daa5-4b64-b6c9-f6bcaa1da56c",
+        "video_turn_id": "fc1c57ac-4100-47cb-82d8-99ecb557f7a2",
+        "can_continue": false
+      },
+      {
+        "provider_expiry_source": "unknown",
+        "output_path": "SessionOutput/storyboard/assets/videos/1784765274798_agent_generated_direct_video_generation_6b916199.mp4",
+        "parent_turn_id": "fc1c57ac-4100-47cb-82d8-99ecb557f7a2",
+        "delete_status": "deleted",
+        "output_asset_id": "SessionOutput/storyboard/assets/videos/1784765274798_agent_generated_direct_video_generation_6b916199.mp4",
+        "client_action_id": "ffb77442-cd89-4be2-94be-1f012ea5ea09",
+        "provider_state_status": "deleted",
+        "updated_at": 1784765332107,
+        "status": "completed",
+        "provider_state_expires_at": null,
+        "operation": "continue",
+        "created_at": 1784765274798,
+        "video_thread_id": "b473e3ac-daa5-4b64-b6c9-f6bcaa1da56c",
+        "video_turn_id": "50b76fec-66ab-4c77-aaa7-794ad961ac5c",
+        "can_continue": false
+      }
+    ]
+  },
+  "ok": true
+}

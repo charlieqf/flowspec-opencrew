@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# OpenCrew pre-push gate: run the same checks as CI (.github/workflows/ci-gate.yml)
+# before code leaves this machine. This is the real pre-merge gate for the
+# main-only workflow, where GitHub CI only runs *after* a direct push.
+#
+# Bypass (docs-only change, emergency, WIP): SKIP_OPENCREW_PREPUSH=1 git push
+set -uo pipefail
+
+if [[ "${SKIP_OPENCREW_PREPUSH:-}" == "1" ]]; then
+  echo "[opencrew] pre-push checks skipped (SKIP_OPENCREW_PREPUSH=1)"
+  exit 0
+fi
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+source "$ROOT_DIR/.githooks/opencrew-g1d-files.sh"
+cd "$ROOT_DIR"
+
+# ---- Determine which files are being pushed (to scope the checks) -----------
+# stdin lines: <local ref> <local sha> <remote ref> <remote sha>
+ZERO="0000000000000000000000000000000000000000"
+changed=""
+while read -r _local_ref local_sha _remote_ref remote_sha; do
+  [[ -z "${local_sha:-}" ]] && continue
+  [[ "$local_sha" == "$ZERO" ]] && continue   # branch deletion
+  if [[ "$remote_sha" == "$ZERO" || -z "$remote_sha" ]]; then
+    # New branch on the remote: compare against origin/main if we have it.
+    base="$(git rev-parse --verify --quiet origin/main || true)"
+    if [[ -n "$base" ]]; then
+      changed+=$'\n'"$(git diff --name-only "$base..$local_sha" 2>/dev/null)"
+    else
+      changed+=$'\n'"$(git diff --name-only "$(git rev-list --max-parents=0 "$local_sha" | tail -1)..$local_sha" 2>/dev/null)"
+    fi
+  else
+    changed+=$'\n'"$(git diff --name-only "$remote_sha..$local_sha" 2>/dev/null)"
+  fi
+done
+
+# Nothing on stdin (e.g. some git versions / manual invocation): check everything.
+if [[ -z "${changed//[[:space:]]/}" ]]; then
+  changed="$(git diff --name-only HEAD~1..HEAD 2>/dev/null || true)"
+fi
+
+run_backend=0
+run_frontend=0
+run_g1d=0
+if grep -qE '^(backend/|ToolLibrary/|ModelConfig/|WorkflowAssistant/)' <<<"$changed"; then run_backend=1; fi
+if grep -qE '^(frontend/|ModelConfig/frontend/|WorkflowAssistant/frontend/)' <<<"$changed"; then run_frontend=1; fi
+if grep -qE "$OPENCREW_G1D_CONTRACT_PATH_REGEX" <<<"$changed"; then run_g1d=1; fi
+
+if [[ "$run_backend" == "0" && "$run_frontend" == "0" && "$run_g1d" == "0" ]]; then
+  echo "[opencrew] pre-push: no backend/frontend changes detected — skipping checks"
+  exit 0
+fi
+
+fail=0
+
+# ---- Backend contract tests -------------------------------------------------
+if [[ "$run_backend" == "1" ]]; then
+  PY="$ROOT_DIR/backend/.venv/bin/python"
+  if [[ ! -x "$PY" ]]; then
+    echo "[opencrew] pre-push WARN: backend/.venv not found — skipping contract tests (CI still enforces)."
+  else
+    echo "[opencrew] pre-push: running backend contract tests…"
+    if ! PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/opencrew-pycache}" "$PY" -m unittest discover -s backend/tests/contracts; then
+      echo "[opencrew] pre-push FAIL: backend contract tests failed."
+      fail=1
+    fi
+  fi
+fi
+
+# ---- G1d controller contract ------------------------------------------------
+if [[ "$run_g1d" == "1" ]]; then
+  if [[ ! -d "$ROOT_DIR/frontend/node_modules" ]]; then
+    echo "[opencrew] pre-push FAIL: frontend/node_modules missing — run 'npm --prefix frontend ci'."
+    fail=1
+  else
+    echo "[opencrew] pre-push: running G1d controller contract…"
+    if ! npm --prefix frontend run test:g1d-controller-contract; then
+      echo "[opencrew] pre-push FAIL: G1d controller contract failed."
+      fail=1
+    fi
+  fi
+fi
+
+# ---- Frontend build ---------------------------------------------------------
+if [[ "$run_frontend" == "1" ]]; then
+  if [[ ! -d "$ROOT_DIR/frontend/node_modules" ]]; then
+    echo "[opencrew] pre-push WARN: frontend/node_modules missing — skipping build (run 'npm --prefix frontend ci'; CI still enforces)."
+  else
+    echo "[opencrew] pre-push: building frontend…"
+    if ! npm --prefix frontend run build; then
+      echo "[opencrew] pre-push FAIL: frontend build failed."
+      fail=1
+    fi
+  fi
+fi
+
+if [[ "$fail" != "0" ]]; then
+  echo "[opencrew] pre-push blocked. Fix the above, or bypass with SKIP_OPENCREW_PREPUSH=1 git push"
+  exit 1
+fi
+
+echo "[opencrew] pre-push checks passed."
+exit 0

@@ -1,0 +1,25 @@
+{
+  "sections": [
+    {
+      "heading": "Portfolio movement",
+      "text": "Payment coverage remained within the controlled reporting threshold.",
+      "metric_refs": [
+        "payment_coverage"
+      ]
+    },
+    {
+      "heading": "Credit risk",
+      "text": "Stage 3 exposure is reported directly from the frozen metric set.",
+      "metric_refs": [
+        "stage_3_ratio",
+        "mock_var_99"
+      ]
+    }
+  ],
+  "citations": {
+    "payment_coverage": "metric://payment_coverage/v1",
+    "mock_var_99": "metric://mock_var_99/v1",
+    "stage_3_ratio": "metric://stage_3_ratio/v1"
+  },
+  "mock_model_output": true
+}

@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Koubo Segment 拆分最小测试案例</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18202a;
+      --muted: #667085;
+      --line: #d7dde6;
+      --panel: #ffffff;
+      --page: #f6f7f9;
+      --green: #16794c;
+      --green-bg: #eaf6ef;
+      --blue: #2266aa;
+      --blue-bg: #eaf2fb;
+      --amber: #946200;
+      --amber-bg: #fff4da;
+      --red: #b3261e;
+      --red-bg: #fdebea;
+      --slate: #475467;
+      --slate-bg: #eef1f5;
+      --violet: #6b4bb8;
+      --violet-bg: #f0ecfb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font: 14px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      display: grid;
+      gap: 14px;
+    }
+    section, header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 24px; line-height: 1.25; }
+    h2 { font-size: 17px; margin-bottom: 10px; }
+    h3 { font-size: 14px; margin-bottom: 8px; }
+    .sub { color: var(--muted); margin-top: 8px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .stack { display: grid; gap: 12px; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .note {
+      border-left: 4px solid var(--blue);
+      background: var(--blue-bg);
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: #1f3f65;
+    }
+    .warn {
+      border-left-color: var(--amber);
+      background: var(--amber-bg);
+      color: #684600;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill, .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .pill { color: var(--slate); background: var(--slate-bg); border-color: #d9dee7; }
+    .badge.ok { color: var(--green); background: var(--green-bg); border-color: #bce5ca; }
+    .badge.tail { color: var(--ink); background: #fff; border-color: #d9dee7; }
+    .badge.anchor { color: var(--green); background: var(--green-bg); border-color: #bce5ca; }
+    .badge.wait { color: var(--ink); background: #fff; border-color: #d9dee7; }
+    .badge.block { color: var(--red); background: var(--red-bg); border-color: #f3bbb7; }
+    .badge.off { color: var(--slate); background: var(--slate-bg); border-color: #d9dee7; }
+    .controls {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    input, select, button {
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      padding: 0 10px;
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      background: #202939;
+      color: #fff;
+      border-color: #202939;
+      font-weight: 700;
+    }
+    label.check {
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--muted);
+    }
+    label.check input { height: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    th {
+      background: #f1f4f8;
+      color: #344054;
+      font-size: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .table-wrap {
+      max-height: 640px;
+      overflow: auto;
+      border-radius: 8px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+    .metric strong { display: block; font-size: 24px; line-height: 1.2; }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 72px;
+      align-items: center;
+      gap: 10px;
+      margin: 7px 0;
+    }
+    .bar {
+      height: 14px;
+      border-radius: 999px;
+      background: #edf1f6;
+      overflow: hidden;
+      border: 1px solid #dde3ea;
+    }
+    .bar > i {
+      display: block;
+      height: 100%;
+      background: #2f6fa6;
+    }
+    .flow {
+      width: 100%;
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+    }
+    .flow text { font: 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1d2939; }
+    .flow .node { fill: #fff; stroke: #98a2b3; stroke-width: 1.2; }
+    .flow .ok { fill: var(--green-bg); stroke: #7cc99b; }
+    .flow .tail { fill: #fff; stroke: #98a2b3; }
+    .flow .wait { fill: #fff; stroke: #98a2b3; }
+    .flow .bad { fill: var(--red-bg); stroke: #e9908a; }
+    .flow .line { stroke: #667085; stroke-width: 1.2; marker-end: url(#arrow); fill: none; }
+    .source-order {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .source-order div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcfe;
+    }
+    .compare-case {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .compare-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      background: #f1f4f8;
+      border-bottom: 1px solid var(--line);
+    }
+    .compare-title strong { font-size: 15px; }
+    .compare-body {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(420px, 1.35fr);
+      gap: 0;
+    }
+    .matrix-side, .plan-side {
+      padding: 14px;
+      min-width: 0;
+    }
+    .matrix-side {
+      border-right: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+    .side-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: #344054;
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .dialogue-line, .vp-segment {
+      display: grid;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #dbe2ea;
+      border-radius: 8px;
+      background: #fff;
+      padding: 9px;
+      margin-bottom: 8px;
+    }
+    .dialogue-line {
+      grid-template-columns: 52px 118px 1fr;
+    }
+    .cross-shot .dialogue-line {
+      grid-template-columns: 96px 118px 1fr;
+    }
+    .scene-label, .plan-shot {
+      display: flex;
+      align-items: center;
+      min-height: 26px;
+      margin: 10px 0 7px;
+      padding: 3px 9px;
+      border-radius: 7px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .scene-label:first-of-type, .plan-shot:first-of-type { margin-top: 0; }
+    .vp-segment {
+      grid-template-columns: 84px 1fr;
+    }
+    .dialogue-id, .segment-id {
+      font-weight: 800;
+      color: #202939;
+    }
+    .dialogue-id small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 750;
+    }
+    .slot-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .segment-dialogues {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      margin-bottom: 7px;
+      border-radius: 7px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: #202939;
+      font-weight: 850;
+      font-size: 12px;
+    }
+    .slot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d9dee7;
+      background: var(--slate-bg);
+      color: var(--slate);
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .slot.white { color: var(--ink); background: #fff; border-color: #d9dee7; }
+    .slot.green { color: var(--green); background: var(--green-bg); border-color: #bce5ca; }
+    .slot.yellow { color: var(--amber); background: var(--amber-bg); border-color: #f3d58b; }
+    .slot.red { color: var(--red); background: var(--red-bg); border-color: #f3bbb7; }
+    .expect {
+      border-top: 1px dashed #d7dde6;
+      padding-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .small { font-size: 12px; color: var(--muted); }
+    @media (max-width: 860px) {
+      main { width: min(100vw - 20px, 1180px); padding-top: 16px; }
+      .grid2, .grid3, .controls, .source-order { grid-template-columns: 1fr; }
+      .compare-body { grid-template-columns: 1fr; }
+      .matrix-side { border-right: 0; border-bottom: 1px solid var(--line); }
+      .dialogue-line, .vp-segment { grid-template-columns: 1fr; }
+      table { table-layout: auto; }
+      .bar-row { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    .actual-shot { border-top: 1px solid #d4deec; padding: 14px; background: #fff; }
+
+    .actual-shot { border-top: 1px solid #d4deec; padding: 14px; background: #fff; }
+    .actual-shot img { display: block; width: 100%; border: 1px solid #d4deec; border-radius: 8px; background: #fff; margin-top: 10px; }
+    .actual-shot figure { margin: 12px 0 0; }
+    .actual-shot figcaption { font-size: 12px; color: #526179; margin-bottom: 6px; }
+    .actual-status { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 800; margin: 8px 0 6px; border: 1px solid transparent; }
+    .actual-status.pass { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+    .actual-status.fail { color: #b42318; background: #fef3f2; border-color: #fecdca; }
+    .actual-summary { color: #475467; font-size: 12px; line-height: 1.45; white-space: pre-line; }
+    .actual-reason { color: #475467; font-size: 12px; line-height: 1.45; margin-top: 8px; }
+
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Shot / Scene / Segment 拆分最小测试案例</h1>
+    <p class="sub">用最少案例覆盖一个 Scene 内 Segment 拆分、尾帧续接、视觉锚点重开 Segment、终视频任务类型，以及 4 / 8 / 15 秒参数下的拆分边界。</p>
+    <div class="legend">
+      <span class="pill">A 音频</span>
+      <span class="pill">O 原图</span>
+      <span class="pill">N 新图；Scene 2/3 可代表“尾帧已物化成新图”</span>
+      <span class="pill">V 新视频 / Raw</span>
+      <span class="pill">F 终视频 / Final 已绑定</span>
+    </div>
+  </header>
+
+  <section class="stack">
+    <h2>判定口径</h2>
+    <div class="note">
+      Segment 拆分以 <span class="mono">05_01_VideoPlanGenerator</span> 为准：Scene 边界不会被跨越；每个 Scene 至少要有自己的视觉锚点，或者能继承上一个可用尾帧。音频只影响音频步骤是否 pending，不决定 Segment 是否能拆出来；口播 / 空镜不改变拆分边界，但会决定终视频任务是对口型还是替换音频。
+    </div>
+    <div class="note warn">
+      重要区分：Raw / 新视频存在并不等于 Final 已确认。VideoOnlyPlan 中 Raw 只会进入“等待确认 Final”；只有 Final 已存在且已绑定，才算 <span class="mono">final_completed</span>，后续尾帧链路才是完成态。
+    </div>
+    <div class="source-order">
+      <div><strong>1. Final</strong><br><span class="small">优先视为 bound_video，当前 Segment 有现成视频来源。</span></div>
+      <div><strong>2. 新图</strong><br><span class="small">作为首帧；Scene 2/3 可理解为尾帧已经复制进新图槽。</span></div>
+      <div><strong>3. 原图</strong><br><span class="small">只能作为生成新图的参考，不能直接跳过新图步骤。</span></div>
+      <div><strong>4. 上一段尾帧</strong><br><span class="small">仅在没有本 Scene 视觉锚点时使用。</span></div>
+      <div><strong>5. 缺失</strong><br><span class="small">第 1 Scene skipped；后续 Scene blocked，除非已有可用尾帧。</span></div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>最小测试案例左右对齐版</h2>
+    <p class="small">左边是 5 句对白的输入矩阵；右边是应该看到的 Video Plan。颜色只表达状态：白=可执行/待执行，灰=条件不满足/不执行，绿=文件存在/完成，黄=正在运行且文件尚未存在，红=执行失败或阻塞且文件尚未存在。基础静态测试中通常只出现白/灰/绿/红，黄色只在真实 running 态出现。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 1：按时长拆分 + 尾帧连续</strong>
+        <span class="pill">max=4s / tolerance=0 / 每句 2s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">source_type = original_image。尾帧不是 Video Plan 固定槽位；只有本段执行成功并产出终视频后，05_02 才会从终视频抽取 TailFrame。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">source_type = previous_segment_tail_frame；depends_on_tail_frame_path 指向 S1。当前静态测试中 S1 TailFrame 尚未产出，所以首帧槽显示尾帧灰 S1；只有 S1 终视频完成并抽取 TailFrame 后，这里才会变绿。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">source_type = previous_segment_tail_frame；depends_on_tail_frame_path 指向 S2。当前静态测试中 S2 TailFrame 尚未产出，所以首帧槽显示尾帧灰 S2；只有 S2 终视频完成并抽取 TailFrame 后，这里才会变绿。S3 自己的尾帧要等 S3 终视频产出后才会生成。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 2：视觉锚点切 1 刀，中间新图重开 Segment</strong>
+        <span class="pill">max=5s / tolerance=0 / 每句 1s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,1,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot green">新图绿</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>2 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">到 D3 前停止，因为 D3 有新的视觉锚点。尾帧要等 S1 终视频产出后才会生成。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4, D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot white">新视频白</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">source_type = generated_image / placed_uploaded_image；不能使用 S1 尾帧作为起点。S2 尾帧同样等 S2 终视频完成后抽取。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 3：首句缺视觉，不能从中间偷拆</strong>
+        <span class="pill">max=5s / tolerance=0 / 每句 1s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>0 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">Scene</span>
+            <div>
+              <div class="segment-dialogues">包含 D：无 Segment</div>
+              <div class="slot-row"><span class="slot">音频灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span><span class="slot red">skipped</span></div>
+              <div class="expect">skipped_reason.code = first_scene_missing_visual_source；D3 虽然有原图，也不应该从中间开始生成 Segment。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>4 / 8 / 15 秒时长阈值覆盖</h2>
+    <p class="small">这 3 个案例使用同一组输入：5 句对白，每句 2 秒，总长 10 秒；D1 有原图，其余为空。这里只验证 max 时长阈值如何按 Dialogue 边界拆分，不用于覆盖“新增原图 / 新图锚点切刀”。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 4：时长阈值，max=4s 拆成 3 段</strong>
+        <span class="pill">max=4s / tolerance=0 / 每句 2s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="expect">期望 3 个 Segment：S1=4s，S2=4s，S3=2s；S2/S3 的首帧来源分别是上一段尾帧。静态测试中上一段 TailFrame 尚未产出，所以依赖槽显示灰色，前段完成抽帧后才会变绿。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 5：时长阈值，max=8s 拆成 2 段</strong>
+        <span class="pill">max=8s / tolerance=0 / 每句 2s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>2 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="expect">期望 2 个 Segment：S1=8s，S2=2s；S2 的首帧来源是 S1 尾帧。静态测试中 S1 TailFrame 尚未产出，所以依赖槽显示灰色，S1 完成抽帧后才会变绿。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 6：时长阈值，max=15s 不拆分</strong>
+        <span class="pill">max=15s / tolerance=0 / 每句 2s</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>1 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="expect">期望 1 个 Segment：总长 10s 小于 15s，不拆分。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>视觉锚点切分覆盖</h2>
+    <p class="small">新增原图 / 新图导致的切分，最小覆盖到切 2 刀即可：Case 2 已覆盖切 1 刀；下面这个案例用 D1 原图、D3 原图、D5 新图覆盖连续切 2 刀。切 3 / 4 刀只是重复同一锚点循环，没有新的分支；只有未来出现最大段数限制、索引截断或每句有图必须单独成段的特殊规则时再加增强案例。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 7：视觉锚点切 2 刀，原图 + 新图连续重开 Segment</strong>
+        <span class="pill">max=10s / 每句 1s / D1 原图，D3 原图，D5 新图</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,1,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot green">新图绿</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D1 原图启动第一段；虽然总时长没有超过 max，但遇到 D3 新视觉锚点前必须结束。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D3 原图是新的视觉锚点，所以 S2 首帧应走原图生成新图，不应显示尾帧 S1。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot white">新视频白</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D5 已有新图，是第三段的首帧锚点；不继承 S2 尾帧。这个案例同时覆盖原图锚点和新图锚点的连续切分。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>Segment 音频合并覆盖</h2>
+    <p class="small">音频槽不是只看 Segment 第一个 D，而是看 Segment 包含的所有 D 是否能合并成 Segment Audio。最少用 3 个案例防止“只看首个 D”的误判：全都有音频、首个有后面缺、首个缺后面有。音频绿时必须标明由哪些 D 合并。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 8：音频合并完成，D1 + D2 都有音频</strong>
+        <span class="pill">max=4s / 每句 2s / Segment Audio = D1 + D2</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[1,1,0,0,0]</span><span class="slot-row"><span class="slot green">音频绿</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[1,0,0,0,0]</span><span class="slot-row"><span class="slot green">音频绿</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="segment-dialogues">音频合并：D1 + D2</div>
+              <div class="slot-row"><span class="slot green">音频绿</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D1 和 D2 的 Dialogue Audio 都存在，Segment Audio 可由 D1 + D2 合并得到，所以音频槽为绿。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 9：首个 D 有音频，但后续 D 缺音频</strong>
+        <span class="pill">max=4s / 每句 2s / 防止只看 D1</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[1,1,0,0,0]</span><span class="slot-row"><span class="slot green">音频绿</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="segment-dialogues">缺失音频：D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D1 有音频不能代表整个 Segment 音频完成；D2 缺失时，Segment Audio 仍需补齐或重新合成，所以音频槽不能绿。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 10：首个 D 缺音频，但后续 D 有音频</strong>
+        <span class="pill">max=4s / 每句 2s / 防止只看后续存在</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[1,0,0,0,0]</span><span class="slot-row"><span class="slot green">音频绿</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="segment-dialogues">缺失音频：D1</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D2 有音频但 D1 缺失，Segment Audio 仍不能完成。这个案例防止算法只要看到任意 Dialogue Audio 就把 Segment 音频标绿。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>新视频 / 终视频状态补充</h2>
+    <p class="small">这组案例不重新证明拆分边界，而是验证执行状态是否正确影响后续尾帧依赖。矩阵仍保持 [A,O,N,V,F] 五列；TailFrame 不是输入矩阵固定列，只在右侧 Video Plan 的尾帧槽表达。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 11：只有新视频，终视频待确认</strong>
+        <span class="pill">Raw 绿 / Final 白 / Tail 灰</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>2s</small></span><span class="mono">[0,1,1,1,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>2s</small></span><span class="mono">[0,0,0,1,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot green">新视频绿</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>2s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>3 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot white">终视频白</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">Raw / 新视频已经存在，但 Final 还未确认或未绑定；此时不能从 Raw 抽取可继承尾帧，后续依赖仍不满足。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot green">新视频绿</span><span class="slot white">终视频白</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">S2 已有 Raw / 新视频，但 Final 尚未确认；它自己的尾帧仍要等终视频完成后才会产生。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S3</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S2</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">S3 的首帧依赖 S2 TailFrame；因为 S2 也还没有 Final 和 TailFrame，所以这里必须保持灰色。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 12：终视频已完成，尾帧待抽取</strong>
+        <span class="pill">Final 绿 / Tail 白</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,1,1,1,1]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>2 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span><span class="slot white">尾帧白</span></div>
+              <div class="expect">Final 已经存在，S1 自己的尾帧抽取条件满足但文件尚未存在，所以尾帧输出槽是白色待执行。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot">尾帧灰 S1</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">S1 TailFrame 文件还没抽出来，所以 S2 的首帧依赖仍是灰色，不能因为 Final 绿就提前变绿。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 13：终视频和尾帧都已完成</strong>
+        <span class="pill">Final 绿 / Tail 绿</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,1,1,1,1]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>2 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">新图绿</span><span class="slot green">新视频绿</span><span class="slot green">终视频绿</span><span class="slot green">尾帧绿</span></div>
+              <div class="expect">S1 Final 和 TailFrame 文件都存在，S1 的尾帧可以作为后续 Segment 首帧来源。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot green">尾帧绿 S1</span><span class="slot white">新视频白</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">S2 首帧依赖已满足，后续可以生成新视频；S2 自己的 Final 和 TailFrame 仍按执行进度推进。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 14：绑定终视频作为视觉锚点重开 Segment</strong>
+        <span class="pill">Final 锚点影响拆分</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,0,0,1]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot green">终视频绿</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>2 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">D1 的原图启动第一段；到 D3 前遇到绑定终视频锚点，必须结束 S1。</div>
+            </div>
+          </div>
+          <div class="vp-segment">
+            <span class="segment-id">S2</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D3, D4, D5</div>
+              <div class="slot-row"><span class="slot">音频灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot green">终视频绿</span><span class="slot white">尾帧白</span></div>
+              <div class="expect">source_type = bound_video。绑定终视频是新的 Segment 起点，但严格按 Video Plan 槽位呈现时，新图槽不需要执行所以显示灰；尾帧从规范 Working Final 抽取。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <h2>终视频任务类型覆盖：口播 / 空镜</h2>
+    <p class="small">这组案例不新增 Video Plan 槽位，仍严格按“音频 - 新图/尾帧 - 新视频 - 终视频 - 尾帧”呈现；终视频任务类型写在每个 Segment 的说明里。代码以 Segment 第一个 D 的 <span class="mono">video_plan.is_talking_head</span> 判断：口播走对口型，空镜走替换音频/重定时。</p>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 15：口播首帧，终视频任务 = 对口型</strong>
+        <span class="pill">is_talking_head=true</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s / 口播</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>1 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">终视频任务：对口型；tasks.need_lipsync = true，sync_mode = lipsync。因为首个 D 是口播，本段尾帧 continuation_allowed = true，后续空视觉 Segment 可以继承。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-case">
+      <div class="compare-title">
+        <strong>Case 16：空镜首帧，终视频任务 = 替换音频</strong>
+        <span class="pill">is_talking_head=false</span>
+      </div>
+      <div class="compare-body">
+        <div class="matrix-side">
+          <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D1<small>1s / 空镜</small></span><span class="mono">[0,1,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot green">原图绿</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D2<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D3<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D4<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+          <div class="dialogue-line"><span class="dialogue-id">D5<small>1s</small></span><span class="mono">[0,0,0,0,0]</span><span class="slot-row"><span class="slot">音频灰</span><span class="slot">原图灰</span><span class="slot">新图灰</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span></span></div>
+        </div>
+        <div class="plan-side">
+          <div class="side-head"><span>应得到的 Video Plan</span><span>1 个 Segment</span></div>
+          <div class="vp-segment">
+            <span class="segment-id">S1</span>
+            <div>
+              <div class="segment-dialogues">包含 D：D1, D2, D3, D4, D5</div>
+              <div class="slot-row"><span class="slot white">音频白</span><span class="slot white">新图白</span><span class="slot">新视频灰</span><span class="slot">终视频灰</span><span class="slot">尾帧灰</span></div>
+              <div class="expect">终视频任务：替换音频 / 重定时；tasks.need_lipsync = false，tasks.need_audio_video_sync = true，sync_mode = audio_replace_retime。拆分结果与 Case 15 相同，但尾帧 continuation_allowed = false。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="stack cross-shot">
+    <h2>跨 Shot 最小测试案例</h2>
+    <p class="small">每个跨 Shot 案例都完整展开 2 个 Shot，每个 Shot 有 2 个 Scene，每个 Scene 有 3 个 D，并标出每个 D 的秒数。右侧显示整个跨 Shot Video Plan，不省略中间 Scene / Segment。</p>
+    <div id="cross-shot-full-cases" class="stack"></div>
+  </section>
+
+  <script>
+    const crossLabels = ["音频", "原图", "新图", "新视频", "终视频"];
+    const crossStateClass = { white: "white", green: "green", yellow: "yellow", red: "red", gray: "" };
+    const crossHtml = value => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    const crossSlot = ([label, state = "gray"]) => `<span class="slot ${crossStateClass[state] || ""}">${crossHtml(label)}</span>`;
+    const crossSlotRow = items => `<span class="slot-row">${items.map(crossSlot).join("")}</span>`;
+    const crossMatrixRow = row => `
+      <div class="dialogue-line">
+        <span class="dialogue-id">${crossHtml(row.id)}<small>${crossHtml(row.note)}</small></span>
+        <span class="mono">[${row.matrix.join(",")}]</span>
+        ${crossSlotRow(crossLabels.map((label, index) => [`${label}${row.states[index] === "green" ? "绿" : row.states[index] === "white" ? "白" : row.states[index] === "red" ? "红" : "灰"}`, row.states[index]]))}
+      </div>`;
+    const crossSceneRows = scene => `<div class="scene-label">${crossHtml(scene.title)}</div>${scene.rows.map(crossMatrixRow).join("")}`;
+    const crossPlanItem = item => item.title
+      ? `<div class="plan-shot">${crossHtml(item.title)}</div>`
+      : `<div class="vp-segment">
+          <span class="segment-id">${crossHtml(item.id)}</span>
+          <div>
+            <div class="segment-dialogues">包含 D：${crossHtml(item.ds)}；时长：${crossHtml(item.duration)}</div>
+            ${crossSlotRow(item.slots)}
+            <div class="expect">${crossHtml(item.expect)}</div>
+          </div>
+        </div>`;
+    const crossCase = item => `
+      <div class="compare-case">
+        <div class="compare-title"><strong>${crossHtml(item.title)}</strong><span class="pill">${crossHtml(item.pill)}</span></div>
+        <div class="compare-body">
+          <div class="matrix-side">
+            <div class="side-head"><span>输入矩阵</span><span class="mono">[A,O,N,V,F]</span></div>
+            ${item.matrix.map(crossSceneRows).join("")}
+          </div>
+          <div class="plan-side">
+            <div class="side-head"><span>应得到的完整 Video Plan</span><span>${crossHtml(item.summary)}</span></div>
+            ${item.plan.map(crossPlanItem).join("")}
+          </div>
+        </div>
+      </div>`;
+    const d = (id, start, matrix, states, extra = "") => ({ id, note: `${start}-${start + 2}s / 2s${extra ? ` / ${extra}` : ""}`, matrix, states });
+    const empty3 = (prefix) => [d(`${prefix}-D1`, 0, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d(`${prefix}-D2`, 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d(`${prefix}-D3`, 4, [0,0,0,0,0], ["gray","gray","gray","gray","gray"])];
+    const planSeg = (id, ds, duration, frame, expect, frameState = "gray") => ({
+      id, ds, duration,
+      slots: [["音频白","white"], [frame, frameState], ["新视频灰","gray"], ["终视频灰","gray"], ["尾帧灰","gray"]],
+      expect,
+    });
+    const completeSeg = (id, ds, duration, frame, expect, frameState = "green", tailState = "green") => ({
+      id, ds, duration,
+      slots: [["音频白","white"], [frame, frameState], ["新视频绿","green"], ["终视频绿","green"], [`尾帧${tailState === "green" ? "绿" : "灰"}`, tailState]],
+      expect,
+    });
+    const blockedScene = (id, ds, code) => ({
+      id, ds, duration: "6s",
+      slots: [["音频灰","gray"], ["尾帧红","red"], ["新视频灰","gray"], ["终视频灰","gray"], ["尾帧灰","gray"], ["blocked","red"]],
+      expect: `blocked_reason.code = ${code}`,
+    });
+    const crossCases = [
+      {
+        title: "Case 17：Task 范围，计划尾帧跨 Shot 连续",
+        pill: "target_type=task / max=4s / 每个 D=2s",
+        summary: "8 个 Segment",
+        matrix: [
+          { title: "Shot1 / Scene1", rows: [d("S1C1-D1", 0, [0,1,0,0,0], ["gray","green","gray","gray","gray"], "口播"), ...empty3("S1C1").slice(1)] },
+          { title: "Shot1 / Scene2", rows: empty3("S1C2") },
+          { title: "Shot2 / Scene1", rows: empty3("S2C1") },
+          { title: "Shot2 / Scene2", rows: empty3("S2C2") },
+        ],
+        plan: [
+          { title: "Shot1 / Scene1" },
+          planSeg("S1C1-S1", "S1C1-D1, S1C1-D2", "4s", "新图白", "source_type=original_image；D1 原图生成首帧，max=4s 所以 D1+D2 为一段。", "white"),
+          planSeg("S1C1-S2", "S1C1-D3", "2s", "尾帧灰 S1C1-S1", "source_type=previous_segment_tail_frame；同 Scene 内第二段依赖前段计划尾帧。"),
+          { title: "Shot1 / Scene2" },
+          planSeg("S1C2-S1", "S1C2-D1, S1C2-D2", "4s", "尾帧灰 S1C1-S2", "跨 Scene 继承上一段计划尾帧；仍按 4s 拆成 D1+D2。"),
+          planSeg("S1C2-S2", "S1C2-D3", "2s", "尾帧灰 S1C2-S1", "同 Scene 内继续用上一段计划尾帧。"),
+          { title: "Shot2 / Scene1" },
+          planSeg("S2C1-S1", "S2C1-D1, S2C1-D2", "4s", "尾帧灰 S1C2-S2", "跨 Shot 继承上一 Shot 最后一段计划尾帧；这里走 last_planned_segment 分支。"),
+          planSeg("S2C1-S2", "S2C1-D3", "2s", "尾帧灰 S2C1-S1", "Shot2 内继续按 max=4s 拆分。"),
+          { title: "Shot2 / Scene2" },
+          planSeg("S2C2-S1", "S2C2-D1, S2C2-D2", "4s", "尾帧灰 S2C1-S2", "跨 Scene 继承 Shot2 Scene1 的计划尾帧。"),
+          planSeg("S2C2-S2", "S2C2-D3", "2s", "尾帧灰 S2C2-S1", "最后一段 2s，等待自身终视频完成后才产生尾帧。"),
+        ],
+      },
+      {
+        title: "Case 18：只生成 Shot2，继承 Shot1 已存在尾帧",
+        pill: "target_type=shot / max=4s / previous_scene_tail_frame",
+        summary: "上游 4 个完成 Segment + Shot2 4 个 Segment",
+        matrix: [
+          { title: "Shot1 / Scene1（上游上下文）", rows: [d("S1C1-D1", 0, [0,0,1,1,1], ["gray","gray","green","green","green"], "已完成"), d("S1C1-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C1-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "已完成")] },
+          { title: "Shot1 / Scene2（上游上下文）", rows: [d("S1C2-D1", 0, [0,0,0,1,1], ["gray","gray","gray","green","green"], "已完成"), d("S1C2-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C2-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "Tail已存在")] },
+          { title: "Shot2 / Scene1", rows: empty3("S2C1") },
+          { title: "Shot2 / Scene2", rows: empty3("S2C2") },
+        ],
+        plan: [
+          { title: "Shot1 / Scene1（上下文完整显示）" },
+          completeSeg("S1C1-S1", "S1C1-D1, S1C1-D2", "4s", "新图绿", "上游已经完成，Final 与 TailFrame 都存在。"),
+          completeSeg("S1C1-S2", "S1C1-D3", "2s", "尾帧绿 S1C1-S1", "上游第二段也已完成。"),
+          { title: "Shot1 / Scene2（上下文完整显示）" },
+          completeSeg("S1C2-S1", "S1C2-D1, S1C2-D2", "4s", "尾帧绿 S1C1-S2", "上游 Scene2 第一段已完成。"),
+          completeSeg("S1C2-S2", "S1C2-D3", "2s", "尾帧绿 S1C2-S1", "这是 Shot2 起点要读取的 previous_scene_tail_frame。"),
+          { title: "Shot2 / Scene1" },
+          planSeg("S2C1-S1", "S2C1-D1, S2C1-D2", "4s", "尾帧绿 S1C2-S2", "只生成 Shot2 时没有 last_planned_segment，必须从 Shot1 最后一个 Scene 的真实 TailFrame 文件继承。", "green"),
+          planSeg("S2C1-S2", "S2C1-D3", "2s", "尾帧灰 S2C1-S1", "进入 Shot2 后，后续段又回到计划尾帧依赖。"),
+          { title: "Shot2 / Scene2" },
+          planSeg("S2C2-S1", "S2C2-D1, S2C2-D2", "4s", "尾帧灰 S2C1-S2", "Shot2 第二个 Scene 继续依赖上一段计划尾帧。"),
+          planSeg("S2C2-S2", "S2C2-D3", "2s", "尾帧灰 S2C2-S1", "完整显示 Shot2 的最后一段。"),
+        ],
+      },
+      {
+        title: "Case 19：Shot2 起点缺 TailFrame，Scene2 自有视觉恢复",
+        pill: "target_type=shot / missing tail / max=4s",
+        summary: "上游 4 个 Segment + 1 blocked Scene + 2 个恢复 Segment",
+        matrix: [
+          { title: "Shot1 / Scene1（上游上下文）", rows: [d("S1C1-D1", 0, [0,0,1,1,1], ["gray","gray","green","green","green"], "Tail绿"), d("S1C1-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C1-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "Tail绿")] },
+          { title: "Shot1 / Scene2（上游上下文）", rows: [d("S1C2-D1", 0, [0,0,0,1,1], ["gray","gray","gray","green","green"], "Tail绿"), d("S1C2-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C2-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "Tail缺失")] },
+          { title: "Shot2 / Scene1", rows: empty3("S2C1") },
+          { title: "Shot2 / Scene2", rows: [d("S2C2-D1", 0, [0,1,0,0,0], ["gray","green","gray","gray","gray"], "自有原图"), ...empty3("S2C2").slice(1)] },
+        ],
+        plan: [
+          { title: "Shot1 / Scene1（上下文完整显示）" },
+          completeSeg("S1C1-S1", "S1C1-D1, S1C1-D2", "4s", "新图绿", "上游完成。"),
+          completeSeg("S1C1-S2", "S1C1-D3", "2s", "尾帧绿 S1C1-S1", "上游完成。"),
+          { title: "Shot1 / Scene2（上下文完整显示）" },
+          completeSeg("S1C2-S1", "S1C2-D1, S1C2-D2", "4s", "尾帧绿 S1C1-S2", "上游完成。"),
+          completeSeg("S1C2-S2", "S1C2-D3", "2s", "尾帧绿 S1C2-S1", "Final 存在但 TailFrame 缺失，所以不能作为 Shot2 起点。", "green", "gray"),
+          { title: "Shot2 / Scene1" },
+          blockedScene("S2C1", "S2C1-D1, S2C1-D2, S2C1-D3", "scene_first_dialogue_missing_first_frame_and_previous_tail_missing"),
+          { title: "Shot2 / Scene2" },
+          planSeg("S2C2-S1", "S2C2-D1, S2C2-D2", "4s", "新图白", "Scene2 有自有原图，所以不依赖缺失的 Shot1 TailFrame，可以重新开段。", "white"),
+          planSeg("S2C2-S2", "S2C2-D3", "2s", "尾帧灰 S2C2-S1", "恢复后仍按 max=4s 拆分。"),
+        ],
+      },
+      {
+        title: "Case 20：上游为空镜，TailFrame 存在但不可继承",
+        pill: "is_talking_head=false / max=4s",
+        summary: "上游 4 个 Segment + 1 blocked Scene + 2 个恢复 Segment",
+        matrix: [
+          { title: "Shot1 / Scene1（上游上下文）", rows: [d("S1C1-D1", 0, [0,0,1,1,1], ["gray","gray","green","green","green"], "口播"), d("S1C1-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C1-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "口播")] },
+          { title: "Shot1 / Scene2（上游上下文）", rows: [d("S1C2-D1", 0, [0,0,0,1,1], ["gray","gray","gray","green","green"], "口播"), d("S1C2-D2", 2, [0,0,0,0,0], ["gray","gray","gray","gray","gray"]), d("S1C2-D3", 4, [0,0,0,1,1], ["gray","gray","gray","green","green"], "空镜/Tail绿")] },
+          { title: "Shot2 / Scene1", rows: empty3("S2C1") },
+          { title: "Shot2 / Scene2", rows: [d("S2C2-D1", 0, [0,1,0,0,0], ["gray","green","gray","gray","gray"], "自有原图"), ...empty3("S2C2").slice(1)] },
+        ],
+        plan: [
+          { title: "Shot1 / Scene1（上下文完整显示）" },
+          completeSeg("S1C1-S1", "S1C1-D1, S1C1-D2", "4s", "新图绿", "口播段，continuation_allowed=true。"),
+          completeSeg("S1C1-S2", "S1C1-D3", "2s", "尾帧绿 S1C1-S1", "口播段，continuation_allowed=true。"),
+          { title: "Shot1 / Scene2（上下文完整显示）" },
+          completeSeg("S1C2-S1", "S1C2-D1, S1C2-D2", "4s", "尾帧绿 S1C1-S2", "口播段，continuation_allowed=true。"),
+          completeSeg("S1C2-S2", "S1C2-D3", "2s", "尾帧绿 S1C2-S1", "终视频任务=替换音频；continuation_allowed=false，TailFrame 文件存在但不可继承。"),
+          { title: "Shot2 / Scene1" },
+          blockedScene("S2C1", "S2C1-D1, S2C1-D2, S2C1-D3", "previous_segment_cutaway_tail_not_usable"),
+          { title: "Shot2 / Scene2" },
+          planSeg("S2C2-S1", "S2C2-D1, S2C2-D2", "4s", "新图白", "自有原图能恢复，不继承空镜尾帧。终视频任务回到对口型。", "white"),
+          planSeg("S2C2-S2", "S2C2-D3", "2s", "尾帧灰 S2C2-S1", "恢复后继续按 4s 拆分。"),
+        ],
+      },
+      {
+        title: "Case 21：绑定终视频跨 Shot 作为上游尾帧来源",
+        pill: "bound_video / max=4s / 每个 D=2s",
+        summary: "bound_video Scene 1 个 Segment + 后续 6 个 Segment",
+        matrix: [
+          { title: "Shot1 / Scene1", rows: [d("S1C1-D1", 0, [0,0,0,0,1], ["gray","gray","gray","gray","green"], "绑定终视频"), ...empty3("S1C1").slice(1)] },
+          { title: "Shot1 / Scene2", rows: empty3("S1C2") },
+          { title: "Shot2 / Scene1", rows: empty3("S2C1") },
+          { title: "Shot2 / Scene2", rows: empty3("S2C2") },
+        ],
+        plan: [
+          { title: "Shot1 / Scene1" },
+          { id: "S1C1-S1", ds: "S1C1-D1, S1C1-D2, S1C1-D3", duration: "6s", slots: [["音频灰","gray"], ["新图灰","gray"], ["新视频灰","gray"], ["终视频绿","green"], ["尾帧绿","green"]], expect: "source_type=bound_video；绑定终视频作为现成视频来源，不再按 max=4s 拆成 D1+D2 / D3。" },
+          { title: "Shot1 / Scene2" },
+          planSeg("S1C2-S1", "S1C2-D1, S1C2-D2", "4s", "尾帧绿 S1C1-S1", "Scene2 没有自有视觉，继承 bound_video 抽出的 TailFrame，并重新按 max=4s 拆分。", "green"),
+          planSeg("S1C2-S2", "S1C2-D3", "2s", "尾帧灰 S1C2-S1", "后续段依赖计划尾帧。"),
+          { title: "Shot2 / Scene1" },
+          planSeg("S2C1-S1", "S2C1-D1, S2C1-D2", "4s", "尾帧灰 S1C2-S2", "跨 Shot 继承上一 Shot 最后一段计划尾帧。"),
+          planSeg("S2C1-S2", "S2C1-D3", "2s", "尾帧灰 S2C1-S1", "Shot2 Scene1 第二段。"),
+          { title: "Shot2 / Scene2" },
+          planSeg("S2C2-S1", "S2C2-D1, S2C2-D2", "4s", "尾帧灰 S2C1-S2", "Shot2 Scene2 第一段。"),
+          planSeg("S2C2-S2", "S2C2-D3", "2s", "尾帧灰 S2C2-S1", "完整显示最后一段。"),
+        ],
+      },
+    ];
+    document.getElementById("cross-shot-full-cases").innerHTML = crossCases.map(crossCase).join("");
+  </script>
+
+  <section class="stack">
+    <h2>Segment 拆分状态图</h2>
+    <svg class="flow" viewBox="0 0 980 360" role="img" aria-label="Segment split state flow">
+      <defs>
+        <marker id="arrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L9,4 L0,8 Z" fill="#667085"></path>
+        </marker>
+      </defs>
+      <rect class="node" x="30" y="36" width="150" height="56" rx="8"></rect>
+      <text x="105" y="60" text-anchor="middle">进入 Scene</text>
+      <text x="105" y="78" text-anchor="middle">读取首个 Dialogue</text>
+
+      <rect class="ok" x="250" y="24" width="170" height="48" rx="8"></rect>
+      <text x="335" y="53" text-anchor="middle">F=1：bound_video</text>
+      <rect class="ok" x="250" y="92" width="170" height="48" rx="8"></rect>
+      <text x="335" y="121" text-anchor="middle">N=1：新图首帧</text>
+      <rect class="ok" x="250" y="160" width="170" height="48" rx="8"></rect>
+      <text x="335" y="181" text-anchor="middle">O=1：原图参考</text>
+      <text x="335" y="199" text-anchor="middle">先生成新图</text>
+      <rect class="tail" x="250" y="228" width="170" height="48" rx="8"></rect>
+      <text x="335" y="257" text-anchor="middle">无锚点：查上游尾帧</text>
+
+      <rect class="ok" x="500" y="80" width="170" height="56" rx="8"></rect>
+      <text x="585" y="104" text-anchor="middle">生成 1 个 Segment</text>
+      <text x="585" y="122" text-anchor="middle">不跨 Scene 边界</text>
+      <rect class="tail" x="500" y="188" width="170" height="64" rx="8"></rect>
+      <text x="585" y="212" text-anchor="middle">尾帧作为首帧</text>
+      <text x="585" y="230" text-anchor="middle">source=previous_tail</text>
+      <rect class="bad" x="500" y="286" width="170" height="48" rx="8"></rect>
+      <text x="585" y="315" text-anchor="middle">skipped / blocked</text>
+
+      <rect class="wait" x="740" y="74" width="190" height="80" rx="8"></rect>
+      <text x="835" y="101" text-anchor="middle">05_05 补跑状态</text>
+      <text x="835" y="121" text-anchor="middle">Raw → 等 Confirm Final</text>
+      <text x="835" y="141" text-anchor="middle">Final → final_completed</text>
+      <rect class="tail" x="740" y="206" width="190" height="64" rx="8"></rect>
+      <text x="835" y="232" text-anchor="middle">尾帧输出</text>
+      <text x="835" y="252" text-anchor="middle">供下一个空视觉 Scene 用</text>
+
+      <path class="line" d="M180 64 C210 64 220 48 250 48"></path>
+      <path class="line" d="M180 68 C210 68 220 116 250 116"></path>
+      <path class="line" d="M180 72 C210 72 220 184 250 184"></path>
+      <path class="line" d="M180 76 C210 76 220 252 250 252"></path>
+      <path class="line" d="M420 48 C455 48 465 98 500 98"></path>
+      <path class="line" d="M420 116 C455 116 465 108 500 108"></path>
+      <path class="line" d="M420 184 C455 184 465 118 500 118"></path>
+      <path class="line" d="M420 252 C455 252 465 220 500 220"></path>
+      <path class="line" d="M420 270 C455 294 465 310 500 310"></path>
+      <path class="line" d="M670 108 C700 108 710 114 740 114"></path>
+      <path class="line" d="M670 220 C700 220 710 238 740 238"></path>
+    </svg>
+  </section>
+
+  <section class="stack">
+    <h2>尾帧可继承状态图</h2>
+    <svg class="flow" viewBox="0 0 980 330" role="img" aria-label="Tail frame eligibility state flow">
+      <defs>
+        <marker id="arrow2" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto">
+          <path d="M0,0 L9,4 L0,8 Z" fill="#667085"></path>
+        </marker>
+      </defs>
+      <style>.flow .line2{stroke:#667085;stroke-width:1.2;marker-end:url(#arrow2);fill:none;}</style>
+      <rect class="node" x="34" y="52" width="168" height="56" rx="8"></rect>
+      <text x="118" y="76" text-anchor="middle">上一 Segment</text>
+      <text x="118" y="94" text-anchor="middle">是否产生视频</text>
+
+      <rect class="wait" x="278" y="34" width="176" height="64" rx="8"></rect>
+      <text x="366" y="60" text-anchor="middle">只有 Raw</text>
+      <text x="366" y="80" text-anchor="middle">pending Confirm Final</text>
+      <rect class="ok" x="278" y="126" width="176" height="64" rx="8"></rect>
+      <text x="366" y="152" text-anchor="middle">Final 已绑定</text>
+      <text x="366" y="172" text-anchor="middle">final_completed</text>
+      <rect class="bad" x="278" y="218" width="176" height="48" rx="8"></rect>
+      <text x="366" y="247" text-anchor="middle">无视频或 blocked</text>
+
+      <rect class="tail" x="548" y="72" width="178" height="64" rx="8"></rect>
+      <text x="637" y="98" text-anchor="middle">抽取 / 计划 TailFrame</text>
+      <text x="637" y="118" text-anchor="middle">写入依赖路径</text>
+      <rect class="node" x="548" y="172" width="178" height="64" rx="8"></rect>
+      <text x="637" y="198" text-anchor="middle">检查 is_talking_head</text>
+      <text x="637" y="218" text-anchor="middle">缺省按 true</text>
+
+      <rect class="ok" x="794" y="82" width="150" height="56" rx="8"></rect>
+      <text x="869" y="106" text-anchor="middle">可继承尾帧</text>
+      <text x="869" y="124" text-anchor="middle">下一空 Scene 可用</text>
+      <rect class="bad" x="794" y="190" width="150" height="56" rx="8"></rect>
+      <text x="869" y="214" text-anchor="middle">不可继承</text>
+      <text x="869" y="232" text-anchor="middle">cutaway / 缺文件</text>
+
+      <path class="line2" d="M202 78 C236 78 244 66 278 66"></path>
+      <path class="line2" d="M202 84 C236 84 244 158 278 158"></path>
+      <path class="line2" d="M202 90 C236 90 244 242 278 242"></path>
+      <path class="line2" d="M454 66 C492 66 510 104 548 104"></path>
+      <path class="line2" d="M454 158 C492 158 510 116 548 116"></path>
+      <path class="line2" d="M637 136 L637 172"></path>
+      <path class="line2" d="M726 204 C758 204 762 218 794 218"></path>
+      <path class="line2" d="M726 204 C758 176 762 110 794 110"></path>
+    </svg>
+  </section>
+</main>
+
+  <script id="koubo-plan-actual-video">
+    (() => {
+      const results = [{"case": 1, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_01.png", "extra": []}, {"case": 2, "pass": true, "expected": 2, "actual": 2, "summary": "Shot 1\nScene 1\nSegment 2", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_02.png", "extra": []}, {"case": 3, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_03.png", "extra": []}, {"case": 4, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_04.png", "extra": []}, {"case": 5, "pass": true, "expected": 2, "actual": 2, "summary": "Shot 1\nScene 1\nSegment 2", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_05.png", "extra": []}, {"case": 6, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_06.png", "extra": []}, {"case": 7, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_07.png", "extra": []}, {"case": 8, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_08.png", "extra": []}, {"case": 9, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_09.png", "extra": []}, {"case": 10, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_10.png", "extra": []}, {"case": 11, "pass": true, "expected": 3, "actual": 3, "summary": "Shot 1\nScene 1\nSegment 3", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_11.png", "extra": []}, {"case": 12, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_12.png", "extra": []}, {"case": 13, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_13.png", "extra": []}, {"case": 14, "pass": true, "expected": 2, "actual": 2, "summary": "Shot 1\nScene 1\nSegment 2", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_14.png", "extra": []}, {"case": 15, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_15.png", "extra": []}, {"case": 16, "pass": true, "expected": 1, "actual": 1, "summary": "Shot 1\nScene 1\nSegment 1", "reason": "PASS: 系统弹窗计数与测试计划一致", "screenshot": "koubo_plan_case_system_screenshots/video_case_16.png", "extra": []}, {"case": 17, "pass": true, "expected": 8, "actual": 8, "summary": "输入 2 Shot / 4 Scene / 12 D\n生成范围 Task：系统弹窗合计 2 Shot / 4 Scene / 8 Segment\n截图说明：主图是弹窗顶部，滚动补图包含下半段 Shot2", "reason": "PASS: target_type=task，实际计划覆盖 Shot_001 + Shot_002；滚动补图用于核对完整跨 Shot 结果。", "screenshot": "koubo_plan_case_system_screenshots/video_case_17.png", "extra": ["koubo_plan_case_system_screenshots/video_case_17_bottom.png"]}, {"case": 18, "pass": true, "expected": 4, "actual": 4, "summary": "输入 2 Shot / 4 Scene / 12 D\n生成范围 Shot_002：系统弹窗只显示目标 1 Shot / 2 Scene / 4 Segment\nShot_001 只作为上游 TailFrame 依赖参与判断，不显示在本次计划范围", "reason": "PASS: 这是“只生成 Shot2”的跨 Shot 继承测试；Shot1 已存在尾帧被读取，输出只展示 Shot_002。", "screenshot": "koubo_plan_case_system_screenshots/video_case_18.png", "extra": []}, {"case": 19, "pass": true, "expected": 4, "actual": 4, "summary": "输入 2 Shot / 4 Scene / 12 D\n生成范围 Shot_002：系统弹窗只显示目标 1 Shot / 2 Scene / 4 Segment\nShot_001 上游 TailFrame 缺失，Shot2 Scene1 被阻断，Scene2 用自有原图恢复", "reason": "PASS: 这是“只生成 Shot2”的跨 Shot 缺尾帧测试；Shot1 是依赖上下文，输出只展示 Shot_002。", "screenshot": "koubo_plan_case_system_screenshots/video_case_19.png", "extra": []}, {"case": 20, "pass": true, "expected": 3, "actual": 3, "summary": "输入 2 Shot / 4 Scene / 12 D\n生成范围 Shot_002：系统弹窗只显示目标 1 Shot / 2 Scene / 3 Segment\nShot_001 上游为空镜，TailFrame 文件存在但不可继承", "reason": "PASS: 这是“只生成 Shot2”的跨 Shot 空镜不可继承测试；Shot1 是依赖上下文，输出只展示 Shot_002。", "screenshot": "koubo_plan_case_system_screenshots/video_case_20.png", "extra": []}, {"case": 21, "pass": true, "expected": 7, "actual": 7, "summary": "输入 2 Shot / 4 Scene / 12 D\n生成范围 Task：系统弹窗合计 2 Shot / 4 Scene / 7 Segment\n截图说明：主图是弹窗顶部，滚动补图包含下半段 Shot2", "reason": "PASS: target_type=task，绑定终视频跨 Shot 作为上游尾帧来源；实际计划覆盖 Shot_001 + Shot_002。", "screenshot": "koubo_plan_case_system_screenshots/video_case_21.png", "extra": ["koubo_plan_case_system_screenshots/video_case_21_bottom.png"]}];
+      const attach = () => {
+        document.querySelectorAll(".actual-shot").forEach((node) => node.remove());
+        document.querySelectorAll(".compare-case").forEach((node, index) => {
+          const item = results[index];
+          if (!item) return;
+          const section = document.createElement("div");
+          section.className = `actual-shot ${item.pass ? "is-pass" : "is-fail"}`;
+          const status = item.pass ? "PASS" : "FAIL";
+          const statusText = `${status} · 期望 ${item.expected} / 系统 ${item.actual}`;
+          const extra = (item.extra || []).map((src, extraIndex) => `<figure><figcaption>滚动补图 ${extraIndex + 1}</figcaption><img src="${src}" alt="系统滚动补图 Case ${item.case}-${extraIndex + 1}"></figure>`).join("");
+          section.innerHTML = `<div class="side-head"><span>Chrome 系统实测截图</span><span>Case ${String(item.case).padStart(2, "0")}</span></div><div class="actual-status ${item.pass ? "pass" : "fail"}">${statusText}</div><div class="actual-summary">${item.summary || "-"}</div><img src="${item.screenshot}" alt="Chrome 系统实测截图 Case ${item.case}">${extra}<div class="actual-reason">${item.reason}</div>`;
+          node.appendChild(section);
+        });
+      };
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => requestAnimationFrame(attach));
+      else requestAnimationFrame(attach);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "acceptance": "media_library_real_ffmpeg_db_publish_failure_v1",
+  "executed_at": "2026-07-20T16:05:23+10:00",
+  "platform": "darwin-arm64",
+  "status": "passed",
+  "test": {
+    "module": "backend.tests.integration.test_media_library_ffmpeg_db_publish_failure",
+    "case": "test_real_ffmpeg_db_publish_failure_cleans_every_output",
+    "real_subprocess": true,
+    "fake_popen": false,
+    "shell_invocation": false
+  },
+  "runtime": {
+    "ffmpeg_path": "ToolLibrary/.bin/ffmpeg",
+    "ffprobe_path": "ToolLibrary/.bin/ffprobe",
+    "ffmpeg_version": "7.0",
+    "ffprobe_version": "7.0",
+    "libx264": true,
+    "aac": true
+  },
+  "fixture": {
+    "logical_path": "含中文 workspace/inbox/真实源视频.mp4",
+    "duration_ms": 1000,
+    "width": 320,
+    "height": 180,
+    "frame_rate": "30/1",
+    "audio_codec": "aac",
+    "audio_sample_rate": 48000
+  },
+  "clip_request": {
+    "start_ms": 137,
+    "end_ms": 387,
+    "requested_duration_ms": 250,
+    "non_keyframe_start": true
+  },
+  "publish_boundary": {
+    "failure_injection": "SQLite BEFORE INSERT trigger on media_library_clip_derivatives",
+    "repository": "ClipDerivativeRepository.create_with_session_file",
+    "publish_attempts": 1,
+    "integrity_errors": 1,
+    "final_file_existed_before_db_publish": true,
+    "part_files_before_db_publish": 0,
+    "actual_duration_ms": 267,
+    "dynamic_tolerance_ms": 34,
+    "dynamic_tolerance_source": "max(30fps video frame 34ms, AAC@48k frame 22ms, 5% request 13ms)",
+    "size_bytes": 19195,
+    "content_sha256": "e1b9413a056a6493e78af48456de30d54cd87625f5722054e25c448897ca826d"
+  },
+  "cleanup": {
+    "derivative_rows": 0,
+    "session_file_rows": 0,
+    "final_files": 0,
+    "part_files": 0,
+    "sidecar_files": 0,
+    "tombstone_files": 0,
+    "clip_directories": 0,
+    "source_sha256_unchanged": true,
+    "source_size_unchanged": true,
+    "source_mtime_unchanged": true
+  },
+  "terminal_job": {
+    "status": "failed",
+    "error_code": "media_clip_execution_failed",
+    "customer_message_is_structured": true,
+    "internal_db_error_not_exposed": true,
+    "failed_event_matches_job_error": true,
+    "failure_metric": "media_library_clip_failure_total{code=\"media_clip_execution_failed\"}",
+    "active_metric_returns_to_zero": true
+  },
+  "resource_safety": {
+    "stdout_closed": true,
+    "stderr_closed": true,
+    "resource_warning_as_error": "passed"
+  }
+}

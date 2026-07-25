@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_id": {
+      "title": "Tool Id",
+      "type": "string"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "patch": {
+      "title": "Patch",
+      "type": "object"
+    }
+  },
+  "required": [
+    "tool_id",
+    "step_id"
+  ],
+  "title": "SessionContextPatch",
+  "type": "object"
+}

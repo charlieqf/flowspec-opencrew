@@ -1,0 +1,214 @@
+.koubo-task-list-table-wrap {
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.koubo-task-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.koubo-task-list-table th {
+  background: #f2f5fa;
+  color: #526178;
+  font-weight: 700;
+  padding: 9px 10px;
+  text-align: left;
+}
+
+.koubo-task-list-table td {
+  border-top: 1px solid #edf1f6;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.koubo-task-list-table tbody tr {
+  cursor: pointer;
+}
+
+.koubo-task-list-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.koubo-task-list-table tbody tr.is-selected {
+  background: #eef6ff;
+  box-shadow: inset 3px 0 0 #4f7cff;
+}
+
+.koubo-task-list-actions-heading {
+  width: 138px;
+}
+
+.koubo-task-list-title-cell {
+  min-width: 190px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-title-cell span,
+.koubo-task-list-counts {
+  color: #63718a;
+}
+
+.koubo-task-list-title-cell span {
+  color: #35445c;
+  font-weight: 700;
+}
+
+.koubo-task-list-summary-heading,
+.koubo-task-list-summary-cell {
+  max-width: 280px;
+  width: 280px;
+}
+
+.koubo-task-list-summary {
+  color: #526178;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 260px;
+  min-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koubo-task-list-status-heading,
+.koubo-task-list-status-cell {
+  min-width: 64px;
+  white-space: nowrap;
+  width: 64px;
+}
+
+.koubo-task-list-updated-heading,
+.koubo-task-list-updated-cell {
+  min-width: 92px;
+  white-space: nowrap;
+  width: 92px;
+}
+
+.koubo-task-list-row-actions {
+  display: grid;
+  gap: 6px;
+}
+
+.koubo-task-list-counts {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  min-width: 132px;
+  white-space: nowrap;
+}
+
+.koubo-task-list-asset-counts {
+  min-width: 138px;
+}
+
+.koubo-task-list-counts span {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 4px;
+  height: 24px;
+  line-height: 1;
+  padding: 0 8px 0 6px;
+}
+
+.koubo-task-list-counts svg {
+  height: 14px;
+  width: 14px;
+}
+
+.koubo-task-list-counts .dialogue {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.koubo-task-list-counts .shot {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.koubo-task-list-counts .scene {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.koubo-task-list-counts .asset-audio {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.koubo-task-list-counts .asset-image {
+  background: #f0fdfa;
+  color: #0f766e;
+}
+
+.koubo-task-list-counts .asset-video {
+  background: #fdf2f8;
+  color: #be185d;
+}
+
+.koubo-task-list-row-actions {
+  grid-template-columns: repeat(4, max-content);
+  align-items: center;
+}
+
+.koubo-task-list-row-actions button {
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid #d7dfeb;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #41506a;
+  cursor: pointer;
+}
+
+.koubo-task-list-row-actions button:hover:not(:disabled) {
+  border-color: #aab8ce;
+  background: #f7f9fc;
+  color: #101828;
+}
+
+.koubo-task-list-row-actions button.danger {
+  color: #b42318;
+}
+
+.koubo-task-list-row-actions button.danger:hover:not(:disabled) {
+  border-color: #f4a29b;
+  background: #fff5f3;
+  color: #912018;
+}
+
+.koubo-task-list-row-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.koubo-task-list-row-actions svg {
+  width: 16px;
+  height: 16px;
+}
+
+.koubo-task-list-empty {
+  padding: 42px;
+  text-align: center;
+  color: #65738a;
+}
+
+@media (max-width: 1100px) {
+  .koubo-task-list-table {
+    min-width: 1100px;
+  }
+
+  .koubo-task-list-table-wrap {
+    overflow-x: auto;
+  }
+}

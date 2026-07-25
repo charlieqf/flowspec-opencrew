@@ -1,0 +1,22 @@
+{
+  "document_id": "DOC-003",
+  "category": "financial",
+  "facts": [
+    {
+      "fact_id": "DOC-003-F1",
+      "statement": "Controlled mock fact extracted from audited-financials.pdf",
+      "evidence_span": {
+        "document_id": "DOC-003",
+        "page": 3,
+        "bbox": [
+          0.12,
+          0.18,
+          0.84,
+          0.29
+        ]
+      }
+    }
+  ],
+  "page_count": 96,
+  "mock_model_output": true
+}

@@ -1,0 +1,25 @@
+{
+  "project_id": "VID-LUMEN-01",
+  "creative_revision": "creative-r2",
+  "dialogues": [
+    {
+      "asset_key": "dlg-001",
+      "text": "Three o'clock slump? Start with hydration.",
+      "duration_seconds": 7,
+      "visual": "host at desk"
+    },
+    {
+      "asset_key": "dlg-002",
+      "text": "Hydra Daily keeps the ritual simple.",
+      "duration_seconds": 8,
+      "visual": "corrected product close-up"
+    },
+    {
+      "asset_key": "dlg-003",
+      "text": "Mix, sip, and get back to your day.",
+      "duration_seconds": 9,
+      "visual": "host payoff"
+    }
+  ],
+  "mock_model_output": true
+}

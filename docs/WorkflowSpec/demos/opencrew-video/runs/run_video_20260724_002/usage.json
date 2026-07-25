@@ -1,0 +1,758 @@
+[
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0001",
+    "operation_id": "op_ca86f0f21daa4f09",
+    "operation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:1",
+    "observation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:1:observation:1",
+    "model_invocation_id": "mi_a9948dc5f5f00f81",
+    "agent_execution_id": "agent_run_video_20260724_002_creative",
+    "run_id": "run_video_20260724_002",
+    "step_id": "S1_creative_brief",
+    "step_attempt_id": "sa_0c83d750086a3acc",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_creative_agent",
+      "version": "1.0.0",
+      "digest": "sha256:917c52e142384afa3b2d4f4b4fecbfc3aa91e46f77fcee38d8a34041695cc867"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-creative-agent",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_4d9b88bda8e920a2",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 900,
+      "output_tokens": 180,
+      "reasoning_tokens": 100,
+      "total_tokens": 1080,
+      "provider_units": {
+        "agent_turn": 1,
+        "tool_calls": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.008",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:00:07Z",
+    "finished_at": "2026-07-24T12:00:09Z",
+    "recorded_at": "2026-07-24T12:00:11Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0002",
+    "operation_id": "op_24d21494a10f3fce",
+    "operation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:2",
+    "observation_idempotency_key": "run_video_20260724_002:S1_creative_brief:single:2:observation:1",
+    "model_invocation_id": "mi_7796b8a6c7a8f6fa",
+    "agent_execution_id": "agent_run_video_20260724_002_creative",
+    "run_id": "run_video_20260724_002",
+    "step_id": "S1_creative_brief",
+    "step_attempt_id": "sa_0c83d750086a3acc",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_creative_agent",
+      "version": "1.0.0",
+      "digest": "sha256:917c52e142384afa3b2d4f4b4fecbfc3aa91e46f77fcee38d8a34041695cc867"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-creative-agent",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_81e5838f48c5dc69",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 900,
+      "output_tokens": 240,
+      "reasoning_tokens": 160,
+      "total_tokens": 1140,
+      "provider_units": {
+        "agent_turn": 2,
+        "tool_calls": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.012",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:00:18Z",
+    "finished_at": "2026-07-24T12:00:20Z",
+    "recorded_at": "2026-07-24T12:00:22Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0003",
+    "operation_id": "op_8eca7628d5f15ae4",
+    "operation_idempotency_key": "run_video_20260724_002:S2_storyboard_plan:single:1",
+    "observation_idempotency_key": "run_video_20260724_002:S2_storyboard_plan:single:1:observation:1",
+    "model_invocation_id": "mi_2195ec32545b58c2",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S2_storyboard_plan",
+    "step_attempt_id": "sa_e6643cac045ffa88",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_planning_model",
+      "version": "1.0.0",
+      "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-planning-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_c250648b9eb4bf2e",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 2100,
+      "output_tokens": 760,
+      "total_tokens": 2860
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.018",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:00:35Z",
+    "finished_at": "2026-07-24T12:00:37Z",
+    "recorded_at": "2026-07-24T12:00:39Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0004",
+    "operation_id": "op_58dd88e395c1d7dc",
+    "operation_idempotency_key": "run_video_20260724_002:S4_consistency_references:single:1",
+    "observation_idempotency_key": "run_video_20260724_002:S4_consistency_references:single:1:observation:1",
+    "model_invocation_id": "mi_bafc3e4cdce57018",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S4_consistency_references",
+    "step_attempt_id": "sa_1c45ebb44d3972f8",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_image_model",
+      "version": "1.0.0",
+      "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-image-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "vision",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_74b371758a97851a",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "image_count": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.06",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:01:04Z",
+    "finished_at": "2026-07-24T12:01:06Z",
+    "recorded_at": "2026-07-24T12:01:08Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0005",
+    "operation_id": "op_610514a793f3b116",
+    "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-001:1",
+    "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-001:1:observation:1",
+    "model_invocation_id": "mi_b800114981c072c9",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S5_audio_fanout",
+    "step_attempt_id": "sa_00eb5f885022ea28:dlg-001",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_tts_model",
+      "version": "1.0.0",
+      "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-tts-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "audio",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_ad68603b07ebc332",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 18,
+      "provider_units": {
+        "audio_seconds": 7.0,
+        "character_count": 42
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.012",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:01:21Z",
+    "finished_at": "2026-07-24T12:01:23Z",
+    "recorded_at": "2026-07-24T12:01:25Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0006",
+    "operation_id": "op_b795ca350407980c",
+    "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-002:1",
+    "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-002:1:observation:1",
+    "model_invocation_id": "mi_85e5fd85dd14485e",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S5_audio_fanout",
+    "step_attempt_id": "sa_00eb5f885022ea28:dlg-002",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_tts_model",
+      "version": "1.0.0",
+      "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-tts-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "audio",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_a7628098505bca75",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 18,
+      "provider_units": {
+        "audio_seconds": 8.0,
+        "character_count": 36
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.012",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:01:35Z",
+    "finished_at": "2026-07-24T12:01:37Z",
+    "recorded_at": "2026-07-24T12:01:39Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0007",
+    "operation_id": "op_7966ce9865a105a9",
+    "operation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-003:1",
+    "observation_idempotency_key": "run_video_20260724_002:S5_audio_fanout:dlg-003:1:observation:1",
+    "model_invocation_id": "mi_7028f1bf6d837b05",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S5_audio_fanout",
+    "step_attempt_id": "sa_00eb5f885022ea28:dlg-003",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_tts_model",
+      "version": "1.0.0",
+      "digest": "sha256:6f2b647a6a55151855169505e9833861787a864be72670a18f8981db2aa7794e"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-tts-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "audio",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_7b1d568050728b9d",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 24,
+      "provider_units": {
+        "audio_seconds": 9.0,
+        "character_count": 35
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.012",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:01:49Z",
+    "finished_at": "2026-07-24T12:01:51Z",
+    "recorded_at": "2026-07-24T12:01:53Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0008",
+    "operation_id": "op_956bcf75aed3f6d8",
+    "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-001:1",
+    "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-001:1:observation:1",
+    "model_invocation_id": "mi_7da3361b7f8fbff9",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S6_visual_prompt_fanout",
+    "step_attempt_id": "sa_86967ee671f24daf:dlg-001",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_planning_model",
+      "version": "1.0.0",
+      "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-planning-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_aef73198396c4bbe",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 620,
+      "output_tokens": 130,
+      "total_tokens": 750
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.006",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:02:07Z",
+    "finished_at": "2026-07-24T12:02:09Z",
+    "recorded_at": "2026-07-24T12:02:11Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0009",
+    "operation_id": "op_fdc596b64d56d3d4",
+    "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-002:1",
+    "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-002:1:observation:1",
+    "model_invocation_id": "mi_ab6bc38b073bf200",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S6_visual_prompt_fanout",
+    "step_attempt_id": "sa_86967ee671f24daf:dlg-002",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_planning_model",
+      "version": "1.0.0",
+      "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-planning-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_9320cbb3ffdd13f3",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 620,
+      "output_tokens": 130,
+      "total_tokens": 750
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.006",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:02:21Z",
+    "finished_at": "2026-07-24T12:02:23Z",
+    "recorded_at": "2026-07-24T12:02:25Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0010",
+    "operation_id": "op_ff04e01541cf70fd",
+    "operation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-003:1",
+    "observation_idempotency_key": "run_video_20260724_002:S6_visual_prompt_fanout:dlg-003:1:observation:1",
+    "model_invocation_id": "mi_4493fd82e0be674e",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S6_visual_prompt_fanout",
+    "step_attempt_id": "sa_86967ee671f24daf:dlg-003",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_planning_model",
+      "version": "1.0.0",
+      "digest": "sha256:4ab704cfbb906b671df9483aa80a61ebd29676465119bcada28ac50976be2bff"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-planning-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "text",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_9727969ea418db87",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 620,
+      "output_tokens": 130,
+      "total_tokens": 750
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.006",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:02:35Z",
+    "finished_at": "2026-07-24T12:02:37Z",
+    "recorded_at": "2026-07-24T12:02:39Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0011",
+    "operation_id": "op_651dd5f0f325101d",
+    "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-001:1",
+    "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-001:1:observation:1",
+    "model_invocation_id": "mi_eb8b31a592c6fc21",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S7_image_fanout",
+    "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-001",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_image_model",
+      "version": "1.0.0",
+      "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-image-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "vision",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_1d9df197372f8a17",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "image_count": 1,
+        "reference_count": 2
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.04",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:02:53Z",
+    "finished_at": "2026-07-24T12:02:55Z",
+    "recorded_at": "2026-07-24T12:02:57Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0012",
+    "operation_id": "op_9ea8b0bf16988195",
+    "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-002:1",
+    "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-002:1:observation:1",
+    "model_invocation_id": "mi_ab4f636281b69088",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S7_image_fanout",
+    "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-002",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_image_model",
+      "version": "1.0.0",
+      "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-image-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "vision",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_926c171d59040113",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "image_count": 1,
+        "reference_count": 2
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.04",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:03:07Z",
+    "finished_at": "2026-07-24T12:03:09Z",
+    "recorded_at": "2026-07-24T12:03:11Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0013",
+    "operation_id": "op_2c7ee072b444490a",
+    "operation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-003:1",
+    "observation_idempotency_key": "run_video_20260724_002:S7_image_fanout:dlg-003:1:observation:1",
+    "model_invocation_id": "mi_eb43f2de2bd425a0",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S7_image_fanout",
+    "step_attempt_id": "sa_8ef0bef21d5f6a77:dlg-003",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_image_model",
+      "version": "1.0.0",
+      "digest": "sha256:f6879e520816976ec517f7b10b830175b5098a17a7de7d6172cee96f48f18151"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-image-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "vision",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_b4940ec963228389",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "image_count": 1,
+        "reference_count": 2
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.04",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:03:21Z",
+    "finished_at": "2026-07-24T12:03:23Z",
+    "recorded_at": "2026-07-24T12:03:25Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0014",
+    "operation_id": "op_1c22e99c4f69563d",
+    "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-001:1",
+    "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-001:1:observation:1",
+    "model_invocation_id": "mi_6486b1440150fffc",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S8_video_fanout",
+    "step_attempt_id": "sa_1a36bdcf705aec71:dlg-001",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_generation_model",
+      "version": "1.0.0",
+      "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-video-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "video",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_c921a3a11d2b008a",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "video_seconds": 7.0,
+        "input_image_count": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.45",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:03:39Z",
+    "finished_at": "2026-07-24T12:03:41Z",
+    "recorded_at": "2026-07-24T12:03:43Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0015",
+    "operation_id": "op_a7d2c2ac0e38c6fe",
+    "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-002:1",
+    "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-002:1:observation:1",
+    "model_invocation_id": "mi_4126faa28baa721e",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S8_video_fanout",
+    "step_attempt_id": "sa_1a36bdcf705aec71:dlg-002",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_generation_model",
+      "version": "1.0.0",
+      "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-video-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "video",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_bf9733a5485f4e7d",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "video_seconds": 8.0,
+        "input_image_count": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.45",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:03:53Z",
+    "finished_at": "2026-07-24T12:03:55Z",
+    "recorded_at": "2026-07-24T12:03:57Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0016",
+    "operation_id": "op_42f9c4f1d3ac982c",
+    "operation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-003:1",
+    "observation_idempotency_key": "run_video_20260724_002:S8_video_fanout:dlg-003:1:observation:1",
+    "model_invocation_id": "mi_7261ef66a33ef27e",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S8_video_fanout",
+    "step_attempt_id": "sa_1a36bdcf705aec71:dlg-003",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_generation_model",
+      "version": "1.0.0",
+      "digest": "sha256:1870ae935c7ac08679ad620cc26d599c6ccbc4b54e6903ffaa0f441a9959f3ea"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-video-model",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "video",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_364613ea1175516c",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "provider_units": {
+        "video_seconds": 9.0,
+        "input_image_count": 1
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.45",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:04:07Z",
+    "finished_at": "2026-07-24T12:04:09Z",
+    "recorded_at": "2026-07-24T12:04:11Z",
+    "supersedes_usage_record_id": null
+  },
+  {
+    "schema_version": "1.2",
+    "usage_record_id": "usage_run_video_20260724_002_0017",
+    "operation_id": "op_871baf0336c2a5d9",
+    "operation_idempotency_key": "run_video_20260724_002:S11_multimodal_qa:single:1",
+    "observation_idempotency_key": "run_video_20260724_002:S11_multimodal_qa:single:1:observation:1",
+    "model_invocation_id": "mi_2e3a7d9b6a58de6a",
+    "agent_execution_id": null,
+    "run_id": "run_video_20260724_002",
+    "step_id": "S11_multimodal_qa",
+    "step_attempt_id": "sa_472b91a72e097570",
+    "step_attempt_no": 1,
+    "profile_snapshot": {
+      "profile_id": "video_multimodal_qa",
+      "version": "1.0.0",
+      "digest": "sha256:33a6de06a049036d13d3577f25c8c7594252aae531aa3e5c19083727d2702c28"
+    },
+    "provider": "mock-provider",
+    "model_id": "mock-multimodal-qa",
+    "model_revision": "2026-07-24",
+    "deployment_id": "demo-local",
+    "region": "local",
+    "modality": "multimodal",
+    "invocation_status": "completed",
+    "provider_request_id": "mock_req_5c4736369b70448c",
+    "usage": {
+      "measurement_status": "locally_measured",
+      "input_tokens": 1200,
+      "output_tokens": 240,
+      "total_tokens": 1440,
+      "provider_units": {
+        "video_seconds": 24.0
+      }
+    },
+    "cost": {
+      "status": "estimated",
+      "amount": "0.015",
+      "currency": "USD",
+      "source": "price_snapshot_calculated",
+      "price_snapshot_ref": "mock-pricebook@2026-07-24"
+    },
+    "started_at": "2026-07-24T12:04:46Z",
+    "finished_at": "2026-07-24T12:04:48Z",
+    "recorded_at": "2026-07-24T12:04:50Z",
+    "supersedes_usage_record_id": null
+  }
+]

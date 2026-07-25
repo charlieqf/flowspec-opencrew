@@ -1,0 +1,124 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "enum": [
+        "1.0"
+      ],
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "tool_use_session_id": {
+      "title": "Tool Use Session Id",
+      "type": "string"
+    },
+    "attempt_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attempt Id"
+    },
+    "workflow_plan_run_id": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Workflow Plan Run Id"
+    },
+    "step_index": {
+      "default": 0,
+      "title": "Step Index",
+      "type": "integer"
+    },
+    "step_id": {
+      "title": "Step Id",
+      "type": "string"
+    },
+    "tool_id": {
+      "title": "Tool Id",
+      "type": "string"
+    },
+    "tool_name": {
+      "title": "Tool Name",
+      "type": "string"
+    },
+    "status": {
+      "default": "not_started",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "default": "",
+      "title": "Started At",
+      "type": "string"
+    },
+    "updated_at": {
+      "default": "",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "finished_at": {
+      "default": "",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "heartbeat_at": {
+      "default": "",
+      "title": "Heartbeat At",
+      "type": "string"
+    },
+    "retry_count": {
+      "default": 0,
+      "title": "Retry Count",
+      "type": "integer"
+    },
+    "idempotency_key": {
+      "default": "",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "input_snapshot_hash": {
+      "default": "",
+      "title": "Input Snapshot Hash",
+      "type": "string"
+    },
+    "output_manifest_path": {
+      "default": "Output/OutputManifest.json",
+      "title": "Output Manifest Path",
+      "type": "string"
+    },
+    "error_summary": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Summary"
+    }
+  },
+  "required": [
+    "tool_use_session_id",
+    "step_id",
+    "tool_id",
+    "tool_name"
+  ],
+  "title": "State",
+  "type": "object"
+}

@@ -1,0 +1,70 @@
+{
+  "profiles": {
+    "fast_structure": {
+      "description": "Quick semantic timeline with no VLM-heavy optional tools and no final delivery package by default.",
+      "best_for": [
+        "fast preview",
+        "low runtime budget",
+        "rough semantic segmentation"
+      ],
+      "tools": ["01", "02", "04", "05", "03", "08", "13", "16"],
+      "skip_by_default": ["06", "07", "09", "10", "11", "12", "14", "15"],
+      "requires_user_confirmation_for": ["03"],
+      "cost_level": "medium"
+    },
+    "standard_semantic": {
+      "description": "Semantic-first timeline with low-cost evidence, alignment, audit, and refinement suggestions.",
+      "best_for": [
+        "normal semantic segmentation",
+        "timeline review",
+        "avoid expensive VLM scene judgement"
+      ],
+      "tools": ["01", "02", "04", "05", "03", "08", "10", "11", "12", "13", "16"],
+      "conditional_tools": ["02_0", "05_1", "07", "09"],
+      "skip_by_default": ["06", "14", "15"],
+      "requires_user_confirmation_for": ["03"],
+      "cost_level": "medium"
+    },
+    "visual_strict": {
+      "description": "High-accuracy scene and visual-boundary workflow, including VLM scene transition judgement.",
+      "best_for": [
+        "multi-location video",
+        "strict shooting-location transitions",
+        "visually complex timeline"
+      ],
+      "tools": ["01", "02", "04", "05", "06", "03", "08", "09", "10", "11", "12", "13", "16"],
+      "conditional_tools": ["02_0", "05_1", "07"],
+      "skip_by_default": ["14", "15"],
+      "requires_user_confirmation_for": ["03", "06"],
+      "cost_level": "very_high"
+    },
+    "retake_delivery_vlm": {
+      "description": "Produce VLM retake descriptions and complete three-scheme delivery packages.",
+      "best_for": [
+        "retake planning",
+        "segment package export",
+        "production handoff"
+      ],
+      "tools": ["01", "02", "04", "05", "03", "08", "10", "11", "12", "13", "14:vlm", "15", "16"],
+      "conditional_tools": ["02_0", "05_1", "06", "07", "09"],
+      "skip_by_default": [],
+      "requires_user_confirmation_for": ["03", "14:vlm"],
+      "cost_level": "very_high"
+    },
+    "full_quality": {
+      "description": "Maximum-quality workflow with all major conditional refinements and final deliverables.",
+      "best_for": [
+        "full QA",
+        "complex videos",
+        "highest confidence deliverables"
+      ],
+      "tools": ["01", "02", "04", "05", "06", "07", "03", "08", "09", "10", "11", "12", "13", "14:vlm", "15", "16"],
+      "conditional_tools": [],
+      "skip_by_default": [],
+      "requires_user_confirmation_for": ["03", "06", "14:vlm"],
+      "cost_level": "very_high"
+    }
+  },
+  "default_recommendation": "standard_semantic",
+  "delivery_recommendation": "retake_delivery_vlm"
+}

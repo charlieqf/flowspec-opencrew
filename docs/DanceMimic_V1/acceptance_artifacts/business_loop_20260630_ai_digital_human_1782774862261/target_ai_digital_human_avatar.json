@@ -1,0 +1,10 @@
+{
+  "origin": {
+    "tool": "upload_asset_library_agent",
+    "source": "imagegen",
+    "prompt": "AI generated stylized 3D digital human presenter, full-body, clearly synthetic person, not a robot, not photorealistic."
+  },
+  "asset_role": "dance_mimic_target_identity",
+  "person_hint": true,
+  "notes": "Provider-safe AI target person fixture for DanceMimic browser acceptance."
+}

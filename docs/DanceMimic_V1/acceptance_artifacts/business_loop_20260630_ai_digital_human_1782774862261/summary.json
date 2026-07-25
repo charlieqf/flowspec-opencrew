@@ -1,0 +1,534 @@
+{
+  "schema_version": "dance_mimic_v1_browser_acceptance_summary_20260630",
+  "generated_at_local": "2026-06-30T09:40:00+10:00",
+  "run_id": "1782774862261",
+  "frontend_url": "http://127.0.0.1:18080",
+  "backend_url": "http://127.0.0.1:8011",
+  "business_goal": "上传或从素材库选择舞蹈参考视频，并选择 AI 生成的人物/数字人目标图，让目标人物按参考舞蹈动作生成新视频。",
+  "target_identity_image": {
+    "fixture_path": "ToolLibrary/DanceMimic_V1/test_fixtures/target_ai_digital_human_avatar.png",
+    "uploaded_library_path": "/Users/macmini-4/.opencrew/dance_mimic_v1/target_images/1782771892738_target_ai_digital_human_avatar.png",
+    "artifact_path": "target_ai_digital_human_avatar.png",
+    "mode_in_final_run": "library",
+    "description": "AI 生成的人物/数字人图；首次由 UI 上传进入素材库，本轮最终复验从素材库选择。不是机器人图。"
+  },
+  "fixtures": [
+    {
+      "key": "frontal",
+      "role": "干净正脸基线(动作小)",
+      "source_video": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_frontal_studio.mp4",
+      "source_probe": {
+        "path": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_frontal_studio.mp4",
+        "exists": true,
+        "size_bytes": 5371296,
+        "duration_seconds": 7.224,
+        "width": 1080,
+        "height": 1920,
+        "avg_frame_rate": "30000/1001"
+      },
+      "run_id": "1782774862261",
+      "task_id": 174,
+      "session_id": 233,
+      "dance_mimic_url": "http://127.0.0.1:18080/#/dance-mimic/tasks/174",
+      "storyboard_url": "http://127.0.0.1:18080/#/koubo-storyboard/tasks/174",
+      "target_identity_image_mode": "library",
+      "target_identity_image": "/Users/macmini-4/.opencrew/dance_mimic_v1/target_images/1782771892738_target_ai_digital_human_avatar.png",
+      "reference_privacy_mode": "provider_safe_outline",
+      "dance_mimic_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 5371296
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 1583330
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 3855
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 6645
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 2148
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 1767
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      },
+      "video_plan_summary": {
+        "shot_count": 1,
+        "scene_count": 1,
+        "dialogue_count": 1,
+        "segment_count": 1,
+        "blocked_segment_count": 0,
+        "skipped_scene_count": 0,
+        "blocked_scene_count": 0,
+        "need_audio_count": 0,
+        "need_image_prompt_count": 0,
+        "need_image_count": 0,
+        "need_video_prompt_count": 1,
+        "need_video_count": 1,
+        "segment_audio_count": 1,
+        "need_lipsync_count": 0,
+        "need_audio_video_sync_count": 1,
+        "need_sync_count": 1,
+        "dance_mimic_reference_video_segments": 1
+      },
+      "execution_status": "completed",
+      "execution_summary": {
+        "segment_count": 1,
+        "completed_count": 1,
+        "failed_count": 0,
+        "failed_timeout_count": 0,
+        "lipsync_completed_count": 0,
+        "audio_video_sync_completed_count": 1,
+        "bound_video_completed_count": 0,
+        "segment_audio_count": 1
+      },
+      "provider_segments": [
+        {
+          "asset_key": "dak_0001",
+          "segment_id": "shot_001_scene_001_segment_001",
+          "status": "completed",
+          "provider": "openrouter",
+          "model": "bytedance/seedance-2.0",
+          "model_alias": "MaxSR2",
+          "reference_mode": "input_references",
+          "video_generation_mode": "dance_mimic_reference_video",
+          "generate_audio": false,
+          "send_frame_images": false,
+          "send_input_references": true,
+          "input_reference_count": 2,
+          "provider_task_id": "wVsV0S0JZ1fw6EkUEQYw",
+          "elapsed_seconds": 234.431
+        }
+      ],
+      "final_video_paths": [
+        "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4"
+      ],
+      "final_video_absolute_paths": [
+        "/Users/macmini-4/.opencrew/sessions/233/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4"
+      ],
+      "final_video_probe": [
+        {
+          "path": "/Users/macmini-4/.opencrew/sessions/233/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+          "exists": true,
+          "size_bytes": 999998,
+          "duration_seconds": 7.16,
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "25/1"
+        }
+      ],
+      "screenshots": [
+        "screenshots/frontal-01-task-list-before-create.png",
+        "screenshots/frontal-02-create-modal-filled-real-detector-target-image.png",
+        "screenshots/frontal-03-run-page-started.png",
+        "screenshots/frontal-04-dance-mimic-completed-artifacts.png",
+        "screenshots/frontal-05-storyboard-opened-target-image-reference-visible.png",
+        "screenshots/frontal-06-video-plan-generated-openrouter-reference-target.png",
+        "screenshots/frontal-07-before-execute-video-plan.png",
+        "screenshots/frontal-08-execution-queued-running.png",
+        "screenshots/frontal-09-execution-completed-modal.png",
+        "screenshots/frontal-10-storyboard-final-video-visible.png",
+        "screenshots/frontal-11-dance-mimic-final-artifacts.png"
+      ],
+      "screenshot_count": 11,
+      "web_visible_screenshots": {
+        "storyboard_final_video_visible": "screenshots/frontal-10-storyboard-final-video-visible.png",
+        "dance_mimic_final_artifacts": "screenshots/frontal-11-dance-mimic-final-artifacts.png"
+      }
+    },
+    {
+      "key": "bigmotion",
+      "role": "纯白影棚,大动作压力",
+      "source_video": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_bigmotion_studio.mp4",
+      "source_probe": {
+        "path": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance_solo_bigmotion_studio.mp4",
+        "exists": true,
+        "size_bytes": 3170157,
+        "duration_seconds": 11.97,
+        "width": 1280,
+        "height": 720,
+        "avg_frame_rate": "24000/1001"
+      },
+      "run_id": "1782774862261",
+      "task_id": 175,
+      "session_id": 234,
+      "dance_mimic_url": "http://127.0.0.1:18080/#/dance-mimic/tasks/175",
+      "storyboard_url": "http://127.0.0.1:18080/#/koubo-storyboard/tasks/175",
+      "target_identity_image_mode": "library",
+      "target_identity_image": "/Users/macmini-4/.opencrew/dance_mimic_v1/target_images/1782771892738_target_ai_digital_human_avatar.png",
+      "reference_privacy_mode": "provider_safe_outline",
+      "dance_mimic_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 3170157
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 1583330
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 4063
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 10135
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 3626
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 2750
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      },
+      "video_plan_summary": {
+        "shot_count": 1,
+        "scene_count": 1,
+        "dialogue_count": 2,
+        "segment_count": 2,
+        "blocked_segment_count": 0,
+        "skipped_scene_count": 0,
+        "blocked_scene_count": 0,
+        "need_audio_count": 0,
+        "need_image_prompt_count": 0,
+        "need_image_count": 0,
+        "need_video_prompt_count": 2,
+        "need_video_count": 2,
+        "segment_audio_count": 2,
+        "need_lipsync_count": 0,
+        "need_audio_video_sync_count": 2,
+        "need_sync_count": 2,
+        "dance_mimic_reference_video_segments": 2
+      },
+      "execution_status": "completed",
+      "execution_summary": {
+        "segment_count": 2,
+        "completed_count": 2,
+        "failed_count": 0,
+        "failed_timeout_count": 0,
+        "lipsync_completed_count": 0,
+        "audio_video_sync_completed_count": 2,
+        "bound_video_completed_count": 0,
+        "segment_audio_count": 2
+      },
+      "provider_segments": [
+        {
+          "asset_key": "dak_0001",
+          "segment_id": "shot_001_scene_001_segment_001",
+          "status": "completed",
+          "provider": "openrouter",
+          "model": "bytedance/seedance-2.0",
+          "model_alias": "MaxSR2",
+          "reference_mode": "input_references",
+          "video_generation_mode": "dance_mimic_reference_video",
+          "generate_audio": false,
+          "send_frame_images": false,
+          "send_input_references": true,
+          "input_reference_count": 2,
+          "provider_task_id": "cJ3TwBJ7nnuOzm6TblFZ",
+          "elapsed_seconds": 261.24
+        },
+        {
+          "asset_key": "dak_0002",
+          "segment_id": "shot_001_scene_001_segment_002",
+          "status": "completed",
+          "provider": "openrouter",
+          "model": "bytedance/seedance-2.0",
+          "model_alias": "MaxSR2",
+          "reference_mode": "input_references",
+          "video_generation_mode": "dance_mimic_reference_video",
+          "generate_audio": false,
+          "send_frame_images": false,
+          "send_input_references": true,
+          "input_reference_count": 2,
+          "provider_task_id": "B1NjgqQ8aH43wJwRUoH4",
+          "elapsed_seconds": 233.609
+        }
+      ],
+      "final_video_paths": [
+        "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+        "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+      ],
+      "final_video_absolute_paths": [
+        "/Users/macmini-4/.opencrew/sessions/234/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+        "/Users/macmini-4/.opencrew/sessions/234/workspace/SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+      ],
+      "final_video_probe": [
+        {
+          "path": "/Users/macmini-4/.opencrew/sessions/234/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+          "exists": true,
+          "size_bytes": 1147809,
+          "duration_seconds": 5.96,
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "25/1"
+        },
+        {
+          "path": "/Users/macmini-4/.opencrew/sessions/234/workspace/SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+          "exists": true,
+          "size_bytes": 1104846,
+          "duration_seconds": 5.92,
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "25/1"
+        }
+      ],
+      "screenshots": [
+        "screenshots/bigmotion-01-task-list-before-create.png",
+        "screenshots/bigmotion-02-create-modal-filled-real-detector-target-image.png",
+        "screenshots/bigmotion-03-run-page-started.png",
+        "screenshots/bigmotion-04-dance-mimic-completed-artifacts.png",
+        "screenshots/bigmotion-05-storyboard-opened-target-image-reference-visible.png",
+        "screenshots/bigmotion-06-video-plan-generated-openrouter-reference-target.png",
+        "screenshots/bigmotion-07-before-execute-video-plan.png",
+        "screenshots/bigmotion-08-execution-queued-running.png",
+        "screenshots/bigmotion-09-execution-completed-modal.png",
+        "screenshots/bigmotion-10-storyboard-final-video-visible.png",
+        "screenshots/bigmotion-11-dance-mimic-final-artifacts.png"
+      ],
+      "screenshot_count": 11,
+      "web_visible_screenshots": {
+        "storyboard_final_video_visible": "screenshots/bigmotion-10-storyboard-final-video-visible.png",
+        "dance_mimic_final_artifacts": "screenshots/bigmotion-11-dance-mimic-final-artifacts.png"
+      }
+    },
+    {
+      "key": "dance1",
+      "role": "单人正脸,城市夜景,真实编舞",
+      "source_video": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance1.mp4",
+      "source_probe": {
+        "path": "/Users/macmini-4/work/code/OpenCrew/ToolLibrary/DanceMimic_V1/test_fixtures/dance1.mp4",
+        "exists": true,
+        "size_bytes": 2926421,
+        "duration_seconds": 14.0,
+        "width": 720,
+        "height": 1280,
+        "avg_frame_rate": "30/1"
+      },
+      "run_id": "1782774862261",
+      "task_id": 176,
+      "session_id": 235,
+      "dance_mimic_url": "http://127.0.0.1:18080/#/dance-mimic/tasks/176",
+      "storyboard_url": "http://127.0.0.1:18080/#/koubo-storyboard/tasks/176",
+      "target_identity_image_mode": "library",
+      "target_identity_image": "/Users/macmini-4/.opencrew/dance_mimic_v1/target_images/1782771892738_target_ai_digital_human_avatar.png",
+      "reference_privacy_mode": "provider_safe_outline",
+      "dance_mimic_artifacts": {
+        "files": {
+          "variables_json": {
+            "path": "SessionContext/Variables.json",
+            "exists": true,
+            "size": 1902
+          },
+          "source_reference_video": {
+            "path": "SessionContext/Video_Reference_Source.mp4",
+            "exists": true,
+            "size": 2926421
+          },
+          "target_identity_image": {
+            "path": "SessionContext/Target_Identity_Image.png",
+            "exists": true,
+            "size": 1583330
+          },
+          "reference_media_manifest": {
+            "path": "SessionOutput/reference/reference_media_manifest.json",
+            "exists": true,
+            "size": 3827
+          },
+          "reference_segments_manifest": {
+            "path": "SessionOutput/reference/segments/reference_segments_manifest.json",
+            "exists": true,
+            "size": 10099
+          },
+          "srt_storyboard": {
+            "path": "SessionOutput/storyboard/srt_storyboard.json",
+            "exists": true,
+            "size": 3613
+          },
+          "storyboard_seed": {
+            "path": "SessionOutput/storyboard/storyboard_seed.json",
+            "exists": true,
+            "size": 2741
+          },
+          "stale_manifest": {
+            "path": "SessionReport/stale_manifest.json",
+            "exists": false,
+            "size": 0
+          }
+        },
+        "reference_ready": true,
+        "storyboard_ready": true
+      },
+      "video_plan_summary": {
+        "shot_count": 1,
+        "scene_count": 1,
+        "dialogue_count": 2,
+        "segment_count": 2,
+        "blocked_segment_count": 0,
+        "skipped_scene_count": 0,
+        "blocked_scene_count": 0,
+        "need_audio_count": 0,
+        "need_image_prompt_count": 0,
+        "need_image_count": 0,
+        "need_video_prompt_count": 2,
+        "need_video_count": 2,
+        "segment_audio_count": 2,
+        "need_lipsync_count": 0,
+        "need_audio_video_sync_count": 2,
+        "need_sync_count": 2,
+        "dance_mimic_reference_video_segments": 2
+      },
+      "execution_status": "completed",
+      "execution_summary": {
+        "segment_count": 2,
+        "completed_count": 2,
+        "failed_count": 0,
+        "failed_timeout_count": 0,
+        "lipsync_completed_count": 0,
+        "audio_video_sync_completed_count": 2,
+        "bound_video_completed_count": 0,
+        "segment_audio_count": 2
+      },
+      "provider_segments": [
+        {
+          "asset_key": "dak_0001",
+          "segment_id": "shot_001_scene_001_segment_001",
+          "status": "completed",
+          "provider": "openrouter",
+          "model": "bytedance/seedance-2.0",
+          "model_alias": "MaxSR2",
+          "reference_mode": "input_references",
+          "video_generation_mode": "dance_mimic_reference_video",
+          "generate_audio": false,
+          "send_frame_images": false,
+          "send_input_references": true,
+          "input_reference_count": 2,
+          "provider_task_id": "DnMEfk8kl6AF0y8s7H8x",
+          "elapsed_seconds": 264.908
+        },
+        {
+          "asset_key": "dak_0002",
+          "segment_id": "shot_001_scene_001_segment_002",
+          "status": "completed",
+          "provider": "openrouter",
+          "model": "bytedance/seedance-2.0",
+          "model_alias": "MaxSR2",
+          "reference_mode": "input_references",
+          "video_generation_mode": "dance_mimic_reference_video",
+          "generate_audio": false,
+          "send_frame_images": false,
+          "send_input_references": true,
+          "input_reference_count": 2,
+          "provider_task_id": "3JWEA3swG64V2wRXAg6N",
+          "elapsed_seconds": 368.805
+        }
+      ],
+      "final_video_paths": [
+        "SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+        "SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+      ],
+      "final_video_absolute_paths": [
+        "/Users/macmini-4/.opencrew/sessions/235/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+        "/Users/macmini-4/.opencrew/sessions/235/workspace/SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4"
+      ],
+      "final_video_probe": [
+        {
+          "path": "/Users/macmini-4/.opencrew/sessions/235/workspace/SessionOutput/storyboard/Working/dak_0001_Video_Final.mp4",
+          "exists": true,
+          "size_bytes": 1456085,
+          "duration_seconds": 7.96,
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "25/1"
+        },
+        {
+          "path": "/Users/macmini-4/.opencrew/sessions/235/workspace/SessionOutput/storyboard/Working/dak_0002_Video_Final.mp4",
+          "exists": true,
+          "size_bytes": 999717,
+          "duration_seconds": 5.96,
+          "width": 720,
+          "height": 1280,
+          "avg_frame_rate": "25/1"
+        }
+      ],
+      "screenshots": [
+        "screenshots/dance1-01-task-list-before-create.png",
+        "screenshots/dance1-02-create-modal-filled-real-detector-target-image.png",
+        "screenshots/dance1-03-run-page-started.png",
+        "screenshots/dance1-04-dance-mimic-completed-artifacts.png",
+        "screenshots/dance1-05-storyboard-opened-target-image-reference-visible.png",
+        "screenshots/dance1-06-video-plan-generated-openrouter-reference-target.png",
+        "screenshots/dance1-07-before-execute-video-plan.png",
+        "screenshots/dance1-08-execution-queued-running.png",
+        "screenshots/dance1-09-execution-completed-modal.png",
+        "screenshots/dance1-10-storyboard-final-video-visible.png",
+        "screenshots/dance1-11-dance-mimic-final-artifacts.png"
+      ],
+      "screenshot_count": 11,
+      "web_visible_screenshots": {
+        "storyboard_final_video_visible": "screenshots/dance1-10-storyboard-final-video-visible.png",
+        "dance_mimic_final_artifacts": "screenshots/dance1-11-dance-mimic-final-artifacts.png"
+      }
+    }
+  ],
+  "assertions": {
+    "browser_flow_complete_for_all_three_fixtures": true,
+    "all_expected_step_screenshots_saved": true,
+    "screenshots_saved": 33,
+    "final_videos_created": 5,
+    "final_videos_exist_nonempty": true,
+    "openrouter_input_references_main_path": true,
+    "provider_audio_generation_disabled": true,
+    "reference_video_not_bound_as_video_final": true
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "toolset_id": "DanceMimic_V1",
+  "workflow_id": "dance_mimic_v1",
+  "target": "dance_mimic_v1",
+  "description": "Machine-readable registry for the DanceMimic_V1 thin ToolLibrary surface.",
+  "implementation_phase": "phase_1_reference_toolchain_mvp",
+  "constraints": [
+    "DanceMimic_V1 uses an independent runner target and surface: dance_mimic_v1.",
+    "DanceMimic_V1 must not reuse the Analysis_V1 seven-step run-to-storyboard chain.",
+    "SessionContext/Variables.json tool-level input is source_video_path; tools must not read Variables.json.reference_video_path.",
+    "Reference face-masked videos produced by 02/03 are motion references and must not be treated as Video_Final.",
+    "DanceMimic downstream video generation uses OpenRouter MaxSR2 input_references as the primary path; Seedance/MaxSR2 normalization is only a fallback."
+  ],
+  "tools": [
+    {
+      "id": "00",
+      "name": "00_PrepareSessionVariables",
+      "display_name_zh": "准备会话变量",
+      "display_name_en": "Prepare session variables",
+      "script": "ToolLibrary/DanceMimic_V1/00_PrepareSessionVariables.py",
+      "implementation_ref": "ToolLibrary/DanceMimic_V1/_tool_impl.py",
+      "wrapper_type": "thin_adapter",
+      "implementation_status": "implemented_mvp",
+      "stage": "prepare",
+      "required_by_default": true,
+      "cost_level": "very_low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "hard_dependencies": ["reference_video_task"],
+      "soft_dependencies": ["openclip_tasks.workflow_mode"],
+      "main_outputs": [
+        "SessionContext/Variables.json",
+        "SessionContext/Video_Reference_Source.mp4",
+        "S1_00_PrepareSessionVariables/Report/Result.json"
+      ],
+      "notes": "00 maps the task-level source reference into Variables.json.source_video_path; it does not read Variables.json.reference_video_path."
+    },
+    {
+      "id": "01",
+      "name": "01_ReferenceMediaDemux",
+      "display_name_zh": "参考视频音画拆分",
+      "display_name_en": "Reference media demux",
+      "script": "ToolLibrary/DanceMimic_V1/01_ReferenceMediaDemux.py",
+      "wrapper_type": "thin_adapter",
+      "implementation_status": "implemented_mvp",
+      "stage": "reference_media_prepare",
+      "required_by_default": true,
+      "cost_level": "medium",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "uses_audio": true,
+      "supports_resume": true,
+      "hard_dependencies": ["SessionContext/Variables.json", "SessionContext/Video_Reference_Source.mp4"],
+      "soft_dependencies": ["ffmpeg", "ffprobe", "demucs_optional"],
+      "main_outputs": [
+        "SessionOutput/reference/reference_media_manifest.json",
+        "SessionOutput/reference/Video_Reference_Silent.mp4",
+        "SessionOutput/reference/Audio_Reference_Mixed.wav",
+        "S2_01_ReferenceMediaDemux/Report/Result.json"
+      ],
+      "notes": "This replaces the legacy 01_VideoProbeMetadata copy. Demucs/vocal extraction is optional in S1; mixed audio and silent video are required."
+    },
+    {
+      "id": "02",
+      "name": "02_ReferenceFaceMaskedVideoBuild",
+      "display_name_zh": "参考视频人脸遮挡构建",
+      "display_name_en": "Reference face-masked video build",
+      "script": "ToolLibrary/DanceMimic_V1/02_ReferenceFaceMaskedVideoBuild.py",
+      "wrapper_type": "thin_adapter",
+      "implementation_status": "implemented_mvp",
+      "stage": "reference_face_mask",
+      "required_by_default": true,
+      "cost_level": "high",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "uses_video": true,
+      "supports_resume": true,
+      "hard_dependencies": [
+        "SessionOutput/reference/reference_media_manifest.json"
+      ],
+      "soft_dependencies": [
+        "insightface_scrfd",
+        "mediapipe_blazeface",
+        "opencv_haar",
+        "fake_detector_fixture",
+        "fixed_bbox_fixture"
+      ],
+      "main_outputs": [
+        "SessionOutput/reference/segments/reference_segments_manifest.json",
+        "SessionOutput/reference/segments/Segment_*/Segment_*_FaceTrack.json",
+        "SessionOutput/reference/segments/Segment_*/Segment_*_Reference_FaceMasked.mp4",
+        "S3_02_ReferenceFaceMaskedVideoBuild/Report/Result.json"
+      ],
+      "notes": "02 is P0 for privacy. The default real detector is insightface_scrfd with mediapipe_blazeface/opencv_haar fallbacks; fake/fixed-bbox fixtures remain the CI path. It writes per-segment detection samples, FaceTrack, provider-safe face-masked reference videos, H.264 provider-size QA, and automatic grid-black masking QA."
+    },
+    {
+      "id": "03",
+      "name": "03_StoryBoardStandardTaskBuild",
+      "display_name_zh": "标准 StoryBoard 构建",
+      "display_name_en": "StoryBoard standard task build",
+      "script": "ToolLibrary/DanceMimic_V1/03_StoryBoardStandardTaskBuild.py",
+      "wrapper_type": "thin_adapter",
+      "implementation_status": "implemented_mvp",
+      "stage": "storyboard_standard_task_build",
+      "required_by_default": true,
+      "cost_level": "low",
+      "uses_llm": false,
+      "uses_vlm": false,
+      "supports_resume": true,
+      "hard_dependencies": [
+        "SessionContext/Variables.json",
+        "SessionOutput/reference/reference_media_manifest.json",
+        "SessionOutput/reference/segments/reference_segments_manifest.json"
+      ],
+      "soft_dependencies": ["openclip_tasks.workflow_mode"],
+      "main_outputs": [
+        "SessionOutput/storyboard/srt_storyboard.json",
+        "SessionOutput/storyboard/storyboard_seed.json",
+        "SessionOutput/storyboard/assets/videos/{dialogue_asset_key}_Reference_FaceMasked.mp4",
+        "S4_03_StoryBoardStandardTaskBuild/Report/Result.json"
+      ],
+      "notes": "03 must write stable dialogue_asset_key values and leave working_assets.video.path empty."
+    }
+  ]
+}

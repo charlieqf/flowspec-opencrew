@@ -1,0 +1,17 @@
+{
+  "application_id": "APP-00123",
+  "document_revision": "docs-r1",
+  "facts": [
+    {
+      "field": "stated_income",
+      "value": 98000,
+      "evidence_span": "payslip:p1:L8-L12"
+    },
+    {
+      "field": "loan_amount",
+      "value": 42000,
+      "evidence_span": "application:p1:L21"
+    }
+  ],
+  "mock_model_output": true
+}

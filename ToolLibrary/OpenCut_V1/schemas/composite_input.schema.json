@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opencrew.local/schemas/composite_input.schema.json",
+  "title": "Media Library Composite Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "asset_id",
+    "source_version",
+    "dialogue_run_id",
+    "dialogue_result_hash",
+    "visual_structure_run_id",
+    "visual_structure_result_hash",
+    "visual_semantic_run_id",
+    "visual_semantic_result_hash",
+    "sampling_strategy",
+    "composite_prompt_version",
+    "model_config_id",
+    "source_duration_ms",
+    "source_width",
+    "source_height",
+    "source_orientation"
+  ],
+  "properties": {
+    "schema_version": {"const": "media_library_composite_input_v1"},
+    "asset_id": {"type": "string", "minLength": 1},
+    "source_version": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "dialogue_run_id": {"type": "string", "minLength": 1},
+    "dialogue_result_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "visual_structure_run_id": {"type": "string", "minLength": 1},
+    "visual_structure_result_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "visual_semantic_run_id": {"type": "string", "minLength": 1},
+    "visual_semantic_result_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sampling_strategy": {"const": "scene_midpoint_v1"},
+    "composite_prompt_version": {"type": "string", "minLength": 1},
+    "model_config_id": {"type": "string", "minLength": 1},
+    "source_duration_ms": {"type": "integer", "minimum": 1},
+    "source_width": {"type": ["integer", "null"], "minimum": 1},
+    "source_height": {"type": ["integer", "null"], "minimum": 1},
+    "source_orientation": {"enum": ["landscape", "portrait", "square", "unknown"]}
+  }
+}

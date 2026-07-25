@@ -1,0 +1,8 @@
+{
+  "application_id": "APP-00123",
+  "amount": 42000,
+  "currency": "AUD",
+  "ledger_operation_key": "disburse:APP-00123",
+  "status": "mock-settled",
+  "disbursed_at": "2026-07-24T03:01:00Z"
+}

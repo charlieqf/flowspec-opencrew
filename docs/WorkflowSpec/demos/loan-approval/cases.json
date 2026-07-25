@@ -1,0 +1,59 @@
+[
+  {
+    "run_id": "run_loan_20260724_001",
+    "session_id": "loan_AU_00123",
+    "task_id": "loan_AU_00123_t",
+    "run_sequence": 1,
+    "supersedes_run_id": null,
+    "started_at": "2026-07-24T00:10:00Z",
+    "source_revision": "application-r1",
+    "context": {
+      "application_id": "APP-00123",
+      "applicant_name": "Alex Chen",
+      "loan_amount": 42000,
+      "stated_income": 98000,
+      "document_revision": "docs-r1",
+      "credit_score_fixture": 582,
+      "fraud_score_fixture": 0.08,
+      "verified_income_fixture": 93000,
+      "review_decision": null
+    },
+    "human_decisions": {},
+    "callbacks": {}
+  },
+  {
+    "run_id": "run_loan_20260724_002",
+    "session_id": "loan_AU_00123",
+    "task_id": "loan_AU_00123_t",
+    "run_sequence": 2,
+    "supersedes_run_id": "run_loan_20260724_001",
+    "started_at": "2026-07-24T02:40:00Z",
+    "source_revision": "application-r2-with-corrected-credit-file",
+    "context": {
+      "application_id": "APP-00123",
+      "applicant_name": "Alex Chen",
+      "loan_amount": 42000,
+      "stated_income": 98000,
+      "document_revision": "docs-r2",
+      "credit_score_fixture": 704,
+      "fraud_score_fixture": 0.05,
+      "verified_income_fixture": 97000,
+      "review_decision": null
+    },
+    "human_decisions": {
+      "S5_human_review": {
+        "decision": "approved",
+        "reason": "Corrected bureau file and verified serviceability support approval.",
+        "expected_revision": 0,
+        "actor": { "type": "user", "id": "risk_officer_17", "roles": ["risk_officer"] }
+      }
+    },
+    "callbacks": {
+      "S7_offer_acceptance": {
+        "accepted": true,
+        "accepted_at": "2026-07-24T02:55:00Z",
+        "signer_id": "customer-00123"
+      }
+    }
+  }
+]

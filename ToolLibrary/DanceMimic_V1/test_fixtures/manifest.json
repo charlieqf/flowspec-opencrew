@@ -1,0 +1,57 @@
+{
+  "schema_version": "dance_mimic_v1_test_fixtures_0.1",
+  "note": "Single-person dance test clips for DanceMimic_V1. Sourced from Wikimedia Commons (CC, attribution required). YouTube was unreachable from the build host (network-level block of youtube.com / googlevideo.com), so license-clean Commons clips were used instead — also safer because the DanceMimic pipeline uploads the reference video to a cloud provider. Only dance_solo_frontal_studio.mp4 is committed, and as a tiny SYNTHETIC placeholder (see committed_file) — the real, full-quality clips are fetched via each fixture's download_url.",
+  "fixtures": [
+    {
+      "file": "dance_solo_frontal_studio.mp4",
+      "committed_file": "SYNTHETIC PLACEHOLDER — a ~3KB 144x256 1s libx264 testsrc clip, NOT the real footage described below. Committed only so the reference-video listing contract (backend/tests/contracts/test_dance_mimic_backend_surface_contract.py) is satisfiable offline and deterministically without a large binary. For real face-detection/motion work, replace it with the clip from download_url.",
+      "role": "primary — single person, FRONTAL face clearly visible, full body, dance studio",
+      "duration_seconds": 7.22,
+      "width": 1080,
+      "height": 1920,
+      "orientation": "portrait",
+      "fps": "29.97",
+      "has_audio": true,
+      "good_for": "02 face detection/tracking/masking (clean frontal face); 01 demux; single-segment smoke",
+      "source_title": "File:Shimi Turco.webm",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Shimi_Turco.webm",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Shimi_Turco.webm",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Fabiola Mastache, via Wikimedia Commons, CC BY-SA 4.0"
+    },
+    {
+      "file": "dance_solo_bigmotion_studio.mp4",
+      "role": "big-motion — single person, SIMPLE plain white studio cyclorama, large dynamic dance (jumps/spins/handstands/floor work), frontal face appears intermittently (e.g. near end)",
+      "duration_seconds": 11.97,
+      "width": 1280,
+      "height": 720,
+      "orientation": "landscape",
+      "fps": "23.976",
+      "has_audio": false,
+      "codec": "h264/yuv420p +faststart (re-encoded; provider-friendly, not raw mp4v)",
+      "good_for": "02 masking under large motion + simple background (cleanest detection scene); SR2 motion-reference smoke (big pose/rhythm change); 03/05_xx end-to-end",
+      "note": "Trimmed to 28s-40s of the 40s source and downscaled 1920x1080 -> 1280x720.",
+      "source": "Mixkit free stock video #452",
+      "source_url": "https://mixkit.co/free-stock-video/",
+      "download_url": "https://assets.mixkit.co/videos/452/452-1080.mp4",
+      "license": "Mixkit Free Stock Video License (free commercial & personal use, no attribution required; do not redistribute/sell as stock)",
+      "license_url": "https://mixkit.co/license/"
+    },
+    {
+      "file": "dance1.mp4",
+      "role": "user-provided — single person, frontal face, full body, real urban night scene, expressive dance motion",
+      "duration_seconds": 14.0,
+      "width": 720,
+      "height": 1280,
+      "orientation": "portrait",
+      "fps": "30",
+      "has_audio": true,
+      "codec": "h264/yuv420p +faststart (re-encoded)",
+      "good_for": "02 face mask in low-light real footage (detection stress); 01 demux (has audio); realistic single-subject end-to-end",
+      "note": "User-provided source. Trimmed to 8s-22s of the original 67s clip (single-person frontal dance window); low-key night lighting.",
+      "source": "user-provided",
+      "license": "unknown — confirm rights before any cloud upload / redistribution"
+    }
+  ]
+}

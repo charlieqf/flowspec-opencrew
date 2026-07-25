@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["entity_id", "period", "data_cut_id", "transaction_count_fixture", "payment_count_fixture", "gl_total_fixture", "discrepancy_rate_fixture", "waiver_decision", "publish_decision"],
+  "properties": {
+    "entity_id": { "type": "string" }, "period": { "type": "string" }, "data_cut_id": { "type": "string" },
+    "transaction_count_fixture": { "type": "integer" }, "payment_count_fixture": { "type": "integer" }, "gl_total_fixture": { "type": "number" }, "discrepancy_rate_fixture": { "type": "number" },
+    "waiver_decision": { "type": ["string", "null"] }, "publish_decision": { "type": ["string", "null"] },
+    "transaction_count": { "type": "integer" }, "payment_count": { "type": "integer" }, "gl_total": { "type": "number" },
+    "dq_passed": { "type": "boolean" }, "waiver_required": { "type": "boolean" }, "dq_accepted": { "type": "boolean" },
+    "metric_version": { "type": "string" }, "distributed_at": { "type": "string" }
+  }
+}

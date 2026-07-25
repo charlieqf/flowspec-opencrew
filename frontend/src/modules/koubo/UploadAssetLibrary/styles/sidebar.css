@@ -1,0 +1,102 @@
+.ual-sidebar {
+  background: var(--ual-panel);
+  border-right: 1px solid var(--ual-border);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px 12px;
+}
+.ual-sidebar.is-collapsed {
+  align-items: center;
+  padding: 18px 8px;
+}
+.ual-sidebar-top {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 0 6px;
+}
+.ual-sidebar-top strong {
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+.ual-sidebar.is-collapsed .ual-sidebar-top {
+  justify-content: center;
+  padding: 0;
+}
+.ual-sidebar.is-collapsed .ual-sidebar-top strong,
+.ual-sidebar.is-collapsed .ual-nav-label {
+  display: none;
+}
+.ual-sidebar.is-collapsed .ual-back-button .ual-flow-icon {
+  transform: rotate(180deg);
+}
+.ual-back-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ual-muted);
+  cursor: pointer;
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  padding: 0;
+  width: 32px;
+}
+.ual-back-button:hover {
+  background: var(--ual-panel-soft);
+  color: var(--ual-text);
+}
+.ual-nav,
+.ual-sidebar-bottom {
+  display: grid;
+  gap: 8px;
+}
+.ual-sidebar-bottom {
+  margin-top: auto;
+}
+.ual-nav button,
+.ual-sidebar-bottom button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: var(--ual-muted);
+  cursor: pointer;
+  display: flex;
+  font-weight: 800;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 16px;
+  text-align: left;
+}
+.ual-sidebar.is-collapsed .ual-nav,
+.ual-sidebar.is-collapsed .ual-sidebar-bottom {
+  width: 100%;
+}
+.ual-sidebar.is-collapsed .ual-nav button,
+.ual-sidebar.is-collapsed .ual-sidebar-bottom button {
+  gap: 0;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0;
+}
+.ual-nav button.is-active,
+.ual-sidebar-bottom button.is-active {
+  background: var(--ual-accent-soft);
+  color: var(--ual-text);
+}
+.ual-nav-icon {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  width: 20px;
+}
+.ual-nav-icon .ual-flow-icon {
+  height: 20px;
+  width: 20px;
+}

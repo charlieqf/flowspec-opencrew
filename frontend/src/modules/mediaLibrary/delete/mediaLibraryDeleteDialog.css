@@ -1,0 +1,36 @@
+.media-library-delete-overlay { align-items: center; background: rgba(22, 31, 48, .48); display: flex; inset: 0; justify-content: center; padding: 24px; position: fixed; z-index: 120; }
+.media-library-delete-dialog { background: #fff; border: 1px solid #e0e5ed; border-radius: 12px; box-shadow: 0 24px 64px rgba(25, 37, 57, .24); max-height: calc(100vh - 48px); overflow: auto; width: min(520px, 100%); }
+.media-library-delete-dialog > header { align-items: flex-start; border-bottom: 1px solid #e7ebf1; display: flex; justify-content: space-between; padding: 19px 20px 17px; }
+.media-library-delete-heading { align-items: flex-start; display: flex; gap: 12px; }
+.media-library-delete-heading > span { align-items: center; background: #fff0ef; border-radius: 9px; color: #d92d20; display: flex; flex: 0 0 auto; height: 36px; justify-content: center; width: 36px; }
+.media-library-delete-heading svg { height: 18px; width: 18px; }
+.media-library-delete-heading h3 { color: #1f2b3d; font-size: 16px; margin: 0 0 5px; }
+.media-library-delete-heading p { color: #758297; font-size: 11px; line-height: 1.5; margin: 0; }
+.media-library-delete-close { align-items: center; background: #fff; border: 1px solid #d8e0eb; border-radius: 7px; color: #53627a; cursor: pointer; display: flex; height: 30px; justify-content: center; padding: 0; width: 30px; }
+.media-library-delete-close:hover:not(:disabled) { background: #f3f6fa; color: #1f2b3d; }
+.media-library-delete-close svg { height: 15px; width: 15px; }
+.media-library-delete-body { display: grid; gap: 14px; padding: 18px 20px; }
+.media-library-delete-target { background: #f6f8fb; border: 1px solid #e3e8f0; border-radius: 8px; display: grid; gap: 4px; padding: 11px 12px; }
+.media-library-delete-target span { color: #8792a4; font-size: 9px; }
+.media-library-delete-target strong { color: #26364f; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-library-delete-target small { color: #6e7c91; font-size: 10px; }
+.media-library-delete-scope h4 { color: #3b4a61; font-size: 11px; margin: 0 0 8px; }
+.media-library-delete-scope ul { border: 1px solid #e4e9f1; border-radius: 8px; list-style: none; margin: 0; padding: 0 12px; }
+.media-library-delete-scope li { align-items: center; border-bottom: 1px solid #edf0f5; display: flex; gap: 10px; min-height: 54px; }
+.media-library-delete-scope li:last-child { border-bottom: 0; }
+.media-library-delete-scope li > span { align-items: center; background: #eef3fa; border-radius: 50%; color: #63748e; display: flex; flex: 0 0 auto; font-size: 9px; height: 22px; justify-content: center; width: 22px; }
+.media-library-delete-scope li div { display: grid; gap: 3px; }
+.media-library-delete-scope li strong { color: #3c4b62; font-size: 11px; }
+.media-library-delete-scope li small { color: #8792a4; font-size: 9px; }
+.media-library-delete-warning, .media-library-delete-blocked, .media-library-delete-error { border-radius: 7px; font-size: 10px; line-height: 1.55; padding: 10px 11px; }
+.media-library-delete-warning { background: #fff7e8; border: 1px solid #f2d59e; color: #996000; }
+.media-library-delete-blocked, .media-library-delete-error { background: #fff0ef; border: 1px solid #f0c0bc; color: #a7352d; }
+.media-library-delete-dialog > footer { align-items: center; border-top: 1px solid #e7ebf1; display: flex; gap: 8px; justify-content: flex-end; padding: 13px 20px; }
+.media-library-delete-dialog > footer button { align-items: center; border-radius: 7px; cursor: pointer; display: inline-flex; font-size: 12px; height: 34px; justify-content: center; min-width: 78px; padding: 0 13px; }
+.media-library-delete-dialog > footer button.secondary { background: #fff; border: 1px solid #d5ddea; color: #45546c; }
+.media-library-delete-dialog > footer button.danger { background: #d92d20; border: 1px solid #d92d20; color: #fff; gap: 6px; }
+.media-library-delete-dialog > footer button.danger:hover:not(:disabled) { background: #b42318; border-color: #b42318; }
+.media-library-delete-dialog > footer button:disabled { cursor: not-allowed; opacity: .5; }
+.media-library-delete-dialog > footer svg { height: 14px; width: 14px; }
+
+@media (max-width: 560px) { .media-library-delete-overlay { align-items: flex-end; padding: 12px; } .media-library-delete-dialog { max-height: calc(100vh - 24px); } }

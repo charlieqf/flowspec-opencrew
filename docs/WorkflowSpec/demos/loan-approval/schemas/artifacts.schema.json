@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "validatedApplication": { "type": "object", "required": ["application_id", "valid", "validation_errors"], "properties": { "application_id": { "type": "string" }, "valid": { "type": "boolean" }, "validation_errors": { "type": "array" } } },
+    "applicationEvidence": { "type": "object", "required": ["application_id", "document_revision", "facts", "mock_model_output"], "properties": { "application_id": { "type": "string" }, "document_revision": { "type": "string" }, "facts": { "type": "array", "items": { "type": "object", "required": ["field", "value", "evidence_span"] } }, "mock_model_output": { "const": true } } },
+    "creditReport": { "type": "object", "required": ["application_id", "score", "enquiry_key", "provider_status"] },
+    "fraudSignals": { "type": "object", "required": ["application_id", "score", "flag", "rule_version"] },
+    "incomeVerification": { "type": "object", "required": ["application_id", "verified_income", "source", "match"] },
+    "riskAssessment": { "type": "object", "required": ["risk_score", "credit_score", "fraud_flag", "serviceability_ratio", "policy_version"] },
+    "approvalPlan": { "type": "object", "required": ["proposed_decision", "review_required", "approved_amount", "reasons"] },
+    "humanReview": { "type": "object", "required": ["application_id", "decision", "actor", "reason", "expected_revision"] },
+    "finalDecision": { "type": "object", "required": ["decision", "source", "policy_decision"] },
+    "acceptedOffer": { "type": "object", "required": ["application_id", "accepted", "accepted_at", "signer_id", "amount"] },
+    "disbursement": { "type": "object", "required": ["application_id", "amount", "currency", "ledger_operation_key", "status", "disbursed_at"] },
+    "rejection": { "type": "object", "required": ["application_id", "decision", "adverse_action_reasons", "risk_score", "delivery_status"] },
+    "applicationRevisionRequest": { "type": "object", "required": ["application_id", "decision", "requested_changes", "review_reason", "status"], "properties": { "decision": { "const": "revision_requested" }, "requested_changes": { "type": "array", "minItems": 1 }, "status": { "const": "open" } } }
+  }
+}
